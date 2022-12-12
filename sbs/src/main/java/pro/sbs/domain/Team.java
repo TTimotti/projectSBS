@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
-@Entity(name = "TEAMS_TEST")
-@SequenceGenerator(name = "TEAMS_TEST_SEQ_GEN", sequenceName = "TEAMS_TEST_SEQ", initialValue = 1, allocationSize = 1)
+@Entity(name = "TEAMS")
+@SequenceGenerator(name = "TEAMS_SEQ_GEN", sequenceName = "TEAMS_SEQ", initialValue = 1, allocationSize = 1)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,7 +25,7 @@ public class Team extends BaseTimeEntity {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEAMS_TEST_SEQ_GEN")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEAMS_SEQ_GEN")
     private Integer teamId;
 
     @Column(nullable = false, unique = true)

@@ -20,13 +20,13 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 
     // JPQL
     // 테이블 내 컬럼은 모두 JAVA 식으로 바꾸기.
-    @Query("select t from TEAMS_TEST t where t.teamId in (select l.teamId from TEAMS_LOG l where l.userName = :userName)")
+    @Query("select t from TEAMS t where t.teamId in (select l.teamId from TEAMS_LOG l where l.userName = :userName)")
     List<Team> selectYourTeams(@Param(value = "userName") String loginUser2);
 
-    @Query("select t from TEAMS_TEST t where lower(t.purpose) like lower('%' || :keyword || '%') order by t.teamId desc")
+    @Query("select t from TEAMS t where lower(t.purpose) like lower('%' || :keyword || '%') order by t.teamId desc")
     List<Team> searchByKeyword(@Param(value = "keyword") String keyword);
 
-    //select * from TEAMS_TEST where TEAM_ID in (select TEAM_ID from TEAMS_LOG where USER_NAME = 'tester02');
+    //select * from TEAMS where TEAM_ID in (select TEAM_ID from TEAMS_LOG where USER_NAME = 'tester02');
     
     
 //    @Query(
