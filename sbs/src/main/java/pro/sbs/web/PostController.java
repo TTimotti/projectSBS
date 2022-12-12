@@ -55,7 +55,7 @@ public class PostController {
         log.info("PostController Post create() entity = {}", entity);
         attrs.addFlashAttribute("createdId", entity.getPostId());
         
-        return "redirect:/team/list?id=" + id;
+        return "redirect:/team/teamActivity?id=" + id;
     }
     
     @PostMapping("/post/update")
