@@ -14,7 +14,11 @@ import pro.sbs.dto.ReplyRegisterDto;
 import pro.sbs.dto.ReplyUpdateDto;
 import pro.sbs.repository.PostRepository;
 import pro.sbs.repository.ReplyRepository;
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
 
 @Slf4j
 @Service // 스프링 컨텍스에 Service 컴포넌트로 등록 -> 의조넝 ㅈ주입이 가능해짐.

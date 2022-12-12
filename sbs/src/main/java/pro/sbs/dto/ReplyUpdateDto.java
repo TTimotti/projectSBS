@@ -1,8 +1,7 @@
 package pro.sbs.dto;
 
-import pro.sbs.domain.Reply;
-
 import lombok.Data;
+import pro.sbs.domain.Reply;
 
 @Data
 public class ReplyUpdateDto {

@@ -19,6 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Getter
+
 @ToString(exclude = { "post" }) // 필드 post는 toString() 메서드를 작성할 대 제외.
 @Entity(name = "REPLIES") // 테이블 replies에 매핑되는 엔터티 클래스.
 @SequenceGenerator(name = "REPLIES_SEQ_GEN", sequenceName = "REPLIES_SEQ",  initialValue = 1, allocationSize = 1)

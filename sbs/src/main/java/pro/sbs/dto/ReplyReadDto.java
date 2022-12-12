@@ -2,10 +2,9 @@ package pro.sbs.dto;
 
 import java.time.LocalDateTime;
 
-import pro.sbs.domain.Reply;
-
 import lombok.Builder;
 import lombok.Data;
+import pro.sbs.domain.Reply;
 
 @Builder
 @Data
