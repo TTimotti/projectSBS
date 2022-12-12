@@ -1,1 +1,1 @@
-# projectSBS
+# PUSH 할때 메모에 본인 이름 넣어주세요~
