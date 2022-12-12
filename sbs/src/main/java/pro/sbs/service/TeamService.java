@@ -50,11 +50,14 @@ public class TeamService {
         Team entity = teamRepository.findByTeamId(teamId).get();
         
         
+        
         return entity;
     }
 
     public List<Team> readTeam() {
         List<Team> list = teamRepository.findAll();
+        log.info("sefs", list);
+        
         return list;
     }
     
