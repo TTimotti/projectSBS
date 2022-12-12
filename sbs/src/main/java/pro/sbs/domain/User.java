@@ -18,13 +18,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
+@Entity(name = "USERS")
+@SequenceGenerator(name = "USERS_SEQ_GEN", sequenceName = "USERS_SEQ", initialValue = 1, allocationSize = 1)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 @ToString
-@Entity(name = "USERS")
-@SequenceGenerator(name = "USERS_SEQ_GEN", sequenceName = "USERS_SEQ", allocationSize = 1)
 public class User extends BaseTimeEntity {
 
     @Id
