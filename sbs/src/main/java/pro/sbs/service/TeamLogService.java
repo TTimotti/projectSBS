@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import pro.sbs.domain.Team;
 import pro.sbs.domain.TeamLog;
 import pro.sbs.dto.TeamJoinDto;
 import pro.sbs.repository.TeamLogRepository;

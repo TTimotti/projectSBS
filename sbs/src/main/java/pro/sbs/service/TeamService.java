@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Team;
 import pro.sbs.dto.TeamRegisterDto;
-import pro.sbs.dto.TeamUpdateDto;
 import pro.sbs.repository.TeamRepository;
 
 @Slf4j

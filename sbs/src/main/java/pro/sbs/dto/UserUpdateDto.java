@@ -1,10 +1,8 @@
 package pro.sbs.dto;
 
-import pro.sbs.domain.User;
-import pro.sbs.domain.UserRole;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pro.sbs.domain.User;
 
 @NoArgsConstructor
 @Data
