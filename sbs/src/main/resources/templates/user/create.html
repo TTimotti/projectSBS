@@ -1,0 +1,85 @@
+<!DOCTYPE html> <!-- 내꺼 -->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>회원가입</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" th:href="@{ /assets/favicon.ico }" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{ /css/styles.css }" rel="stylesheet" />
+    </head>
+    <body>
+    <div class="container-fluid">
+        <div class="my-2 p-4 bg-secondary text-white text-center rounded">
+            <h1>회원 가입 페이지</h1>
+        </div>        
+        <div class="my-2">
+            <form method="post">
+                <div class="my-2">
+                    <label for="userName" class="form-label">유저 이름</label> 
+                    <input type="text" id="userName" class="form-control" name="userName" required autofocus />
+                </div>
+                <div class="my-2 d-none" id="ok">
+                    <p class="text-success">사용 가능한 아이디입니다.</p>
+                </div>
+                <div class="my-2 d-none" id="nok">
+                    <p class="text-danger">사용이 불가능한 아이디입니다.</p>
+                </div>
+                <div class="my-2">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" id="password" class="form-control" name="password" required />
+                </div>
+                <div class="my-2">
+                    <label for="passwordcheck" class="form-label">비밀번호 확인</label> 
+                    <input type="password" id="passwordcheck" class="form-control" required />
+                </div>
+                <div class="my-2 d-none" id="pok">
+                    <p class="text-success">비밀번호가 확인 되었습니다.</p>
+                </div>
+                <div class="my-2 d-none" id="pnok">
+                    <p class="text-danger">비밀번호가 서로 다릅니다.</p>
+                </div>
+                <div class="my-2">
+                    <label for="nickname" class="form-label">닉네임</label>
+                    <input type="text" id="nickname" class="form-control" name="nickname" required />
+                </div>
+                <div class="my-2">
+                    <label for="email" class="form-label">이메일</label> 
+                    <input type="email" id="email" class="form-control" name="email" required />
+                </div>
+                <div class="my-2">
+                    <label for="phone" class="form-label">휴대폰</label> 
+                    <input type="text" id="phone" class="form-control" name="phone" required />
+                </div>
+                <div class="my-2">
+                    <label for="gender" class="form-label" id="gender">성별</label>
+                    <select class="form-select" name="gender" id="selectGender">
+                        <option selected>성별</option>
+                        <option value="남자">남자</option>
+                        <option value="여자">여자</option>
+                    </select>
+                </div>
+                <div class="my-2">
+                    <label for="birthday" class="form-label">생일</label>
+                    <input type="date" id="birthday" class="form-control" name="birthday" required />
+                </div>
+                <div class="my-2">
+                    <label for="locationId" class="form-label">지역</label>
+                    <input type="text" id="locationId" class="form-control" name="locationId" required />
+                </div>
+                <div class="my-2">
+                    <input type="submit" id="btnSubmit" class="form-control btn btn-outline-success disabled" value="회원가입" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script th:src=" @{ /js/scripts.js }"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src=" @{ /js/user.js}"></script>
+</body>
+</html>

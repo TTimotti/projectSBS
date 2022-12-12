@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif;}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <a th:href="/team/teamInfo"><i class="fa fa-fw fa-home"></i> 모임 기본 설정</a>
+  <a href="/team/teamPhoto"><i class="fa fa-fw fa-wrench"></i> 사진 설정</a>
+  <a href="/team/teamMember"><i class="fa fa-fw fa-user"></i> 멤버 설정</a>
+  <a href="/team/teamManage"><i class="fa fa-fw fa-envelope"></i> 위임/폐쇄</a>
+  <a href="/team/teamPost"><i class="fa fa-fw fa-envelope"></i> 게시글 관리</a>
+</div>
+
+<div class="main">
+  <h2>아이티윌0410 관리자 페이지</h2>
+  <form method="post">
+    <div>
+        <label>카페주소: </label>
+        <input type="text" th:value="${ team.teamId }" readonly/>
+    </div>
+    <div>
+        <label>카페이름: </label>
+        <input type="text" th:value="${ team.teamName }" name="teamName"/>
+    </div>
+    <div>
+        <label>개설일: </label>
+        <input type="text" th:value="${ #temporals.format(team.createdTime, 'yyyy년 MM월 dd일 HH시 mm분 ss초') }" />
+        
+    </div>
+    <div>
+        <label>제한인원 </label>
+        <input type="text" th:value="${ team.maxMember }" name="maxMember"/>
+        <span>명</span>
+    </div>
+    <div>
+        <label>인원 수</label>
+        <input type="text" th:value="실험중..."/>
+        <span> 명 </span>
+    </div>
+    <div>
+        <input type="submit" value="수정하기"/>
+    </div>
+    </form>
+</div>
+     
+</body>
+</html> 

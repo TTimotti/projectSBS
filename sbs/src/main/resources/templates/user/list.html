@@ -1,0 +1,41 @@
+<!DOCTYPE html> <!-- 내꺼 -->
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{ layout/layout }">
+<div layout:fragment="content">
+    <div class="card my-2">
+        <div class="card-header">
+            <h1>유저 목록 페이지</h1>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>유저 이름</th>
+                        <th>닉네임</th>
+                        <th>가입 날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${ list }">
+                        <td th:text="${ user.userId }"></td>
+                        <td>
+                        <a th:href="@{ /user/myPage?userId={userId} (userId = ${ user.userId }) }"
+                        th:text="${ user.userName }"></a></td>
+                        <td th:text="${ user.nickname }"></td>
+                        <td
+                            th:text="${ #temporals.format(user.createdTime, 'yyyy-MM-dd HH:mm:ss') }"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+<!-- content -->
+
+
+</html>

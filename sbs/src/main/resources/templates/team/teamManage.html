@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif;}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  
+  <a th:href="@{/team/teamInfo?teamId={teamId} (teamId = ${ team.teamId }) }" id="teamInfo"><i class="fa fa-fw fa-home"></i> 모임 기본 설정</a>
+  <a th:href="@{/team/teamPhoto?teamId={teamId} (teamId = ${ team.teamId }) }" id="teamPhoto"><i class="fa fa-fw fa-wrench"></i> 사진 설정</a>
+  <a th:href="@{/team/teamMember?teamId={teamId} (teamId = ${ team.teamId }) }" id="teamMember"><i class="fa fa-fw fa-user"></i> 멤버 설정</a>
+  <a th:href="@{/team/teamManage?teamId={teamId} (teamId = ${ team.teamId }) }" id="teamManage"><i class="fa fa-fw fa-envelope"></i> 위임/폐쇄</a>
+  <a th:href="@{/team/teamPost?teamId={teamId} (teamId = ${ team.teamId }) }" id="teamPost"><i class="fa fa-fw fa-envelope"></i> 게시글 관리</a>
+</div>
+
+<div class="main">
+  <h2>아이티윌0410 관리자 페이지</h2>
+  <div>
+    <label>양도합니다.</label>
+    <input type="button" id="btnDelete" value="모임 폐쇄"/>
+  </div>
+<form id="teamId">
+  <div>
+    <input th:value="${ team.teamId }" name="teamId" />
+  </div>
+</form>
+</div>
+    
+<script>
+const form = document.querySelector('#teamId');
+const btnDelete = document.querySelector('#btnDelete');
+
+btnDelete.addEventListener('click', function() {
+	event.preventDefault();
+	
+	const result = confirm('폐쇄하면 복구할 수 없습니다. 폐쇄하겠습니까?');
+	
+	if (result) {
+		form.action = '/team/delete';
+		form.method = 'post';
+		form.submit();
+	}
+});
+</script>
+</body>
+</html> 

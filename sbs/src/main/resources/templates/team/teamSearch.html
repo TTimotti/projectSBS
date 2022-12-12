@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ layout/layout.html }">
+
+<div layout:fragment="content">
+    <div class="card my-2">
+        <div class="card-header">
+            <h1>그룹 목록 페이지</h1>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>그룹 이름</th>
+                        <th>팀장</th>
+                        <th>그룹 소개</th>
+                        <th>최대 인원</th>
+                        <th>가입하기</th>
+                    </tr>
+                </thead>
+                <!-- 팀 리스트 영역 -->
+                <tbody id="teams">
+
+                </tbody>
+            </table>
+        </div>
+        <!-- !!!Modal!!! 모임 들어가기 !!!Modal!!! -->
+            <div class="modal fade" id="teamJoinModal" tabindex="-1" aria-labelledby="teamJoinModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="teamJoinModalLabel">모임을 들어가기 위한 비밀번호를 입력하세요. </h1>
+                            <button type="button" class="btn-case" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- 팀 아이디 삽입 위치 -->
+                            <input id="modalTeamId" readonly/>
+                            <!-- 팀 비밀번호 삽입 위치  -->
+                            <input id="modalTeamPassword" readonly/>
+                            <!-- 팀 응답 삽입 위치 -->
+                            <input type="text" id="modalTeamPasswordInput" class="form-control"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="button" id="modalBtnJoin" class="btn btn-outline-success">들어가기...</button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end Modal -->
+    </div>
+</div>
+
+      <th:block layout:fragment="script">
+        <!-- Ajax를 사용하기 위한 axios 자바스크립트 라이브러리 추가 -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script th:inline="javascript">
+            // 타임리프 inline 기능을 이용하면 자바스크립트 안에서 타임리프 속성을 이용할 수 있음.
+            // 로그인 사용자 아이디를 자바스크립트 변수에 저장.
+            
+            const loginUser = [[ ${ #authentication.name } ]];
+        </script>
+        
+        <!-- 댓글 관련 자바스크립트 함수/코드들을 작성한 스크립트 파일 -->
+        <script th:src="@{ /js/teamList.js }"></script>
+        <!-- js를 사용하면 html에 있는 값들을 다 사용할 수 있다. 단지, js 전용 파일을 찾는 것일 뿐. -->
+      </th:block>
+
+</html>

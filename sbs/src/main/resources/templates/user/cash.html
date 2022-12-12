@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Spring Boot</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" th:href="@{ /assets/favicon.ico }" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link th:href="@{ /css/styles.css }" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="my-2 p-4 bg-secondary text-white text-center rounded">
+            <h1>캐쉬 충전 페이지</h1>
+        </div>        
+        <div class="my-2">
+                <div class="my-2">
+                    <label for="userName" class="form-label">유저 이름</label> 
+                    <input type="text" id="userName" class="form-control" name="userName"  th:value="${ user.userName }" readonly />
+                </div>
+                <div class="my-2">
+                    <label for="passwordn" class="form-label">현재 비밀번호</label>
+                    <input type="password" id="passwordn" class="form-control" name="passwordn"/>
+                </div>
+                <div class="my-2 d-none" id="pcheck">
+                    <p class="text-danger">비밀번호가 올바르지 않습니다.</p>
+                </div>
+            <form id="formCash">
+                <div class="my-2 d-none">
+                    <label for="userId" class="form-label">유저 아이디</label> 
+                    <input type="number" id="userId" class="form-control" name="userId"  th:value="${ user.userId }" readonly />
+                </div>
+                <div class = "my-2">
+                    <label for="cashn" class="form-label">현재 캐쉬</label> 
+                    <input type="number" id="cashn" class="form-control" name="cashn"  th:value="${ user.cash }" readonly />
+                </div>
+                <div class = "my-2">
+                    <label for="cash" class="form-label">캐쉬 충전</label> 
+                    <input type="number" id="cash" class="form-control" name="cash"/>
+                </div>
+            </form>  
+            
+            <div class="row">
+                <div class="col-6">
+                    <button class ="btn btn-outline-primary form-control col-6 disabled" id="btnCash">캐쉬 충전</button>
+                </div>
+                <div class="col-6">
+                    <button class ="btn btn-outline-danger form-control col-6" id="btnCancel">뒤로가기</button>
+                </div>
+            </div>
+        </div>
+
+        
+    </div> <!-- end content -->
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script th:src=" @{ /js/scripts.js }"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src=" @{ /js/userCash.js}"></script>
+</body>
+</html>

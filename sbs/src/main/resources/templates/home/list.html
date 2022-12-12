@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        >
+      
+      <div>
+        <h1>메인 페이지</h1>
+      </div>
+      
+      <div>
+        <ul>
+            <!-- 로그인하지 않은 상태 -->
+            <th:block sec:authorize="isAnonymous()">
+            <li>
+                <p>로그인해주세요.</p>
+            </li>
+            <li>
+                <a th:href="@{ /login }">LOGIN</a>
+            </li>
+            <li>
+                <a href="/user/create">회원 가입</a>
+            </li>
+            </th:block>
+            
+            <th:block sec:authorize="isAuthenticated()">
+            <li>
+                <p><span sec:authentication="name"></span>님, 반갑습니다~ </p>
+            </li>
+            <li>
+                <a href= "/team/teamSearch"> Find Your Team </a>
+            </li>
+            <li>
+                <a href="/team/teamCreate"> 모임 생성 </a>
+            </li>
+            <li>
+                <a href="/user/joinedTeamList">내가 가입한 모임 보기</a>
+            </li>
+            <li>
+                <a th:href="@{/logout}">로그아웃</a>
+            </li>
+            </th:block>
+            
+            <th:block sec:authorize="hasRole('ADMIN')">
+                        <li>
+                <a href="/user/list">회원 목록</a>
+            </li>
+            <li>
+                <a href="/team/teamList">모임 목록</a>
+            </li>
+            </th:block>
+        </ul>
+      </div>
+</html>

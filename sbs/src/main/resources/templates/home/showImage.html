@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    
+    <body>
+        <h3>이미지 출력</h3>
+        <div th:each="imageFile : ${image} ">
+            <img  th:src="${imageFile.fileUrl}" width="150" height="150">
+        </div>
+
+    </body>
+</html>

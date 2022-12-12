@@ -1,0 +1,95 @@
+<!DOCTYPE html> <!-- 내꺼 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ layout/layout.html }">
+
+<!--/* layout/layout.html 파일의 "content" 프래그먼트에 삽입될 컨텐트  */-->
+<div layout:fragment="content">
+    <div class="card my-2">
+        <div class="card-header">
+            <h1>마이 페이지</h1>
+        </div>
+        <div class="card-body">
+                <form id="form">
+                <div class="my-2">
+                    <label for="userId" class="form-label">유저 아이디</label> 
+                    <input type="number" id="userId" class="form-control" name="userId"  th:value="${ user.userId }" readonly />
+                </div>
+                   <div class="row">
+                        <div class = "my-2 col-7">
+                            <label for="username" class="form-label">유저 이름</label>
+                            <input id="username" class="form-control" name="userName" th:value="${ user.userName }" readonly />
+                        </div>
+                        <div class = "my-2 col-5">
+                            <label for="userimage" class="form-label">유저 이미지</label>
+                            <input type="image" id="userimage" name="userImage" class="form-control" value="개인 사진"/>
+                        </div>
+                    </div>
+                    <div class="my-2 d-none">
+                        <label for="password" class="form-label">비밀번호</label>
+                        <input id="password" class="form-control" name="password" th:value="${ user.password }" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="nickname" class="form-label">닉네임</label>
+                        <input id="nickname" class="form-control" name="nickname" th:value="${ user.nickname }" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="email" class="form-label">이메일</label>
+                        <input id="email" class="form-control" name="email" th:value="${ user.email }" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="phone" class="form-label">휴대폰</label>
+                        <input id="phone" class="form-control" name="phone" th:value="${ user.phone }" readonly />
+                    </div>
+                <div class="my-2">
+                    <label for="gender" class="form-label">성별</label>
+                        <input id="gender" class="form-control" name="gender" th:value="${ user.gender }" readonly />
+                </div>
+                    <div class="my-2">
+                        <label for="birth" class="form-label">생일</label>
+                        <input id="birth" class="form-control" name="birthday" th:value="${ user.birthday }" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="locationId" class="form-label">지역</label>
+                        <input id="locationId" class="form-control" name="locationId" th:value="${ user.locationId }" readonly />
+                    </div>
+                    <div class = "my-2 row">
+                        <label for="cash" class="form-label">캐쉬</label>
+                        <div class = "col-6">
+                        <input id="cash" class="form-control" name="cash" th:value="${ user.cash }" readonly />
+                        </div>
+                        <div class = "col-4">
+                        <input type = "button" id="btnCash" class="btnModifies btn btn-outline-info" name="btnCash" value="캐쉬충전"/>
+                        </div>
+                    </div>
+                    <div class="my-2  d-none">
+                        <label for="createdTime" class="form-label">작성 시간</label>
+                        <input id="createdTime" class="form-control" 
+                            th:value="${ #temporals.format(user.createdTime, 'yyyy-MM-dd HH:mm:ss') }" readonly />
+                    </div>  
+                    <div class="my-2  d-none"> 
+                        <label for="modifiedTime" class="form-label">수정 시간</label>
+                        <input id="modifiedTime" class="form-control" 
+                            th:value="${ #temporals.format(user.modifiedTime, 'yyyy-MM-dd HH:mm:ss') }" readonly />
+                    </div> 
+                    <div class="my-2" >
+                    <a class="btn btn-primary form-control" th:href="@{ /user/update?userId={userId} (userId = ${ user.userId }) }">수정하기</a>
+                </div>
+                </form>    
+        </div>
+    </div>
+
+    
+</div>
+<!-- content -->
+
+    <th:block layout:fragment="script">
+        <!-- Ajax를 사용하기 위한 axios 자바스크립트 라이브러리 추가 -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>        
+        <!-- 댓글 관련 자바스크립트 함수/코드들을 작성한 스크립트 파일 -->
+        <script th:src="@{ /js/userMyPage.js }"></script>
+    </th:block>
+  
+</html>
+
+</html>
