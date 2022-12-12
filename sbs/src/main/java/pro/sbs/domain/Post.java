@@ -21,38 +21,37 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity(name = "POSTS")
-@SequenceGenerator(name = "POSTS_SEQ_GEN", sequenceName = "POSTS_SEQ", 
-                initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "POSTS_SEQ_GEN", sequenceName = "POSTS_SEQ", initialValue = 1, allocationSize = 1)
 public class Post extends BaseTimeEntity {
     // field
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POSTS_SEQ_GEN")
     @Column(nullable = false, name = "post_id")
     private Integer postId;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
 //    @Column(nullable = false, name = "team_id")
     private Team team;
-    
-    @Column(nullable = false)  
+
+    @Column(nullable = false)
     private String title;
-    @Column(nullable = false, length = 1000) 
+    @Column(nullable = false, length = 1000)
     private String content;
     @Column(nullable = false)
     private String author;
-    
-    public  Post update(String title, String content) {
+
+    public Post update(String title, String content) {
         this.title = title;
         this.content = content;
-        
+
         return this;
     }
-    
+
     public Post createDto(Team teamId) {
-     
+
         this.team = teamId;
-        
+
         return this;
     }
-    
+
 }

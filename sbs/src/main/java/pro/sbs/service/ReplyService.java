@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Post;
 import pro.sbs.domain.Reply;
 import pro.sbs.dto.ReplyReadDto;
@@ -13,8 +15,6 @@ import pro.sbs.dto.ReplyUpdateDto;
 import pro.sbs.repository.PostRepository;
 import pro.sbs.repository.ReplyRepository;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service // 스프링 컨텍스에 Service 컴포넌트로 등록 -> 의조넝 ㅈ주입이 가능해짐.
