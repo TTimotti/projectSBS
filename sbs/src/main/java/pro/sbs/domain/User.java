@@ -89,6 +89,9 @@ public class User extends BaseTimeEntity {
 
     // FIXME Spend Cash 기능이 필요해보임
     public User cash(Integer cash) {
+    	if (this.cash == 0) {
+    		this.cash = 0;
+    	}
         this.cash += cash;
 
         return this;
