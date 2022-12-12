@@ -59,14 +59,14 @@ public class TeamService {
         return list;
     }
     
-    @Transactional
-    public Integer update(TeamUpdateDto dto) {
-        Team entity = teamRepository.findById(dto.getTeamId()).get();
-        log.info("ㅠㅠㅠㅠㅠㅠ {}", entity.getTeamId());
-        entity.update(dto.getTeamName(), dto.getMaxMember());
-        log.info("ㅠㅠㅠㅠㅠㅠ {}", entity.getTeamId());
-        return entity.getTeamId();
-    }
+//    @Transactional
+//    public Integer update(TeamUpdateDto dto) {
+//        Team entity = teamRepository.findById(dto.getTeamId()).get();
+//        log.info("ㅠㅠㅠㅠㅠㅠ {}", entity.getTeamId());
+//        entity.update(dto.getTeamName(), dto.getMaxMember());
+//        log.info("ㅠㅠㅠㅠㅠㅠ {}", entity.getTeamId());
+//        return entity.getTeamId();
+//    }
     
     public String checkTeamName(String teamName) {
         log.info("확인 중입니다... {}", teamName);

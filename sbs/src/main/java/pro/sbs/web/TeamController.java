@@ -79,16 +79,17 @@ public class TeamController {
         log.info("관리자 페이지로 이동합니다..");
     }
     
-    @PostMapping("team/teamInfo")
-    public String teamUpdate(TeamUpdateDto dto) {
-        log.info("모임을 변경합니다... 모임번호 = {}", dto.getTeamId());
-        
-        Integer teamId = teamService.update(dto);
-        log.info("번호를 가져왔을까요? {}", teamId);
-     // 포스트 수정 성공 후에는 상세 페이지로 이동(redirect)
-        return "redirect:/team/teamInfo?teamId=" + teamId;
-        
-}
+//    @PostMapping("team/teamInfo")
+//    public String teamUpdate(TeamUpdateDto dto) {
+//        log.info("모임을 변경합니다... 모임번호 = {}", dto.getTeamId());
+//        
+//         FIXME
+//        Integer teamId = teamService.update(dto);
+//        log.info("번호를 가져왔을까요? {}", teamId);
+////      포스트 수정 성공 후에는 상세 페이지로 이동(redirect)
+//        return "redirect:/team/teamInfo?teamId=" + teamId;
+//        
+//}
             
     @GetMapping("/team/teamList")
     public String teamList(Model model) {

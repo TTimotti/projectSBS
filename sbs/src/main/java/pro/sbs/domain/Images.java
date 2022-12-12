@@ -13,8 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity(name = "TEAM_IMAGES")
-@SequenceGenerator(name = "TEAM_IMAGES_SEQ2_GEN", sequenceName = "TEAM_IMAGES_SEQ2", initialValue = 1, allocationSize = 1)
+@Entity(name = "TEAMS_IMAGES")
+@SequenceGenerator(name = "TEAM_IMAGES_SEQ_GEN", sequenceName = "TEAM_IMAGES_SEQ", initialValue = 1, allocationSize = 1)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -22,10 +22,8 @@ import lombok.ToString;
 @ToString
 public class Images {
 
-    // 테이블의 PK 컬럼 설정
-    // DB에 저장될 사진 번호...
     @Id
-    @GeneratedValue(generator = "TEAM_IMAGES_SEQ2_GEN", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "TEAM_IMAGES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
     private Integer fid;
     
     @Column(nullable = false)
