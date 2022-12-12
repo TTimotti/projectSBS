@@ -18,13 +18,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
+@Entity(name = "USERS")
+@SequenceGenerator(name = "USERS_SEQ_GEN", sequenceName = "USERS_SEQ", allocationSize = 1)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 @ToString
-@Entity(name = "USERS")
-@SequenceGenerator(name = "USERS_SEQ_GEN", sequenceName = "USERS_SEQ", allocationSize = 1)
 public class User extends BaseTimeEntity {
 
     @Id
@@ -35,16 +36,16 @@ public class User extends BaseTimeEntity {
     private String userName;
 
     @Column(nullable = false)
-    private String password; // 사용자 (로그인) 비밀번호.
+    private String password;
 
     @Column(nullable = false)
-    private String nickname; // 사용자 별명(닉네임)
+    private String nickname;
 
     @Column(nullable = false)
-    private String email; // 사용자 이메일 -> social 로그인 기능에서 사용될 수 있음.
+    private String email;
 
     @Column(nullable = false)
-    private String phone; // 사용자 이메일 -> social 로그인 기능에서 사용될 수 있음.
+    private String phone;
 
     @Column(nullable = false)
     private String gender;
