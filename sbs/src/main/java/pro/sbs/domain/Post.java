@@ -21,12 +21,12 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity(name = "POSTS")
-@SequenceGenerator(name = "POSTS_SEQ_GEN", sequenceName = "POSTS_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "POSTS_SEQ_GEN", sequenceName = "POST_SEQ", initialValue = 1, allocationSize = 1)
 public class Post extends BaseTimeEntity {
     // field
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POSTS_SEQ_GEN")
-    @Column(nullable = false, name = "post_id")
+//    @Column(nullable = false, name = "post_id")
     private Integer postId;
 
     @ManyToOne(fetch = FetchType.LAZY)

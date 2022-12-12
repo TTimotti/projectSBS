@@ -20,7 +20,7 @@ import lombok.ToString;
 
 
 @Entity(name = "USERS")
-@SequenceGenerator(name = "USERS_SEQ_GEN", sequenceName = "USERS_SEQ", allocationSize = 1)
+@SequenceGenerator(name = "USERS_SEQ_GEN", sequenceName = "USERSS_SEQ", allocationSize = 1)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

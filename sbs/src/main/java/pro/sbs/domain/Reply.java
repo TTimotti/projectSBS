@@ -27,7 +27,7 @@ public class Reply extends BaseTimeEntity {
     
     
     @Id
-    @Column(nullable = false, name = "reply_id")
+//    @Column(nullable = false, name = "reply_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REPLIES_SEQ_GEN")
     private Integer replyId; // 댓글 번호
     
