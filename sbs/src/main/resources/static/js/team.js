@@ -74,7 +74,6 @@
                 + '<td>' + st.teamName + '</td>'
                 + '<td>' + st.purpose + '</td>'
                 + '<td>' + st.teamLeader + '</td>'
-                + '<td>' + st.categoryId + '</td>'
                 + '<td>' + st.maxMember + '</td>'
                 + '<td>' + memberNumbers + '</td>'
                 
@@ -143,9 +142,11 @@
         teamJoinModal.show();
     }
     
-    modalBtnJoin.addEventListener('click', joinTeam);
+    if (loginUser != 'anonymousUser') {
+        modalBtnJoin.addEventListener('click', joinTeam);
+    }
     
-    function joinTeam(event) {
+    function joinTeam() {
         const joinTeamId = modalTeamId.value;
         const joinTeamPassword = modalTeamPassword.value;
         const joinTeamPasswordInput = modalTeamPasswordInput.value;
