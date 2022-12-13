@@ -21,9 +21,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Images;
 import pro.sbs.domain.Team;
+import pro.sbs.dto.TeamJoinDto;
 import pro.sbs.dto.TeamRegisterDto;
-import pro.sbs.dto.TeamUpdateDto;
 import pro.sbs.service.ImageService;
+import pro.sbs.service.TeamLogService;
 import pro.sbs.service.TeamService;
 
 @Slf4j
@@ -33,6 +34,8 @@ public class TeamController {
     
     private final TeamService teamService;
     private final ImageService imageService;
+    private final TeamLogService teamLogService;
+    
     private Integer fileId = 1;
     
     @PreAuthorize("hasRole('USER')")
@@ -48,6 +51,8 @@ public class TeamController {
         
         teamService.registerTeam(dto);
         Team entity = teamService.readTeam(dto);
+        TeamJoinDto teamJoinDto = new TeamJoinDto(entity.getTeamId(), entity.getTeamLeader());
+        teamLogService.add(teamJoinDto);
         imageService.saveFile(file, entity);
         
         return "redirect:/";
@@ -142,6 +147,16 @@ public class TeamController {
         log.info("{}", team);
         
         return ResponseEntity.ok(team);
+    }
+    
+    @GetMapping("/team/countMembers/{teamId}")
+    @ResponseBody
+    public ResponseEntity<Integer> countMembers(@PathVariable Integer teamId) {
+        log.info("해당 팀의 번호는... {}", teamId);
+        Integer members = teamService.countMembers(teamId);
+        log.info("멤버 수는 ... {}", members);
+        
+        return ResponseEntity.ok(members);
     }
 }
 

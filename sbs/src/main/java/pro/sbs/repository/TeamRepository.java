@@ -35,4 +35,7 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 //                List<TeamDto> findGetCategory();
 
                 List<Team> findByCategoryIdOrderByCategoryIdDesc(Integer categoryId);
+
+                @Query("select count(t.teamId) from TEAMS_LOG t where t.teamId = :teamId")
+                Integer countById(@Param(value = "teamId") Integer teamId);
 }

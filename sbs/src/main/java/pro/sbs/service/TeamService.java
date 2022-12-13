@@ -115,6 +115,11 @@ public class TeamService {
         
         return teamRepository.findByOrderByTeamIdDesc();
     }
+
+    public Integer countMembers(Integer teamId) {
+        Integer members = teamRepository.countById(teamId);
+        return members;
+    }
     
 
 //    @Transactional(readOnly = true) 

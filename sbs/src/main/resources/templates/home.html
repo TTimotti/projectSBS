@@ -43,6 +43,7 @@
                 <span> <span sec:authentication="name"></span><span>님, 반갑습니다! </span>
                 <a class="btn btn-primary" th:href="@{ /user/myPage }">My Page</a>
                 <a class="btn btn-primary" th:href="@{ /user/joinedTeamList }">내 모임</a>
+                <a class="btn btn-primary" th:href="@{ /team/teamCreate }">모임 만들기</a>
                 <a class="btn btn-primary" th:href="@{ /logout }">로그아웃</a>
                 </span>
             </th:block>
@@ -95,7 +96,9 @@
                                         <th>팀 이름</th>
                                         <th>팀 소개</th>
                                         <th>팀 리더</th>
-                                        <th>정원수</th>
+                                        <th>카테고리</th>
+                                        <th>최대 인원</th>
+                                        <th>현 인원수</th>
                                         <th>입장 여부</th>
                                     </tr>
                                 </thead>
