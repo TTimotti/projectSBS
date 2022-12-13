@@ -47,7 +47,6 @@ window.addEventListener('DOMContentLoaded', () => {
 					+ '<td>' + st.teamName + '</td>'
 					+ '<td>' + st.purpose + '</td>'
 					+ '<td>' + st.teamLeader + '</td>'
-					+ '<td>' + st.categoryId + '</td>'
 					+ '<td>' + st.maxMember + '</td>'
 
 				if (st.teamLeader != loginUser && !joinedTeamsId.includes(st.teamId)) {

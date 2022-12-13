@@ -28,9 +28,9 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         log.info("SBS 실행준비 중입니다...");
-        List<Team> teams = teamService.read();
-        model.addAttribute("teams", teams);
-        log.info("test = {} ", teams);
+        List<Team> list = teamService.read();
+        model.addAttribute("list", list);
+        log.info("test = {} ", list);
         return "/home";
     }
     
