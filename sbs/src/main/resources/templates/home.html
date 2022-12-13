@@ -128,7 +128,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                        <th:block sec:authorize="isAnonymous()">
+                        <a class="btn btn-success" th:href="@{ /login }">들어가기</a>
+                        </th:block>
+                        <th:block sec:authorize="isAuthenticated()">
                         <button type="button" id="modalBtnJoin" class="btn btn-outline-success">들어가기</button> <!-- btn btn-outline-success 차이?-->
+                        </th:block>
                     </div>
                 </div>
             </div>
