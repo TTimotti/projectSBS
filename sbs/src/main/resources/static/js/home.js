@@ -3,6 +3,7 @@
  * home(메인 페이지)에 있는 기능들 모음
  * 1. 검색한 리스트 목록 띄우기
  * 2. 가입하기/활동하기/관리하기 등등 활동 버튼 기능 활성화.
+ * @author 서범수
  */
  
 window.addEventListener('DOMContentLoaded', () => {
@@ -70,7 +71,8 @@ function prepareSearchedTeams(teamIds) {
                 
                 // (3) 버튼의 경우의 수
                 // 팀 리더와 로그인 유저가 같은 경우 (= 팀 리더)
-                // 태그를 <button>으로 하면 페이지 이동이 안되서 관리하기, 활동하기 버튼은 <a><div>로 교체함.                                                                                     
+                // 태그를 <button>으로 하면 페이지 이동이 안되서 관리하기, 활동하기 버튼은 <a><div>로 교체함.
+                // 다른 것들도 통일 예정                                                                                     
                 if (st.leader == loginUser) { 
                     str  
                         += '<td>'
@@ -152,7 +154,7 @@ const modalBtnJoin = document.querySelector('#modalBtnJoin');
 function showModal(team) {
     // 칸(input)에 값 집어넣기.
     modalTeamId.value = team.teamId;
-    modalTeamPassword.value = team.teamPassword;
+    modalTeamPassword.value = team.password;
     teamJoinModal.show();
 }
 

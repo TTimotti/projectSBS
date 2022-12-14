@@ -106,8 +106,8 @@
                                         <th>팀 이름</th>
                                         <th>팀 소개</th>
                                         <th>팀 리더</th>
-                                        <th>카테고리</th>
-                                        <th>정원수</th>
+                                        <th>최대 인원</th>
+                                        <th>현 인원수</th>
                                         <th>입장 여부</th>
                                     </tr>
                                 </thead>                                
@@ -120,8 +120,8 @@
             <hr/>
         
             <div id="joinners"></div>   
-        
-<!--         !!!!!!!모달!!!!!!! -->
+       
+<!--         !!!!!!!가입하기 모달!!!!!!! -->
             <div class="modal fade" id="teamJoinModal" tabIndex="-1" aria-labelledby="teamJoinModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -130,21 +130,46 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            팀 아이디 삽입 위치
+                            <!-- 팀 아이디 삽입 위치  -->
                             <input type="hidden" id="modalTeamId" readonly />
-                            팀 비밀번호 삽입 위치
+                            <!-- 팀 비밀번호 삽입 위치  -->
                             <input type="hidden" id="modalTeamPassword" class="form-control" />
-                            팀 응답 삽입 위치
+                            <!-- 팀 응답 삽입 위치 -->
                             <input type="text" id="modalTeamPasswordInput" class="form-control"/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" id="modalBtnJoin" class="btn btn-outline-success">들어가기</button> btn btn-outline-success 차이?
+                            <th:block sec:authorize="isAnonymous()">
+                                <a class="btn btn-success" th:href="@{ /login }">들어가기</a>
+                                <!-- ㄴ 로그아웃 상태일 시, 들어가기를 누르면 로그인 페이지로 넘어감. -->
+                            </th:block>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <button type="button" id="modalBtnJoin" class="btn btn-outline-success">들어가기</button>
+                            </th:block>
                         </div>
                     </div>
                 </div>
-            </div> 
-<!--         end Modal -->         
+            </div> <!-- end Modal -->
+            
+            <!--        !!!!!!! 가입 불가 모달 !!!!!!! -->
+            <div class="modal fade" id="teamForbiddenModal" tabIndex="-1" aria-labelledby="teamForbiddenModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="teamForbiddenModal">이런... 가입할 수가 없군요...</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    
+                        <div class="modal-body">
+                        <input type="text" value="정원이 초과되었거나, 다른 사유로 인해 모임에 가입할 수 없습니다. 팀장에게 문의하세요." class="form-control" readonly/>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">확인</button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end Modal -->   
         </section>    
     
 <!--     Call to Action -->
