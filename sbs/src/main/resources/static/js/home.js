@@ -1,171 +1,195 @@
 /**
- * home.js
- * home.html
+ * home.js || home.html
+ * home(메인 페이지)에 있는 기능들 모음
+ * 1. 검색한 리스트 목록 띄우기
+ * 2. 가입하기/활동하기/관리하기 등등 활동 버튼 기능 활성화.
  */
  
-/*
-   함수보다 다른 것들이 먼저 실행됨.
-   그래서 함수로 설정하는 것이 속도조절에 편한듯.
-   나는 showshowshow()에 teamList를 넣지 않았음.
-   그래서 느려서 반응이 없었음
-   그래서 showshowshow()에 data, teamList를 넣어서 속도 조절.
-*/
+window.addEventListener('DOMContentLoaded', () => {
+    
+if (searchedTeams != null) {
+    for (let team of searchedTeams) {
+        console.log("검색된 팀들: ", team.teamName);
+    }
+}
 
- window.addEventListener('DOMContentLoaded', () => {
+
+
+// 사용자가 가입한 팀들의 번호(teamId)를 배열에 저장함.
+joinedTeams();
+
+function joinedTeams() {
+    axios
+    .post('/user/readByLoginUser/', loginUser)
+    .then(response => { prepareSearchedTeams(response.data) })
+    .catch(err => { console.log(err) });
+}
+
+// 검색된 팀들을 보여줌 (함수가 상당히 길음)
+function prepareSearchedTeams(teamIds) {
+    let joinedTeamsId = [];
     
-    if (searchedTeams != null) {
-        for (let team of searchedTeams) {
-            console.log(team.teamName);
-        }
+    for (let t of teamIds) {
+    console.log(t.teamId);
+    joinedTeamsId.push(t.teamId);
+    }
     
+    console.log("가입된 팀들의 teamId는... ", joinedTeamsId);
         
-        joinedTeamsIdMethod();
+    const showSearchedTeams = document.querySelector('#showSearchedTeams');
+    // home.html의 <tbody id = showSearchedTeams>
         
-        function joinedTeamsIdMethod() {
-             axios
-                 .post('/user/readByLoginUser/', loginUser)
-                 .then(response => { showSearchedTeams(response.data) })
-                 .catch(err => { console.log(err) });
-     }
- 
-    /* function example(() => {
-        axios
-        .all([axios.get(""), axios.get("")])
-        .then(axios.spread((res1, res2) => {
-            console.log(res1, res2);
-        })  
-        )
-        .catch((err) => console.log(err));
-        }, []);
-    */
- 
-    function showSearchedTeams(data) {
-        let joinedTeamsId = [];
+    // tbody 채우기 시작 
+    let str = '';
+    
+    // searchedTeams: teamController -> home.html (list라는 이름으로 데이터를 넘김)
+    // home.html -> home.js (list라는 이름을 searchedTeams라는 이름으로 바꾸어 자바스크립트로 데이터 넘김)
+    for (let st of searchedTeams) { 
         
-        for (let d of data) {
-        console.log(d.teamId);
-        joinedTeamsId.push(d.teamId);
-        }
-        
-        console.log(joinedTeamsId);
-        
-        const showSearchedTeams = document.querySelector('#showSearchedTeams');
-        
-        //***** 
-        let str = '';
+        // (1) 팀의 현 인원수를 가져옵니다
+        countMembers();
             
-        for (let st of searchedTeams) {
-            let memberNumbers ='';
+        function countMembers() {
+            axios
+            .get('/team/countMembers/' + st.teamId)
+            .then(response => { readSearchedTeams(response.data) })
+            .catch(err => { console.log(err) });
+        }   
+        
+        // (2) 팀의 정보 + 팀 현 인원수 보여주기    
+        function readSearchedTeams(memberNumbers) {
+            console.log("가입된 인원=", memberNumbers);
             
-            prepareCountMembers();
-            
-            function prepareCountMembers() {
-                axios
-                    .get('/team/countMembers/' + st.teamId)
-                    .then(response => { countMembers(response.data) })
-                    .catch(err => { console.log(err) });
-            }   
-            
-            function countMembers(data) {
-                memberNumbers = data;
-                console.log("숫자=", data);
-                str += '<tr>'
+            str += '<tr>'
                 + '<td>' + st.teamId + '</td>'
                 + '<td>' + st.teamName + '</td>'
                 + '<td>' + st.purpose + '</td>'
-                + '<td>' + st.teamLeader + '</td>'
+                + '<td>' + st.leader + '</td>'
                 + '<td>' + st.maxMember + '</td>'
                 + '<td>' + memberNumbers + '</td>'
                 
-                
-                if (st.teamLeader == loginUser) {
-                    str += '<td>' 
-                        + `<button type="button" class="btnJoin btn btn-outline-primary" data-teamId="${ st.teamId }">관리하기</button>` 
+                // (3) 버튼의 경우의 수
+                // 팀 리더와 로그인 유저가 같은 경우 (= 팀 리더)
+                // 태그를 <button>으로 하면 페이지 이동이 안되서 관리하기, 활동하기 버튼은 <a><div>로 교체함.                                                                                     
+                if (st.leader == loginUser) { 
+                    str  
+                        += '<td>'
+                        + '<a href="/team/teamActivity?teamId='
+                        +  st.teamId
+                        + '">'
+                        + `<div id="teamPage" class="btnGoToTeam btn btn-outline-primary" data-teamId="${ st.teamId }">관리하기</div>` 
+                        + '</a>'
                         + '</td>'
-                } else if (st.teamLeader != loginUser && joinedTeamsId.includes(st.teamId)) {
-                    str += '<td>' 
-                        + `<button type="button" class="btnJoin btn btn-outline-primary" data-teamId="${ st.teamId }">활동하기</button>` 
+                // 팀 리더와 로그인 유저가 같지 않으나, 유저가 이 모임에 가입했을 경우. (= 팀 회원)
+                } else if (st.leader != loginUser && joinedTeamsId.includes(st.teamId)) {
+                    str += '<td>'
+                        + '<a href="/team/teamActivity?teamId='
+                        +  st.teamId
+                        + '">'
+                        + `<button type="button" class="btnGoToTeam btn btn-outline-primary" data-teamId="${ st.teamId }">활동하기</button>` 
                         + '</td>'
+                // 팀의 인원수가 다 찼을 경우.
                 } else if (st.maxMember <= memberNumbers ) {
                     str += '<td>' 
-                        + `<button type="button" class="btnJoin btn btn-outline-primary" data-teamId="${ st.teamId }">인원 초과</button>` 
+                        + `<button type="button" class="btnForbidden btn btn-outline-primary" data-teamId="${ st.teamId }">관리자 문의</button>` 
                         + '</td>'
-                } else if (st.teamLeader != loginUser && !joinedTeamsId.includes(st.teamId)) {
+                // 팀 비회원
+                } else if (st.leader != loginUser && !joinedTeamsId.includes(st.teamId)) {
                     str += '<td>' 
                         + `<button type="button" class="btnJoin btn btn-outline-primary" data-teamId="${ st.teamId }">가입하기</button>` 
                         + '</td>'
                 }   
                 + '</tr>';
-
+                
+                // (4) 완성된 항목 html로 옮기기.
                 showSearchedTeams.innerHTML = str;
                 
+                // (5) 버튼 기능 활성화
+                // 가입하기 모달
                 const btnJoin = document.querySelectorAll('.btnJoin');
                 
+                // 관리자문의 모달
+                const btnForbidden = document.querySelectorAll('.btnForbidden');
+                
                 btnJoin.forEach(btn => {
-                btn.addEventListener('click', getJoinModal);
+                    btn.addEventListener('click', getJoinModal);
                 });
-                }
-            }
-            
-            
-            
-            //*****
-            
+                
+                btnForbidden.forEach(btn => {
+                    btn.addEventListener('click', getForbiddenModal);
+                });
+        } // readSearchedTeams 끝.
+    } // 반복문 끝.
+} // prepareSearchedTeams 끝.
+    
+// ---------------------------------------------------------------- //
+
+// 가입하기 모달
+function getJoinModal(event) {
+    const teamId = event.target.getAttribute('data-teamId');
+    console.log("버튼에 해당하는 팀 아이디값은...", teamId);
+    
+    // 해당 번호의 Team 객체를 Ajax GET 방식으로 요청 후 모달 띄우기 준비과정.
+    axios
+    .get('/team/join/' + teamId)
+    .then(response => { showModal(response.data) })
+    .catch(err => { console.log(err) });
+}
+
+// 모달
+const teamJoinDivModal = document.querySelector('#teamJoinModal');
+const teamJoinModal = new bootstrap.Modal(teamJoinDivModal);
+// 팀 아이디 칸
+const modalTeamId = document.querySelector('#modalTeamId');
+// 팀 비밀번호 칸
+const modalTeamPassword = document.querySelector('#modalTeamPassword');
+// 팀 비밀번호 입력 칸
+const modalTeamPasswordInput = document.querySelector('#modalTeamPasswordInput');
+// 들어가기 버튼
+const modalBtnJoin = document.querySelector('#modalBtnJoin');
+
+// (home.html에 있는) 모달에 데이터 전달 후, 모달을 보여주세요.
+function showModal(team) {
+    // 칸(input)에 값 집어넣기.
+    modalTeamId.value = team.teamId;
+    modalTeamPassword.value = team.teamPassword;
+    teamJoinModal.show();
+}
+
+if (loginUser != 'anonymousUser') {
+    modalBtnJoin.addEventListener('click', joinTeam);
+}
+
+function joinTeam() {
+    const joinTeamId = modalTeamId.value;
+    const joinTeamPassword = modalTeamPassword.value;
+    const joinTeamPasswordInput = modalTeamPasswordInput.value;
+    
+    if (joinTeamPassword == joinTeamPasswordInput) {
+        console.log("성공~");
+        const data = {
+            teamId: joinTeamId,
+            userName: loginUser
+    }
+    
+    alert("가입 성공!");
+    
+    axios
+    .post('/home/success', data)
+    .then(function() {
+        teamJoinModal.hide();
         }
-    
-    // ---------------------------------------------------------------- //
-    function getJoinModal(event) {
-        console.log("버튼의 속성을 가져옵니다.", event.target);
-        // 클릭된 버튼의 속성값을 읽어오기.
-        const teamId = event.target.getAttribute('data-teamId');
-        console.log("버튼에 해당하는 아이디값은...", teamId);
-        
-        // 해당 번호의 Team 객체를 Ajax GET 방식으로 요청 후 모달 띄우기 준비과정.
-        axios
-        .get('/team/join/' + teamId)
-        .then(response => { showModal(response.data) })
-        .catch(err => { console.log(err) });
+    );
     }
-    
-    const divModal = document.querySelector('#teamJoinModal');
-    const teamJoinModal = new bootstrap.Modal(divModal);
-    const modalTeamId = document.querySelector('#modalTeamId');
-    const modalTeamPassword = document.querySelector('#modalTeamPassword');
-    const modalTeamPasswordInput = document.querySelector('#modalTeamPasswordInput');
-    const modalBtnJoin = document.querySelector('#modalBtnJoin');
-    
-    
-    function showModal(team) {
-        modalTeamId.value = team.teamId;
-        modalTeamPassword.value = team.teamPassword;
-        
-        teamJoinModal.show();
-    }
-    
-    if (loginUser != 'anonymousUser') {
-        modalBtnJoin.addEventListener('click', joinTeam);
-    }
-    
-    function joinTeam() {
-        const joinTeamId = modalTeamId.value;
-        const joinTeamPassword = modalTeamPassword.value;
-        const joinTeamPasswordInput = modalTeamPasswordInput.value;
-        
-        
-        if (joinTeamPassword == joinTeamPasswordInput) {
-            console.log("성공~");
-            const data = {
-                teamId: joinTeamId,
-                userName: loginUser
-            }
-            
-            axios
-            .post('/home/success', data)
-            .then(function() {
-                teamJoinModal.hide();
-            }
-            );
-        }
-    }
-    }
-});
+}
+
+// 관리자 문의 모달
+
+const divForbiddenModal = document.querySelector('#teamForbiddenModal');
+const teamForbiddenModal = new bootstrap.Modal(divForbiddenModal);
+function getForbiddenModal() {
+    console.log("팀에 가입할 수 없음");
+    teamForbiddenModal.show();
+}
+      
+}); // 맨 윗줄 window.addEventListener 끝.

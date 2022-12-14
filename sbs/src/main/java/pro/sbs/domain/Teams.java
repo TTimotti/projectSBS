@@ -46,6 +46,11 @@ public class Teams extends BaseTimeEntity {
 
     @Column(nullable = false)
     private Integer maxMember;
+    
+    @Column(nullable = false)
+    private Integer fid;
+
+
 
 //    public Teams update(String teamName, Integer maxMember, String teamLeader, String teamPassword) {
 //        this.teamName = teamName;

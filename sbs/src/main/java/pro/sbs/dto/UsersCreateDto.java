@@ -12,7 +12,7 @@ import pro.sbs.domain.Users;
  */
 @NoArgsConstructor
 @Data
-public class CreateUserDto {
+public class UsersCreateDto {
     
     private String userName;    
     private String password; // 사용자 (로그인) 비밀번호.

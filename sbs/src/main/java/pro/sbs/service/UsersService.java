@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
-import pro.sbs.dto.CreateUserDto;
+import pro.sbs.dto.UsersCreateDto;
 import pro.sbs.repository.UsersRepository;
 
 @Service
@@ -18,6 +18,11 @@ public class UsersService {
     
     private final UsersRepository usersRepository;
     
+    /**
+     * 모든 유저들 검색
+     * @return 검색된 List<Users>
+     * @author 김지훈
+     */
     @Transactional(readOnly = true) // 검색 속도가 빨라짐.
     public List<Users> read() {
         log.info("read() 호출");
@@ -25,7 +30,13 @@ public class UsersService {
         return usersRepository.findByOrderByUserIdDesc();
     }
     
-    public Users createUser(CreateUserDto dto) {
+    /**
+     * DTO 기반 Users 생성, DB에 저장
+     * @param dto
+     * @return 생성된 Users
+     * @author 김지훈
+     */
+    public Users createUser(UsersCreateDto dto) {
         return usersRepository.save(dto.toEntity());
     }
 
