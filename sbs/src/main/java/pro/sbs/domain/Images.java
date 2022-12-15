@@ -13,8 +13,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity(name = "TEAMS_IMAGES")
-@SequenceGenerator(name = "TEAM_IMAGES_SEQ_GEN", sequenceName = "TEAM_IMAGES_SEQ", initialValue = 1, allocationSize = 1)
+
+/**
+ * 이미지 저장을 위한 엔터티 클래스
+ * 1. 유저 경로에 폴더 생성
+ * 2. 오리지널 파일명을 이름과 확장자로 나눠서 폴더 안에 파일로 저장 !!!{파일(file)과 이미지 파일(img)은 다르다}!!!
+ *      ex) image.jpg --> Name = image(파일), Extension = .jpg(파일을 이미지(jpeg, png 등)로 변환해주는 확장자)
+ * 3. 경로를 DB에 저장 후 불러올 때는 이름과 확장자를 합쳐서 불러옴
+ * @author 김지훈
+ *
+ */
+@Entity(name = "IMAGES")
+@SequenceGenerator(name = "IMAGES_SEQ_GEN", sequenceName = "IMAGES_SEQ", initialValue = 1, allocationSize = 1)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,14 +33,14 @@ import lombok.ToString;
 public class Images {
 
     @Id
-    @GeneratedValue(generator = "TEAM_IMAGES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "IMAGES_SEQ_GEN", strategy = GenerationType.SEQUENCE)
     private Integer fid;
     
     @Column(nullable = false)
-    private Integer fileId;
+    private String fileName;
     
     @Column(nullable = false)
-    private String OriginalName;
+    private String originalName;
     
     @Column(nullable = false)
     private String fileUrl;

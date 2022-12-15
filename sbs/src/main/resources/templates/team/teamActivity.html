@@ -89,16 +89,21 @@
 						<div class="features-icons-icon d-flex">
 							<i class="bi-window m-auto text-primary"></i>
 						</div>
+                        <div>
+                            <a
+                                th:href="@{ /activity/create?id={id} (id = ${ team.teamId }) }">활동
+                                생성</a>
+                        </div>
 
-
-						<!-- calendar -->
+                        <!-- calendar -->
 
 						<!-- weekcalendar -->
-						<input type="text" class="teamJoinDay" id="teamJoinDay"
-							style="display: none;">
+						<input type="text" class="teamJoinDay" id="teamJoinDay">
 						<hr />
 						<h3>팀내에 활동 리스트</h3>
 						<p class="lead mb-0">여기가 활동 리스트 테이블</p>
+                        
+                        
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-4">
@@ -114,11 +119,11 @@
 												</div>
 												
 												<div class="calendar-views">
-													<!--  
+												<!--
                                     <button type="button" class="calendar-view-week">주간</button>
                                     <button type="button" class="calendar-view-year">연간</button>
                                     <button type="button" class="calendar-view-month">월간</button>
-                                    -->
+                                     -->
 												</div>
 											</div>
 											<div id="calendar"></div>
@@ -136,7 +141,7 @@
 											</table>
 										</div>
 										<div>
-											<ul id="progresspagingul" class="progresspagingul"></ul>
+											<ul id="progresspagingul"></ul>
 										</div>
 									</div>
 									<div>
@@ -196,6 +201,8 @@
 			</div>
 		</div>
 	</footer>
+	
+	<!-- - -->
 	<div class="popup_layer" id="popup_layer" style="display: none;">
 		<div class="popup_box">
 			<div style="height: 10px; width: 375px; float: top;">
@@ -204,22 +211,37 @@
 					width="30px" height="30px"></a>
 			</div>
 			<!--팝업 컨텐츠 영역-->
+			<!--  
 			<div class="popup_cont">
 				<h5>활동 상세 정보</h5>
-				<p>
-					!!!!!!!!!!!!!!!!!!!!<br> ~~~~~~~~~~~~~~~~~ @@@@@@@@@@@@@@@@@@@
-					%%%%%%%%%%%%%%%% ^^^^^^^^^^^^^^^^ &&&&&&&&&&&&&& *************
-					((((((((((((((((
-
-				</p>
-
+			<div>	
+			<br/><br/><br/>
+			<label id="playTitle">관리 번호</label>
+			<br/>
+			<input type="text" class="my-2" id ="activityName" th:value="${ info.activityId }" readOnly/>
+			<label id="playTitle">주제</label>
+			<br/>
+			<input type="text" class="my-2" id ="activityPlay" th:value="${ info.play }" readOnly/>
+			<br/>
+			<label id="playBudget">회비</label>
+			<br/>
+			<input type="text" class="my-2" id ="activityBudget"  th:value="${ info.budget}" readOnly/>
+			<br/>
+			<label id="playPlace">장소</label>
+			<br/>
+			<input type="text" class="my-2" id ="activityPlace"  th:value="${ info.place }" readOnly/>
+			<br/>
+			<label id="playPeople">인원</label>
+			<br/>
+			<input type="text" class="my-2" id ="activityPeople" th:value="${ info.people }" readOnly/>
+			<br/>
+			<button>참여</button>
 			</div>
-			<!--팝업 버튼 영역-->
-			<div class="popup_btn" style="float: bottom; margin-top: 100px;">
-				<a href="javascript:closePop();">닫기</a>
 			</div>
 		</div>
-	</div>
+	</div> 
+	-->
+	
 	<!-- Ajax axios JS-->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<!-- Jquery JS-->

@@ -11,6 +11,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
 
+
+/**
+ * 생성/수정 시간 기록용 상위 클래스
+ * @author 김지훈
+ *
+ */
 @Getter
 @MappedSuperclass
 @EntityListeners(value = { AuditingEntityListener.class })

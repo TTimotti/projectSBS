@@ -3,16 +3,12 @@ package pro.sbs.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import pro.sbs.domain.Post;
 import pro.sbs.domain.Reply;
 import pro.sbs.dto.ReplyReadDto;
 import pro.sbs.dto.ReplyRegisterDto;
-import pro.sbs.dto.ReplyUpdateDto;
-import pro.sbs.repository.PostRepository;
 import pro.sbs.repository.ReplyRepository;
 
 @Slf4j
@@ -20,18 +16,24 @@ import pro.sbs.repository.ReplyRepository;
 @RequiredArgsConstructor
 public class ReplyService {
 
-    private final PostRepository postRepository;
+//    private final PostRepository postRepository;
     
     private final ReplyRepository replyRepository;
     
+    /**
+     * 댓글 생성 메서드. 
+     * @param dto
+     * @return
+     * @author 추
+     */
     public Integer create(ReplyRegisterDto dto) {
         log.info("ReplyService dto ={}", dto);
         
-        Post post = postRepository.findById(dto.getPostId()).get();
+        // 종속시 밑에도 바꿔야함.
+//        Post post = postRepository.findById(dto.getPostId()).get();
+//        log.info("ReplyService create postId ={}", post);
         
-        log.info("ReplyService create postId ={}", post);
-        
-        Reply reply = Reply.builder().post(post)
+        Reply reply = Reply.builder().postId(dto.getPostId())
                 .replyText(dto.getReplyText())
                 .writer(dto.getWriter())
                 .build();
@@ -43,6 +45,12 @@ public class ReplyService {
         return reply.getReplyId();
     }
     
+    /**
+     * 게시물마다 댓글 읽어오는 메서드 이것도 굳이 dto를 쓴 이유는 종속때 필요하기 때문 
+     * 그냥 List<Reply> 쓰는거랑 똑같아서 그냥 이걸로 쓰면됌.
+     * @param postId
+     * @return
+     */
     public List<ReplyReadDto> readReplies(Integer postId) {
         log.info("ReplyService postId = {}", postId);
         
@@ -54,6 +62,11 @@ public class ReplyService {
         return list.stream().map(ReplyReadDto::fromEntity).toList();
     }
 
+    /**
+     * 댓글 하나만 가져오는 메서드 수정 삭제시 모달로 넘기기위함.
+     * @param replyId
+     * @return
+     */
     public ReplyReadDto readReply(Integer replyId) {
         log.info("ReplyService readReply(replyId={})", replyId);
         
@@ -70,16 +83,15 @@ public class ReplyService {
         return replyId;
     }
 
-    @Transactional
-    public Integer update(ReplyUpdateDto dto) {
-        log.info("ReplyService update(dto={})", dto);
-        
-        // 수정하려는 댓글 아이디로 댓글 엔터티 객체를 검색.
-        Reply entity = replyRepository.findById(dto.getReplyId()).get();
-        // 데이터베이스 테이블에서 검색한 엔터티 객체를 수정.
-        entity.update(dto.getReplyText());
-        // @Transactional이 적용된 경우에 메서드 실행이 끝날 때 DB에 자동으로 save됨.
-        
-        return entity.getReplyId(); // 수정한 엔터티의 아이디를 리턴.
-    }
+//    @Transactional
+//    public Integer update(ReplyUpdateDto dto) {
+//        log.info("ReplyService update(dto={})", dto);
+// 
+//        Reply entity = replyRepository.findById(dto.getReplyId()).get();
+//        
+//        entity.update(dto.getReplyText());
+//        
+//        
+//        return entity.getReplyId(); 
+//    }
 }

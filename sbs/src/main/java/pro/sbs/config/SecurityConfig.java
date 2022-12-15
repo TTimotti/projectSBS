@@ -10,6 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * 주석 설명 추가바람
+ * @author XXX
+ *
+ */
 // 컨트롤러 메서드들에서 @PreAuthorize, @PostAuthorize 애니테이션을 이용할 수 있도록
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration // 스프링부트 앱 환경 설정을 자바 코드로 설정.

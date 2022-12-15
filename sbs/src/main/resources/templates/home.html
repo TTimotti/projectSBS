@@ -1,78 +1,86 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html 
+    xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     
     <head>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>메인 페이지</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap icons-->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-        rel="stylesheet" type="text/css" />
-    <!-- Google fonts-->
-    <link
-        href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
-        rel="stylesheet" type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/css/styles.css" rel="stylesheet" />
-    <link href="/css/calendar.css" rel="stylesheet" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        
+        <title>Main Page</title>
+        
+<!--     Favicon -->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        
+<!--     Bootstrap icons -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        
+<!--     Google fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    
+<!--     Core theme CSS (includes Bootstrap) -->
+        <link href="/css/styles.css" rel="stylesheet" />
+        <link href="/css/calendar.css" rel="stylesheet" />
     </head>
 
     <body>
-    <!-- Navigation-->
+<!--     Navigation -->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-            <a class="navbar-brand" th:href="@{/}">SBS</a>
-            <!-- 로그인하지 않은 상태 -->
-            <span>
-            <th:block sec:authorize="isAnonymous()">
-                <a class="btn btn-primary" th:href="@{ /login }">로그인</a>
-                <a class="btn btn-primary" th:href="@{ /user/create }">회원 가입</a>
-            </th:block>
-            </span>
-            
-            <!-- 로그인 상태 -->
-            <th:block sec:authorize="isAuthenticated()">
-                <span> <span sec:authentication="name"></span><span>님, 반갑습니다! </span>
-                <a class="btn btn-primary" th:href="@{ /user/myPage }">My Page</a>
-                <a class="btn btn-primary" th:href="@{ /user/joinedTeamList }">내 모임</a>
-                <a class="btn btn-primary" th:href="@{ /team/teamCreate }">모임 만들기</a>
-                <a class="btn btn-primary" th:href="@{ /logout }">로그아웃</a>
+                <a class="navbar-brand" th:href="@{/}">SBS</a>
+                
+<!--             로그인하지 않은 상태 -->
+                <span>
+                    <th:block sec:authorize="isAnonymous()">
+                        <a class="btn btn-primary" th:href="@{ /login }">Sign In</a>
+                        <a class="btn btn-primary" th:href="@{ /user/signUp }">Sign Up</a>
+                    </th:block>
                 </span>
-            </th:block>
+            
+<!--             로그인 상태 -->
+                <th:block sec:authorize="isAuthenticated()">
+                    <span>
+                        <span sec:authentication="name"></span><span>님, 반갑습니다! </span>
+                        <a class="btn btn-primary" th:href="@{ /user/myPage }">My Page</a>
+                        <a class="btn btn-primary" th:href="@{ /user/myTeamList }">My Team List</a>
+                        <a class="btn btn-primary" th:href="@{ /team/teamCreate }">Team Create</a>
+                        <a class="btn btn-primary" th:href="@{ /logout }">Log Out</a>
+                    </span>
+                </th:block>
             </div>
         </nav>
         
-    <!-- Masthead-->
-    <!-- 검색 기능 -->
-        <div class="container ">
-        <div class="row">
-        <div class="col-lg-4" style = "border: solid 1px black; text-align: center" >사진 넣는 곳</div>
-        </div>
+    
+<!--     검색 기능 -->
+        <div class="container">
+            <div class="row">
+                <!-- 팀 이미지 표시 -->
+                <div class="col-lg-4" style = "border: solid 1px black; text-align: center" >
+                    <img src="image/다운로드.jpg" alt="기본 이미지" />
+                </div>
+            </div>
         </div>
         
+
         <header class="masthead">
-            <!-- Icons Grid-->
+        
+<!--             Icons Grid -->
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
                         <div class="text-center text-white">
-                            <!-- Page heading-->
+                        
+<!--                             Page heading -->
                             <h1 class="mb-5" style="color : black;">모임 검색</h1>
+                            
                             <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN" th:action="@{ /team/search }" method="get">
                                 <div class="row">
                                     <div class="col">
                                         <input class="form-control form-control-lg" id="searchMain" type="text" name="keyword" placeholder="모임 검색하기" data-sb-validations="required,email" required autofocus />
                                     </div>
                                     <div class="col-auto">
-                                    <input type="submit" class="btn btn-primary" value="검색" />
+                                        <input type="submit" class="btn btn-primary" value="검색" />
                                     </div>
                                 </div>
                             </form>
@@ -87,7 +95,9 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <h3>모임 리스트</h3>
+                        
                         <p class="lead mb-0">검색결과</p>
+                        
                         <div>
                             <table class="table table-hover">
                                 <thead>
@@ -100,16 +110,16 @@
                                         <th>현 인원수</th>
                                         <th>입장 여부</th>
                                     </tr>
-                                </thead>
-                                <tbody id = showSearchedTeams>
-                                </tbody>
+                                </thead>                                
+                                <tbody id = showSearchedTeams></tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        <hr/>
+            <hr/>
         
+<<<<<<< HEAD
         <!-- <div id="joinners"></div> -->   
         
         <!-- !!!!!!!모달!!!!!!! -->
@@ -136,64 +146,105 @@
                         <th:block sec:authorize="isAuthenticated()">
                         <button type="button" id="modalBtnJoin" class="btn btn-outline-success" th:href="@{ /team/teamActivity?id={id} (id = ${ modalTeamId }) }">들어가기</button> <!-- btn btn-outline-success 차이?-->
                         </th:block>
+=======
+            <div id="joinners"></div>   
+       
+<!--         !!!!!!!가입하기 모달!!!!!!! -->
+            <div class="modal fade" id="teamJoinModal" tabIndex="-1" aria-labelledby="teamJoinModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="teamJoinModalLabel">모임 비밀번호를 입력하세요.</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- 팀 아이디 삽입 위치  -->
+                            <input type="hidden" id="modalTeamId" readonly />
+                            <!-- 팀 비밀번호 삽입 위치  -->
+                            <input type="hidden" id="modalTeamPassword" class="form-control" />
+                            <!-- 팀 응답 삽입 위치 -->
+                            <input type="text" id="modalTeamPasswordInput" class="form-control"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                            <th:block sec:authorize="isAnonymous()">
+                                <a class="btn btn-success" th:href="@{ /login }">들어가기</a>
+                                <!-- ㄴ 로그아웃 상태일 시, 들어가기를 누르면 로그인 페이지로 넘어감. -->
+                            </th:block>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <button type="button" id="modalBtnJoin" class="btn btn-outline-success">들어가기</button>
+                            </th:block>
+                        </div>
+>>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
                     </div>
                 </div>
-            </div>
-        </div> <!-- end Modal -->
-        
-    </section>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!-- Call to Action-->
-    <section class="call-to-action text-white text-center" id="signup">
-        <div class="container position-relative">
-            <div class="row justify-content-center">
-                <p>밑단</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer-->
-    <footer class="footer bg-light">
-        <div class="container">
-            <div class="row">
-                <div
-                    class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                    <ul class="list-inline mb-2">
-                        <li class="list-inline-item"><a href="#!">검색</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="#!">마이페이지</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="#!">모임
-                                참석</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="#!">공지
-                                사항 Policy</a></li>
-                    </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">&copy;
-                        Footer</p>
+            </div> <!-- end Modal -->
+            
+            <!--        !!!!!!! 가입 불가 모달 !!!!!!! -->
+            <div class="modal fade" id="teamForbiddenModal" tabIndex="-1" aria-labelledby="teamForbiddenModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="teamForbiddenModal">이런... 가입할 수가 없군요...</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    
+                        <div class="modal-body">
+                        <input type="text" value="정원이 초과되었거나, 다른 사유로 인해 모임에 가입할 수 없습니다. 팀장에게 문의하세요." class="form-control" readonly/>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">확인</button>
+                        </div>
+                    </div>
                 </div>
-                <div
-                    class="col-lg-6 h-100 text-center text-lg-end my-auto">
+            </div> <!-- end Modal -->   
+        </section>    
+    
+<!--     Call to Action -->
+        <section class="call-to-action text-white text-center" id="signup">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <p>밑단</p>
+                </div>
+            </div>
+        </section>
+    
+<!--     Footer -->
+        <footer class="footer bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                        <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#!">검색</a>
+                        </li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item">
+                            <a href="#!">마이페이지</a>
+                        </li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item">
+                            <a href="#!">모임 참석</a>
+                        </li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item">
+                            <a href="#!">공지사항 Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy;Footer</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item me-4"><a
-                            href="#!"><i class="bi-facebook fs-3"></i></a>
+                        <li class="list-inline-item me-4">
+                            <a href="#!"><i class="bi-facebook fs-3"></i></a>
                         </li>
-                        <li class="list-inline-item me-4"><a
-                            href="#!"><i class="bi-twitter fs-3"></i></a>
+                        <li class="list-inline-item me-4">
+                            <a href="#!"><i class="bi-twitter fs-3"></i></a>
                         </li>
-                        <li class="list-inline-item"><a href="#!"><i
-                                class="bi-instagram fs-3"></i></a></li>
+                        <li class="list-inline-item">
+                            <a href="#!"><i class="bi-instagram fs-3"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -209,13 +260,11 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Team Password Modal JS-->
-    <script th:src="@{/js/team.js}"></script>
+    <script th:src="@{/js/home.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script th:inline="javascript">
             // 타임리프 inline 기능을 이용하면 자바스크립트 안에서 타임리프 속성을 이용할 수 있음.
-            // 로그인 사용자 아이디를 자바스크립트 변수에 저장.
-            
+            // 로그인 사용자 아이디를 자바스크립트 변수에 저장.            
             const loginUser = [[ ${ #authentication.name } ]];
             const searchedTeams = [[${ list }]];
         </script>

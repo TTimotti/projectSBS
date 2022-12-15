@@ -5,19 +5,15 @@ moment.locale('ko');
 /*페이지 기능 추가 메서드*/
 /*************************/
 
-
-// 메인페이지 개설된 전체 활동 목록
-//scAllTime();
+progressActivityList();
 pastActivityList();
-ProgressActivityList();
-//scAllEndTime();
+
 
 /************************************************************ */
 /************************************************************ */
 /* 연간,월간,주간 달력, 팀안에 개설된 활동 뷰 페이지 기능 코드*/
 /************************************************************ */
 /************************************************************ */
-
 
 // 달력 요일
 var calendarDays = ["일", "월", "화", "수", "목", "금", "토"];
@@ -408,7 +404,8 @@ $(".calendar-controls > .calendar-today").on("click", function() {
 });
 // 전체 활동 목록 갱신
 $(".calendar-controls > .calendar-reList").on("click", function() {
-	ProgressActivityList();
+	progressActivityList();
+	pastActivityList();
 	$("#progresspagingul").css("display","");
 	$(".activityTitle").html("진행중인 활동"); 
 });
@@ -453,7 +450,7 @@ function scSearchList(data) {
 				+ '<td class="activityUser">' + t.userId + '</td>'
 				+ '<td>' + t.budget.toLocaleString(); +'</td>'
 			str += '<td>' +
-				'<button id="joinAc" class="btn btn-success" style="width:100px; height:30px; padding:0%;" th:href="@{ /team/list?id={id}'
+				'<button id="joinAc" class="btn btn-success" style="width:100px; height:30px; padding:0%;" th:href="@{ /activity/party?id={ id }'
 				+ '(id = ' + t.teamId + ')' + '}">참여</button>'
 				+ '</td>'
 				+ '</tr>';
@@ -485,7 +482,7 @@ $(document).on("click", ".calendar table > tbody > tr > td", function(event) {
 		
 		const startTime= document.querySelector('#teamJoinDay').value;		
 	  	
-	  	$(".activityTitle").html("<em>"+ startTime + " 일 활동" +"</em>"); 
+	  	$(".activityTitle").html(startTime + " 일"); 
 	  	 axios
         .get("/scTimeSearch", 
         	{ params :
@@ -508,67 +505,77 @@ let totalData; //총 데이터 수
 let dataPerPage; //한 페이지에 나타낼 글 수
 let pageCount = 5;//페이징에 나타낼 페이지 수
 let globalCurrentPage = 1; //현재 페이지
-var globalData; //controller에서 가져온 data 전역변수
 
-function pastActivityList() {
+// progress 
+var proGlobalData; 
+// past
+var pastproGlobalData;
+
+
+/** 
+ * 진행중인 활동 목록 테이블/페이징 처리 실행 메서드
+ * 
+ */
+function progressActivityList() {
     $(document).ready(function() {
         dataPerPage = 5;
-
         var Id = 1
 
         var param = { Id: Id };
-
         $.ajax({
+            method: "get",
+            url: "/team/progressList",
+            param,
+            dataType: "json",
+            success: function(data) {
+				console.log(data);	
+                totalData = data.length - 1;
+				proGlobalData = data;
+				
+                //글 목록 표시 호출 (테이블 생성)
+                progressDisplayData(1, dataPerPage, data)
+                //페이징 표시 호출
+                progressPaging(totalData, dataPerPage, pageCount, 1)
+            }
+        });
+    });
+}
+/**
+ * 기한이 지난 활동 목록,페이징 처리 실행 메서드
+ */
+function pastActivityList() {
+   
+    $(document).ready(function() {
+      
+        dataPerPage = 5;
+      
+        var Id = 1
 
-            method: "post",
+        var param = { Id: Id };
+        $.ajax({
+            method: "get",
             url: "/team/pastList",
             param,
             dataType: "json",
             success: function(data) {
-
+				console.log(data);
                 totalData = data.length - 1;
-                globalData = data;
+                pastproGlobalData = data;
 
                 //글 목록 표시 호출 (테이블 생성)
-                PastDisplayData(1, dataPerPage, data)
+                pastDisplayData(1, dataPerPage, data)
                 //페이징 표시 호출
-                PastPaging(totalData, dataPerPage, pageCount, 1)
-            }
-        });
-    });
-}
-
-function ProgressActivityList() {
-    $(document).ready(function() {
-        dataPerPage = 5;
-
-        var Id = 1
-
-        var param = { Id: Id };
-
-        $.ajax({
-
-            method: "post",
-            url: "/team/ProgressList",
-            param,
-            dataType: "json",
-            success: function(data) {
-
-                totalData = data.length - 1;
-                globalData = data;
-
-                //글 목록 표시 호출 (테이블 생성)
-                ProgressDisplayData(1, dataPerPage, data)
-                //페이징 표시 호출
-                ProgressPaging(totalData, dataPerPage, pageCount, 1)
+                pastPaging(totalData, dataPerPage, pageCount, 1)
             }
         });
     });
 }
 
 
-
-function PastPaging(totalData, dataPerPage, pageCount, currentPage) {
+/** 
+ * 기한이 지난 활동 목록 테이블 페이징 처리
+ */
+function pastPaging(totalData, dataPerPage, pageCount, currentPage) {
 
     totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수
 
@@ -608,15 +615,12 @@ function PastPaging(totalData, dataPerPage, pageCount, currentPage) {
     }
 
     $("#pastpagingul").html(pageHtml);
-    let displayCount = "";
-    displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
-    $("#displayCount").text(displayCount);
 
 
     //페이징 번호 클릭 이벤트 
-    $("#pastpagingul li a").click(function (event) {
+    $("#pastpagingul li a").off().on('click',(function (event) {
         
-        globalData
+        pastproGlobalData;
 
         let $id = $(this).attr("id");
         selectedPage = $(this).text();
@@ -627,21 +631,23 @@ function PastPaging(totalData, dataPerPage, pageCount, currentPage) {
         //전역변수에 선택한 페이지 번호를 담는다...
         globalCurrentPage = selectedPage;
         //페이징 표시 재호출
-        PastPaging(totalData, dataPerPage, pageCount, selectedPage);
+        pastPaging(totalData, dataPerPage, pageCount, selectedPage);
         //글 목록 표시 재호출
-        PastDisplayData(selectedPage, dataPerPage, globalData);
+        pastDisplayData(selectedPage, dataPerPage, pastproGlobalData);
         
         // 마우스 스크롤 
         event.preventDefault();
         event.stopPropagation();
         return false;
-    });
+    }));
 }
 
 
 
-
-function PastDisplayData(currentPage, dataPerPage, data) {
+/**
+ * 기한이 지난(끝난) 활동 테이블 처리
+ */
+function pastDisplayData(currentPage, dataPerPage, data) {
     
     let chartHtml = "";
     var i;
@@ -674,7 +680,7 @@ function PastDisplayData(currentPage, dataPerPage, data) {
 				+ '<td class="activityUser">' + data[i].userId + '</td>'
 				+ '<td>' + data[i].budget.toLocaleString(); +'</td>'
 			chartHtml += '<td>' +
-				'<a id="joinAc" class="btn btn-primary" style="width:100px; height:30px; padding:0%;" href="javascript:openPop();">정보</a>'
+				'<a id="infoAc" class="btn btn-primary" style="width:100px; height:30px; padding:0%;">정보</a>'
 				+ '</td>'
 				+ '</tr>';
 	}
@@ -685,8 +691,10 @@ function PastDisplayData(currentPage, dataPerPage, data) {
 
 
 }
-
-function ProgressPaging(totalData, dataPerPage, pageCount, currentPage) {
+/** 
+ * 진행중인 활동 테이블 페이징처리
+ *  */
+function progressPaging(totalData, dataPerPage, pageCount, currentPage) {
 
     totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수
 
@@ -705,36 +713,33 @@ function ProgressPaging(totalData, dataPerPage, pageCount, currentPage) {
     let next = last + 1;
     let prev = first - 1;
 
-    let pageHtml = "";
+    let progressPageHtml = "";
 
     if (prev > 0) {
-        pageHtml += "<li><a href='#' id='prev'> 이전 </a></li>";
+        progressPageHtml += "<li><a href='#' id='prev'> 이전 </a></li>";
     }
 
     //페이징 번호 표시 
     for (var i = first; i <= last; i++) {
         if (currentPage == i) {
-            pageHtml +=
+            progressPageHtml +=
                 "<li class='on'><a href='#' id='" + i + "'>" + i + "</a></li>";
         } else {
-            pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+            progressPageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
         }
     }
 
     if (last < totalPage) {
-        pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
+        progressPageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
     }
 
-    $("#progresspagingul").html(pageHtml);
-    let displayCount = "";
-    displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
-    $("#displayCount").text(displayCount);
+    $("#progresspagingul").html(progressPageHtml);
 
 
     //페이징 번호 클릭 이벤트 
-    $("#progresspagingul li a").click(function (event) {
+    $("#progresspagingul li a").off().on('click',(function (event) {
         
-        globalData
+        proGlobalData;
 
         let $id = $(this).attr("id");
         selectedPage = $(this).text();
@@ -745,20 +750,21 @@ function ProgressPaging(totalData, dataPerPage, pageCount, currentPage) {
         //전역변수에 선택한 페이지 번호를 담는다...
         globalCurrentPage = selectedPage;
         //페이징 표시 재호출
-        ProgressPaging(totalData, dataPerPage, pageCount, selectedPage);
+        progressPaging(totalData, dataPerPage, pageCount, selectedPage);
         //글 목록 표시 재호출
-        ProgressDisplayData(selectedPage, dataPerPage, globalData);
+        progressDisplayData(selectedPage, dataPerPage, proGlobalData);
+        
         // 마우스 스크롤 
         event.preventDefault();
         event.stopPropagation();
         return false;
-    });
+    }));
 }
 
-
-
-
-function ProgressDisplayData(currentPage, dataPerPage, data) {
+/**
+ * 진행중인 활동 목록 테이블 처리 
+ * */ 
+function progressDisplayData(currentPage, dataPerPage, data) {
     
     let chartHtml = "";
     var i;
@@ -790,27 +796,59 @@ function ProgressDisplayData(currentPage, dataPerPage, data) {
                 + '<td>' + data[i].play + '</td>'
                 + '<td class="activityUser">' + data[i].userId + '</td>'
                 + '<td>' + data[i].budget.toLocaleString(); +'</td>'
+                
+                // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성 
+                if (data[i].teamId == 1) {
             chartHtml += '<td>' +
-                '<a id="joinAc" class="btn btn-success" style="width:100px; height:30px; padding:0%;" th:href="@{ /team/list?id={id}'
-                + '(id = ' + data[i].teamId + ')' + '}">참여</a>'
+                '<a id="joinAc" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/post/create">참여</a>'
                 + '</td>'
+                
+                // 이미 가입된 회원일 경우 탈퇴버튼 생성.
+                } else if (data[i].teamId != 1) {
+            chartHtml += '<td>' +
+                '<a id="joinAc" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/post/create">탈퇴</a>'
+                + '</td>'   
+                }
                 + '</tr>';
+                
+                
     }
+    
+    const buttons = document.querySelectorAll('.btnPartyIn');
+    buttons.forEach(btn => {
+       btn.addEventListener('click', insertMyList) 
+    });
     chartHtml += '</tbody>';
 
     $("#dynamicTable").empty();
     $("#dynamicTable").append(chartHtml);
 }
 
+function insertMyList(event) {
+    
+    const teamId = event.target.getAttribute('data-teamId');
+    
+    axios
+    .get('/activity/paryIn' + teamId)
+    .then(response => { console.log(response) })
+    .catch(err => { console.log(err) })
+    
+}
+
+
+
+
 /********************************************/
 /********* activityUser 레이어 팝업창 *******/
 /********************************************/
 function openPop() {
     document.getElementById("popup_layer").style.display = "block";
-
+	
 }
 
 //팝업 닫기
 function closePop() {
     document.getElementById("popup_layer").style.display = "none";
 }
+
+

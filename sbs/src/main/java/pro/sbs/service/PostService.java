@@ -8,10 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Post;
-import pro.sbs.domain.Team;
 import pro.sbs.dto.PostCreateDto;
 import pro.sbs.dto.PostReadDto;
-import pro.sbs.dto.PostUpdateDto;
 import pro.sbs.repository.PostRepository;
 import pro.sbs.repository.TeamRepository;
 
@@ -24,15 +22,27 @@ public class PostService {
     
     private final PostRepository postRepository; // 생성자에 의한 의존성 주입.
     
+    /**
+     * 전체 게시글 가져오기.
+     * 
+     * @param teamId
+     * @return
+     * @author 추
+     */
     @Transactional(readOnly = true)
     public List<PostReadDto> read(Integer teamId) {
         log.info("postService read()");
         
-        List<Post> list = postRepository.findByTeamTeamIdOrderByPostIdDesc(teamId);
+        List<Post> list = postRepository.findByTeamIdOrderByPostIdDesc(teamId);
         
         return list.stream().map(PostReadDto::fromEntity).toList();
     }
     
+    /**
+     * 게시물 하나 가져오기.
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     public Post readIndex(Integer id) {
         log.info("postService readIndex(Id) = {}", id);
@@ -43,19 +53,15 @@ public class PostService {
         return index;
     }
     
-    /**
-     * 팀아이드를 넣은 팀 객체(team)를 포스트객체(post)에 빌더로 생성해야 save에 팀아이디가 종속된 포스트dto를 넣어
-     * 저장할 수 있다. save는 
-     * @param dto
-     * @return
-     */
+    
     public Post create(PostCreateDto dto) {
         log.info("PostService create(dto={}", dto);
         
-        Team team = teamRepository.findById(dto.getTeamId()).get();
-        log.info("PostService create(team = {}", team);
+        // 종속시 사용
+//        Team team = teamRepository.findById(dto.getTeamId()).get();
+//        log.info("PostService create(team = {}", team);
         
-        Post post = Post.builder().team(team)
+        Post post = Post.builder().teamId(dto.getTeamId())
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .author(dto.getAuthor())
@@ -69,15 +75,15 @@ public class PostService {
         return entity;
     }
 
-    @Transactional
-    public Integer update(PostUpdateDto dto) {
-        log.info("postService update(dto={})", dto);
-        
-        Post entity = postRepository.findById(dto.getId()).get(); // (1)
-        entity.update(dto.getTitle(), dto.getContent()); // (2)
-        
-        return entity.getPostId();
-    }
+//    @Transactional
+//    public Integer update(PostUpdateDto dto) {
+//        log.info("postService update(dto={})", dto);
+//        
+//        Post entity = postRepository.findById(dto.getId()).get(); // (1)
+//        entity.update(dto.getTitle(), dto.getContent()); // (2)
+//        
+//        return entity.getPostId();
+//    }
     
     public Integer delete(Integer id) {
         log.info("postService delete(id={})", id);

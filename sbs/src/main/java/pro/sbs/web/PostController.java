@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Post;
 import pro.sbs.dto.PostCreateDto;
-import pro.sbs.dto.PostUpdateDto;
 import pro.sbs.service.PostService;
-import pro.sbs.service.TeamService;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,12 +19,11 @@ import pro.sbs.service.TeamService;
 @RequestMapping
 public class PostController {
     
-    private final TeamService teamService;
+//    private final TeamService teamService;
     
     private final PostService postService;
     
     @GetMapping({"/post/detail", "/post/modify"})
-    // 컨트롤러 메서드가 2개 이상의 요청 주소를 처리할 때는 mapping에서 요청 주소를 배열로 설정.
     public void detail(Integer id, Model model) {
         log.info("postController datail(id={})", id);
         log.info("postController modify(id={})", id);
@@ -44,21 +41,20 @@ public class PostController {
     }
     
     /**
-     * dto에 teamId를 넣는과정을 담은 게시물 생성 메서드. 
-     * 
+     * 게시물 작성.
      * @param dto
      * @param attrs
      * @param id
      * @return
+     * @author 추
      */
     @PostMapping("/post/create")
     public String create(PostCreateDto dto, RedirectAttributes attrs, Integer id) {
         log.info("PostController Post create() dto = {}", dto);
         log.info("PostController create teamId = {}", id);
-        
-        dto.getAddTeamId(id);
+        // 여기서 종속시에 타입이 달라 아이디를 직접 넣어줘야해서 이렇게함 
+        dto.setTeamId(id);
         log.info("PostController Post create() dto2 = {}", dto);
-        log.info("PostController Post create() dto.getTeamId = {}", dto.getTeamId());
         Post entity = postService.create(dto);
         log.info("PostController Post create() entity = {}", entity);
         attrs.addFlashAttribute("createdId", entity.getPostId());
@@ -66,16 +62,16 @@ public class PostController {
         return "redirect:/team/teamActivity?id=" + id;
     }
     
-    @PostMapping("/post/update")
-    public String update(PostUpdateDto dto) {
-        log.info("PostController update(dto = {})",dto);
-        
-        Integer postId = postService.update(dto);
-        
-        log.info("PostController postId={}", postId);
-        
-        return "redirect:/post/detail?id=" + dto.getId();
-    }
+//    @PostMapping("/post/update")
+//    public String update(PostUpdateDto dto) {
+//        log.info("PostController update(dto = {})",dto);
+//        
+//        Integer postId = postService.update(dto);
+//        
+//        log.info("PostController postId={}", postId);
+//        
+//        return "redirect:/post/detail?id=" + dto.getId();
+//    }
     
     @PostMapping("/post/delete")
     public String delete(Integer id, RedirectAttributes attrs) {
@@ -85,7 +81,6 @@ public class PostController {
         attrs.addFlashAttribute("deletedPostId", postId);
         log.info("postController delete postId = {}", postId);
         
-        // 삭제 완료 후에는 목록 페이지로 이동(redirect) - PRG 패턴
         return "redirect:/";
     }
     
