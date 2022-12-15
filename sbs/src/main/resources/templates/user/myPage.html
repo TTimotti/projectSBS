@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>SBS - 마이페이지</title>
+</head>
+<body>
+
+<div class="card-body">
+                <form id="form">
+                <div class="my-2">
+                    <label for="userId" class="form-label">유저 아이디</label> 
+                    <input type="number" id="userId" class="form-control" name="userId"  th:value="${ users.userId }" readonly />
+                </div>
+                   <div class="row">
+                        <div class = "my-2 col-7">
+                            <label for="username" class="form-label">유저 이름</label>
+                            <input id="username" class="form-control" name="userName" th:value="${ users.userName }" readonly />
+                        </div>
+                        <div class = "my-2 col-5">
+                            <label for="userimage" class="form-label">유저 이미지</label>
+                            <input type="image" id="userimage" name="userImage" class="form-control" value="개인 사진"/>
+                        </div>
+                    </div>
+                    <div class="my-2">
+                        <label for="nickname" class="form-label">닉네임</label>
+                        <input id="nickname" class="form-control" name="nickname" th:value="${ users.nickname }" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="email" class="form-label">이메일</label>
+                        <input id="email" class="form-control" name="email" th:value="${ users.email }" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="phone" class="form-label">휴대폰</label>
+                        <input id="phone" class="form-control" name="phone" th:value="${ users.phone }" readonly />
+                    </div>
+                <div class="my-2">
+                    <label for="gender" class="form-label">성별</label>
+                        <input id="gender" class="form-control" name="gender" th:value="${ users.gender }" readonly />
+                </div>
+                    <div class="my-2">
+                        <label for="birth" class="form-label">생일</label>
+                        <input id="birth" class="form-control" name="birthdate" th:value="${ users.birthdate }" readonly />
+                    </div>
+                    <div class="my-2">
+                        <label for="location" class="form-label">지역</label>
+                        <input id="location" class="form-control" name="location" th:value="${ users.location }" readonly />
+                    </div>
+                    <div class = "my-2 row">
+                        <label for="cash" class="form-label">캐쉬</label>
+                        <div class = "col-6">
+                        <input id="cash" class="form-control" name="cash" th:value="${ users.cash }" readonly />
+                        </div>
+                        <div class = "col-4">
+                        <input type = "button" id="btnCash" class="btnModifies btn btn-outline-info" name="btnCash" value="캐쉬충전"/>
+                        </div>
+                    </div>
+                    <div class="my-2  d-none">
+                        <label for="createdTime" class="form-label">회원가입 시간</label>
+                        <input id="createdTime" class="form-control" 
+                            th:value="${ #temporals.format(users.createdTime, 'yyyy-MM-dd HH:mm:ss') }" readonly />
+                    </div>  
+                    <div class="my-2  d-none"> 
+                        <label for="modifiedTime" class="form-label">수정 시간</label>
+                        <input id="modifiedTime" class="form-control" 
+                            th:value="${ #temporals.format(users.modifiedTime, 'yyyy-MM-dd HH:mm:ss') }" readonly />
+                    </div> 
+                    <div class="my-2" >
+                    <a class="btn btn-primary form-control" th:href="@{ /user/update?userId={userId} (userId = ${ users.userId }) } ">수정하기</a>
+                </div>
+                </form>    
+        </div>
+
+</body>
+</html>
