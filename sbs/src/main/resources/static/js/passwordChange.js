@@ -115,7 +115,7 @@ window.addEventListener('DOMContentLoaded', function() {
         const result = confirm('뒤로 가시겠습니까?');
         if (result) {
             formPasswordChange.action = '/user/myPage?userId=' + userIdValue;
-            formPasswordChange.method = 'POST';
+            formPasswordChange.method = 'get';
             formPasswordChange.submit();
         }
 

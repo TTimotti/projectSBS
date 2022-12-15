@@ -132,7 +132,7 @@ window.addEventListener('DOMContentLoaded', function() {
         const result = confirm('뒤로 가시겠습니까?');
         if (result) {
             formUpdate.action = '/user/myPage?userId=' + userIdValue;
-            formUpdate.method = 'POST';
+            formUpdate.method = 'get';
             formUpdate.submit();
         }
 
