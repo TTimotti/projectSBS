@@ -43,6 +43,14 @@ public class PostController {
         
     }
     
+    /**
+     * dto에 teamId를 넣는과정을 담은 게시물 생성 메서드. 
+     * 
+     * @param dto
+     * @param attrs
+     * @param id
+     * @return
+     */
     @PostMapping("/post/create")
     public String create(PostCreateDto dto, RedirectAttributes attrs, Integer id) {
         log.info("PostController Post create() dto = {}", dto);
@@ -51,7 +59,7 @@ public class PostController {
         dto.getAddTeamId(id);
         log.info("PostController Post create() dto2 = {}", dto);
         log.info("PostController Post create() dto.getTeamId = {}", dto.getTeamId());
-        Post entity = postService.create(dto, id);
+        Post entity = postService.create(dto);
         log.info("PostController Post create() entity = {}", entity);
         attrs.addFlashAttribute("createdId", entity.getPostId());
         

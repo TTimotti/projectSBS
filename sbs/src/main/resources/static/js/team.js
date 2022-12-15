@@ -74,7 +74,6 @@
                 + '<td>' + st.teamName + '</td>'
                 + '<td>' + st.purpose + '</td>'
                 + '<td>' + st.teamLeader + '</td>'
-                + '<td>' + st.categoryId + '</td>'
                 + '<td>' + st.maxMember + '</td>'
                 + '<td>' + memberNumbers + '</td>'
                 

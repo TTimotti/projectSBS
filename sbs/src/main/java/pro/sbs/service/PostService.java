@@ -43,8 +43,13 @@ public class PostService {
         return index;
     }
     
-    
-    public Post create(PostCreateDto dto, Integer id) {
+    /**
+     * 팀아이드를 넣은 팀 객체(team)를 포스트객체(post)에 빌더로 생성해야 save에 팀아이디가 종속된 포스트dto를 넣어
+     * 저장할 수 있다. save는 
+     * @param dto
+     * @return
+     */
+    public Post create(PostCreateDto dto) {
         log.info("PostService create(dto={}", dto);
         
         Team team = teamRepository.findById(dto.getTeamId()).get();
