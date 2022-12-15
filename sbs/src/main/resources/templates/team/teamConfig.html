@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        
+        <title>Team Config Page</title>
+    </head>
+    
+    <body> 
+       
+        <div>        
+            <div>
+                <label>팀 이름 : </label>
+                <input id="teamName" th:value="${ team.teamName }" readonly />          
+            </div >
+            
+            이미지 불러오기 기능 (TODO)
+            <div th:each="imageFile : ${all}">
+                <span th:if="${imageFile.fid == team.fid}">
+                    <label>메인 이미지</label>
+                    <img id="mainImage" th:src="|${imageFile.fileUrl}|" width="400" height="300" th:alt="${imageFile.fileUrl}">
+                </span>
+            </div>
+            
+            <div>
+                <label>리더 : </label>
+                <input id="leader" th:value="${ team.leader }" readonly />          
+            </div>
+            <div>
+                <label>소개 : </label>
+                <input id="purpose" th:value="${ team.purpose }" readonly />          
+            </div>
+            <div>
+                <label>개설일 : </label>
+                <input id="createdTime" th:value="${ team.createdTime }" readonly />          
+            </div>
+            <div>
+                <label>최대 회원 수 : </label>
+                <input id="maxMember" th:value="${ team.maxMember }" readonly />          
+            </div>
+        </div>
+    
+    </body>
+    
+
+        <script th:src="@{ /js/teamConfig.js }"></script>
+        <script th:inline="javascript">
+            // 타임리프 inline 기능을 이용하면 자바스크립트 안에서 타임리프 속성을 이용할 수 있음.      
+            let imageFile = [[ ${ #mainImage.src } ]];
+        </script>
+        
+</html>
