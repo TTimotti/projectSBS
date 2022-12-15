@@ -98,11 +98,30 @@ public class UsersController {
 
     }
     
+    
+    /**
+     * 아이디 중복 체크 기능
+     * 
+     * @param userName
+     * @return 중복 = nok , 중복 아님 = ok return
+     * @author 이존규
+     */
+    @GetMapping("/checkid")
+    @ResponseBody // 컨트롤러 메서드가 리턴하는 값이 뷰의 이름이 아니라 클라이언트로 직접 전송되는 데이터인 경우 사용
+    public ResponseEntity<String> checkUsername(String userName) {
+        log.info("checkUserName() = {}", userName);
+
+        String result = usersService.checkUsername(userName);
+
+        return ResponseEntity.ok(result);
+    }
+    
     /**
      * 입력받은 아이디 값과 비밀번호 값을 비교
      * @param userId 
      * @param password
      * @return 비밀번호 일치 = ok / 비밀번호 불일치 = nok
+     * @author 이존규
      */
     @GetMapping("/checkpw")
     @ResponseBody
@@ -131,6 +150,7 @@ public class UsersController {
      * userId, username, 입력받은 캐쉬를 dto로 받아서 저장
      * @param dto
      * @return myPage로 redirect 
+     * @author 이존규
      */
     @PostMapping("/cash")
     public String cash(UsersCashDto dto) throws UnsupportedEncodingException {
@@ -142,5 +162,21 @@ public class UsersController {
         
         return "redirect:/user/myPage?userName="+ encodedParam;
     }
+    
+    /**
+     * user id를 이용하여 update 홈페이지로 이동
+     * @param userId 
+     * @author 이존규
+     */
+    @GetMapping("/update")
+    public void update(Integer userId, Model model) {
+        log.info("update(id) id = {}", userId);
+
+        Users user = usersService.read(userId);
+        log.info("user = {}", user);
+
+        model.addAttribute("user", user);
+    }
+    
     
 }
