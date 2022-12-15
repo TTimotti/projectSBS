@@ -1,6 +1,7 @@
 package pro.sbs.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -129,6 +130,23 @@ public class UsersService {
 
         return dto.getUserName();
 
+    }
+
+    /**
+     * 아이디 중복체크 기능
+     * @param userName 
+     * @return 중복 - nok, 중복 아님 - ok
+     */
+    @Transactional(readOnly = true)
+    public String checkUsername(String userName) {
+        log.info("checkUsername(username={})", userName);
+
+        Optional<Users> result = usersRepository.findByUserName(userName);
+        if (result.isPresent()) { // username이 일치하는 생성된 객체가 존재하는 경우.
+            return "nok";
+        } else { // username이 일치하는 생성된 객체가 존재하지 않는 경우.
+            return "ok";
+        }
     }
  
 }
