@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html 
     xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>SBS - 마이페이지</title>
 </head>
 <body>
-
+ 
 <div class="card-body">
                 <form id="form">
                 <div class="my-2">
                     <label for="userId" class="form-label">유저 아이디</label> 
                     <input type="number" id="userId" class="form-control" name="userId"  th:value="${ users.userId }" readonly />
                 </div>
-                   <div class="row">
+                   <div class="row"> 
                         <div class = "my-2 col-7">
                             <label for="username" class="form-label">유저 이름</label>
                             <input id="username" class="form-control" name="userName" th:value="${ users.userName }" readonly />
@@ -37,7 +36,7 @@
                         <label for="phone" class="form-label">휴대폰</label>
                         <input id="phone" class="form-control" name="phone" th:value="${ users.phone }" readonly />
                     </div>
-                <div class="my-2">
+                <div class="my-2"> 
                     <label for="gender" class="form-label">성별</label>
                         <input id="gender" class="form-control" name="gender" th:value="${ users.gender }" readonly />
                 </div>
@@ -72,7 +71,7 @@
                     <a class="btn btn-primary form-control" th:href="@{ /user/update?userId={userId} (userId = ${ users.userId }) } ">수정하기</a>
                 </div>
                 </form>    
-        </div> 
-
-</body>
+        </div>  
+<script th:src="@{ /js/myPage.js }"></script>
+</body>  
 </html>
