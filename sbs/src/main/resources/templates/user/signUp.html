@@ -7,7 +7,7 @@
 </head>
 <body>
     <div>
-        <form enctype="multipart/form-data" >
+        <form method="post" th:action="@{ /user/signUp }" enctype="multipart/form-data" >
             <div>
                 <label for="userName">아이디</label>
                 <input type="text" id="userName" name="userName" autofocus required />

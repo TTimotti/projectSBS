@@ -99,7 +99,13 @@ public class UsersController {
     }
     
     
-    
+    /**
+     * 아이디 중복 체크 기능
+     * 
+     * @param userName
+     * @return 중복 = nok , 중복 아님 = ok return
+     * @author 이존규
+     */
     @GetMapping("/checkid")
     @ResponseBody // 컨트롤러 메서드가 리턴하는 값이 뷰의 이름이 아니라 클라이언트로 직접 전송되는 데이터인 경우 사용
     public ResponseEntity<String> checkUsername(String userName) {
@@ -115,6 +121,7 @@ public class UsersController {
      * @param userId 
      * @param password
      * @return 비밀번호 일치 = ok / 비밀번호 불일치 = nok
+     * @author 이존규
      */
     @GetMapping("/checkpw")
     @ResponseBody

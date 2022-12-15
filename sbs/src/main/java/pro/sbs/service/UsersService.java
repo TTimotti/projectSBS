@@ -117,6 +117,7 @@ public class UsersService {
      * 캐시충전 
      * @param dto (user id, user name, 캐쉬 금액)
      * @return 캐쉬 충전된 계정의 이름을 return
+     * @author 이존규
      */
     @Transactional
     public String cash(UsersCashDto dto) {
@@ -136,6 +137,7 @@ public class UsersService {
      * 아이디 중복체크 기능
      * @param userName 
      * @return 중복 - nok, 중복 아님 - ok
+     * @author 이존규
      */
     @Transactional(readOnly = true)
     public String checkUsername(String userName) {
