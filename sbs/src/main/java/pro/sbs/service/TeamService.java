@@ -1,5 +1,6 @@
 package pro.sbs.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -74,7 +75,48 @@ private final TeamRepository teamRepository;
         
         return entity;
     }
-
+    
+    /**
+     * 
+     * @param teamId
+     * @return 해당 teamId와 일치하는 팀의 현재 인원 수를 가져 옴.
+     * @author 서범수
+     */
+    public Integer countMembers(Integer teamId) {
+        Integer members = teamRepository.countByTeamId(teamId);
+        return members;
+    }
+    
+    /**
+     * 
+     * @param loginUser
+     * // loginUser를 자바스크립트에서 가져올 때, 마지막에 ('=')라는 글자가 추가되기 때문에
+     * // 마지막 글자를 제거하기 위해 loginUser2라는 변수를 새로 생성함.
+     * @return 해당 loginUser가 가입한 팀에 대한 정보들을 리스트로 가져옴.
+     * @author 서범수
+     */
+    public List<Teams> readByLoginUser(String loginUser) {
+        String loginUser2 = loginUser.substring(0, loginUser.length() - 1);
+        log.info("아이디 가져옴 {}", loginUser2);
+        List<Teams> list = teamRepository.selectYourTeams(loginUser2);
+        return list;
+    }
+    
+    /**
+     * 
+     * @param keyword 사용자가 입력한 값
+     * @return 사용자가 입력한 값을 DB에서 존재하는 팀들의 제목과 비교 후, 팀 정보들을 가져옴.
+     * @author 서범수
+     */
+    public List<Teams> search(String keyword) {
+        log.info("search(keyword={})", keyword);
+        
+        List<Teams> list = new ArrayList<>();
+        
+        list = teamRepository.searchByKeyword(keyword);
+        
+        return list;
+    }
 
 
 
