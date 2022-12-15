@@ -42,8 +42,7 @@
                 <th:block sec:authorize="isAuthenticated()">
                     <span>
                         <span sec:authentication="name"></span><span>님, 반갑습니다! </span>
-                        
-                        <a class="btn btn-primary" th:href="@{ /user/myPage?userName={userName} (userName = ${ #authentication.name }) }">My Page</a>
+                        <a class="btn btn-primary" th:href="@{ /user/myPage }">My Page</a>
                         <a class="btn btn-primary" th:href="@{ /user/myTeamList }">My Team List</a>
                         <a class="btn btn-primary" th:href="@{ /team/teamCreate }">Team Create</a>
                         <a class="btn btn-primary" th:href="@{ /logout }">Log Out</a>
@@ -120,34 +119,6 @@
             </div>
             <hr/>
         
-<<<<<<< HEAD
-        <!-- <div id="joinners"></div> -->   
-        
-        <!-- !!!!!!!모달!!!!!!! -->
-        <div class="modal fade" id="teamJoinModal" tabIndex="-1" aria-labelledby="teamJoinModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="teamJoinModalLabel">모임 비밀번호를 입력하세요.</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- 팀 아이디 삽입 위치 -->
-                        <input type="hidden" id="modalTeamId" readonly />
-                        <!-- 팀 비밀번호 삽입 위치 -->
-                        <input type="hidden" id="modalTeamPassword" class="form-control" />
-                        <!-- 팀 응답 삽입 위치 -->
-                        <input type="text" id="modalTeamPasswordInput" class="form-control"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
-                        <th:block sec:authorize="isAnonymous()">
-                        <a class="btn btn-success" th:href="@{ /login }">들어가기</a>
-                        </th:block>
-                        <th:block sec:authorize="isAuthenticated()">
-                        <button type="button" id="modalBtnJoin" class="btn btn-outline-success" th:href="@{ /team/teamActivity?id={id} (id = ${ modalTeamId }) }">들어가기</button> <!-- btn btn-outline-success 차이?-->
-                        </th:block>
-=======
             <div id="joinners"></div>   
        
 <!--         !!!!!!!가입하기 모달!!!!!!! -->
@@ -165,7 +136,15 @@
                             <input type="hidden" id="modalTeamPassword" class="form-control" />
                             <!-- 팀 응답 삽입 위치 -->
                             <input type="text" id="modalTeamPasswordInput" class="form-control"/>
-                        </div>
+                            
+                            <div class="my-2 d-none" id="ok">
+                                <p class="text-success">비밀번호 확인!</p>
+                            </div>
+                            
+                            <div class="my-2 d-none" id="nok">
+                                <p class="text-danger">비밀번호를 확인하세요.</p>
+                            </div>
+                            
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
                             <th:block sec:authorize="isAnonymous()">
@@ -173,12 +152,12 @@
                                 <!-- ㄴ 로그아웃 상태일 시, 들어가기를 누르면 로그인 페이지로 넘어감. -->
                             </th:block>
                             <th:block sec:authorize="isAuthenticated()">
-                                <button type="button" id="modalBtnJoin" class="btn btn-outline-success">들어가기</button>
+                                <a id="modalBtnJoin" class="btn btn-outline-success">들어가기</a>
                             </th:block>
                         </div>
->>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
                     </div>
                 </div>
+            </div> 
             </div> <!-- end Modal -->
             
             <!--        !!!!!!! 가입 불가 모달 !!!!!!! -->
@@ -217,34 +196,34 @@
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item">
-                                <a href="#!">검색</a>
-                            </li>
-                            <li class="list-inline-item">|</li>
-                            <li class="list-inline-item">
-                                <a th:href="@{ /user/myPage?userName={userName} (userName = ${ #authentication.name }) }">마이페이지</a>
-                            </li>
-                            <li class="list-inline-item">|</li>
-                            <li class="list-inline-item">
-                                <a href="#!">모임 참석</a>
-                            </li>
-                            <li class="list-inline-item">|</li>
-                            <li class="list-inline-item">
-                                <a href="#!">공지사항 Policy</a>
-                            </li>
-                        </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy;Footer</p>
-                    </div>
+                        <li class="list-inline-item">
+                            <a href="#!">검색</a>
+                        </li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item">
+                            <a href="#!">마이페이지</a>
+                        </li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item">
+                            <a href="#!">모임 참석</a>
+                        </li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item">
+                            <a href="#!">공지사항 Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy;Footer</p>
+                </div>
                 <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item me-4">
-                            <a href="https://www.facebook.com/sbsnow/"><i class="bi-facebook fs-3"></i></a>
+                            <a href="#!"><i class="bi-facebook fs-3"></i></a>
                         </li>
                         <li class="list-inline-item me-4">
-                            <a href="https://twitter.com/sbsnow"><i class="bi-twitter fs-3"></i></a>
+                            <a href="#!"><i class="bi-twitter fs-3"></i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="https://www.instagram.com/sbsnow_insta/"><i class="bi-instagram fs-3"></i></a>
+                            <a href="#!"><i class="bi-instagram fs-3"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -265,7 +244,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script th:inline="javascript">
             // 타임리프 inline 기능을 이용하면 자바스크립트 안에서 타임리프 속성을 이용할 수 있음.
-            // 로그인 사용자 아이디를 자바스크립트 변수에 저장.     
+            // 로그인 사용자 아이디를 자바스크립트 변수에 저장.            
             const loginUser = [[ ${ #authentication.name } ]];
             const searchedTeams = [[${ list }]];
         </script>
