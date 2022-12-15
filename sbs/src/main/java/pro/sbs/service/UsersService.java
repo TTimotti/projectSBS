@@ -40,4 +40,17 @@ public class UsersService {
         return usersRepository.save(dto.toEntity());
     }
 
+    
+    /**
+     * user name을 이용하여 users 객체 호출
+     * @param userName
+     * @return Users 객체
+     */
+    @Transactional(readOnly = true)
+    public Users read(String userName) {
+        
+        log.info("userId = {}", userName);
+        return usersRepository.findByUserName(userName).get();
+    }
+    
 }

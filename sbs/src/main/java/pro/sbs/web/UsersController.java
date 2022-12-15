@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import pro.sbs.domain.Users;
 import pro.sbs.dto.UsersCreateDto;
 import pro.sbs.service.ImagesService;
 import pro.sbs.service.UsersService;
@@ -20,14 +22,14 @@ import pro.sbs.service.UsersService;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UsersController {
-
+ 
     private final PasswordEncoder passwordEncoder;
     private final UsersService usersService;
     private final ImagesService imagesService;
 
     
     @GetMapping("/signUp")
-    public void signUp() {
+    public void signUp() { 
         log.info("signUp() 호출");
 
     }
@@ -56,4 +58,22 @@ public class UsersController {
 
     }
 
+    
+    /**
+     * 마이페이지
+     * 
+     * @param userName = 로그인한 아이디
+     * @return 마이페이지로 이동
+     */
+    @GetMapping("/myPage")
+    public void myPage(Model model, String userName) {
+        log.info("mypage(name = {})", userName);
+        
+        Users user = usersService.read(userName);
+        
+        log.info("user = {}", user);
+        
+        model.addAttribute("users", user);
+        
+    }
 }
