@@ -218,4 +218,18 @@ public class UsersController {
         return "redirect:/user/myPage?userId=" + dto.getUserId();
     }
     
+    /**
+     * 회원탈퇴 기능
+     * @param userId
+     * @return 회원 탈퇴 후 
+     */
+    @PostMapping("/delete")
+    public String delete(Integer userId) {
+        log.info("delete(userId) = {}", userId);
+
+        Integer result = usersService.delete(userId);
+
+        return "redirect:/logout";
+    }
+    
 }

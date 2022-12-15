@@ -193,4 +193,16 @@ public class UsersService {
         return entity.getUserId();
     }
 
+    /**
+     * 회원 탈퇴
+     * @param userId
+     * @return 탈퇴한 유저의 id
+     */
+    public Integer delete(Integer userId) {
+        log.info("delete");
+        
+        usersRepository.deleteById(userId);
+        
+        return userId;
+    }
 }
