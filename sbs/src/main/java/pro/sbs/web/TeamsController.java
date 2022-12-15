@@ -44,6 +44,7 @@ public class TeamsController {
      * @param file
      * @return 리다이렉트 된 팀 상세페이지
      * @throws IOException
+     * @author 김지훈
      */    
     @PostMapping("/teamCreate")
     public String createTeam(TeamsCreateDto dto, @RequestParam("teamImage") MultipartFile file) throws IOException {
