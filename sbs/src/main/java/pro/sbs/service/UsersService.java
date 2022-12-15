@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
+import pro.sbs.dto.PasswordChangeDto;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
 import pro.sbs.dto.UsersUpdateDto;
@@ -153,7 +154,7 @@ public class UsersService {
             return "ok";
         }
     }
-    
+
     /**
      * 정보 수정 기능
      * 
@@ -168,6 +169,26 @@ public class UsersService {
 
         entity.update(dto.getNickname(), dto.getEmail(), dto.getPhone(), dto.getGender(), dto.getBirthdate(),
                 dto.getLocation());
+
+        return entity.getUserId();
+    }
+
+    /**
+     * 비밀번호 변경
+     * @param passwordChangeDto dto
+     * @return userid
+     */
+    @Transactional
+    public Integer passwordChange(PasswordChangeDto dto) {
+        log.info("pc Service dto = {}", dto);
+
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+        Users entity = usersRepository.findById(dto.getUserId()).get();
+
+        entity.passwordChange(dto.getPassword());
+
+        log.info("password change dto = {}", dto);
 
         return entity.getUserId();
     }

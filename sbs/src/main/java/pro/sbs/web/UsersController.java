@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
+import pro.sbs.dto.PasswordChangeDto;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
 import pro.sbs.dto.UsersUpdateDto;
@@ -63,8 +64,6 @@ public class UsersController {
         return "redirect:/login";
 
     }
-
-    
     /**
      * 마이페이지
      * 
@@ -73,32 +72,21 @@ public class UsersController {
      * @author 이존규
      */
     @GetMapping("/myPage")
-    public void myPageNameG(Model model, String userName) {
-        log.info("mypage(name = {})", userName);
+    public void myPage(Model model, String userName, Integer userId) {
+        log.info("myPage(userName = {}, userId = {})", userName, userId);
         
-        Users user = usersService.read(userName);
+        Users user = null;
+        if (userName == null) {
+            user = usersService.read(userId);
+        } else {
+            user = usersService.read(userName);
+        }
         
         log.info("user = {}", user);
         
         model.addAttribute("users", user);
         
     } 
-    
-    /**
-     * 마이페이지 (뒤로가기 등으로 POST 값이 주어질 경우)
-     * 
-     * @param userid = 로그인한 아이디의 id값
-     * @return 마이페이지로 이동
-     * @author 이존규
-     */
-    @PostMapping("/myPage")
-    public void myPageIdP(Model model, Integer userId) {
-        log.info("mypage(id = {})", userId);
-        Users user = usersService.read(userId);
-        model.addAttribute("users", user);
-
-    }
-    
     
     /**
      * 아이디 중복 체크 기능
@@ -195,4 +183,39 @@ public class UsersController {
         
         return "redirect:/user/myPage?userName="+ encodedParam;
     }
+    
+    /**
+     * 비밀번호 변경 홈페이지로 이동
+     * 
+     * @param userId
+     * @author 이존규
+     */
+    @GetMapping("/passwordChange")
+    public void passwordChange(Integer userId, Model model) {
+        log.info("passwordChange(uesrid = {})", userId);
+
+        Users user = usersService.read(userId);
+
+        model.addAttribute("user", user);
+    }
+    
+    /**
+     * 비밀번호 변경
+     * @param dto
+     * @return 마이페이지로 이동
+     * @author 이존규
+     */
+    @PostMapping("/passwordChange")
+    public String passwordChange(PasswordChangeDto dto) {
+        log.info("changePw dto = {}", dto);
+
+        Users user = usersService.read(dto.getUserId());
+
+        log.info("user = {}", user);
+        
+        Integer result = usersService.passwordChange(dto);
+
+        return "redirect:/user/myPage?userId=" + dto.getUserId();
+    }
+    
 }
