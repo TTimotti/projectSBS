@@ -18,7 +18,7 @@
                 <input id="teamName" th:value="${ team.teamName }" readonly />          
             </div >
             
-            이미지 불러오기 기능 (TODO)
+<!--             이미지 불러오기 기능 (TODO) -->
             <div th:each="imageFile : ${all}">
                 <span th:if="${imageFile.fid == team.fid}">
                     <label>메인 이미지</label>
