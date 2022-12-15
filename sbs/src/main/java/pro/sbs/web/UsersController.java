@@ -73,31 +73,21 @@ public class UsersController {
      * @author 이존규
      */
     @GetMapping("/myPage")
-    public void myPageNameG(Model model, String userName) {
-        log.info("mypage(name = {})", userName);
+    public void myPage(Model model, String userName, Integer userId) {
+        log.info("myPage(userName = {}, userId = {})", userName, userId);
         
-        Users user = usersService.read(userName);
+        Users user = null;
+        if (userName == null) {
+            user = usersService.read(userId);
+        } else {
+            user = usersService.read(userName);
+        }
         
         log.info("user = {}", user);
         
         model.addAttribute("users", user);
         
     } 
-    
-    /**
-     * 마이페이지 (뒤로가기 등으로 POST 값이 주어질 경우)
-     * 
-     * @param userid = 로그인한 아이디의 id값
-     * @return 마이페이지로 이동
-     * @author 이존규
-     */
-    @PostMapping("/myPage")
-    public void myPageIdP(Model model, Integer userId) {
-        log.info("mypage(id = {})", userId);
-        Users user = usersService.read(userId);
-        model.addAttribute("users", user);
-
-    }
     
     
     /**

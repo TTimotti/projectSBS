@@ -21,7 +21,13 @@
                         </div>
                         <div class = "my-2 col-5">
                             <label for="userimage" class="form-label">유저 이미지</label>
-<!--                             이미지 넣기 -->
+<!--             이미지 불러오기 기능 (TODO) -->
+                        <div th:each="imageFile : ${all}">
+                            <span th:if="${imageFile.fid == users.fid}">
+                                <label>프로필 이미지</label>
+                                <img id="mainImage" th:src="|${imageFile.fileUrl}|" width="400" height="300" th:alt="${imageFile.fileUrl}">
+                            </span>
+                        </div>
                         </div>
                     </div>
                     <div class="my-2">
