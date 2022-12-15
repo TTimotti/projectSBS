@@ -1,9 +1,10 @@
 /**
- * home.js || home.html
+ * home.js
  * home(메인 페이지)에 있는 기능들 모음
  * 1. 검색한 리스트 목록 띄우기
  * 2. 가입하기/활동하기/관리하기 등등 활동 버튼 기능 활성화.
- * @author 서범수
+ * 작성자: 서범수
+ *
  */
  
 window.addEventListener('DOMContentLoaded', () => {
@@ -21,7 +22,7 @@ joinedTeams();
 
 function joinedTeams() {
     axios
-    .post('/user/readByLoginUser/', loginUser)
+    .post('/team/readByLoginUser/', loginUser)
     .then(response => { prepareSearchedTeams(response.data) })
     .catch(err => { console.log(err) });
 }
@@ -88,7 +89,8 @@ function prepareSearchedTeams(teamIds) {
                         + '<a href="/team/teamActivity?teamId='
                         +  st.teamId
                         + '">'
-                        + `<button type="button" class="btnGoToTeam btn btn-outline-primary" data-teamId="${ st.teamId }">활동하기</button>` 
+                        + `<div class="btnGoToTeam btn btn-outline-primary" data-teamId="${ st.teamId }">활동하기</div>` 
+                        + '</a>'
                         + '</td>'
                 // 팀의 인원수가 다 찼을 경우.
                 } else if (st.maxMember <= memberNumbers ) {
@@ -156,32 +158,43 @@ function showModal(team) {
     modalTeamId.value = team.teamId;
     modalTeamPassword.value = team.password;
     teamJoinModal.show();
+
 }
 
+
+
 if (loginUser != 'anonymousUser') {
+    
     modalBtnJoin.addEventListener('click', joinTeam);
 }
+
 
 function joinTeam() {
     const joinTeamId = modalTeamId.value;
     const joinTeamPassword = modalTeamPassword.value;
     const joinTeamPasswordInput = modalTeamPasswordInput.value;
+    const okDiv = document.querySelector('#ok');
+    const nokDiv = document.querySelector('#nok');
     
     if (joinTeamPassword == joinTeamPasswordInput) {
+        okDiv.className = 'my-2 ';
+        nokDiv.className = 'my-2 d-none';
         console.log("성공~");
+        modalBtnJoin.href ="/team/teamActivity?teamId=" + joinTeamId;
         const data = {
             teamId: joinTeamId,
             userName: loginUser
-    }
-    
-    alert("가입 성공!");
-    
-    axios
-    .post('/home/success', data)
-    .then(function() {
-        teamJoinModal.hide();
         }
-    );
+        alert("가입에 성공했습니다. 활동하러 갈까요?");
+        axios
+        .post('/team/success', data)
+        .then(function() {
+            teamJoinModal.hide();
+        }
+        );
+    } else {
+            okDiv.className = 'my-2 d-none';
+            nokDiv.className = 'my-2';
     }
 }
 
