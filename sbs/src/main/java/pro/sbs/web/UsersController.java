@@ -1,18 +1,23 @@
 package pro.sbs.web;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
+import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
 import pro.sbs.service.ImagesService;
 import pro.sbs.service.UsersService;
@@ -64,9 +69,10 @@ public class UsersController {
      * 
      * @param userName = 로그인한 아이디
      * @return 마이페이지로 이동
+     * @author 이존규
      */
     @GetMapping("/myPage")
-    public void myPage(Model model, String userName) {
+    public void myPageNameG(Model model, String userName) {
         log.info("mypage(name = {})", userName);
         
         Users user = usersService.read(userName);
@@ -75,5 +81,66 @@ public class UsersController {
         
         model.addAttribute("users", user);
         
+    } 
+    
+    /**
+     * 마이페이지 (뒤로가기 등으로 POST 값이 주어질 경우)
+     * 
+     * @param userid = 로그인한 아이디의 id값
+     * @return 마이페이지로 이동
+     * @author 이존규
+     */
+    @PostMapping("/myPage")
+    public void myPageIdP(Model model, Integer userId) {
+        log.info("mypage(id = {})", userId);
+        Users user = usersService.read(userId);
+        model.addAttribute("users", user);
+
     }
+    
+    /**
+     * 입력받은 아이디 값과 비밀번호 값을 비교
+     * @param userId 
+     * @param password
+     * @return 비밀번호 일치 = ok / 비밀번호 불일치 = nok
+     */
+    @GetMapping("/checkpw")
+    @ResponseBody
+    public ResponseEntity<String> checkPw(Integer userId, String password) {
+        log.info("User id = {}, password = {}", userId, password);
+
+        String result = usersService.checkPw(userId, password);
+
+        return ResponseEntity.ok(result);
+    }
+    
+    /**
+     * 캐쉬 충전 페이지로 이동
+     * @param userId 로그인한 user의 id
+     * @author 이존규
+     */
+    @GetMapping("/cash")
+    public void cash(Integer userId, Model model) {
+        log.info("cash = {}", userId);
+        Users user = usersService.read(userId);
+        model.addAttribute("user", user);
+    }
+    
+    
+    /**
+     * userId, username, 입력받은 캐쉬를 dto로 받아서 저장
+     * @param dto
+     * @return myPage로 redirect 
+     */
+    @PostMapping("/cash")
+    public String cash(UsersCashDto dto) throws UnsupportedEncodingException {
+        log.info("cash = {}", dto);
+        
+        String result = usersService.cash(dto);
+        
+        String encodedParam = URLEncoder.encode(result);
+        
+        return "redirect:/user/myPage?userName="+ encodedParam;
+    }
+    
 }
