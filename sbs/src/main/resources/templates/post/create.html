@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+<title>SBS Team Project</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Bootstrap icons-->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    rel="stylesheet" type="text/css" />
+<!-- Google fonts-->
+<link
+    href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+    rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="/css/styles.css" rel="stylesheet" />
+<link href="/css/calendar.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#!">SBS</a> <a
+            class="btn btn-primary" href="#signup">POST : DETAIL</a>
+    </div>
+</nav>
+
+<section class="features-icons bg-light">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="card my-2">
+            <div></div>
+            
+            <div class="card-header">
+                <h1>포스트 작성 페이지</h1>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="my-2">
+                        <label for="title" class="form-label">제목</label>
+                        <input id="title" class="form-control" 
+                            type="text" name="title" required autofocus />
+                    </div>
+                    <div class="my-2">
+                        <label for="content" class="form-label">내용</label>
+                        <textarea id="content" class="form-control"
+                            name="content" required></textarea>
+                    </div>
+                    <div class="my-2">
+                        <label for="author" class="form-label">작성자</label>
+                        <!-- 작성자는 로그인 사용자 아이디를 자동으로 삽입. readonly. -->
+                        <input id="author" class="form-control" type="text"
+                            name="author"  />
+                    </div>
+                    <div class="my-2">
+                        <input type="submit" class="form-control btn btn-success" 
+                            value="작성 완료" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action-->
+<section class="call-to-action text-white text-center" id="signup">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <p>밑단</p>
+        </div>
+    </div>
+</section>
+<!-- Footer-->
+<footer class="footer bg-light">
+    <div class="container">
+        <div class="row">
+            <div
+                class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item"><a href="#!">검색</a></li>
+                    <li class="list-inline-item">⋅</li>
+                    <li class="list-inline-item"><a href="#!">마이페이지</a></li>
+                    <li class="list-inline-item">⋅</li>
+                    <li class="list-inline-item"><a href="#!">모임
+                            참석</a></li>
+                    <li class="list-inline-item">⋅</li>
+                    <li class="list-inline-item"><a href="#!">공지
+                            사항 Policy</a></li>
+                </ul>
+                <p class="text-muted small mb-4 mb-lg-0">&copy;
+                    Footer</p>
+            </div>
+            <div
+                class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4"><a
+                        href="#!"><i class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item me-4"><a
+                        href="#!"><i class="bi-twitter fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item"><a href="#!"><i
+                            class="bi-instagram fs-3"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<!-- Bootstrap core JS-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- Core theme JS-->
+</body>
+</html>

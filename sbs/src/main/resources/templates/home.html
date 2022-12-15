@@ -120,6 +120,34 @@
             </div>
             <hr/>
         
+<<<<<<< HEAD
+        <!-- <div id="joinners"></div> -->   
+        
+        <!-- !!!!!!!모달!!!!!!! -->
+        <div class="modal fade" id="teamJoinModal" tabIndex="-1" aria-labelledby="teamJoinModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="teamJoinModalLabel">모임 비밀번호를 입력하세요.</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 팀 아이디 삽입 위치 -->
+                        <input type="hidden" id="modalTeamId" readonly />
+                        <!-- 팀 비밀번호 삽입 위치 -->
+                        <input type="hidden" id="modalTeamPassword" class="form-control" />
+                        <!-- 팀 응답 삽입 위치 -->
+                        <input type="text" id="modalTeamPasswordInput" class="form-control"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                        <th:block sec:authorize="isAnonymous()">
+                        <a class="btn btn-success" th:href="@{ /login }">들어가기</a>
+                        </th:block>
+                        <th:block sec:authorize="isAuthenticated()">
+                        <button type="button" id="modalBtnJoin" class="btn btn-outline-success" th:href="@{ /team/teamActivity?id={id} (id = ${ modalTeamId }) }">들어가기</button> <!-- btn btn-outline-success 차이?-->
+                        </th:block>
+=======
             <div id="joinners"></div>   
        
 <!--         !!!!!!!가입하기 모달!!!!!!! -->
@@ -148,6 +176,7 @@
                                 <button type="button" id="modalBtnJoin" class="btn btn-outline-success">들어가기</button>
                             </th:block>
                         </div>
+>>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
                     </div>
                 </div>
             </div> <!-- end Modal -->
