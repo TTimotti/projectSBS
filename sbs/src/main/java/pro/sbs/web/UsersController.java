@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
+import pro.sbs.dto.UsersUpdateDto;
 import pro.sbs.service.ImagesService;
 import pro.sbs.service.UsersService;
 
@@ -178,5 +179,20 @@ public class UsersController {
         model.addAttribute("user", user);
     }
     
-    
+    /**
+     * user update 정보를 받아서 update 실행
+     * @param user Update dto
+     * @return 수정된 유저의 마이페이지
+     * @author 이존규
+     */
+    @PostMapping("/update")
+    public String updatePost(UsersUpdateDto dto) {
+        log.info("updateDto(dto) ={}", dto);
+
+        Integer userId = usersService.update(dto);
+
+        String encodedParam = URLEncoder.encode(dto.getUserName());
+        
+        return "redirect:/user/myPage?userName="+ encodedParam;
+    }
 }

@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
+import pro.sbs.dto.UsersUpdateDto;
 import pro.sbs.repository.UsersRepository;
 
 @Service
@@ -114,7 +115,8 @@ public class UsersService {
     }
 
     /**
-     * 캐시충전 
+     * 캐시충전
+     * 
      * @param dto (user id, user name, 캐쉬 금액)
      * @return 캐쉬 충전된 계정의 이름을 return
      * @author 이존규
@@ -127,7 +129,7 @@ public class UsersService {
 
         entity.chargeCash(dto.getCash());
 
-        log.info("cash = {}, {}",dto.getUserName(), dto.getCash());
+        log.info("cash = {}, {}", dto.getUserName(), dto.getCash());
 
         return dto.getUserName();
 
@@ -135,7 +137,8 @@ public class UsersService {
 
     /**
      * 아이디 중복체크 기능
-     * @param userName 
+     * 
+     * @param userName
      * @return 중복 - nok, 중복 아님 - ok
      * @author 이존규
      */
@@ -150,5 +153,23 @@ public class UsersService {
             return "ok";
         }
     }
- 
+    
+    /**
+     * 정보 수정 기능
+     * 
+     * @param UserUpdateDto dto
+     * @return update된 user의 id
+     */
+    @Transactional
+    public Integer update(UsersUpdateDto dto) {
+        log.info("user update (dto) ={}", dto);
+
+        Users entity = usersRepository.findById(dto.getUserId()).get();
+
+        entity.update(dto.getNickname(), dto.getEmail(), dto.getPhone(), dto.getGender(), dto.getBirthdate(),
+                dto.getLocation());
+
+        return entity.getUserId();
+    }
+
 }
