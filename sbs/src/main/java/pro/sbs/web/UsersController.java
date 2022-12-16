@@ -1,6 +1,5 @@
 package pro.sbs.web;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -17,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import pro.sbs.domain.Images;
 import pro.sbs.domain.Users;
+import pro.sbs.dto.PasswordChangeDto;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
 import pro.sbs.dto.UsersUpdateDto;
@@ -65,8 +64,6 @@ public class UsersController {
         return "redirect:/login";
 
     }
-
-    
     /**
      * 마이페이지
      * 
@@ -77,7 +74,7 @@ public class UsersController {
     @GetMapping("/myPage")
     public void myPage(Model model, String userName, Integer userId) {
         log.info("myPage(userName = {}, userId = {})", userName, userId);
-                
+        
         Users user = null;
         if (userName == null) {
             user = usersService.read(userId);
@@ -85,18 +82,11 @@ public class UsersController {
             user = usersService.read(userName);
         }
         
-        Integer fid = user.getFid();
-        Images image = imagesService.readByFid(fid);
-
-        
         log.info("user = {}", user);
-        log.info("image = {}", image);
         
         model.addAttribute("users", user);
-        model.addAttribute("image", image);
         
     } 
-    
     
     /**
      * 아이디 중복 체크 기능
@@ -193,4 +183,54 @@ public class UsersController {
         
         return "redirect:/user/myPage?userName="+ encodedParam;
     }
+    
+    /**
+     * 비밀번호 변경 홈페이지로 이동
+     * 
+     * @param userId
+     * @author 이존규
+     */
+    @GetMapping("/passwordChange")
+    public void passwordChange(Integer userId, Model model) {
+        log.info("passwordChange(uesrid = {})", userId);
+
+        Users user = usersService.read(userId);
+
+        model.addAttribute("user", user);
+    }
+    
+    /**
+     * 비밀번호 변경
+     * @param dto
+     * @return 마이페이지로 이동
+     * @author 이존규
+     */
+    @PostMapping("/passwordChange")
+    public String passwordChange(PasswordChangeDto dto) {
+        log.info("changePw dto = {}", dto);
+
+        Users user = usersService.read(dto.getUserId());
+
+        log.info("user = {}", user);
+        
+        Integer result = usersService.passwordChange(dto);
+
+        return "redirect:/user/myPage?userId=" + dto.getUserId();
+    }
+    
+    /**
+     * 회원탈퇴 기능
+     * @param userId
+     * @return 회원 탈퇴 후 
+     */
+    @PostMapping("/delete")
+    public String delete(Integer userId) {
+        log.info("delete(userId) = {}", userId);
+
+        Integer result = usersService.delete(userId);
+
+        return "redirect:/logout";
+    }
+    
 }
+
