@@ -23,7 +23,7 @@
                             <label for="userImage" class="form-label">유저 이미지</label>
 <!--             이미지 불러오기 기능 (TODO) -->
                             <div>
-                                <img id="userImage" width="150" height="100" />
+                                <img id="userImage" th:src="@{/image/display?fid={fid} (fid = ${users.fid}) }" width="150" height="100" />
                             </div>                         
                         </div>
                     </div>

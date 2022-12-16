@@ -17,22 +17,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         }
     })
-    
-    const img = document.querySelector('#userImage');
-            func();
-            
-            function func() {
-                axios
-                .get('/image/display?fid=' + usersFid)
-                .then(response => {  
-                    console.log('axios 실행');
-                    console.log(response.data);
-                    img.src = '/image/display?fid=' + usersFid;
-                    console.log(img.src);
-                    })
-                .catch(err => { console.log(err); }); 
 
-            }
 
 
 });
