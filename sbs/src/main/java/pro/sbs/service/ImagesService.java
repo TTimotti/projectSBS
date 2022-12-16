@@ -136,4 +136,17 @@ public class ImagesService {
         
     }
 
+    /**
+     * fid로 이미지 찾는 서비스
+     * 
+     * @param Integer fid
+     * @return Images
+     * @author 김지훈
+     */
+    public Images readByFid(Integer fid) {
+        log.info("readByFid(fid={}) 호출", fid);
+        
+        return imagesRepository.findByFid(fid);
+    }
+
 }

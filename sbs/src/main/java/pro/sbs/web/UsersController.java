@@ -1,5 +1,6 @@
 package pro.sbs.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import pro.sbs.domain.Images;
 import pro.sbs.domain.Users;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
@@ -75,7 +77,7 @@ public class UsersController {
     @GetMapping("/myPage")
     public void myPage(Model model, String userName, Integer userId) {
         log.info("myPage(userName = {}, userId = {})", userName, userId);
-        
+                
         Users user = null;
         if (userName == null) {
             user = usersService.read(userId);
@@ -83,9 +85,15 @@ public class UsersController {
             user = usersService.read(userName);
         }
         
+        Integer fid = user.getFid();
+        Images image = imagesService.readByFid(fid);
+
+        
         log.info("user = {}", user);
+        log.info("image = {}", image);
         
         model.addAttribute("users", user);
+        model.addAttribute("image", image);
         
     } 
     

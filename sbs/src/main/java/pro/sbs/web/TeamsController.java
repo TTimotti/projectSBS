@@ -72,7 +72,7 @@ public class TeamsController {
         
     }
  
-    @GetMapping("/teamConfig") // TODO FIXME
+    @GetMapping("/teamConfig") // TODO FIXME 이미지를 불러와야함
     public void teamConfig(Model model, Integer teamId) throws IOException{
         log.info("teamConfig(model={}, teamId={}) 호출", model, teamId);
         

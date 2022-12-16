@@ -1,6 +1,5 @@
 /**
- * member.js
- * /membet/signup.html
+ * update.js || update.html
  */
 
 
