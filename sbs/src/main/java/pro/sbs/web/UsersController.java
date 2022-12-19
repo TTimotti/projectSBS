@@ -160,7 +160,7 @@ public class UsersController {
      * @throws IOException 
      * @throws IllegalStateException 
      */
-    @GetMapping("/update")
+    @GetMapping("/userUpdate")
     public void update(Integer userId, Model model) throws IllegalStateException, IOException {
         log.info("update(id, file) id = {}", userId);
 
@@ -178,7 +178,7 @@ public class UsersController {
      * @throws IOException 
      * @throws IllegalStateException 
      */
-    @PostMapping("/update")
+    @PostMapping("/userUpdate")
     public String updatePost(UsersUpdateDto dto, @RequestParam("userImage") MultipartFile file) throws IllegalStateException, IOException {
         log.info("updateDto(dto) ={}", dto);
 
