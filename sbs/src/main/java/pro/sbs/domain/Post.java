@@ -26,12 +26,12 @@ public class Post extends BaseTimeEntity {
     // field
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POSTS_SEQ_GEN")
-    @Column(nullable = false, name = "post_id")
+//    @Column(nullable = false, name = "post_id")
     private Integer postId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false, name = "team_id")
-    private Integer teamId;
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @Column(nullable = false, name = "team_id")
+    private Teams team;
 
     @Column(nullable = false)
     private String title;
@@ -47,8 +47,9 @@ public class Post extends BaseTimeEntity {
         return this;
     }
 
-    public Post createDto(Integer teamId) {
-        this.teamId = teamId;
+    public Post createDto(Teams teamId) {
+
+        this.team = teamId;
 
         return this;
     }

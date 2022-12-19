@@ -1,6 +1,7 @@
 package pro.sbs.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,19 +11,13 @@ import pro.sbs.domain.Activity;
 
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
+    
+    Optional<Activity> findByActivityId(Integer activityId);
+    
    List<Activity> findByOrderByActivityIdDesc();
     
-   /**
-    *  활동 시간으로 검색해서 활동 다불러오는거
-    * @return
-    */
     List<Activity> findByOrderByStartTimeDesc();
     
-    /**
-     * 활동아이디로 검색해서 팀아이디 가져오는거
-     * @param teamId
-     * @return
-     */
     List<Activity> findByTeamIdOrderByActivityIdDesc(Integer teamId);
     
     /**
@@ -30,19 +25,21 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
      * @param startTime
      * @return
      */
-    @Query("select a from ACTIVITIES a where to_char(a.startTime, 'yyyy-MM-dd')"
+    @Query("select a from ACTIVITIES a where teamId like :teamId and to_char(a.startTime, 'yyyy-MM-dd')"
     		+ " like :startTime order by startTime desc")
-    List<Activity> searchByStTime(@Param(value = "startTime") String startTime);
+    List<Activity> searchByStTime(@Param(value = "startTime") String startTime,
+    							  @Param(value = "teamId")Integer teamId);
+    				
     
     //현재 날짜 이전의 팀 활동기간 조회
-    @Query("select a from ACTIVITIES a where to_char(a.startTime, 'yyyy-MM-dd') "
+    @Query("select a from ACTIVITIES a where teamId like :teamId and to_char(a.startTime, 'yyyy-MM-dd') "
     		+ "< to_char(sysdate, 'yyyy-MM-dd') order by startTime desc")
-    List<Activity> startTimeBypast();
+    List<Activity> startTimeBypast(@Param(value = "teamId") Integer teamId);
     
     //진행중인 팀 활동 기간 조회
-    @Query("select a from ACTIVITIES a where to_char(a.startTime, 'yyyy-MM-dd')"
+    @Query("select a from ACTIVITIES a where teamId like :teamId and to_char(a.startTime, 'yyyy-MM-dd')"
     		+ " >= to_char(sysdate, 'yyyy-MM-dd') order by startTime")
-    List<Activity> startTimeByProgress();
+    List<Activity> startTimeByProgress(@Param(value = "teamId") Integer teamId);
     
     /**
      * ActivityId로 해당 활동 정보 조회 
@@ -52,9 +49,5 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
     List<Activity> ActivityInfo(@Param(value = "activityId") Integer activityId);
     
     
-    /**
-     * 팀 아이디로 불러오기
-     * @return
-     */
     List<Activity> findByOrderByTeamIdDesc();
 }

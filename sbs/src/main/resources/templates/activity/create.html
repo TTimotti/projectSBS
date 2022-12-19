@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 <title>SBS Team Project</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -21,92 +21,114 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
-<link href="/css/calendar.css" rel="stylesheet" />
+<link href="/css/kakaomap.css" rel="stylesheet" />
 </head>
-<body>
-<!-- Navigation-->
-<nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-        <a class="navbar-brand" href="#!">SBS</a>
+
+
+
+
+<body style="width: 100%; height: 100%;">
+
+<header class="masthead">
+    <div class="row">
     </div>
-</nav>
-
+</header>
 <section class="features-icons bg-light">
-
     <div class="container">
-
-        <div class="row">
-            <div class="card my-2">
-            <div></div>
-            
-            <div class="card-header">
-                <h1>활동 생성 페이지</h1>
+      <div class="row">
+        <div class="col-lg-4" style="padding-left: 5%; padding-right: 5%">
+          <div class="card my-2"
+            style="background-color: dodgerblue; width: 550px; float: left; margin-left: 20px;">
+            <div class="my-2 p-3" style="text-align: center; color: white;">
+                <h1>소모임 등록</h1>
             </div>
             <div class="card-body">
-                <form method="post">
-                    <div class="my-2">
-                        <label for="play" class="form-label">활동 내용</label>
-                        <input id="play" class="form-control" 
-                            type="text" name="play" required autofocus />
+                <form id="form" method="post">
+                    <div>
+                        <input id="teamId" class="form-control" type="text" name="teamId"
+                            th:value="${ id }" required style="display: none;" readonly /> <input
+                            id="userName" class="form-control" type="text" name="userName"
+                            th:value="${ #authentication.name }" style="display: none;"
+                            required readonly />
                     </div>
                     <div class="my-2">
-                        <label for="place" class="form-label">활동 장소</label>
-                        <input id="place" class="form-control" 
-                            type="text" name="place" />
+                        <label for="play" class="form-label" style="color: white;"><b>주제</b></label>
+                        <input id="play" class="form-control"
+                            style="border-bottom-color: black; border-bottom: 10px;"
+                            type="text" name="play" placeholder="주제를 입력해주세요. ex:) 게임,음주"
+                            required autofocus />
                     </div>
                     <div class="my-2">
-                    <label for="startTime" class="form-label">활동 날짜</label>
-                    <input type="date" id="startTime" class="form-control" name="startTime" required />
-                </div>
+                        <label for="place" class="form-label" style="color: white;"><b>장소</b></label>
+                        <input id="place" class="form-control" type="text" name="place"
+                            placeholder="장소를 입력해주세요." />
+                    </div>
                     <div class="my-2">
-                        <input type="submit"
-                            class="form-control btn btn-success"
-                            value="작성 완료" />
+                        <label for="budget" class="form-label" style="color: white;"><b>회비</b></label>
+                        <input id="budget" class="form-control" type="number"
+                            name="budget" placeholder="회비를 입력해주세요." />
+                    </div>
+                    <div class="my-2">
+                        <label for="startTime" class="form-label" style="color: white;"><b>날짜/시간</b></label>
+                        <input type="datetime-local" id="startTime" class="form-control"
+                            name="startTime" required />
+                    </div>
+                    <div class="my-2 p-2" style="text-align: center;">
+                        <a id="activityCreate" class="btn btn-success"
+                            style="width: 100px; height: 50px; padding: 12px; margin-left: 0px; margin-top: 30px;">등록</a>
+                        <a id="activityCancel" class="btn btn-danger"
+                            style="width: 100px; height: 50px; padding: 12px; margin-left: 40px; margin-top: 30px;"
+                            th:href="@{ /team/teamActivity?teamId={id} (id = ${ id }) }">취소</a>
                     </div>
                 </form>
             </div>
         </div>
+        <div class="my-2" style="margin-left: 20px; float: left;">
+            <div class="map_wrap">
+                <div id="map"
+                    style="width: 550px; height: 610px; position: relative; overflow: hidden;
+                    border-radius : 5px 5px 5px 5px;"></div>
+                <div id="menu_wrap" class="bg_white">
+                    <div class="option">
+                        <div>
+                            <form onsubmit="searchPlaces(); return false;">
+                                키워드 : <input type="text" value="소모임 장소" id="keyword" size="15">
+                                <button type="submit">검색하기</button>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <ul id="placesList"></ul>
+                    <div id="pagination"></div>
+                </div>
+            </div>
         </div>
     </div>
-</section>
-
-<!-- Call to Action-->
-<section class="call-to-action text-white text-center" id="signup">
-    <div class="container position-relative">
-        <div class="row justify-content-center">
-            <p>밑단</p>
-        </div>
+      </div>
     </div>
-</section>
-<!-- Footer-->
-<footer class="footer bg-light">
+    </section>
+    <!-- Footer-->
+<footer class="footer bg-light" style="clear: left;">
     <div class="container">
         <div class="row">
-            <div
-                class="col-lg-6 h-100 text-center text-lg-start my-auto">
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                 <ul class="list-inline mb-2">
                     <li class="list-inline-item"><a href="#!">검색</a></li>
                     <li class="list-inline-item">⋅</li>
                     <li class="list-inline-item"><a href="#!">마이페이지</a></li>
                     <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">모임
-                            참석</a></li>
+                    <li class="list-inline-item"><a href="#!">모임 참석</a></li>
                     <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지
-                            사항 Policy</a></li>
+                    <li class="list-inline-item"><a href="#!">공지 사항 Policy</a></li>
                 </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy;
-                    Footer</p>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Footer</p>
             </div>
-            <div
-                class="col-lg-6 h-100 text-center text-lg-end my-auto">
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                 <ul class="list-inline mb-0">
-                    <li class="list-inline-item me-4"><a
-                        href="#!"><i class="bi-facebook fs-3"></i></a>
-                    </li>
-                    <li class="list-inline-item me-4"><a
-                        href="#!"><i class="bi-twitter fs-3"></i></a>
-                    </li>
+                    <li class="list-inline-item me-4"><a href="#!"><i
+                            class="bi-facebook fs-3"></i></a></li>
+                    <li class="list-inline-item me-4"><a href="#!"><i
+                            class="bi-twitter fs-3"></i></a></li>
                     <li class="list-inline-item"><a href="#!"><i
                             class="bi-instagram fs-3"></i></a></li>
                 </ul>
@@ -114,15 +136,20 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         </div>
     </div>
 </footer>
-<!-- Bootstrap core JS-->
-<!-- Bootstrap core JS-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Axios -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<!-- Core theme JS-->
+    <br />
+    <!-- Ajax axios JS-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Bootstrap core JS-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!-- Bootstrap core JS-->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- KakaoMap -->
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abaecbd1f25256beda80cb6e2837cf2b&libraries=services"></script>
+    <!-- ActivityCreate.js -->
+    <script th:inline="javascript" th:src="@{/js/activityCreate.js}"></script>
 </body>
 </html>

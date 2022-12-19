@@ -17,32 +17,41 @@ public class PostCreateDto {
     private String author;
     private Integer teamId;
     
-    /**
-     * post 타입에 빌더를 리턴해야 저장할 수 있음.
-     * @return
-     * @author 추
-     */
+    // DTO 객체를 엔터티 객체로 변환 리턴하는 메서드 - PostService에서 PostRepository를 호출할 대 사용.
     public Post toEntity() {
         return Post.builder()
-                .teamId(teamId)
                 .title(title)
                 .content(content)
                 .author(author)
                 .build();
     }
     
-    /**
-     * 이건 종속때 사용하는거
-     * @param entity
-     * @return
-     */
-//    public PostCreateDto fromEntity(Post entity) {
-//        return PostCreateDto.builder()
-//                .teamId(entity.getTeam().getTeamId())
-//                .title(entity.getTitle())
-//                .content(entity.getContent())
-//                .author(entity.getAuthor())
-//                .build();
-//    }
+//   public void PostCreateDto() {
+//       this.title = title;
+//       this.content = content;
+//       this.author = author;
+//       this.teamId = teamId;
+//       
+//   }
+
+    
+    public PostCreateDto fromEntity(Post entity) {
+        return PostCreateDto.builder()
+                .teamId(entity.getTeam().getTeamId())
+                .title(entity.getTitle())
+                .content(entity.getContent())
+                .author(entity.getAuthor())
+                .build();
+    }
+    
+    public PostCreateDto postCreateDto(String title, String content, String author, Integer teamId) {
+        
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.teamId = teamId;
+        
+        return this;
+    }
     
 }

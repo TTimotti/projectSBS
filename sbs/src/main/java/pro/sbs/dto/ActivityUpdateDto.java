@@ -1,7 +1,6 @@
 package pro.sbs.dto;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,37 +12,23 @@ import pro.sbs.domain.Activity;
 @AllArgsConstructor
 @Data
 @Builder
-public class ActivityCreateDto {
-	
+public class ActivityUpdateDto {
+
+    private Integer id;
     private String play;
     private String place;
-    private String startTime;
     private Integer teamId;
-    private String userName;
-    private Integer budget;
+    private String startTime;
+    
     
     public Activity toEntity() {
-    	
         return Activity.builder()
+                .activityId(id)
                 .play(play)
                 .place(place)
-                .teamId(teamId)
-                .budget(budget)
-                .userName(userName)
                 .startTime(LocalDateTime.parse(startTime))
                 .build();
     }
-
+    
     
 }
-
-
-
-
-
-
-
-
-
-
-

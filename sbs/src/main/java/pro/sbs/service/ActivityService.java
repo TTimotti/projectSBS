@@ -11,8 +11,9 @@ import pro.sbs.domain.Activity;
 import pro.sbs.domain.MyActivityList;
 import pro.sbs.domain.Teams;
 import pro.sbs.dto.ActivityCreateDto;
+import pro.sbs.dto.ActivityInfoDto;
 import pro.sbs.dto.ActivityReadDto;
-import pro.sbs.dto.MyActivityListCreateDto;
+import pro.sbs.dto.ActivityUpdateDto;
 import pro.sbs.repository.ActivityRepository;
 import pro.sbs.repository.MyActivityListRepository;
 import pro.sbs.repository.TeamRepository;
@@ -62,42 +63,40 @@ public class ActivityService {
     }
     
     
-    /**
-     *  캘린더에서 날짜 선택시 input text에 있는 text값을 읽어와
-     *  String 타입으로 날짜에 해당되는 활동들을 검색하는 기능. 
-     */
-    public List<Activity> scTimeRead(String startTime) {
-               
-        List<Activity> list = activityRepository.searchByStTime(startTime);
-                
-        log.info("scheduleTime={}",list);
-        
-        return list;
-    }
+//    /**
+//     *  캘린더에서 날짜 선택시 input text에 있는 text값을 읽어와
+//     *  String 타입으로 날짜에 해당되는 활동들을 검색하는 기능. 
+//     */
+//    public List<Activity> scTimeRead(String startTime) {
+//               
+//        List<Activity> list = activityRepository.searchByStTime(startTime);
+//                
+//        log.info("scheduleTime={}",list);
+//        
+//        return list;
+//    }
     
     
-    /**
-     *  날짜가 지난 종료된 활동 목록 불러오는 기능.
-     */
-    public List<Activity> readAcTimePast(){
-        
-        return activityRepository.startTimeBypast();
-    }
-    
-    /**
-     *  진행중인 활동 목록 불러오는 기능.
-     */
-    public List<Activity> readAcTimeProgress(){
-        
-        return activityRepository.startTimeByProgress();
-    }
+    /*  날짜가 지난 종료된 활동 목록 불러오는 기능.
+    */
+   public List<Activity> readAcTimePast(Integer teamId){
+
+       return activityRepository.startTimeBypast(teamId);
+   }
+
+   /*  진행중인 활동 목록 불러오는 기능.
+    */
+   public List<Activity> readAcTimeProgress(Integer teamId){
+
+       return activityRepository.startTimeByProgress(teamId);
+   }
     
     /**
      * 활동 아이디값을 받아 해당 아이디값의 활동정보를 받아오는 기능
      */
-    public List<Activity> readAcInfoByactivityId(Integer activityId){
-    	
-    	return activityRepository.ActivityInfo(activityId);
+    public Activity readAcInfoByActivityId(Integer activityId){
+
+        return activityRepository.findById(activityId).get();
     }
 
     /**
@@ -105,7 +104,6 @@ public class ActivityService {
      * 
      * @param dto
      * @return
-     * @author 추
      */
     public Activity create(ActivityCreateDto dto) {
         log.info("create(dto={}", dto);
@@ -113,13 +111,13 @@ public class ActivityService {
         Teams team = teamRepository.findById(dto.getTeamId()).get();
         log.info("create(team = {}", team);
         
-        /**
-         * 이거 액티비티 종속시키면 팀객체에서 가져오는 teamId를 넣어줘야함.
-         */
-//        Activity activity = Activity.builder().team(team)
+        
         Activity activity = Activity.builder().teamId(dto.getTeamId())
                 .play(dto.getPlay())
                 .place(dto.getPlace())
+                .budget(dto.getBudget())
+                .userName(dto.getUserName())
+                .startTime(dto.toEntity().getStartTime())
                 .build();
         log.info("create(activity = {}", activity);
         
@@ -130,18 +128,54 @@ public class ActivityService {
         return entity;
     }
 
-    public MyActivityList create(MyActivityListCreateDto dto) {
-
-        MyActivityList myList = MyActivityList.builder().TeamId(dto.getTeamId())
-                .activityId(dto.getActivityId())
-                .userId(dto.getUserId())
-                .build();
-        log.info("create(myList) = {}", myList);
+    public Activity readIndex(Integer id) {
         
-        MyActivityList entity = myActivityListRepository.save(myList);
-        
-        
+        Activity entity = activityRepository.findByActivityId(id).get();
         return entity;
+    }
+
+    public ActivityInfoDto myActivityListJoinMember(Integer activityId) {
+        log.info("myActivityListJoinMember()");
+        Activity activity = activityRepository.findById(activityId).get();
+        List<MyActivityList> myActivityList = myActivityListRepository.ActivityJoinMemberInfo(activityId);
+        ActivityInfoDto dto = ActivityInfoDto.builder().activityId(activity.getActivityId())
+                .budget(activity.getBudget()).place(activity.getPlace()).play(activity.getPlay())
+                .startTime(activity.getStartTime()).teamId(activity.getTeamId())
+                .myActivityList(myActivityList).build();
+        
+        return dto;
+    }
+    
+    /**
+     *  캘린더에서 날짜 선택시 input text에 있는 text값을 읽어와
+     *  String 타입으로 날짜에 해당되는 활동들을 검색하는 기능. 
+     */
+    public List<Activity> scTimeRead(String startTime,Integer teamId) {
+
+        List<Activity> list = activityRepository.searchByStTime(startTime,teamId);
+
+        log.info("scheduleTime={}",list);
+
+        return list;
+    }
+    
+    
+    public Integer update(ActivityUpdateDto dto) {
+        log.info("update(dto={}", dto);
+// FIXME
+       Activity entity = activityRepository.findById(dto.getId()).get();
+       entity.update(dto.getPlay(), dto.getPlace(), dto.toEntity().getStartTime());
+       log.info("entity = {}",entity);
+
+        return entity.getActivityId();
+    }
+
+    public Integer delete(Integer id) {
+        log.info("delete(id={})", id);
+
+        activityRepository.deleteById(id);
+
+        return id;
     }
 
 

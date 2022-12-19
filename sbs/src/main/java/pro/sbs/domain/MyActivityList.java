@@ -27,13 +27,16 @@ public class MyActivityList extends BaseTimeEntity {
     @Column(nullable = false, name = "my_list_id")
     private Integer myListId;
     
-    @Column(name = "user_id", columnDefinition = "number (6)")
-    private Integer userId;
-    
     @Column(name = "team_id", columnDefinition = "number (6)")
     private Integer TeamId;
     
     @Column(name = "activity_id", columnDefinition = "number (6)")
     private Integer activityId;
+    
+    @Column(name = "nickname", length = 400)
+    private String nickName;
+    
+    @Column(name = "user_name", length = 400)
+    private String userName;
 
 }
