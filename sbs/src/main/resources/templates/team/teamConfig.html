@@ -75,91 +75,85 @@
                     <label>팀 비밀번호</label>
                     <input id="password" th:value="${ team.password }" readonly/>
                 </div>
-                
-                <div>
-                    <input type="submit" value="수정" />
-                </div>
-                
-                
-<!--                 <div class="my-2" > -->
-<!--                     <a class="btn btn-primary form-control disabled" id="btnUpdateTeam">수정하기</a> -->
-<!--                 </div> -->
-                
+
+                <div class="my-2" > 
+                    <a class="btn btn-primary form-control disabled" id="btnUpdateTeam">수정하기</a>
+                </div>   
             </form>
-        </div>
+        
     <hr/>
             
         
-<!--         <form id="changeTeamPasswordForm"> -->
+        <form id="changeTeamPasswordForm">
             
-<!--             <input type="hidden" th:value="${ team.teamId }" name="teamId" readonly /> -->
-            
-<!--             <div> -->
-<!--                 <label for="changePassword">팀 비밀번호를 수정하시려면 여기로...</label><br/> -->
-<!--                 <input type="password" id="changePassword" name="changePassword"/> -->
-<!--             </div> -->
-            
-<!--             <div> -->
-<!--                 <label for="changePassword2">한번 더 입력</label><br/> -->
-<!--                 <input type="password" id="changePassword2" name="changePassword2"/> -->
-<!--             </div> -->
-            
-<!--             <div class="my-2 d-none" id="pok"> -->
-<!--                 <p class="text-success">비밀번호가 확인 되었습니다.</p> -->
-<!--             </div> -->
-            
-<!--             <div class="my-2 d-none" id="pnok"> -->
-<!--                 <p class="text-danger">비밀번호가 서로 다릅니다.</p> -->
-<!--             </div> -->
-            
-<!--             <div class="my-2" > -->
-<!--                 <a class="btn btn-primary form-control disabled" id="btnChangeTeamPassword">수정하기</a> -->
-<!--             </div> -->
-            
-<!--             </form> -->
-            
-<!--         </div> -->
-<!--     <hr/>             -->
-<!--         <div> -->
-<!--             <h2>팀 멤버</h2> -->
-<!--             <form id="memberForm"> -->
-<!--                 <table> -->
-<!--                     <thead> -->
-<!--                         <tr> -->
-<!--                             <th>멤버</th> -->
-<!--                             <th>이름</th> -->
-<!--                             <th>성별</th> -->
-<!--                             <th>생년월일</th> -->
-<!--                             <th>체크</th> -->
-<!--                         </tr> -->
-<!--                     </thead> -->
-    
-<!--                     <tbody> -->
-<!--                         <tr th:each="member : ${ joinedMembers }"> -->
-<!--                             <td th:text="${ member.userName }"></td> -->
-<!--                             <td th:text="${ member.nickname }"></td> -->
-<!--                             <td th:text="${ member.gender }"></td> -->
-<!--                             <td th:text="${ member.birthdate }"></td> -->
-<!--                             <td> -->
-<!--                                 <input type="hidden" name="teamId" th:value="${ team.teamId }"/> -->
-<!--                                 <input type="checkbox" name="checkedMember[]" class="checkedMember" th:value="${ member.userName }"/> -->
-<!--                             </td> -->
-<!--                         </tr> -->
-<!--                     </tbody> -->
-<!--                 </table> -->
-<!--                 <div class="my-2" > -->
-<!--                     <a class="btn btn-primary form-control" id="btnKickOutMembers">탈퇴하기</a> -->
-<!--                 </div> -->
-<!--                 <div class="my-2" > -->
-<!--                     <a class="btn btn-primary form-control" id="btnHandOverLeader">양도하기</a> -->
-<!--                 </div> -->
-<!--             </form> -->
-<!--         </div> -->
-<!--     <hr/> -->
-<!--         <div class="my-2" > -->
-<!--                 <input type="hidden" th:value="${ team.teamId }" name="teamId" /> -->
-<!--                 <a class="btn btn-danger form-control" id="btnDeleteTeam">모임 폐쇄하기</a> -->
-<!--         </div>     -->
+            <input type="hidden" th:value="${ team.teamId }" name="teamId" readonly />
+            <div>
+                <label for="changePassword">팀 비밀번호를 수정하시려면 여기로...</label><br/>
+                <input type="password" id="changePassword" name="changePassword"/>
+            </div>
+            <div>
+                <label for="changePassword2">한번 더 입력</label><br/>
+                <input type="password" id="changePassword2" name="changePassword2"/>
+            </div>
+            <div class="my-2 d-none" id="pok">
+                <p class="text-success">비밀번호가 확인 되었습니다.</p>
+            </div>
+            <div class="my-2 d-none" id="pnok">
+                <p class="text-danger">비밀번호가 서로 다릅니다.</p>
+            </div>
+            <div class="my-2" >
+                <a class="btn btn-primary form-control disabled" id="btnChangeTeamPassword">수정하기</a>
+            </div>
+            </form>
+        </div>
+        <hr/>
+
+
+            <div>
+                <h2>팀 멤버</h2>
+                <form id="memberForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>멤버</th>
+                            <th>이름</th>
+                            <th>성별</th>
+                            <th>생년월일</th>
+                            <th>체크</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="member : ${ joinedMembers }" th:if="${member.userName != team.leader}">
+                            <td th:text="${ member.userName }"></td>
+                            <td th:text="${ member.nickname }"></td>
+                            <td th:text="${ member.gender }"></td>
+                            <td th:text="${ member.birthdate }"></td>
+                            
+                            <td>
+                                <input type="hidden" name="teamId" th:value="${ team.teamId }"/>
+                                <input type="checkbox" name="checkedMember[]" class="checkedMember" th:value="${ member.userName }"/>
+                            </td>
+                        
+                        </tr>
+                    </tbody>
+                </table>
+                    <div class="my-2" >
+                        <a class="btn btn-primary form-control" id="btnKickOutMembers">탈퇴하기</a>
+                    </div>
+                    <div class="my-2" >
+                        <a class="btn btn-primary form-control" id="btnHandOverLeader">양도하기</a>
+                    </div>
+                </form>
+            </div>
+            <hr/>
+
+            <form id="deleteTeamForm">
+            <div class="my-2" >
+                    <input type="hidden" th:value="${ team.teamId }" name="teamId" />
+                    <a class="btn btn-danger form-control" id="btnDeleteTeam">모임 폐쇄하기</a>
+            </div>            
+            </form>
     
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

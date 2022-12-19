@@ -1,5 +1,6 @@
 package pro.sbs.web;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import pro.sbs.domain.Users;
 import pro.sbs.dto.PostReadDto;
 import pro.sbs.dto.TeamsCreateDto;
 import pro.sbs.dto.TeamsJoinDto;
+import pro.sbs.dto.TeamsUpdateDto;
 import pro.sbs.service.ActivityService;
 import pro.sbs.service.ImagesService;
 import pro.sbs.service.PostService;
@@ -106,17 +108,21 @@ public class TeamsController {
         
     }
     
-    @PostMapping("/teamUpdate")
-    public String teamUpdate(Model model, Integer teamId, @RequestParam("teamImage") MultipartFile file) throws IOException{
-        log.info("teamUpdate(model={}, teamId={}) 호출", model, teamId, file);
+    /**
+     * 팀에 대한 정보(팀 이름, 팀 소개, 최대 인원 수)를 업데이트 하는 기능.
+     * @param dto 업데이트 할 정보들을 가지고 있는 DTO
+     * @return 팀 관리자 페이지로 리다이렉트.
+     * @author 서범수
+     */
+    @PostMapping("/updateTeam")
+    public String updateTeam(TeamsUpdateDto dto, @RequestParam("teamImage") MultipartFile file, Model model) throws IOException{
+        log.info("updateTeam(dto={}, file={}) 호출", dto, file);
         
-        Teams team = teamService.readTeam(teamId);        
-        log.info("teamUpdate.team = {}",team);        
-        model.addAttribute("team", team);
+        Integer teamId = teamService.updateTeam(dto);
         
-        imagesService.updateTeamImage(file, teamId);
+        imagesService.updateTeamImage(file, dto.getTeamId());
         
-        return "redirect:/team/teamConfig?teamId=" + teamId;
+        return "redirect:/team/teamConfig?teamId=" + dto.getTeamId();
     }
     
     /**
@@ -226,6 +232,88 @@ public class TeamsController {
         
         model.addAttribute("active", active);
         
+    }
+    
+    /**
+     * 팀 이름 중복 방지를 위해, DB에서 팀 이름을 비교하는 메서드
+     * 
+     * @param teamName 사용자가 입력한 
+     * @return 사용자가 입력한 값이 가능한 것인지 여부 확인
+     * @author 서범수
+     */
+    @GetMapping("/checkTeamId")
+    @ResponseBody
+    public ResponseEntity<String> checkTeamName(String teamName) {
+        log.info("checkTeamName(teamName={}) 호출", teamName);
+        
+        String result = teamService.checkTeamName(teamName);
+        
+        return ResponseEntity.ok(result);
+    }
+    
+    /**
+     * 팀의 비밀번호를 바꾸는 기능
+     * @param password 바꾸려는 비밀번호.
+     * @param teamId 비밀번호를 바꾸고자 하느 팀의 번호(teamId).
+     * @return 팀 관리자 페이지로 리다이렉트.
+     * @author 서범수.
+     */
+    @PostMapping("/changeTeamPassword")
+    public String changeTeamPassword(@RequestParam(value = "changePassword") String password, Integer teamId) {
+        log.info("changeTeamPassword(password= {}, teamId = {}) 호출", password, teamId);
+        
+        teamService.changeTeamPassword(password, teamId);
+        
+        return "redirect:/team/teamConfig?teamId=" + teamId;
+        
+    }
+
+    /**
+     * 팀 리더가, 팀에 가입된 멤버들을 탈퇴시키는 기능.
+     * @param checkedMember 체크박스에 클릭되어 있는 멤버들(복수 선택 가능)
+     * @param teamId 멤버들을 탈퇴시키고자 하는 팀의 번호(teamId).
+     * @return 탈퇴시키고 난 후, 팀 관리자 페이지로 리다이렉트.
+     * @author 서범수
+     */
+    @PostMapping("/kickOutMembers")
+    public String kickOutMembers(@RequestParam(value ="checkedMember[]") List<String> checkedMember, Integer teamId) {
+        log.info("kickOutMembers(checkedMember={}, teamId={}) 호출", checkedMember, teamId);
+        
+        Integer kickOutMembers = teamLogService.kickOutMembers(checkedMember, teamId);
+        
+    return "redirect:/team/teamConfig?teamId=" + teamId;
+    }
+    
+    /**
+     * 팀의 리더를 다른 멤버에게 양도하는 기능.
+     * @param checkedMember VIEW에 있는 체크박스가 클릭되어 있는 멤버(단 한 명)
+     * @param teamId 양도하고자 하는 팀의 번호(teamId).
+     * @return 팀 메인 페이지로 이동.
+     * @author 서범수
+     */
+    @PostMapping("/handOverLeader")
+    public String handOverLeader(@RequestParam(value ="checkedMember[]") List<String> checkedMember, Integer teamId) {
+        log.info("handOverLeader(checkedMember={}, teamId={}) 호출", checkedMember, teamId);
+        
+        Integer handOverLeader = teamService.handOverLeader(checkedMember, teamId);
+        
+        return "redirect:/team/teamActivity?teamId=" + teamId;
+    }
+    
+    /**
+     * 팀 폐쇄하기
+     * @param teamId 삭제할 팀의 번호(teamId).
+     * @return 사이트 메인 페이지로 이동.
+     * @author 서범수
+     */
+    @PostMapping("/deleteTeam")
+    public String deleteTeam(Integer teamId) {
+        log.info("deleteTeam(teamId= {}) 호출", teamId);
+        
+        teamService.deleteTeam(teamId);
+        teamLogService.deleteByTeamId(teamId);
+        
+        return "redirect:/";
     }
     
 

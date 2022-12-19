@@ -49,17 +49,34 @@ public class Teams extends BaseTimeEntity {
     
     @Column(nullable = false)
     private Integer fid;
+    
+    
+    /**
+     * 팀에 대한 정보(팀 이름, 팀 소개, 팀 최대인원)를 수정할 때 쓰는 메서드
+     * @param teamName 바꿀 팀 이름
+     * @param purpose 바꿀 팀 소개
+     * @param maxMember 바꿀 최대 인원
+     * @return
+     * @author 서범수
+     */
+    public Teams update(String teamName, String purpose, Integer maxMember) {
+        this.teamName = teamName;
+        this.purpose = purpose;
+        this.maxMember = maxMember;
+        
+        return this;
+    }
+
+    /**
+     * 팀 비밀번호를 바꿉니다.
+     * @param password 바꿀 비밀번호.
+     */
+    public void changePassword(String password) {
+        this.password = password;
+        
+    }
 
 
-
-//    public Teams update(String teamName, Integer maxMember, String teamLeader, String teamPassword) {
-//        this.teamName = teamName;
-//        this.maxMember = maxMember;
-//        this.teamLeader = teamLeader;
-//        this.teamPassword = teamPassword;
-//        
-//        return this;
-//    }
     
 
 }

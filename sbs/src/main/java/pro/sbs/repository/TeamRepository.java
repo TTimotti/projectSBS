@@ -3,7 +3,10 @@ package pro.sbs.repository;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -60,6 +63,25 @@ public interface TeamRepository extends JpaRepository<Teams, Integer> {
      */
     @Query("select u from USERS u where u.userName in (select t.userName from TEAMS_LOG t where t.teamId = :teamId)")
     List<Users> selectJoinedMembers(@Param(value = "teamId") Integer teamId);
+
+    /**
+     * 
+     * @param checkedMember 양도하고자 하는 팀의 멤버(단 한 명)
+     * @param teamId
+     * @return 업데이트에 성공하면 1.
+     */
+    @Modifying
+    @Transactional
+    @Query("update TEAMS t set t.leader = :checkedMember where t.teamId = :teamId")
+    Integer updateByUsername(@Param(value = "checkedMember") List<String> checkedMember, @Param(value = "teamId") Integer teamId);
+
+    /**
+     * 
+     * @param teamId 폐쇄하고자 하는 팀의 번호(teamId)
+     */
+    @Modifying
+    @Transactional
+    void deleteByTeamId(Integer teamId);
 
 
 }

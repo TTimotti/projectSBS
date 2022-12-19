@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', function() {
        axios
        .get('/team/checkTeamId?teamName=' + teamName)
        .then(response => { teamCheckResult(response.data) })
-       .catch(err => { console.log(err); }); // 에러가 뜨는 경우는... axios404에러...가 대부분 오타 제발 확인... 컨트롤러
+       .catch(err => { console.log(err); });
     });
     
     function teamCheckResult(result) {
@@ -129,12 +129,21 @@ window.addEventListener('DOMContentLoaded', function() {
         
     });
     
+    // 삭제하기.
+    
     const btnDeleteTeam = document.querySelector('#btnDeleteTeam');
+    const deleteTeamForm = document.querySelector('#deleteTeamForm');
     
     btnDeleteTeam.addEventListener('click', function() {
        const result = confirm('폐쇄하면 복구할 수 없습니다. 정말 폐쇄하겠습니까?');
        
-       //TODO
+       if (result) {
+        deleteTeamForm.action = '/team/deleteTeam';
+        deleteTeamForm.method = 'post';
+        deleteTeamForm.submit();
+        
+        alert("모임 폐쇄가 되었습니다.");
+    }
        
     });
 
