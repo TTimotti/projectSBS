@@ -36,6 +36,12 @@ public class UsersController {
     private final ImagesService imagesService;
 
     
+    @GetMapping("/signIn")
+    public void signIn() { 
+        log.info("signIn() 호출");
+
+    }
+    
     @GetMapping("/signUp")
     public void signUp() { 
         log.info("signUp() 호출");
