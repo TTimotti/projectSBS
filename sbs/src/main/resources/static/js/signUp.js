@@ -81,6 +81,20 @@ window.addEventListener('DOMContentLoaded', function() {
             .then(response => { displayCheckResult(response.data) })
             .catch(err => { console.log(err); });
     });
+    
+     function displayCheckResult(data) {
+        console.log(data);
+        if (data == 'ok') {
+            okDiv.className = 'my-2';
+            nokDiv.className = 'my-2 d-none';
+            btnSubmit.classList.remove('disabled'); // 버튼 활성화
+        } else {
+            okDiv.className = 'my-2 d-none';
+            nokDiv.className = 'my-2';
+            btnSubmit.classList.add('disabled');
+        }
+
+    }
 
 
 
