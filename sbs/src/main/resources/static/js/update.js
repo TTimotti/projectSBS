@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const pinput = document.querySelector('#pinput');
     const btnUpdate = document.querySelector('#btnUpdate');
     const userIdValue = userId.value;
+    const pinfo = document.querySelector('#pinfo');
 
     // 패스워드 체크
     password.addEventListener('change', function() {
@@ -75,13 +76,16 @@ window.addEventListener('DOMContentLoaded', function() {
     passwordcheckInput.addEventListener('change', function() {
         if (password.value == passwordcheckInput.value) {
             pokDiv.className = 'my-2 ';
+            pinfo.className = 'my-2 d-none';
             pnokDiv.className = 'my-2 d-none';
             btnUpdate.classList.remove('disabled');
             btnPasswordChange.classList.remove('disabled');
             btnDelete.classList.remove('disabled');
+            pinfo.className = 'my-2 d-none';
             if (pcheck.className == 'my-2') {
                 pokDiv.className = 'my-2 d-none';
                 pnokDiv.className = 'my-2';
+                pinfo.className = 'my-2';
                 btnPasswordChange.classList.add('disabled');
                 btnDelete.classList.add('disabled');
                 btnUpdate.classList.add('disabled');
@@ -89,6 +93,7 @@ window.addEventListener('DOMContentLoaded', function() {
         } else {
             pokDiv.className = 'my-2 d-none';
             pnokDiv.className = 'my-2';
+            pinfo.className = 'my-2';
             btnPasswordChange.classList.add('disabled');
             btnDelete.classList.add('disabled');
             btnUpdate.classList.add('disabled');
@@ -97,17 +102,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     });
-    
+
     password.addEventListener('change', function() {
         if (password.value == passwordcheckInput.value) {
             pokDiv.className = 'my-2 ';
             pnokDiv.className = 'my-2 d-none';
+            pinfo.className = 'my-2 d-none';
             btnUpdate.classList.remove('disabled');
             btnPasswordChange.classList.remove('disabled');
             btnDelete.classList.remove('disabled');
             if (pcheck.className == 'my-2') {
                 pokDiv.className = 'my-2 d-none';
                 pnokDiv.className = 'my-2';
+                pinfo.className = 'my-2';
                 btnPasswordChange.classList.add('disabled');
                 btnDelete.classList.add('disabled');
                 btnUpdate.classList.add('disabled');
@@ -115,6 +122,7 @@ window.addEventListener('DOMContentLoaded', function() {
         } else {
             pokDiv.className = 'my-2 d-none';
             pnokDiv.className = 'my-2';
+            pinfo.className = 'my-2';
             btnPasswordChange.classList.add('disabled');
             btnDelete.classList.add('disabled');
             btnUpdate.classList.add('disabled');
@@ -123,7 +131,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     });
-    
+
     // 뒤로가기 버튼
     const btnCancel = document.querySelector('#btnCancel');
     const formUpdate = document.querySelector('#formUpdate');
