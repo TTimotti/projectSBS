@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import pro.sbs.domain.Teams;
+import pro.sbs.domain.Users;
 
 public interface TeamRepository extends JpaRepository<Teams, Integer> {
 
@@ -50,6 +51,15 @@ public interface TeamRepository extends JpaRepository<Teams, Integer> {
      */
     @Query("select t from TEAMS t where lower(t.teamName) like lower('%' || :keyword || '%') order by t.teamId desc")
     List<Teams> searchByKeyword(@Param(value = "keyword") String keyword);
+
+    /**
+     * 
+     * @param teamId
+     * @return 팀에 가입된 멤버들의 리스트.
+     * @author 서범수
+     */
+    @Query("select u from USERS u where u.userName in (select t.userName from TEAMS_LOG t where t.teamId = :teamId)")
+    List<Users> selectJoinedMembers(@Param(value = "teamId") Integer teamId);
 
 
 }

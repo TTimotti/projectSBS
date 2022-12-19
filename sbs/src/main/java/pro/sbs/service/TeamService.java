@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Teams;
+import pro.sbs.domain.Users;
 import pro.sbs.dto.TeamsCreateDto;
 import pro.sbs.repository.TeamRepository;
 
@@ -116,6 +117,19 @@ private final TeamRepository teamRepository;
         list = teamRepository.searchByKeyword(keyword);
         
         return list;
+    }
+
+    /**
+     * 팀에 가입된 멤버들의 정보를 가져오는 기능
+     * @param teamId 가입된 멤버들을 읽어오고자 하는 팀의 번호(teamId)
+     * @return 팀에 가입된 멤버들의 리스트
+     * @author 서범수
+     */
+    public List<Users> readJoinedMembers(Integer teamId) {
+        List<Users> joinedMembers = teamRepository.selectJoinedMembers(teamId);
+        
+        return joinedMembers;
+        
     }
 
 

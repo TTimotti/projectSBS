@@ -18,8 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Activity;
+import pro.sbs.domain.Images;
 import pro.sbs.domain.Teams;
-import pro.sbs.dto.ActivityReadDto;
+import pro.sbs.domain.Users;
 import pro.sbs.dto.PostReadDto;
 import pro.sbs.dto.TeamsCreateDto;
 import pro.sbs.dto.TeamsJoinDto;
@@ -77,14 +78,32 @@ public class TeamsController {
         return "redirect:/team/teamConfig?teamId=" + entity.getTeamId();
         
     }
- 
-    @GetMapping("/teamConfig")
-    public void teamConfig(Model model, Integer teamId) {
+    
+    /**
+     * 팀 리더가 관리자 페이지로 들어갈 때, 팀에 대한 정보를 불러오는 기능
+     * @param model
+     * @param teamId 관리자 페이지로 이동하고자 하는 팀의 번호(teamId)
+     * @throws IOException
+     * @author 김지훈, 서범수.
+     */
+    @GetMapping("/teamConfig") 
+    public void teamConfig(Model model, Integer teamId) throws IOException{
         log.info("teamConfig(model={}, teamId={}) 호출", model, teamId);
         
         Teams team = teamService.readTeam(teamId);        
         log.info("teamConfig.team = {}",team);        
-        model.addAttribute("team", team);   
+        model.addAttribute("team", team);
+        
+        // 팀에 가입한 멤버들을 가져옵니다. (teamId, User, teamLog 이용)
+        
+        List<Users> joinedMembers = teamService.readJoinedMembers(teamId);
+        model.addAttribute("joinedMembers", joinedMembers);
+        
+        List<Images> files = imagesService.read();        
+        model.addAttribute("all",files);
+        log.info("teamConfig.model = {}", model);
+        
+        
     }
     
     @PostMapping("/teamUpdate")
@@ -190,7 +209,7 @@ public class TeamsController {
      */
     @GetMapping("/teamActivity")
     public void team(Integer teamId, Model model) {
-        log.info("teamController main()");
+        log.info("team()");
         log.info("teamId = {}", teamId);
         
         Teams team = teamService.readTeam(teamId);
@@ -203,13 +222,9 @@ public class TeamsController {
         
         List<Activity> active = activityService.read();
         
+        log.info("active = {}", active);
+        
         model.addAttribute("active", active);
-        
-        // 종속시 이걸로 변경, 지금은 teamId 값 넘겨오기위한 테스트
-        List<ActivityReadDto> activeDto = activityService.read(teamId);
-        log.info("activeDto = {}", activeDto);
-        
-        model.addAttribute("activeDto", activeDto);
         
     }
     

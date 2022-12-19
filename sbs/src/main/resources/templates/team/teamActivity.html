@@ -27,8 +27,10 @@
 	<!-- Navigation-->
 	<nav class="navbar navbar-light bg-light static-top">
 		<div class="container">
-			<a class="navbar-brand" href="#!">SBS</a> <a class="btn btn-primary"
-				href="#signup">LIST</a>
+			<a class="navbar-brand" href="#!">SBS</a>
+            <a class="btn btn-primary" href="#signup">LIST</a>
+            <a class="btn btn-primary" th:href="@{/team/teamConfig?teamId={teamId} (teamId = ${ team.teamId })}" th:if="${#authentication.name == team.leader}">관리하기</a>
+                                                                    
 		</div>
 	</nav>
 	<!-- Masthead-->
