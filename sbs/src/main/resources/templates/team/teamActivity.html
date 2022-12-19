@@ -69,10 +69,13 @@
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                     <div class="features-icons-icon d-flex">
                         <i class="bi-window m-auto text-primary"></i>
+                        <i class="bi bi-newspaper m-auto text-success"></i>
                     </div>
                     <div>
                         <a class ="btn btn-primary" th:href="@{ /activity/create?id={id} (id = ${ team.teamId }) }">활동 등록</a>
+                        <a class ="btn btn-success" th:href="@{ /post/create?id={id} (id = ${ team.teamId }) }">게시글 작성</a>
                     </div>
+                    
 
                     <!-- calendar -->
 
@@ -241,18 +244,11 @@
 <!-- Bootstrap core JS-->
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script th:src="@{/js/scripts.js}"></script>
 <!-- kakao -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abaecbd1f25256beda80cb6e2837cf2b&libraries=services"></script>
 <!-- Calendar JS -->
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script th:inline="javascript" th:src="@{/js/calendar.js}"></script>
-    <script th:inline="javascript">
-            
-            
-            
-        </script>
 </body>
 </html>
