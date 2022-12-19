@@ -71,7 +71,7 @@
                             th:value="${ #temporals.format(users.modifiedTime, 'yyyy-MM-dd HH:mm:ss') }" readonly />
                     </div> 
                     <div class="my-2" >
-                    <a class="btn btn-primary form-control" th:href="@{ /user/update?userId={userId} (userId = ${ users.userId }) } ">수정하기</a>
+                    <a class="btn btn-primary form-control" th:href="@{ /user/userUpdate?userId={userId} (userId = ${ users.userId }) } ">수정하기</a>
                     </div>
                     <div class="my-2" >
                     <a class="btn btn-primary form-control" th:href="@{ / } ">뒤로가기</a>
