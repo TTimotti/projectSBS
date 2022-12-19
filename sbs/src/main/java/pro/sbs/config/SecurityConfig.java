@@ -54,7 +54,7 @@ public class SecurityConfig {
         
         
         http.logout() // 로그아웃 관련 설정 시작
-        .logoutSuccessUrl("/login"); // 로그아웃 성공 후 이동할 url
+        .logoutSuccessUrl("/user/signIn"); // 로그아웃 성공 후 이동할 url
         
         // 특정 경로에 시큐리티 적용 : 권한을 가지고 있는 사용자만 접근할 수 있는 경로
         // 익명 사용자도 접근할 수 있는 경로.
