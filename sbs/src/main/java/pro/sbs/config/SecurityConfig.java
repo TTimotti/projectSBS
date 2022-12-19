@@ -50,7 +50,7 @@ public class SecurityConfig {
         // 로그인/ 로그아웃 관련 성정
         http.formLogin()
         .loginPage("/user/signIn")
-        .defaultSuccessUrl("/user/myPage", true);// Spring security에서 제공하는 기본 로그인 폼 사용
+        .defaultSuccessUrl("/", true);// Spring security에서 제공하는 기본 로그인 폼 사용
         
         
         http.logout() // 로그아웃 관련 설정 시작
