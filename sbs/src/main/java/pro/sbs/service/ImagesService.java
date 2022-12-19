@@ -13,8 +13,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Images;
 import pro.sbs.domain.Teams;
+import pro.sbs.domain.Users;
 import pro.sbs.repository.ImagesRepository;
 import pro.sbs.repository.TeamRepository;
+import pro.sbs.repository.UsersRepository;
 
 @Service
 @Slf4j
@@ -23,6 +25,7 @@ public class ImagesService {
 
     private final ImagesRepository imagesRepository;
     private final TeamRepository teamRepository;
+    private final UsersRepository userRepository;
 
     /**
      * 모든 이미지 검색
@@ -41,7 +44,7 @@ public class ImagesService {
     private String fileDir;
     
     /**
-     * 이미지 저장 메서드
+     * 유저 이미지 저장 메서드
      * 경로는 USERS_FID를 이용해서 IMAGES와 연동
      * C:\Users\sbs\이미지파일.확장자
      * @param file
@@ -87,6 +90,50 @@ public class ImagesService {
 
         return savedFile.getFid();
 
+    }
+    
+    /**
+     * 유저 이미지 업데이트 메서드
+     * 경로는 TEAMS_FID를 이용해서 IMAGES와 연동
+     * C:\Users\sbs\이미지파일.확장자
+     * @param file
+     * @return fid 값(Integer)
+     * @throws IllegalStateException 
+     * @throws IOException
+     * 김지훈
+     */
+    @Transactional
+    public Integer updateUserImage(MultipartFile file, Integer userId) throws IllegalStateException, IOException {
+        log.info("updateUserImage(file={}, userId={}) 호출", file, userId);
+        if (file.isEmpty()) {
+            return null;
+        }
+
+        // 원래 파일 이름 추출
+        String origName = file.getOriginalFilename();
+
+        // 저장할 이름 생성
+        String fileName = "User" +origName.substring(0, origName.indexOf("."));
+
+        // 확장자 추출(ex : .png)
+        String extension = origName.substring(origName.lastIndexOf("."));
+
+        // 파일을 불러올 때 사용할 파일 경로
+        String savedPath = fileDir + fileName + extension;
+
+        // 실제로 로컬에 저장
+        file.transferTo(new File(savedPath));
+
+        // 데이터베이스에 파일 정보 저장 (레퍼지토리 호출)
+        Users user = userRepository.findByUserId(userId).get();
+        Integer fid = user.getFid();
+        
+        Images entity = imagesRepository.findByFid(fid);
+        log.info("updateUserImage.entity = {} " , entity);
+        entity.update(fileName, origName, savedPath, extension);
+
+        return fid;
+        
     }
 
     /**
@@ -165,7 +212,7 @@ public class ImagesService {
      */
     @Transactional
     public Integer updateTeamImage(MultipartFile file, Integer teamId) throws IllegalStateException, IOException {
-        log.info("updateTeamImage(file={}, fid={}) 호출", file, teamId);
+        log.info("updateTeamImage(file={}, teamId={}) 호출", file, teamId);
         if (file.isEmpty()) {
             return null;
         }
@@ -181,10 +228,6 @@ public class ImagesService {
 
         // 파일을 불러올 때 사용할 파일 경로
         String savedPath = fileDir + fileName + extension;
-
-        // 파일 엔티티 생성
-        Images image = Images.builder().originalName(origName).fileName(fileName).fileUrl(savedPath)
-                .extension(extension).build();
 
         // 실제로 로컬에 저장
         file.transferTo(new File(savedPath));

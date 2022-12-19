@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -156,14 +157,16 @@ public class UsersController {
      * user id를 이용하여 update 홈페이지로 이동
      * @param userId 
      * @author 이존규
+     * @throws IOException 
+     * @throws IllegalStateException 
      */
     @GetMapping("/update")
-    public void update(Integer userId, Model model) {
-        log.info("update(id) id = {}", userId);
+    public void update(Integer userId, Model model) throws IllegalStateException, IOException {
+        log.info("update(id, file) id = {}", userId);
 
         Users user = usersService.read(userId);
-        log.info("user = {}", user);
-
+        log.info("update.user = {}", user);
+        
         model.addAttribute("user", user);
     }
     
@@ -172,12 +175,16 @@ public class UsersController {
      * @param user Update dto
      * @return 수정된 유저의 마이페이지
      * @author 이존규
+     * @throws IOException 
+     * @throws IllegalStateException 
      */
     @PostMapping("/update")
-    public String updatePost(UsersUpdateDto dto) {
+    public String updatePost(UsersUpdateDto dto, @RequestParam("userImage") MultipartFile file) throws IllegalStateException, IOException {
         log.info("updateDto(dto) ={}", dto);
 
         Integer userId = usersService.update(dto);
+        
+        imagesService.updateUserImage(file, userId);
 
         String encodedParam = URLEncoder.encode(dto.getUserName());
         
