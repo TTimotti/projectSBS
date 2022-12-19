@@ -15,11 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Activity;
 import pro.sbs.domain.MyActivityList;
-import pro.sbs.domain.Teams;
 import pro.sbs.dto.ActivityCreateDto;
-import pro.sbs.dto.ActivityReadDto;
 import pro.sbs.dto.MyActivityListCreateDto;
-import pro.sbs.dto.PostReadDto;
 import pro.sbs.service.ActivityService;
 import pro.sbs.service.PostService;
 import pro.sbs.service.TeamService;
@@ -35,32 +32,6 @@ public class ActivityController {
     private final TeamService teamService;
     
     private final ActivityService activityService;
-    
-    @GetMapping("/team/teamActivity")
-    public void team(Integer teamId, Model model) {
-        log.info("teamController main()");
-        log.info("teamId = {}", teamId);
-        teamId = 1;
-        
-        Teams team = teamService.readTeam(teamId);
-        
-        model.addAttribute("team", team);
-        
-        List<PostReadDto> post = postService.read(teamId);
-        
-        model.addAttribute("post", post);
-        
-        List<Activity> active = activityService.read();
-        
-        model.addAttribute("active", active);
-        
-        // 종속시 이걸로 변경, 지금은 teamId 값 넘겨오기위한 테스트
-        List<ActivityReadDto> activeDto = activityService.read(teamId);
-        log.info("activeDto = {}", activeDto);
-        
-        model.addAttribute("activeDto", activeDto);
-        
-    }
     
     @GetMapping("/activity/partyIn")
     public void partyIn (Integer id, Integer userId, Integer activityd, Model model) {

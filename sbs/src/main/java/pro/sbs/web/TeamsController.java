@@ -17,11 +17,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import pro.sbs.domain.Images;
+import pro.sbs.domain.Activity;
 import pro.sbs.domain.Teams;
-import pro.sbs.dto.TeamsJoinDto;
+import pro.sbs.dto.ActivityReadDto;
+import pro.sbs.dto.PostReadDto;
 import pro.sbs.dto.TeamsCreateDto;
+import pro.sbs.dto.TeamsJoinDto;
+import pro.sbs.service.ActivityService;
 import pro.sbs.service.ImagesService;
+import pro.sbs.service.PostService;
 import pro.sbs.service.TeamLogService;
 import pro.sbs.service.TeamService;
 
@@ -34,6 +38,8 @@ public class TeamsController {
     private final TeamService teamService;
     private final ImagesService imagesService;
     private final TeamLogService teamLogService;
+    private final PostService postService;
+    private final ActivityService activityService;
 
     /**
      * 팀 생성 페이지로 이동 GET
@@ -174,5 +180,40 @@ public class TeamsController {
         
         return "/home";
     }
+    
+    /**
+     * 
+     * @param teamId 팀 메인 페이지로 들어갈 팀의 번호.
+     * @param model
+     * @author 추지훈.
+     * 팀 메인 페이지로 들어가는 기능. (ActivityController -> TeamsController로 옮김)
+     */
+    @GetMapping("/teamActivity")
+    public void team(Integer teamId, Model model) {
+        log.info("teamController main()");
+        log.info("teamId = {}", teamId);
+        
+        Teams team = teamService.readTeam(teamId);
+        
+        model.addAttribute("team", team);
+        
+        List<PostReadDto> post = postService.read(teamId);
+        
+        model.addAttribute("post", post);
+        
+        List<Activity> active = activityService.read();
+        
+        model.addAttribute("active", active);
+        
+        // 종속시 이걸로 변경, 지금은 teamId 값 넘겨오기위한 테스트
+        List<ActivityReadDto> activeDto = activityService.read(teamId);
+        log.info("activeDto = {}", activeDto);
+        
+        model.addAttribute("activeDto", activeDto);
+        
+    }
+    
+
+    
     
 }
