@@ -72,17 +72,26 @@ public class TeamsController {
         
     }
  
-    @GetMapping("/teamConfig") // TODO FIXME 이미지를 불러와야함
-    public void teamConfig(Model model, Integer teamId) throws IOException{
+    @GetMapping("/teamConfig")
+    public void teamConfig(Model model, Integer teamId) {
         log.info("teamConfig(model={}, teamId={}) 호출", model, teamId);
         
         Teams team = teamService.readTeam(teamId);        
         log.info("teamConfig.team = {}",team);        
         model.addAttribute("team", team);   
-                
-        List<Images> files = imagesService.read();        
-        model.addAttribute("all",files);
-        log.info("teamConfig.model = {}", model);
+    }
+    
+    @PostMapping("/teamUpdate")
+    public String teamUpdate(Model model, Integer teamId, @RequestParam("teamImage") MultipartFile file) throws IOException{
+        log.info("teamUpdate(model={}, teamId={}) 호출", model, teamId, file);
+        
+        Teams team = teamService.readTeam(teamId);        
+        log.info("teamUpdate.team = {}",team);        
+        model.addAttribute("team", team);
+        
+        imagesService.updateTeamImage(file, teamId);
+        
+        return "redirect:/team/teamConfig?teamId=" + teamId;
     }
     
     /**

@@ -47,4 +47,14 @@ public class Images {
     
     @Column(nullable = false)
     private String extension;
+
+    public Images update(String fileName, String originalName, String fileUrl, String extension) {
+        this.fileName = fileName;
+        this.originalName = originalName;
+        this.fileUrl = fileUrl;
+        this.extension = extension;
+        
+        return this;
+        
+    }
 }

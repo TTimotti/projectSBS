@@ -12,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Images;
+import pro.sbs.domain.Teams;
 import pro.sbs.repository.ImagesRepository;
+import pro.sbs.repository.TeamRepository;
 
 @Service
 @Slf4j
@@ -20,6 +22,7 @@ import pro.sbs.repository.ImagesRepository;
 public class ImagesService {
 
     private final ImagesRepository imagesRepository;
+    private final TeamRepository teamRepository;
 
     /**
      * 모든 이미지 검색
@@ -132,6 +135,7 @@ public class ImagesService {
         // 데이터베이스에 파일 정보 저장 (레퍼지토리 호출)
         Images savedFile = imagesRepository.save(image);
 
+
         return savedFile.getFid();
         
     }
@@ -147,6 +151,54 @@ public class ImagesService {
         log.info("readByFid(fid={}) 호출", fid);
         
         return imagesRepository.findByFid(fid);
+    }
+    
+    /**
+     * 팀 이미지 업데이트 메서드
+     * 경로는 TEAMS_FID를 이용해서 IMAGES와 연동
+     * C:\Users\sbs\이미지파일.확장자
+     * @param file
+     * @return fid 값(Integer)
+     * @throws IllegalStateException 
+     * @throws IOException
+     * 김지훈
+     */
+    @Transactional
+    public Integer updateTeamImage(MultipartFile file, Integer teamId) throws IllegalStateException, IOException {
+        log.info("updateTeamImage(file={}, fid={}) 호출", file, teamId);
+        if (file.isEmpty()) {
+            return null;
+        }
+
+        // 원래 파일 이름 추출
+        String origName = file.getOriginalFilename();
+
+        // 저장할 이름 생성
+        String fileName = "Team" +origName.substring(0, origName.indexOf("."));
+
+        // 확장자 추출(ex : .png)
+        String extension = origName.substring(origName.lastIndexOf("."));
+
+        // 파일을 불러올 때 사용할 파일 경로
+        String savedPath = fileDir + fileName + extension;
+
+        // 파일 엔티티 생성
+        Images image = Images.builder().originalName(origName).fileName(fileName).fileUrl(savedPath)
+                .extension(extension).build();
+
+        // 실제로 로컬에 저장
+        file.transferTo(new File(savedPath));
+
+        // 데이터베이스에 파일 정보 저장 (레퍼지토리 호출)
+        Teams team = teamRepository.findByTeamId(teamId).get();
+        Integer fid = team.getFid();
+        
+        Images entity = imagesRepository.findByFid(fid);
+        log.info("updateTeamImage.entity = {} " , entity);
+        entity.update(fileName, origName, savedPath, extension);
+
+        return fid;
+        
     }
 
 }
