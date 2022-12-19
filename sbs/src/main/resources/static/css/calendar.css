@@ -213,8 +213,8 @@
 	top: 50%;
 	left: 50%;
 	overflow: auto;
-	height: 600px;
-	width: 800px;
+	height: 550px;
+	width: 880px;
 	transform: translate(-50%, -50%);
 	z-index: 1002;
 	box-sizing: border-box;

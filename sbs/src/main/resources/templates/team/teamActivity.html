@@ -37,11 +37,10 @@
     <div class="row">
         <div class="col-sm">
             <div class="card m-10">
-                <label for="id" class="form-label">글 번호</label> <input id="id"
-                    class="form-control" th:value="${ team.teamId }" readonly />
+             <input id="id" class="form-control" th:value="${ team.teamId }" readonly style="display:none;"/>
                 <div class="card-body col-auto" id="mypageListMain">
                     <div style="width: 800px; margin-left: auto; margin-right: auto; text-align: center;">
-                                        <h5 class="card-title">공지사항 게시판</h5>
+                                        <h3 class="card-title">공지사항</h3>
                     <div>
                         <a th:href="@{ /post/create?id={id} (id = ${ team.teamId }) }">게시글
                             작성</a>
@@ -72,7 +71,7 @@
                         <i class="bi-window m-auto text-primary"></i>
                     </div>
                     <div>
-                        <a class ="btn btn-primary" th:href="@{ /activity/create?id={id} (id = ${ team.teamId }) }">소모임 등록</a>
+                        <a class ="btn btn-primary" th:href="@{ /activity/create?id={id} (id = ${ team.teamId }) }">활동 등록</a>
                     </div>
 
                     <!-- calendar -->
@@ -80,9 +79,7 @@
     <!-- weekcalendar -->
     <input type="text" class="teamJoinDay" id="teamJoinDay" style="display: none;"/>
     <input type="text" class="activityId" id="activityId" style="display: none;">
-    <hr />
-    <h3>팀내에 활동 리스트</h3>
-    <p class="lead mb-0">여기가 활동 리스트 테이블</p>
+    <hr width="800px" style="margin-left: auto; margin-right: auto; margin-bottom : 0; padding: 0;"/>
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
@@ -112,10 +109,10 @@
                     <h1 class="activityTitle">진행중인 활동</h1>
                 </div>
                 <div style="width: auto">
-                    <hr width="500px"
-                        style="margin-left: auto; margin-right: auto; padding: 0;">
+                    <hr width="800px"
+                        style="margin-left: auto; margin-right: auto; margin-bottom : 0; padding: 0;">
                     <div
-                        style="width: 500px; margin-left: auto; margin-right: auto;">
+                        style="width: 800px; margin-left: auto; margin-right: auto;">
                         <table id="dynamicTable" class="table table-hover">
                         </table>
                     </div>
@@ -126,8 +123,10 @@
                 <div>
                     <h1>종료된 활동</h1>
                 </div>
+                <hr width="800px"
+                        style="margin-left: auto; margin-right: auto; margin-bottom : 0; padding: 0;">
                 <div
-                    style="width: 500px; margin-left: auto; margin-right: auto;">
+                    style="width: 800px; margin-left: auto; margin-right: auto;">
                                     <table id="dynamicEndTable" class="table table-hover">
                                     </table>
                                 </div>
