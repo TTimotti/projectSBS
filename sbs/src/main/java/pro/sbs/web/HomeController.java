@@ -19,11 +19,15 @@ public class HomeController {
     private final TeamService teamService;
 
     @GetMapping("/") 
-    public String home(Model model) {
+    public String home(String keyword, Model model) {
         log.info("home() 호출");
-        
-        List<Teams> list = teamService.read();
-        model.addAttribute("list", list);
+        if(keyword!=null) {
+            List<Teams> list = teamService.search(keyword);
+            model.addAttribute("list", list);
+        } else {
+            List<Teams> list = teamService.read();
+            model.addAttribute("list", list);
+        }
         
         return "/home";
         
