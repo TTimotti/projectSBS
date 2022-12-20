@@ -29,6 +29,17 @@ public interface TeamsLogRepository extends JpaRepository<TeamsLog, Integer>{
     @Modifying
     @Transactional
     void deleteByTeamId(Integer teamId);
+    
+    /**
+     * 
+     * @param 탈퇴하기 버튼을 누른 사용자의 정보를 TEAMS_LOG에서 삭제하는 기능.
+     * @param teamId
+     */
+    @Modifying
+    @Transactional
+    @Query("delete from TEAMS_LOG t where t.userName = :userName and t.teamId= :teamId")
+    void deleteByUsername(@Param(value = "userName") String userName, @Param(value = "teamId") Integer teamId);
+    
 
     
     

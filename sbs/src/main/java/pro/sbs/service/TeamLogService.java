@@ -61,6 +61,13 @@ public class TeamLogService {
         
     }
 
+    public void deleteJoinedTeam(String userName, Integer teamId) {
+        log.info("deleteJoinedTeam(userName={}, teamId={}) 호출", userName, teamId);
+        
+        teamsLogRepository.deleteByUsername(userName, teamId);
+        
+    }
+
 
 
 }

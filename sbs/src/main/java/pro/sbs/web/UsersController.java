@@ -25,6 +25,7 @@ import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
 import pro.sbs.dto.UsersUpdateDto;
 import pro.sbs.service.ImagesService;
+import pro.sbs.service.TeamLogService;
 import pro.sbs.service.UsersService;
 
 @Controller
@@ -36,6 +37,7 @@ public class UsersController {
     private final PasswordEncoder passwordEncoder;
     private final UsersService usersService;
     private final ImagesService imagesService;
+    private final TeamLogService teamLogService;
 
     
     @GetMapping("/signIn")
@@ -262,6 +264,15 @@ public class UsersController {
         
         model.addAttribute("myTeamList", myTeamList);
         
+    }
+    
+    @PostMapping("/deleteJoinedTeam")
+    public String deleteJoinedTeam(String userName, Integer teamId) {
+        log.info("deleteJoinedTeam(userName = {}, teamId = {}) 호출", userName, teamId);
+        
+        teamLogService.deleteJoinedTeam(userName, teamId);
+        
+        return "redirect:/";
     }
     
 }
