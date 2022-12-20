@@ -1747,12 +1747,12 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Hero Section,
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
   min-height: 50vh;
-  background-color: var(--color-secondary);
+  background-color: #2b90d9;
   background-image: url("../img/hero-bg.png");
   background-size: cover;
   background-position: center;
