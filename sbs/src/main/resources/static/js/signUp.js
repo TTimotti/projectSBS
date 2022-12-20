@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', function() {
         } else {
             pokDiv.className = 'my-2 d-none';
             pnokDiv.className = 'my-2';
-            btnSubmit.classList.add('disabled');
+            btnSubmit.classList.add('disabled')
 
         }
     });

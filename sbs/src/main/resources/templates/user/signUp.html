@@ -13,7 +13,7 @@
     <div class="container-fluid" >
     
             <div class="container-fluid">
-                <img th:src="@{ /image/sbs.png }" class="image2" />
+                <img th:src="@{ /image/sbs.png }" class="image2" style="width: 23rem; border:2px solid #2b90d9 ; border-radius: 5rem"/>
             </div>
             
             <div class="my-2">
@@ -91,7 +91,7 @@
                     
                     <div>
                         <h1>프로필 사진</h1>
-                        <input type="file" id="userImage" name="userImage" class="form-control" />
+                        <input type="file" id="userImage" name="userImage" class="form-control" required  />
                     </div>
                     
                     <h1>지역</h1>
@@ -112,9 +112,7 @@
                     </span>
                    
                     <div class="my-2">
-                        <input type="submit" id="btnSubmit"
-                            class="form-control btn btn-outline-success disabled"
-                            value="회원가입" />
+                        <input type="submit" id="btnSubmit" class="form-control btn btn-outline-success" value="회원가입" />
                     </div>
                 </form>
             </div>
