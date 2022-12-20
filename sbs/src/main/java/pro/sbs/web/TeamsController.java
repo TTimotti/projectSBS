@@ -127,7 +127,7 @@ public class TeamsController {
         
         imagesService.updateTeamImage(file, dto.getTeamId());
         
-        return "redirect:/team/teamConfig";
+        return "redirect:/team/teamActivity?teamId=" + teamId;
     }
     
     /**
