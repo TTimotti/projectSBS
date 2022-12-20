@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
           
             if (r.writer == r.writer) {
                 str += '<div class="card-footer">'
-                    + `<button type="button" class="btnModifies btn btn-outline-primary" data-rid="${r.replyId}">수정</button>`
+                    + `<button type="button" class="btnModifies btn btn-primary" data-rid="${r.replyId}">수정</button>`
                     + '</div>';
             }
             str += '</div>';

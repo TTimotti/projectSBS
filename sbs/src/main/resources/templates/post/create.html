@@ -49,7 +49,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
             <div class="col-lg-6 card-header">
                 <h1 id="pcheader">게시물작성</h1>
             </div>
-            <div class="col-lg-6 card-body">
+            <div class="col card-body">
                 <form method="post">
                     <div class="my-4">
                         <label for="title" class="form-label">제목</label>
@@ -65,7 +65,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                         <label for="author" class="form-label">작성자</label>
                         <!-- 작성자는 로그인 사용자 아이디를 자동으로 삽입. readonly. -->
                         <input id="author" class="form-control" type="text"
-                            name="author"  />
+                            name="author" th:value="${ #authentication.name }" readonly />
                     </div>
                     <div class="my-4">
                         <input type="submit" class="form-control btn btn-primary" 
