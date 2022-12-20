@@ -1233,8 +1233,11 @@ function changeTypeDate() {
     /*
     * 팀 회원 탈퇴 기능.
     */
+    
     const btnDeleteJoinedTeam = document.querySelector('#btnDeleteJoinedTeam');
     const deleteJoinedTeamForm  = document.querySelector('#deleteJoinedTeamForm');
+    
+    if (btnDeleteJoinedTeam != null) {
     btnDeleteJoinedTeam.addEventListener('click', function(){
     	const result = confirm('탈퇴 하겠습니까?');
     	if (result) {
@@ -1245,6 +1248,19 @@ function changeTypeDate() {
     		alert("탈퇴가 완료되었습니다.");
     	}
     });
+    }
+    
+    /*
+    * 팀 관리 페이지로 들어가는 기능.
+    */
+    const btnTeamConfig = document.querySelector('#btnTeamConfig');
+    const teamConfigForm = document.querySelector('#teamConfigForm');
+    btnTeamConfig.addEventListener('click', function() {
+       teamConfigForm.action = "/team/teamConfig"
+       teamConfigForm.method = "post";
+       teamConfigForm.submit();
+    });
+    
 	/*
 	* 로그인 안하면 메인페이지로 이동시키는 기능
 	*/ 

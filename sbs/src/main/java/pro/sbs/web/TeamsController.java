@@ -92,7 +92,7 @@ public class TeamsController {
      * @author 김지훈, 서범수.
      */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    @GetMapping("/teamConfig") 
+    @PostMapping("/teamConfig") 
     public void teamConfig(Model model, Integer teamId) throws IOException{
         log.info("teamConfig(model={}, teamId={}) 호출", model, teamId);
         
@@ -127,7 +127,7 @@ public class TeamsController {
         
         imagesService.updateTeamImage(file, dto.getTeamId());
         
-        return "redirect:/team/teamConfig?teamId=" + dto.getTeamId();
+        return "redirect:/team/teamConfig";
     }
     
     /**
