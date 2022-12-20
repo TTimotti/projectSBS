@@ -58,7 +58,6 @@ public class ActivityController {
     @PostMapping("/activity/update")
     public String update(ActivityUpdateDto dto) {
         log.info("update(dto = {})", dto);
- ////
         Integer activityId = activityService.update(dto);
 
         log.info("activityId = {}", activityId);
