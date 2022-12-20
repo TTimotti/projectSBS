@@ -32,7 +32,8 @@ public class ActivityController {
     private final PostService postService;
 
     private final ActivityService activityService;
-
+    
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/team/teamNoticePost")
     public ResponseEntity<List<PostReadDto>> teamNoticePost(Integer teamId) {
 
@@ -43,7 +44,7 @@ public class ActivityController {
         return ResponseEntity.ok(post);
     }
 
-    
+    @PreAuthorize("hasRole('USER')")
     @GetMapping({ "/activity/detail", "/activity/modify" })
     public void detail(Integer id, Model model) {
         log.info("detail, modify  activityId = {}", id);
@@ -53,7 +54,7 @@ public class ActivityController {
         model.addAttribute(id);
     }
 
-    
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/activity/update")
     public String update(ActivityUpdateDto dto) {
         log.info("update(dto = {})", dto);
@@ -65,7 +66,7 @@ public class ActivityController {
         return "redirect:/activity/detail?id=" + dto.getId();
     }
 
-    
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/activity/delete")
     public String delete(Integer id, RedirectAttributes attrs) {
 
@@ -78,7 +79,7 @@ public class ActivityController {
         return "redirect:/";
     }
 
-    
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/activity/create")
     public void create(Integer id, Model model) {
         log.info("ActivityController create() teamId = {}", id);
@@ -92,7 +93,7 @@ public class ActivityController {
      * @param dto
      * @return
      */
-    
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/activity/create")
     public String create(Integer id, ActivityCreateDto dto) {
 
@@ -105,7 +106,7 @@ public class ActivityController {
 
         return "redirect:/team/teamActivity?teamId=" + teamId;
     }
-
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/team/list") // 요청 URL/방식 매핑.
     public ResponseEntity<List<Activity>> home2(Model model) {
         log.info("home()");
@@ -120,6 +121,7 @@ public class ActivityController {
     /*
     *  날짜가 지난 종료된 활동 목록 불러오는 기능.
     */
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/team/pastList") // 요청 URL/방식 매핑.
     public ResponseEntity<List<Activity>> home3(Integer teamId, Model model) {
         // 현재 이전 활동 내역 조회
@@ -131,6 +133,7 @@ public class ActivityController {
     /*
     *  진행중인 활동 목록 불러오는 기능.
     */
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/team/progressList") // 요청 URL/방식 매핑.
     public ResponseEntity<List<Activity>> home4(Integer teamId, Model model) {
         // 기간이 지나지 않은 활동 내역 조회
@@ -142,6 +145,7 @@ public class ActivityController {
     /**
      * 캘린더에서 날짜 선택시 input text에 있는 text값을 읽어와 String 타입으로 날짜에 해당되는 활동들을 검색하는 기능.
      */
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/scTimeSearch")
     public ResponseEntity<List<Activity>> scTimeSearch(String startTime, Integer teamId) {
 
@@ -159,6 +163,7 @@ public class ActivityController {
     /**
      * 활동 아이디를 테이블에서 받아 해당 아이디의 활동 정보를 받아서 팝업 레이어에 전달해주는 기능.
      */
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/activityInfo")
     public ResponseEntity<ActivityInfoDto> myActivityList(Integer activityId) {
 

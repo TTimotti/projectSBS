@@ -1200,7 +1200,6 @@ function closePop() {
          
 }
 
-
 $(document).on("click",".infoAc", function(event){
 
         // 클릭된 버튼의 속성값을 읽어오기.
@@ -1232,4 +1231,34 @@ function changeTypeDate() {
     ($('.createTimeTeam').val(teamCreateTimes));
     
 }
-    
+    /*
+    * 팀 회원 탈퇴 기능.
+    */
+    const btnDeleteJoinedTeam = document.querySelector('#btnDeleteJoinedTeam');
+    const deleteJoinedTeamForm  = document.querySelector('#deleteJoinedTeamForm');
+    btnDeleteJoinedTeam.addEventListener('click', function(){
+    	const result = confirm('탈퇴 하겠습니까?');
+    	if (result) {
+    		deleteJoinedTeamForm.action = '/user/deleteJoinedTeam';
+    		deleteJoinedTeamForm.method = 'post';
+    		deleteJoinedTeamForm.submit();
+    		
+    		alert("탈퇴가 완료되었습니다.");
+    	}
+    });
+	/*
+	* 로그인 안하면 메인페이지로 이동시키는 기능
+	*/ 
+	checkUser();
+    function checkUser() {
+		
+		const userName = document.querySelector('.loginUserName').value;
+		
+		if(userName == ""){
+			
+			alert("로그인 후 이용해 주세요.")
+			
+			window.location.replace("http://localhost8888:");
+		}
+		
+	}
