@@ -3,6 +3,8 @@ package pro.sbs.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import pro.sbs.domain.Post;
 
@@ -13,12 +15,19 @@ public interface PostRepository  extends JpaRepository<Post, Integer>{
     
     List<Post> findByTeamTeamIdOrderByPostIdDesc(Integer teamId);
 
+    @Query(
+"select p from POSTS p where lower(p.title) like lower('%' || :keyword || '%') or lower(p.content) like lower('%' || :keyword || '%') order by p.postId desc"
+)
+    List<Post> searchKeywordOrderByModfiedTime(@Param(value = "keyword") String keyword);  
     
     
-//    @Query(
-//"insert into POSTS (title, content, author, teamTeamId) VALUES ('test', 'test', 'test', 2)"            
-//    )
-//    Post saveDto(PostCreateDto dto);
-//    
+    List<Post> findByTitleIgnoreCaseContainingOrderByPostIdDesc(String title);
+    
+    List<Post> findByContentIgnoreCaseContainingOrderByPostIdDesc(String content);
+    
+    List<Post> findByAuthorIgnoreCaseContainingOrderByPostIdDesc(String author);
+    
+    List<Post> findByTitleIgnoreCaseContainingOrContentIgnoreCaseContainingOrderByPostIdDesc(String title, String content);
+    
     
 }

@@ -52,7 +52,7 @@ public interface TeamRepository extends JpaRepository<Teams, Integer> {
      * @return 사용자가 입력한 값을 DB에서 존재하는 팀들의 제목과 비교 후, 팀 정보들을 가져옴.
      * @author 서범수
      */
-    @Query("select t from TEAMS t where lower(t.teamName) like lower('%' || :keyword || '%') order by t.teamId desc")
+    @Query("select t from TEAMS t where lower(t.teamName) like lower('%' || :keyword || '%') or lower(t.teamId) like lower('%' || :keyword || '%') or lower(t.purpose) like lower('%' || :keyword || '%') order by t.teamId desc")
     List<Teams> searchByKeyword(@Param(value = "keyword") String keyword);
 
     /**

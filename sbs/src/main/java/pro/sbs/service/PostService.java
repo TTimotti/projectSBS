@@ -1,5 +1,6 @@
 package pro.sbs.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -82,6 +83,28 @@ public class PostService {
         postRepository.deleteById(id);
         
         return id;
+    }
+
+    public List<Post> search(String type, String keyword) {
+        log.info("search(type={}, keyword={})", type, keyword);
+        
+        List<Post> list = new ArrayList<>();
+        switch (type) {
+        case "t":
+            list = postRepository.findByTitleIgnoreCaseContainingOrderByPostIdDesc(keyword);
+            break;
+        case "c":
+            list = postRepository.findByContentIgnoreCaseContainingOrderByPostIdDesc(keyword);
+            break;
+        case "tc":
+            list = postRepository.searchKeywordOrderByModfiedTime(keyword);
+            break;
+        case "a":
+            list = postRepository.findByAuthorIgnoreCaseContainingOrderByPostIdDesc(keyword);
+            break;
+        }
+        
+        return list;
     }
     
 }

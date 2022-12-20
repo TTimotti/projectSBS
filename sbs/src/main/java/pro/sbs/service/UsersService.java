@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
+import pro.sbs.dto.MyTeamListDto;
 import pro.sbs.dto.PasswordChangeDto;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
@@ -204,5 +205,17 @@ public class UsersService {
         usersRepository.deleteById(userId);
         
         return userId;
+    }
+    
+    /**
+     * 유저가 가입한 팀 목록을 불러오는 기능
+     * @param userName 로그인한 유저
+     * @author 서범수
+     */
+    public List<MyTeamListDto> readMyTeamList(String userName) {
+        log.info("readMyTeamList(userName={}) 호출", userName);
+        
+        List<MyTeamListDto> teamsLogList = usersRepository.selectTeamsLogByUserName(userName);
+        return teamsLogList;
     }
 }

@@ -1216,7 +1216,7 @@ $(document).on("click",".infoAc", function(event){
 countMembers();
 
 function countMembers() {
-			const teamId = document.querySelector('#id').value;
+            const teamId = document.querySelector('#id').value;
             axios
             .get('/team/countMembers/' + teamId)
             .then(response => {$('.joinMembers').val(response.data)})
@@ -1225,11 +1225,11 @@ function countMembers() {
 changeTypeDate();
         
 function changeTypeDate() {
-	
-	const teamCreateTime = document.querySelector('#teamCreatedTime').value;
-	const teamCreateTimes = moment(teamCreateTime).format('YYYY년 MM월 DD일');
+    
+    const teamCreateTime = document.querySelector('#teamCreatedTime').value;
+    const teamCreateTimes = moment(teamCreateTime).format('YYYY년 MM월 DD일');
 
-	($('.createTimeTeam').val(teamCreateTimes));
-	
+    ($('.createTimeTeam').val(teamCreateTimes));
+    
 }
-	
+    

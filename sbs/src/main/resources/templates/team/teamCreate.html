@@ -56,7 +56,7 @@
             </div>
             
             <form id= "createTeamForm" method="post" enctype="multipart/form-data">
-                <div class = "row">
+                <div class = "row" id="createForm">
                         <div class="mb-3">
                             <h6><label for="teamName">팀 이름</label></h6>
                             <input type="text" id="teamName" class="form-form" name="teamName" placeholder="Team Name" required autofocus />
@@ -78,7 +78,7 @@
                             <input type="password" id="password" class="form-form" name="password" placeholder="Team Password" required />
                         </div>
                         <div class="mb-3" >
-                            <h6 id="teamImage">팀 이미지 등록</h6>
+                            <h6>팀 이미지 등록</h6>
                             <input type="file" id="teamImage" class="form-form" name="teamImage" required/>
                         </div>
                         
@@ -93,7 +93,7 @@
                         </div>
                     
                         <div class="mb-3">
-                            <a class="btn btn-outline-primary btn-sm form-control" id="btnSubmit">생성하기!</a>
+                            <a class="btn btn-outline-primary btn-sm form-control disabled" id="btnSubmit">생성하기!</a>
                         </div>
                     </div>
                 </form>

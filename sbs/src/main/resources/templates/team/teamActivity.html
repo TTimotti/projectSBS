@@ -33,66 +33,66 @@
     </div>
 </nav>
 </div>
-		<div id="jb-sidebar-left">
-			<div class="teamPhoto">
-				<img class="teamImage" id="teamImage"
-					th:src="@{/image/display?fid={teamFid} (teamFid = ${team.fid}) }"
-					width="220" height="200" />
-			</div>
-			<br />
-			<div class="sidebarTeamInfo">
-				<h2>[[ ${ team.teamName } ]]</h2>
-				<hr style="width: 200px"/>
-				<h7>리더 : [[ ${ team.leader } ]]</h7>
-				<hr style="width: 200px"/>
-				<h4>
-					정원 : <input class="joinMembers" readOnly disabled/> / [[${ team.maxMember }]]명
-				</h4>
-				<hr style="width: 200px"/>
-					<h6>
-						<input class="createTimeTeam" readOnly disabled/>
-					</h6>
-				<hr style="width: 200px"/>
-				<textarea class="teamInfoDetail" readOnly disabled>[[${ team.purpose }]]</textarea>
-			</div>
-			<br />
-			<div class="sidebarUserInfo">
-				<h5>[[ ${ #authentication.name } ]] 님 어서오세요!</h5>
-				<h3></h3>
-			</div>
-		</div>
+        <div id="jb-sidebar-left">
+            <div class="teamPhoto">
+                <img class="teamImage" id="teamImage"
+                    th:src="@{/image/display?fid={teamFid} (teamFid = ${team.fid}) }"
+                    width="220" height="200" />
+            </div>
+            <br />
+            <div class="sidebarTeamInfo">
+                <h2>[[ ${ team.teamName } ]]</h2>
+                <hr style="width: 200px"/>
+                <h7>리더 : [[ ${ team.leader } ]]</h7>
+                <hr style="width: 200px"/>
+                <h4>
+                    정원 : <input class="joinMembers" readOnly disabled/> / [[${ team.maxMember }]]명
+                </h4>
+                <hr style="width: 200px"/>
+                    <h6>
+                        <input class="createTimeTeam" readOnly disabled/>
+                    </h6>
+                <hr style="width: 200px"/>
+                <textarea class="teamInfoDetail" readOnly disabled>[[${ team.purpose }]]</textarea>
+            </div>
+            <br />
+            <div class="sidebarUserInfo">
+                <h5>[[ ${ #authentication.name } ]] 님 어서오세요!</h5>
+                <h3></h3>
+            </div>
+        </div>
 
-		<div id="jb-sidebar-right">
-				<i class="bi-window m-auto text-primary"></i> 
-				<br/>
-					<a class="btn btn-primary"
-					th:href="@{ /activity/create?id={id} (id = ${ team.teamId }) }"
-					style="margin: 0px;">활동 등록</a>
-				<br/>
-				<i class="bi bi-newspaper m-auto text-success"
-				   th:if="${#authentication.name == team.leader}"></i>
-				<br/>
-					<a class="btn btn-success"
-					th:href="@{ /post/create?id={id} (id = ${ team.teamId }) }"
-					th:if="${#authentication.name == team.leader}"
-					style="margin: 0px;">공지 등록</a>
-				<br/>
-				<i class="bi bi-gear" th:if="${#authentication.name == team.leader}"></i>
-				<br/>	 
-					<a class="btn btn-warning"
-					th:href="@{/team/teamConfig?teamId={teamId} (teamId = ${ team.teamId })}"
-					th:if="${#authentication.name == team.leader}"
-					style="margin: 0px;">관리하기</a>
-			</div>
-		<!-- Masthead-->
+        <div id="jb-sidebar-right">
+                <i class="bi-window m-auto text-primary"></i> 
+                <br/>
+                    <a class="btn btn-primary"
+                    th:href="@{ /activity/create?id={id} (id = ${ team.teamId }) }"
+                    style="margin: 0px;">활동 등록</a>
+                <br/>
+                <i class="bi bi-newspaper m-auto text-success"
+                   th:if="${#authentication.name == team.leader}"></i>
+                <br/>
+                    <a class="btn btn-success"
+                    th:href="@{ /post/create?id={id} (id = ${ team.teamId }) }"
+                    th:if="${#authentication.name == team.leader}"
+                    style="margin: 0px;">공지 등록</a>
+                <br/>
+                <i class="bi bi-gear" th:if="${#authentication.name == team.leader}"></i>
+                <br/>    
+                    <a class="btn btn-warning"
+                    th:href="@{/team/teamConfig?teamId={teamId} (teamId = ${ team.teamId })}"
+                    th:if="${#authentication.name == team.leader}"
+                    style="margin: 0px;">관리하기</a>
+            </div>
+        <!-- Masthead-->
 <div id="jb-content">
     <div class="row">
         <div>
             <div>
              <input id="id" class="form-control" th:value="${ team.teamId }" readonly style="display:none;"/>
                 <div class="card-body bg-light col-auto" id="mypageListMain" 
-               		 style="text-align: center; border-radius : 5px 5px 5px 5px;
-               		 margin-bottom: 5px;" >
+                     style="text-align: center; border-radius : 5px 5px 5px 5px;
+                     margin-bottom: 5px;" >
                 <div style="width: 800px; margin-left: auto; margin-right: auto;">
                                         <h3 class="card-title">공지사항</h3>
                         <table id="noticePostTable"
@@ -109,7 +109,7 @@
 <!-- Icons Grid-->
 <div class="container position-relative"></div>
 <section class="features-icons bg-light text-center"
-	style="border-radius : 5px 5px 5px 5px; margin-bottom: 5px;" >
+    style="border-radius : 5px 5px 5px 5px; margin-bottom: 5px;" >
     <div class="container">
         <div class="row">
             <div class="col-lg-4">

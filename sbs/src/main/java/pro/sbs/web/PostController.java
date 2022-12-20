@@ -1,5 +1,8 @@
 package pro.sbs.web;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,6 @@ import pro.sbs.domain.Post;
 import pro.sbs.dto.PostCreateDto;
 import pro.sbs.dto.PostUpdateDto;
 import pro.sbs.service.PostService;
-import pro.sbs.service.TeamService;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,9 +23,9 @@ import pro.sbs.service.TeamService;
 @RequestMapping
 public class PostController {
     
-    private final TeamService teamService;
     
     private final PostService postService;
+    
     
     @GetMapping({"/post/detail", "/post/modify"})
     // 컨트롤러 메서드가 2개 이상의 요청 주소를 처리할 때는 mapping에서 요청 주소를 배열로 설정.
@@ -37,12 +39,14 @@ public class PostController {
         
     }
     
+    
     @GetMapping("/post/create")
     public void create(Integer id, Model model) {
         log.info("PostController Get create()");
         model.addAttribute("id", id);
         
     }
+    
     
     @PostMapping("/post/create")
     public String create(PostCreateDto dto, RedirectAttributes attrs, Integer id) {
@@ -61,6 +65,7 @@ public class PostController {
         return "redirect:/team/teamActivity?teamId=" + teamId;
     }
     
+    
     @PostMapping("/post/update")
     public String update(PostUpdateDto dto) {
         log.info("PostController update(dto = {})",dto);
@@ -72,6 +77,7 @@ public class PostController {
         return "redirect:/post/detail?id=" + dto.getId();
     }
     
+    
     @PostMapping("/post/delete")
     public String delete(Integer id, RedirectAttributes attrs) {
         log.info("PostController delete(id={})", id);
@@ -80,10 +86,22 @@ public class PostController {
         attrs.addFlashAttribute("deletedPostId", postId);
         log.info("postController delete postId = {}", postId);
         
-        // 삭제 완료 후에는 목록 페이지로 이동(redirect) - PRG 패턴
         return "redirect:/";
     }
     
+    @GetMapping("/post/search")
+    public String search(String type, String keyword, Model model) throws IndexOutOfBoundsException {
+        log.info("search(type={}, keyword={})", type, keyword);
+        
+        List<Post> post = postService.search(type, keyword);
+        model.addAttribute("post", post);
+        log.info("list ={}", post);
+   
+        Integer teamId = post.get(0).getTeam().getTeamId();
+        log.info("teamId ={}", teamId);
+        
+        return "redirect:/team/teamActivity?teamId=" + 27;
+    }
     
     
 }
