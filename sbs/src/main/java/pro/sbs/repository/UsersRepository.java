@@ -25,7 +25,7 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
      * @param userName 로그인한 유저
      * @author 서범수
      */
-    @Query("select new pro.sbs.dto.MyTeamListDto(t.teamId, t.teamName, tl.createdTime) from TEAMS_LOG tl, TEAMS t where tl.userName = :userName and tl.teamId = t.teamId")
+    @Query("select new pro.sbs.dto.MyTeamListDto(t.teamId, t.teamName, tl.createdTime, t.leader) from TEAMS_LOG tl, TEAMS t where tl.userName = :userName and tl.teamId = t.teamId")
     List<MyTeamListDto> selectTeamsLogByUserName(@Param(value = "userName") String userName);
     
     

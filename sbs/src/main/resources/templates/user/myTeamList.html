@@ -51,24 +51,40 @@
         
         <div class="container container-body mt-3 mb-3" style="text-align: center;">
             <div>
-                <h1 class="mt-3">내가 가입한 팀 목록</h1>
+                <h1 class="mt-3">팀 목록</h1>
                 <hr style="margin-top: 6px;"/>
             </div>
             <div class="mb-3">
+                <h2>내가 생성한 모임</h2>
                 <table class="table table-hover">
                         <thead>
+                            <tr>
+                                <th>팀 이름</th>
+                                <th>생성일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="mtl : ${ myTeamList } " th:if="${#authentication.name == mtl.leader}">
+                                <td><a th:text="${mtl.teamName}" th:href="@{/team/teamActivity?teamId={teamId} (teamId = ${mtl.teamId}) }"></a></td>
+                                <td th:text="${#temporals.format(mtl.createdTime, 'yyyy년 MM월 dd일 hh시 mm분')}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2>내가 가입한 모임</h2>
+                    <table class="table table-hover">
+                    <thead>
                             <tr>
                                 <th>팀 이름</th>
                                 <th>가입일</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            <tr th:each="mtl : ${ myTeamList }">
+                            <tr th:each="mtl : ${ myTeamList } " th:if="${#authentication.name != mtl.leader}">
                                 <td><a th:text="${mtl.teamName}" th:href="@{/team/teamActivity?teamId={teamId} (teamId = ${mtl.teamId}) }"></a></td>
-                                <td th:text="${mtl.createdTime}"></td>
+                                <td th:text="${#temporals.format(mtl.createdTime, 'yyyy년 MM월 dd일 hh시 mm분')}"></td>
                             </tr>
                         </tbody>
+                    
                     </table>
             </div>
         </div>
