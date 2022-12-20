@@ -88,11 +88,16 @@
                     style="margin: 0px;">공지 등록</a>
                 <br/>
                 <i class="bi bi-gear" th:if="${#authentication.name == team.leader}"></i>
-                <br/>    
-                    <a class="btn btn-warning"
-                    th:href="@{/team/teamConfig?teamId={teamId} (teamId = ${ team.teamId })}"
-                    th:if="${#authentication.name == team.leader}"
-                    style="margin: 0px;">관리하기</a>
+                <br/>
+                
+                <form id="teamConfigForm">
+                    <div>
+                        <input class ="loginUserName" type="hidden" th:value="${ #authentication.name }" name="userName"/>
+                        <input type="hidden" th:value="${ team.teamId }" name="teamId" />
+                        <a class="btn btn-warning" th:if="${#authentication.name == team.leader}" id="btnTeamConfig" style="margin: 0px;">관리하기</a>
+                    </div>
+                </form>
+                
             </div>
         <!-- Masthead-->
 <div id="jb-content">
