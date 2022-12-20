@@ -892,7 +892,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '<td>' + data[i].budget.toLocaleString(); +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-            if (data[i].teamId == 1) {
+            if (data[i].teamId == 27) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
             + data[i].teamId 
@@ -906,7 +906,6 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '</td>'   
             }
             + '</tr>';
-            
             
 }
     

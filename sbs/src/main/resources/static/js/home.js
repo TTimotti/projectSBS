@@ -89,18 +89,18 @@ function prepareSearchedTeams(teamIds) {
                         + '<a href="/team/teamActivity?teamId='
                         +  st.teamId
                         + '">'
-                        + `<div class="btnGoToTeam btn btn-outline-primary" data-teamId="${ st.teamId }">활동하기</div>` 
+                        + `<div class="btnGoToTeam btn btn-primary" data-teamId="${ st.teamId }">활동하기</div>` 
                         + '</a>'
                         + '</td>'
                 // 팀의 인원수가 다 찼을 경우.
                 } else if (st.maxMember <= memberNumbers ) {
                     str += '<td>' 
-                        + `<button type="button" class="btnForbidden btn btn-outline-primary" data-teamId="${ st.teamId }">관리자 문의</button>` 
+                        + `<button type="button" class="btnForbidden btn btn-danger" data-teamId="${ st.teamId }">관리자 문의</button>` 
                         + '</td>'
                 // 팀 비회원
                 } else if (st.leader != loginUser && !joinedTeamsId.includes(st.teamId)) {
                     str += '<td>' 
-                        + `<button type="button" class="btnJoin btn btn-outline-primary" data-teamId="${ st.teamId }">가입하기</button>` 
+                        + `<button type="button" class="btnJoin btn btn-success" data-teamId="${ st.teamId }">가입하기</button>` 
                         + '</td>'
                 }   
                 + '</tr>';

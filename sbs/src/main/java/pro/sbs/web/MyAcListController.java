@@ -68,6 +68,7 @@ public class MyAcListController {
     @PostMapping("/myAcList/partyin")
     public String partyin(MyActivityListCreateDto dto, Integer id, RedirectAttributes attrs) {
         log.info("partyIn() dto = {}", dto);
+        log.info("partyIn() id = {}", id);
         dto.setTeamId(id);
         //        dto.setUserId(userId);
         log.info("partyIn() dto2 = {}", dto);
