@@ -312,3 +312,65 @@
 	background: rgba(0, 0, 0, 0.5);
 }
 /*popup*/
+
+
+/** 레이아웃 css  */
+
+#jb-container {
+	width: 1640px;
+	margin: 0px auto;
+	padding: 20px;
+}
+
+#jb-header {
+	background-color:#d9e1e8;
+	width: 1600px;
+	margin-bottom: 20px;
+	border-radius : 5px 5px 5px 5px;
+}
+
+#jb-content {
+	
+	width: 1100px;
+	margin-left: 10px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+#jb-sidebar-left {
+	width: 260px;
+	padding: 20px;
+	margin-bottom: 20px;
+	float: left;
+	border: 1px solid #bcbcbc;
+	border-radius : 5px 5px 5px 5px;
+}
+
+#jb-sidebar-right {
+	width: 200px;
+	height: 900px;
+	padding: 20px;
+	float: right;
+	border: 1px solid #bcbcbc;
+	text-align: center;
+	border-radius : 5px 5px 5px 5px;
+}
+
+#jb-footer {
+	background-color:#d9e1e8;
+	border-radius : 5px 5px 5px 5px;
+	width: 1600px;
+	clear: both;
+}
+.bi-window {
+	font-size: 100px;
+	margin : 0px;
+}
+.bi-newspaper {
+	font-size: 100px;	
+	margin : 0px;
+}
+.bi-gear {
+	font-size: 100px;
+	color : white;
+}
