@@ -19,14 +19,17 @@ window.addEventListener('DOMContentLoaded', function() {
     
     // 아이디 사용 가능 여부 확인하는 js 만들기 (TODO)
     const teamNameInput = document.querySelector('#teamName');
+    const passwordInput = document.querySelector('#password');
+    const teamImageInput = document.querySelector('#teamImage');
+    const purposeInput = document.querySelector('#purpose');
     const okDiv = document.querySelector('#availableId');
     const nokDiv = document.querySelector('#unavailableId');
     const btnCreateTeam = document.querySelector('#btnSubmit');
     const createTeamForm = document.querySelector('#createTeamForm');
     
-    teamName.addEventListener('change', function() {
+    teamNameInput.addEventListener('change', function() {
        const teamName = teamNameInput.value;
-       
+
        axios
        .get('/team/checkTeamId?teamName=' + teamName)
        .then(response => { teamCheckResult(response.data) })
@@ -38,16 +41,23 @@ window.addEventListener('DOMContentLoaded', function() {
             okDiv.className = 'my-2';
             nokDiv.className = 'my-2 d-none';
             btnCreateTeam.classList.remove('disabled');
-            
         } else {
             okDiv.className = 'my-2 d-none';
             nokDiv.className = 'my-2';
             btnCreateTeam.classList.add('disabled');
-
         }
     }
     
         btnCreateTeam.addEventListener('click', function() {
+            const teamName = teamNameInput.value;
+            const password = passwordInput.value;
+            const purpose = purposeInput.value;
+            const teamImage = teamImageInput.value;
+        
+        if (password.length == 0 || purpose.length == 0 || teamName.length == 0 || teamImage.length == 0) {
+            alert("빈칸을 채워주세요!");
+        } else {
+            
         const result = confirm('팀을 정말 생성할까요?');
         if (result) {
             createTeamForm.action = '/team/teamCreate';
@@ -55,6 +65,7 @@ window.addEventListener('DOMContentLoaded', function() {
             createTeamForm.submit();
             
             alert("생성완료! 활동하러 갈까요?");
+            }
         }
     })
 
