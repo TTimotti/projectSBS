@@ -13,6 +13,7 @@ public class MyTeamListDto {
     private Integer teamId;
     private String teamName;
     private LocalDateTime createdTime;
+    private String leader;
     
 
 }
