@@ -10,8 +10,7 @@
     <link rel="stylesheet" href= "/css/signIn.css">
 </head>
 
-<body>
-
+<body class="body">
     <div class="main" >
 <!--         웹페이지 상단 -->
         <header>
@@ -31,64 +30,27 @@
                 <div class="login-pw-wrap">
                     <input id="input-pw" placeholder="비밀번호" type="password" name="password"/>
                 </div>
-                <div class="login-btn-wrap">
-                    <input id="btnSubmit" value="로그인" type="submit" />
+                <div>
+                    <input class="login-btn-btn" id="btnSubmit" value="로그인" type="submit" />
                 </div>            
             </form>
 
         </section>
-
-<!--         class,PW 찾기 및 회원가입 부분 -->
-<!--         <section class="find-signup-wrap"> -->
-
-<!--             <div id="find-signup-wrap-ko"> -->
-<!--                 <span class="find-id"> -->
-<!--                     <a href="https://nid.naver.com/user2/help/idInquiry?lang=ko_KR" target="_blank" title="QR코드 로그인">아이디 -->
-<!--                         찾기</a> -->
-<!--                 </span> -->
-
-<!--                 <span class="find-pw"> -->
-<!--                     <a href="https://nid.naver.com/user2/help/pwInquiry?lang=ko_KR" target="_blank" -->
-<!--                         title="일회용번호 로그인">비밀번호 찾기</a> -->
-<!--                 </span> -->
-
-<!--                 <span class="sign-up"> -->
-<!--                     <a href="./signup.html" target="_blank" -->
-<!--                         title="일회용번호 로그인">회원가입</a> -->
-<!--                 </span> -->
-<!--             </div> -->
-
-<!--             <div id="find-signup-wrap-en" style="display:none;"> -->
-                
-<!--                 <span class="find-id-en"> -->
-<!--                     <span>Forgot your</span>  -->
-<!--                     <a href="https://nid.naver.com/user2/help/idInquiry?lang=ko_KR" target="_blank" title="QR코드 로그인">Username</a> -->
-<!--                 </span> -->
-
-<!--                 <span class="find-pw"> -->
-<!--                     <span>or</span>  -->
-<!--                     <a href="https://nid.naver.com/user2/help/pwInquiry?lang=ko_KR" target="_blank" -->
-<!--                         title="일회용번호 로그인">Password?</a> -->
-<!--                 </span> -->
-
-<!--                 <span class="sign-up"> -->
-<!--                     <a href="https://nid.naver.com/user2/V2Join?m=agree&lang=ko_KR" target="_blank" -->
-<!--                         title="일회용번호 로그인">Sign up</a> -->
-<!--                 </span> -->
-<!--             </div> -->
-
-
-<!--         </section> -->
-
-        <!--저작권 정보-->
-<!--         <footer> -->
-<!--             <div class="copyright-wrap"> -->
-<!--                 <span> <img src="image/NAVER_LOGO.png" width=70px> Copyright © NAVER Corp. All Rights Reserved.</span> -->
-<!--             </div> -->
-<!--         </footer> -->
-
     </div>
-
+    
+    <script type="text/javascript">
+//     const signIn = document.querySelector('#signInBtn');
+//     window.addEventListener('DOMContentLoaded', function() {
+    	 
+//     	signIn.addEventListener('click', event => {
+//     		axios.post('/signIn' + userName)
+//             .then(response => { displayCheckResult(response.data) })
+//             .catch(err => { console.log(err); });
+//          });
+    	
+//     }
+    	
+    	</script>
 </body>
 
 </html>

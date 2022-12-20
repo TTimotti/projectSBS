@@ -167,7 +167,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
                                     <th:block sec:authorize="isAnonymous()">
-                                        <a class="btn btn-success" th:href="@{ /login }">들어가기</a>
+                                        <a class="btn btn-success" th:href="@{ /user/signIn }">들어가기</a>
                                         <!-- ㄴ 로그아웃 상태일 시, 들어가기를 누르면 로그인 페이지로 넘어감. -->
                                     </th:block>
                                     <th:block sec:authorize="isAuthenticated()">
