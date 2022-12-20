@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
 /* calendar */
 .calendar {
 	width: 500px;
@@ -348,7 +348,6 @@
 
 #jb-sidebar-right {
 	width: 200px;
-	height: 900px;
 	padding: 20px;
 	float: right;
 	border: 1px solid #bcbcbc;
@@ -373,4 +372,50 @@
 .bi-gear {
 	font-size: 100px;
 	color : white;
+}
+.sidebarTeamInfo {
+	padding : 10px;
+	text-align: center;
+	color : white;
+	margin:0;
+	width: 220px;
+	background-color: #77919d;
+	border-radius : 5px 5px 5px 5px;
+	
+}
+.sidebarUserInfo {
+	padding : 10px;
+	text-align: center;
+	color : white;
+	margin:0;
+	width: 220px;
+	height: 250px;
+	background-color: #2b90d9;
+	border-radius : 5px 5px 5px 5px;
+	
+}
+.teamImage {
+	border-radius : 5px 5px 5px 5px;
+}
+.joinMembers {
+	margin:0;
+	text-align: center;
+	color : white;
+	width : 20px;
+	background-color:transparent;
+	border:0;
+}
+.createTimeTeam {
+	margin:0;
+	text-align: center;
+	color : white;
+	background-color:transparent;
+	border:0;
+}
+.teamInfoDetail {
+	background-color:transparent;
+	text-align: center;
+	color : white;
+	border:0;
+	resize: none;
 }
