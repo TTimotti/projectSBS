@@ -218,4 +218,5 @@ public class UsersService {
         List<MyTeamListDto> teamsLogList = usersRepository.selectTeamsLogByUserName(userName);
         return teamsLogList;
     }
+
 }
