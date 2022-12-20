@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+*{color: #fff;}
+
+body {
+       background-color: #282c37;
+    color: rgb(192, 192, 192);
+}
+.container {
+       background-color: #282c37;
+       color: rgb(233, 233, 233);
+}
+
+.my-2 {
+    background-color: #282c37; 
+    color: #fff;
+    border-radius: 20px 40px 60px 80px;
+    
+}
+
+form {
+    background-color: #282c37;
+}
+
+
+.features-icons{
+    background-color: #282c37;
+    color: #fff;
+    
+}
+
+.card-body {
+   background-color: #282c37;
+    
+}
+.card-header {
+    background-color: #282c37;
+}
+
+.form-control {
+    border-radius: 10px 10px 10px 10px;
+}
+ 
+#pcheader {
+    border-radius: 10px 10px 10px 10px;
+}
