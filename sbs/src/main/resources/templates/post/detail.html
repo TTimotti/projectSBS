@@ -98,7 +98,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                         <div class="col-4">
                             <!-- 로그인 아이디로 댓글 작성자 아이디를 자동 삽입. readonly -->
                             
-                        <input type="text" class="form-control" id="writer" />
+                        <input type="text" class="form-control" id="writer" th:value="${ #authentication.name }" readonly/>
                     </div>
                 </div>
                 <div class="card-body row">
@@ -108,7 +108,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                     </div>
                     <div class="col-2">
                         <button
-                            class="btn btn-outline-primary"
+                            class="btn btn-primary"
                             id="btnReplyRegister">등록</button>
                     </div>
                 </div>

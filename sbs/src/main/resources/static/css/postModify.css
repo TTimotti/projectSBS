@@ -10,14 +10,14 @@ body {
 }
 
 .my-2 {
-    background-color: #282c37; 
+    background-color:  #77919d;  
     color: #fff;
     border-radius: 20px 20px 20px 20px;
     
 }
 
 .my-4 {
-   background-color: #282c37; 
+   background-color:  #77919d; 
     color: #fff;
     border-radius: 20px 20px 20px 20px;
      
@@ -27,7 +27,7 @@ body {
 }
 
 .col-lg-4 {
-    background-color: #282c37;
+    background-color: #77919d; 
     border-radius: 20px 20px 20px 20px;
 }
 

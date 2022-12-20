@@ -71,7 +71,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                             </div>
                             <div class="my-4">
                                 <label for="nickname" class="form-label">생성자</label>
-                                <input id="nickname" name="nickname" class="form-control" th:value="${ activity.place }" readonly />
+                                <input id="nickname" name="nickname" class="form-control" th:value="${ #authentication.name }" readonly />
                             </div>
                         </form>
                         <div class="my-4">
