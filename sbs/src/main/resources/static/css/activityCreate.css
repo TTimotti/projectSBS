@@ -1,12 +1,11 @@
 @charset "UTF-8";
-*{color: #fff;}
 body {
        background-color: #282c37;
-    color: rgb(192, 192, 192);
+    color: rgb(0, 0, 0);
 }
 .features-icons {
     background-color: #d9e1e8;
-       color: rgb(233, 233, 233);
+       color: rgb(0, 0, 0);
 }
 
 .my-2 {
