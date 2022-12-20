@@ -90,7 +90,7 @@
 									<div class="option">
 										<div>
 											<form onsubmit="searchPlaces(); return false;">
-												키워드 : <input type="text" value="소모임 장소" id="keyword"
+												키워드 : <input type="text" th:value="${ activity.place }" id="keyword"
 													size="15">
 												<button type="submit">검색하기</button>
 											</form>
@@ -103,19 +103,14 @@
 							</div>
 						</div>
 						<div class="my-10" style="text-align: center;">
-								<button class="btn btn-danger" id="btnDelete">삭제</button>
-								<button class="btn btn-success" id="btnUpdate">수정 완료</button>
+								<button class="btn btn-danger" id="btnDelete"
+								style="width: 300px; height: 65px; margin-top: 40px; margin-bottom: 40px; font-size: xx-large;  margin-right: 50px;">삭제</button>
+								<button class="btn btn-success" id="btnUpdate"
+								style="width: 300px; height: 65px; margin-top: 40px; margin-bottom: 40px; font-size: xx-large;  margin-left: 50px;">수정 완료</button>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-
-	<!-- Call to Action-->
-	<section class="call-to-action text-white text-center" id="signup">
-		<div class="container position-relative">
-			<div class="row justify-content-center"></div>
 		</div>
 	</section>
 	<!-- Footer-->

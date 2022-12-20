@@ -25,6 +25,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/calendar.css" rel="stylesheet" />
 <link href="/css/activityDetail.css" rel="stylesheet" />
+<link href="/css/kakaomap.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
@@ -47,57 +48,75 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         <div class="row">
             <div layout:fragment="content" class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="card-header">
-                        <h1>활동명 : </h1>
-                    </div>
-                    
-                    <div class="card-body">
-                        <form>
-                            <div class="my-4">
-                                <label for="activityId" class="form-label">글 번호</label>
-                                <input id="activityId" class="form-control" th:value="${ activity.activityId }" readonly />
-                            </div>
-                            <div class="my-4">
-                                <label for="play" class="form-label">제목</label>
-                                <input id="play" class="form-control" th:value="${ activity.play }" readonly />
-                            </div>
-                            <div class="my-4">
-                                <label for="place" class="form-label">장소</label>
-                                <textarea id="place" class="form-control" th:text="${ activity.place }" readonly></textarea>
-                            </div>
-                            <div class="my-4">
-                                <label for="budget" class="form-label">활동 금액</label>
-                                <input id="budget" class="form-control" th:value="${ activity.budget }" readonly />
-                            </div>
-                            <div class="my-4">
-                                <label for="createdTime"
-                                    class="form-label">작성 시간</label>
-                                <input id="createdTime"
-                                    class="form-control"
-                                    th:value="${ #temporals.format(activity.createdTime, 'yyyy-MM-dd HH:mm:ss') }"
-                                    readonly />
-                            </div>
-                            <div class="my-4">
-                                <label for="modifiedTime"
-                                    class="form-label">수정 시간</label>
-                                <input id="modifiedTime"
-                                    class="form-control"
-                                    th:value="${ #temporals.format(activity.modifiedTime, 'yyyy-MM-dd HH:mm:ss') }"
-                                    readonly />
-                            </div>
-                             
-                            <div class="my-4">
-                                <label for="startTime"
-                                    class="form-label">활동 날짜</label>
-                                <input id="startTime"
-                                    class="form-control"
-                                    th:value="${ #temporals.format(activity.startTime, 'yyyy-MM-dd HH:mm:ss') }"
-                                    readonly />
-                            </div>
-                            
-                        </form>
-                        <div class="my-4">
-                            <a class="btn btn-primary" th:href="@{ /activity/modify?id={id} (id = ${ activity.activityId }) }">수정</a>
+ 						<div style="margin-top: 10px; color: white; margin-left: 10px; margin-top: 30px;">
+							<h1>활동 상세 정보 </h1>
+							<hr style="width: 400px;"/>
+						</div>
+						<div class="card-body">
+							<form id="formModify">
+								<div class="my-4">
+									<div>
+										<input id="teamId" class="form-control" type="text"
+											name="teamId" th:value="${ activity.teamId }" required
+											style="display: none;" disabled />
+									</div>
+									<label for="activityId" class="form-label"
+										style="color: white;">활동 번호</label> <input id="activityId"
+										name="activityId" class="form-control"
+										th:value="${ activity.activityId }" disabled />
+								</div>
+								<div class="my-4">
+									<label for="play" class="form-label" style="color: white;">주제</label>
+									<input id="play" name="play" class="form-control"
+										th:value="${ activity.play }" disabled />
+								</div>
+								<div class="my-4">
+									<label for="budget" class="form-label" style="color: white;"><b>회비</b></label>
+									<input type="number" id="budget" class="form-control"
+										name="budget" th:value="${ activity.budget }" disabled />
+								</div>
+
+								<div class="my-4">
+									<label for="startTime" class="form-label" style="color: white;"><b>날짜/시간</b></label>
+									<input type="datetime-local" id="startTime"
+										class="form-control" name="startTime"
+										th:value="${ activity.startTime }" disabled />
+								</div>
+								<div class="my-4">
+									<label for="nickname" class="form-label" style="color: white;">주최자</label>
+									<input id="nickname" name="nickname" class="form-control"
+										th:value="${ #authentication.name }" disabled />
+								</div>
+								<div class="my-4">
+									<label for="place" class="form-label" style="color: white;">장소</label>
+									<input id="place" name="place" class="form-control"
+										th:value="${ activity.place }" disabled />
+								</div>
+							</form>
+						</div>
+						<div class="my-2" style="margin-left: 20px; float: left;">
+							<div class="map_wrap">
+								<div id="map"
+									style="width: 925px; height: 500px; position: relative; overflow: hidden; border-radius: 5px 5px 5px 5px;"></div>
+								<div id="menu_wrap" class="bg_white">
+									<div class="option">
+										<div>
+											<form onsubmit="searchPlaces(); return false;">
+												키워드 : <input type="text" th:value="${ activity.place }" id="keyword"
+													size="15">
+												<button type="submit">검색하기</button>
+											</form>
+										</div>
+									</div>
+									<hr>
+									<ul id="placesList"></ul>
+									<div id="pagination"></div>
+								</div>
+							</div>
+						</div>
+                        <div class="my-4" style="text-align: center;">
+                            <a class="btn btn-primary btn-block" 
+                            style="width: 300px; height: 90px; margin-top: 60px; font-size: xx-large; padding-top: 20px;" th:href="@{ /activity/modify?id={id} (id = ${ activity.activityId }) }">수정하기</a>
                         </div>
                     </div>
                 </div>
@@ -171,15 +190,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Call to Action-->
-<section class="call-to-action text-white text-center" id="signup">
-    <div class="container position-relative">
-        <div class="row justify-content-center">
-        </div>
-    </div>
 </section>
 <!-- Footer-->
 <footer class="footer">
@@ -215,14 +225,19 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 </footer>
 <!-- Bootstrap core JS-->
 <!-- Bootstrap core JS-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Axios -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- Axios -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- KAKAO -->
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abaecbd1f25256beda80cb6e2837cf2b&libraries=services"></script>
 
-<!-- Core theme JS-->
-<script th:src="@{/js/reply.js}"></script>
+	<!-- Core theme JS-->
+	<script th:src="@{/js/reply.js}"></script>
+	<script th:inline="javascript" th:src="@{/js/activityDetail.js}"></script>
 </body>
 </html>
