@@ -1,0 +1,46 @@
+@charset "UTF-8";
+*{color: #fff;}
+body {
+       background-color: #282c37;
+    color: rgb(192, 192, 192);
+}
+.features-icons {
+    background-color: #d9e1e8;
+       color: rgb(233, 233, 233);
+}
+
+.my-2 {
+    background-color: #282c37; 
+    color: #fff;
+    border-radius: 20px 20px 20px 20px;
+    
+}
+
+.my-4 {
+   background-color: #282c37; 
+    color: #fff;
+    border-radius: 20px 20px 20px 20px;
+     
+}
+
+
+.col-lg-4 {
+    background-color: #282c37;
+    border-radius: 20px 20px 20px 20px;
+}
+
+
+.features-icons{
+    background-color: #d9e1e8;
+    color: #fff;
+    
+}
+
+
+.form-control {
+    border-radius: 10px 10px 10px 10px;
+}
+ 
+#pcheader {
+    border-radius: 10px 10px 10px 10px;
+}

@@ -24,60 +24,51 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/calendar.css" rel="stylesheet" />
+<link href="/css/postCreate.css" rel="stylesheet"/>
 </head>
 <body>
 <!-- Navigation-->
-<nav class="navbar navbar-light bg-light static-top">
+<nav class="navbar navbar-light static-top">
     <div class="container">
-        <a class="navbar-brand" href="/">SBS</a> <a
-            class="btn btn-primary" href="#signup">POST : DETAIL</a>
+        <a class="navbar-brand" href="/">
+            <img src="mainSbsLog.jpg" width="200" align="left">
+        </a> 
+        <a class="btn btn-primary" href="#signup">POST : CREATE</a>
     </div>
 </nav>
-<!-- Masthead-->
-<header class="masthead">
-    <div class="row">
-        <div class="col-sm">
-            <div class="my-2">
-            </div>
-        </div>
-    </div>
-</header>
-<!-- Icons Grid-->
-<div class="container position-relative">
-    
-</div>
 
-<section class="features-icons bg-light">
+
+
+<section class="features-icons">
 
     <div class="container">
 
         <div class="row">
-            <div class="card my-2">
-            <div></div>
+            <div class="col-lg-6 card my-2">
             
-            <div class="card-header">
-                <h1>포스트 작성 페이지</h1>
+            <div class="col-lg-6 card-header">
+                <h1 id="pcheader">게시물작성</h1>
             </div>
-            <div class="card-body">
+            <div class="col-lg-6 card-body">
                 <form method="post">
-                    <div class="my-2">
+                    <div class="my-4">
                         <label for="title" class="form-label">제목</label>
                         <input id="title" class="form-control" 
                             type="text" name="title" required autofocus />
                     </div>
-                    <div class="my-2">
+                    <div class="my-4">
                         <label for="content" class="form-label">내용</label>
                         <textarea id="content" class="form-control"
                             name="content" required></textarea>
                     </div>
-                    <div class="my-2">
+                    <div class="my-4">
                         <label for="author" class="form-label">작성자</label>
                         <!-- 작성자는 로그인 사용자 아이디를 자동으로 삽입. readonly. -->
                         <input id="author" class="form-control" type="text"
                             name="author"  />
                     </div>
-                    <div class="my-2">
-                        <input type="submit" class="form-control btn btn-success" 
+                    <div class="my-4">
+                        <input type="submit" class="form-control btn btn-primary" 
                             value="작성 완료" />
                     </div>
                 </form>
@@ -91,29 +82,25 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <section class="call-to-action text-white text-center" id="signup">
     <div class="container position-relative">
         <div class="row justify-content-center">
-            <p>밑단</p>
         </div>
     </div>
 </section>
+
 <!-- Footer-->
-<footer class="footer bg-light">
+<footer class="footer">
     <div class="container">
         <div class="row">
             <div
                 class="col-lg-6 h-100 text-center text-lg-start my-auto">
                 <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">검색</a></li>
+                    <li class="list-inline-item"><a href="#!">HOME</a></li>
                     <li class="list-inline-item">⋅</li>
                     <li class="list-inline-item"><a href="#!">마이페이지</a></li>
                     <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">모임
-                            참석</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지
-                            사항 Policy</a></li>
+                    <li class="list-inline-item"><a href="#!">공지 사항</a></li>
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">&copy;
-                    Footer</p>
+                    SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
             </div>
             <div
                 class="col-lg-6 h-100 text-center text-lg-end my-auto">
@@ -141,5 +128,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <!-- Core theme JS-->
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+  <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
+  <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+</svg>
 </body>
 </html>
