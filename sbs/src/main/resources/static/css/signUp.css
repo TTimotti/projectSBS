@@ -634,8 +634,8 @@ progress {
 .container-md,
 .container-sm {
   width: 100%;
-  padding-right: var(--bs-gutter-x, 0.75rem);
-  padding-left: var(--bs-gutter-x, 0.75rem);
+  padding-right: 0;
+  padding-left: 0;
   margin-right: auto;
   margin-left: auto;
 }
@@ -2195,7 +2195,7 @@ progress {
   color: #212529;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #2b90d9;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -3319,8 +3319,9 @@ textarea.form-control-lg {
 }
 
 .btn-outline-success {
-  color: #198754;
+  color: #2b90d9;
   border-color: #198754;
+  border-radius: 1rem;
 }
 .btn-outline-success:hover {
   color: #fff;
@@ -11327,7 +11328,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: -15rem;
   }
   body{
-    background-color: #f5f6f7;
+    background-color: ghostwhite;
 }
 select{
     width:85px;
@@ -11617,6 +11618,8 @@ h1{
     /* margin: 0px 10px 8px 10px; */
     padding: 10px;
     border: solid 1px #dadada;
+    
+    border-radius: 1rem;
     background: #fff;
     cursor: pointer;
 }
@@ -11724,13 +11727,19 @@ h1{
 /*회원가입버튼*/
 #btnSubmit{
     width:100px;
-    background-color: #03c75a;
-    border: none;
+    background-color: #2b90d9;
     color:#fff;
+    border: none;    
     font-size: 18px;
     outline:none;
     cursor: pointer;
 }
+
+#btnSubmit:hover{
+    background-color: #282c37;
+    color:#2b90d9;
+}
+
 /*인증번호버튼박스*/
 .cnum-btn-wrap{
     height: 52px;
