@@ -58,7 +58,12 @@
             <br />
             <div class="sidebarUserInfo">
                 <h5>[[ ${ #authentication.name } ]] 님 어서오세요!</h5>
-                <h3></h3>
+                <hr style="width: 200px"/>
+                <h4 th:if="${#authentication.name == team.leader}">등급: 모임 리더</h4>
+                <h4 th:if="${#authentication.name != team.leader}">등급: 일반 멤버</h4>
+                <hr style="width: 200px"/>
+                <a class="btn btn-danger"
+                    style="width: 70%; height: 5%; font-size: 15px;">모임 탈퇴</a>
             </div>
         </div>
 
