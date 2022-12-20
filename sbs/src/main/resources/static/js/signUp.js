@@ -2,6 +2,33 @@
  * member.js
  * /membet/signup.html
  */
+ 
+ /*!
+* Start Bootstrap - Simple Sidebar v6.0.5 (https://startbootstrap.com/template/simple-sidebar)
+* Copyright 2013-2022 Start Bootstrap
+* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
+*/
+// 
+// Scripts
+// 
+
+window.addEventListener('DOMContentLoaded', event => {
+
+    // Toggle the side navigation
+    const sidebarToggle = document.body.querySelector('#sidebarToggle');
+    if (sidebarToggle) {
+        // Uncomment Below to persist sidebar toggle between refreshes
+        // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+        //     document.body.classList.toggle('sb-sidenav-toggled');
+        // }
+        sidebarToggle.addEventListener('click', event => {
+            event.preventDefault();
+            document.body.classList.toggle('sb-sidenav-toggled');
+            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+        });
+    }
+
+});
 
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -54,12 +81,11 @@ window.addEventListener('DOMContentLoaded', function() {
             .then(response => { displayCheckResult(response.data) })
             .catch(err => { console.log(err); });
     });
-
-    // 가입 확인 버튼 활성화
-    function displayCheckResult(data) {
-
+    
+     function displayCheckResult(data) {
+        console.log(data);
         if (data == 'ok') {
-            okDiv.className = 'my-2 ';
+            okDiv.className = 'my-2';
             nokDiv.className = 'my-2 d-none';
             btnSubmit.classList.remove('disabled'); // 버튼 활성화
         } else {
@@ -69,6 +95,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 
     }
+
 
 
 

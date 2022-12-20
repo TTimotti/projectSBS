@@ -58,7 +58,7 @@ public class UsersController {
      * @author 김지훈
      */
     @PostMapping("/signUp")
-    public String signUp(UsersCreateDto dto, MultipartFile image) throws IOException {
+    public String signUp(UsersCreateDto dto, @RequestParam("userImage") MultipartFile image) throws IOException {
         log.info("signUp(dto={},image={}) 호출", dto, image);
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         
@@ -68,7 +68,7 @@ public class UsersController {
         
         usersService.createUser(dto); // Users 생성하는 서비스 호출
         
-        return "redirect:/login";
+        return "redirect:/user/signIn";
 
     }
     /**
