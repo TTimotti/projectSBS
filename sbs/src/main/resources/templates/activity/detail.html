@@ -24,30 +24,23 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/calendar.css" rel="stylesheet" />
+<link href="/css/activityDetail.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
-<nav class="navbar navbar-light bg-light static-top">
+<nav class="navbar navbar-light static-top">
     <div class="container">
         <a class="navbar-brand" href="/">SBS</a> <a
             class="btn btn-primary" href="#signup">ACTIVITY : DETAIL</a>
     </div>
 </nav>
-<!-- Masthead-->
-<header class="masthead">
-    <div class="row">
-        <div class="col-sm">
-            <div class="my-2">
-            </div>
-        </div>
-    </div>
-</header>
+
 <!-- Icons Grid-->
 <div class="container position-relative">
     
 </div>
 
-<section class="features-icons bg-light">
+<section class="features-icons">
 
     <div class="container">
 
@@ -60,23 +53,23 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                     
                     <div class="card-body">
                         <form>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="activityId" class="form-label">글 번호</label>
                                 <input id="activityId" class="form-control" th:value="${ activity.activityId }" readonly />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="play" class="form-label">제목</label>
                                 <input id="play" class="form-control" th:value="${ activity.play }" readonly />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="place" class="form-label">장소</label>
                                 <textarea id="place" class="form-control" th:text="${ activity.place }" readonly></textarea>
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="budget" class="form-label">활동 금액</label>
                                 <input id="budget" class="form-control" th:value="${ activity.budget }" readonly />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="createdTime"
                                     class="form-label">작성 시간</label>
                                 <input id="createdTime"
@@ -84,7 +77,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                                     th:value="${ #temporals.format(activity.createdTime, 'yyyy-MM-dd HH:mm:ss') }"
                                     readonly />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="modifiedTime"
                                     class="form-label">수정 시간</label>
                                 <input id="modifiedTime"
@@ -93,7 +86,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                                     readonly />
                             </div>
                              
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="startTime"
                                     class="form-label">활동 날짜</label>
                                 <input id="startTime"
@@ -103,13 +96,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                             </div>
                             
                         </form>
-                        <div class="my-2">
+                        <div class="my-4">
                             <a class="btn btn-primary" th:href="@{ /activity/modify?id={id} (id = ${ activity.activityId }) }">수정</a>
                         </div>
                     </div>
                 </div>
                 
-                <hr/>
                 <!-- 
                 <div class="card my-4">
                     <div class="card-header">
@@ -186,29 +178,24 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <section class="call-to-action text-white text-center" id="signup">
     <div class="container position-relative">
         <div class="row justify-content-center">
-            <p>밑단</p>
         </div>
     </div>
 </section>
 <!-- Footer-->
-<footer class="footer bg-light">
+<footer class="footer">
     <div class="container">
         <div class="row">
             <div
                 class="col-lg-6 h-100 text-center text-lg-start my-auto">
                 <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">검색</a></li>
+                    <li class="list-inline-item"><a href="#!">HOME</a></li>
                     <li class="list-inline-item">⋅</li>
                     <li class="list-inline-item"><a href="#!">마이페이지</a></li>
                     <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">모임
-                            참석</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지
-                            사항 Policy</a></li>
+                    <li class="list-inline-item"><a href="#!">공지 사항</a></li>
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">&copy;
-                    Footer</p>
+                    SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
             </div>
             <div
                 class="col-lg-6 h-100 text-center text-lg-end my-auto">

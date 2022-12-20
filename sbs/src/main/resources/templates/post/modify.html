@@ -24,29 +24,23 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/calendar.css" rel="stylesheet" />
+<link href="/css/postModify.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
-<nav class="navbar navbar-light bg-light static-top">
+<nav class="navbar navbar-light static-top">
     <div class="container">
         <a class="navbar-brand" href="#!">SBS</a> <a
             class="btn btn-primary" href="#signup">POST : MODIFY</a>
     </div>
 </nav>
-<!-- Masthead-->
-<header class="masthead">
-    <div class="row">
-        <div class="col-sm">
-        
-        </div>
-    </div>
-</header>
+
 <!-- Icons Grid-->
 <div class="container position-relative">
     
 </div>
 
-<section class="features-icons bg-light text-center">
+<section class="features-icons text-center">
 
     <div class="container">
 
@@ -59,24 +53,24 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                     
                     <div class="card-body">
                         <form id="formModify">
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="postId" class="form-label">글 번호</label>
                                 <input id="postId" name="id" class="form-control" th:value="${ post.postId }" readonly />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="title" class="form-label">제목</label>
                                 <input id="title" name="title" class="form-control" th:value="${ post.title }" autofocus />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="content" class="form-label">내용</label>
                                 <textarea id="content" name="content" class="form-control" th:text="${ post.content }"></textarea>
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="author" class="form-label">작성자</label>
                                 <input id="author" name="author" class="form-control" th:value="${ post.author }" readonly />
                             </div>
                         </form>
-                        <div class="my-2">
+                        <div class="my-4">
                             <button class="btn btn-danger" id="btnDelete">삭제</button>
                             <button class="btn btn-success" id="btnUpdate">수정 완료</button>
                         </div>
@@ -91,29 +85,24 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <section class="call-to-action text-white text-center" id="signup">
     <div class="container position-relative">
         <div class="row justify-content-center">
-            <p>밑단</p>
         </div>
     </div>
 </section>
 <!-- Footer-->
-<footer class="footer bg-light">
+<footer class="footer">
     <div class="container">
         <div class="row">
             <div
                 class="col-lg-6 h-100 text-center text-lg-start my-auto">
                 <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">검색</a></li>
+                    <li class="list-inline-item"><a href="#!">HOME</a></li>
                     <li class="list-inline-item">⋅</li>
                     <li class="list-inline-item"><a href="#!">마이페이지</a></li>
                     <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">모임
-                            참석</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지
-                            사항 Policy</a></li>
+                    <li class="list-inline-item"><a href="#!">공지 사항</a></li>
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">&copy;
-                    Footer</p>
+                    SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
             </div>
             <div
                 class="col-lg-6 h-100 text-center text-lg-end my-auto">

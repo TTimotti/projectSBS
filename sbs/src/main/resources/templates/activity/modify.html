@@ -24,29 +24,22 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/calendar.css" rel="stylesheet" />
+<link href="/css/activityModify.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Navigation-->
-<nav class="navbar navbar-light bg-light static-top">
+<nav class="navbar navbar-light static-top">
     <div class="container">
-        <a class="navbar-brand" href="#!">SBS</a> <a
-            class="btn btn-primary" href="#signup">ACTIVITY : MODIFY</a>
+        <a class="navbar-brand" href="#!">SBS</a> 
     </div>
 </nav>
-<!-- Masthead-->
-<header class="masthead">
-    <div class="row">
-        <div class="col-sm">
-        
-        </div>
-    </div>
-</header>
+
 <!-- Icons Grid-->
 <div class="container position-relative">
     
 </div>
 
-<section class="features-icons bg-light text-center">
+<section class="features-icons text-center">
 
     <div class="container">
 
@@ -59,29 +52,29 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                     
                     <div class="card-body">
                         <form id="formModify">
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="activityId" class="form-label">글 번호</label>
                                 <input id="activityId" name="id" class="form-control" th:value="${ activity.activityId }" readonly />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="play" class="form-label">제목</label>
                                 <input id="play" name="play" class="form-control" th:value="${ activity.play }" autofocus />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="place" class="form-label">장소</label>
                                 <input id="place" name="place" class="form-control" th:value="${ activity.place }" autofocus />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="startTime" class="form-label" style="color: white;"><b>날짜/시간</b></label>
                                 <input type="datetime-local" id="startTime" class="form-control"
                                     name="startTime" required />
                             </div>
-                            <div class="my-2">
+                            <div class="my-4">
                                 <label for="nickname" class="form-label">생성자</label>
                                 <input id="nickname" name="nickname" class="form-control" th:value="${ activity.place }" readonly />
                             </div>
                         </form>
-                        <div class="my-2">
+                        <div class="my-4">
                             <button class="btn btn-danger" id="btnDelete">삭제</button>
                             <button class="btn btn-success" id="btnUpdate">수정 완료</button>
                         </div>
@@ -96,29 +89,24 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <section class="call-to-action text-white text-center" id="signup">
     <div class="container position-relative">
         <div class="row justify-content-center">
-            <p>밑단</p>
         </div>
     </div>
 </section>
 <!-- Footer-->
-<footer class="footer bg-light">
+<footer class="footer">
     <div class="container">
         <div class="row">
             <div
                 class="col-lg-6 h-100 text-center text-lg-start my-auto">
                 <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">검색</a></li>
+                    <li class="list-inline-item"><a href="#!">HOME</a></li>
                     <li class="list-inline-item">⋅</li>
                     <li class="list-inline-item"><a href="#!">마이페이지</a></li>
                     <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">모임
-                            참석</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지
-                            사항 Policy</a></li>
+                    <li class="list-inline-item"><a href="#!">공지 사항</a></li>
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">&copy;
-                    Footer</p>
+                    SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
             </div>
             <div
                 class="col-lg-6 h-100 text-center text-lg-end my-auto">
