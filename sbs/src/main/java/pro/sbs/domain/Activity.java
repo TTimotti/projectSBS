@@ -31,10 +31,10 @@ public class Activity extends BaseTimeEntity {
     @Column(nullable = false, name = "activity_id")
     private Integer activityId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name ="play")
     private String play;
 
-    @Column
+    @Column (name = "budget")
     private Integer budget;
 
     @Column(nullable = false, name = "team_id")
@@ -56,9 +56,10 @@ public class Activity extends BaseTimeEntity {
         return this;
     }
 
-    public Activity update(String play, String place, LocalDateTime startTime) {
+    public Activity update(String play, String place, Integer budget, LocalDateTime startTime) {
         this.play = play;
         this.place = place;
+        this.budget = budget;
         this.startTime = startTime;
         
         return this;

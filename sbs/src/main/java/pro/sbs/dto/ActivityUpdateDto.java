@@ -14,18 +14,20 @@ import pro.sbs.domain.Activity;
 @Builder
 public class ActivityUpdateDto {
 
-    private Integer id;
+    private Integer activityId;
     private String play;
     private String place;
     private Integer teamId;
+    private Integer budget;
     private String startTime;
     
     
     public Activity toEntity() {
         return Activity.builder()
-                .activityId(id)
+                .activityId(activityId)
                 .play(play)
                 .place(place)
+                .budget(budget)
                 .startTime(LocalDateTime.parse(startTime))
                 .build();
     }

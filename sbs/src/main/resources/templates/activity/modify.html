@@ -1,171 +1,162 @@
 <!DOCTYPE html>
-<html 
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>SBS Team Project</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Bootstrap icons-->
 <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-    rel="stylesheet" type="text/css" />
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet" type="text/css" />
 <!-- Google fonts-->
 <link
-    href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
-    rel="stylesheet" type="text/css" />
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+	rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
-<link href="/css/calendar.css" rel="stylesheet" />
 <link href="/css/activityModify.css" rel="stylesheet" />
+<link href="/css/kakaomap.css" rel="stylesheet" />
 </head>
 <body>
-<!-- Navigation-->
-<nav class="navbar navbar-light static-top">
-    <div class="container">
-        <a class="navbar-brand" href="#!">SBS</a> 
-    </div>
-</nav>
+	<!-- Navigation-->
+	<nav class="navbar navbar-light static-top">
+		<div class="container">
+			<a class="navbar-brand" href="#!">SBS</a>
+		</div>
+	</nav>
+	<!-- Icons Grid-->
+	<div class="container position-relative"></div>
+	<section class="features-icons">
+		<div class="container">
+			<div class="row">
+				<div layout:fragment="content" class="col-lg-4">
+					<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+						<div style="margin-top: 10px; color: white; margin-left: 10px; margin-top: 30px;">
+							<h1>활동 정보 수정</h1>
+							<hr style="width: 400px;"/>
+						</div>
+						<div class="card-body">
+							<form id="formModify">
+								<div class="my-4">
+									<div>
+										<input id="teamId" class="form-control" type="text"
+											name="teamId" th:value="${ activity.teamId }" required
+											style="display: none;" readonly />
+									</div>
+									<label for="activityId" class="form-label"
+										style="color: white;">활동 번호</label> <input id="activityId"
+										name="activityId" class="form-control"
+										th:value="${ activity.activityId }" readonly />
+								</div>
+								<div class="my-4">
+									<label for="play" class="form-label" style="color: white;">주제</label>
+									<input id="play" name="play" class="form-control"
+										th:value="${ activity.play }" autofocus />
+								</div>
+								<div class="my-4">
+									<label for="budget" class="form-label" style="color: white;"><b>회비</b></label>
+									<input type="number" id="budget" class="form-control"
+										name="budget" th:value="${ activity.budget }" required />
+								</div>
 
-<!-- Icons Grid-->
-<div class="container position-relative">
-    
-</div>
+								<div class="my-4">
+									<label for="startTime" class="form-label" style="color: white;"><b>날짜/시간</b></label>
+									<input type="datetime-local" id="startTime"
+										class="form-control" name="startTime"
+										th:value="${ activity.startTime }" required />
+								</div>
+								<div class="my-4">
+									<label for="nickname" class="form-label" style="color: white;">주최자</label>
+									<input id="nickname" name="nickname" class="form-control"
+										th:value="${ #authentication.name }" readonly />
+								</div>
+								<div class="my-4">
+									<label for="place" class="form-label" style="color: white;">장소</label>
+									<input id="place" name="place" class="form-control"
+										th:value="${ activity.place }" autofocus />
+								</div>
+							</form>
+						</div>
+						<div class="my-2" style="margin-left: 20px; float: left;">
+							<div class="map_wrap">
+								<div id="map"
+									style="width: 925px; height: 500px; position: relative; overflow: hidden; border-radius: 5px 5px 5px 5px;"></div>
+								<div id="menu_wrap" class="bg_white">
+									<div class="option">
+										<div>
+											<form onsubmit="searchPlaces(); return false;">
+												키워드 : <input type="text" value="소모임 장소" id="keyword"
+													size="15">
+												<button type="submit">검색하기</button>
+											</form>
+										</div>
+									</div>
+									<hr>
+									<ul id="placesList"></ul>
+									<div id="pagination"></div>
+								</div>
+							</div>
+						</div>
+						<div class="my-10" style="text-align: center;">
+								<button class="btn btn-danger" id="btnDelete">삭제</button>
+								<button class="btn btn-success" id="btnUpdate">수정 완료</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-<section class="features-icons text-center">
+	<!-- Call to Action-->
+	<section class="call-to-action text-white text-center" id="signup">
+		<div class="container position-relative">
+			<div class="row justify-content-center"></div>
+		</div>
+	</section>
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="#!">HOME</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="#!">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="#!">공지 사항</a></li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; SBSProject ::
+						su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a href="#!"><i
+								class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a href="#!"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a href="#!"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 
-    <div class="container">
+	<!-- Bootstrap core JS-->
+	<!-- Bootstrap core JS-->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abaecbd1f25256beda80cb6e2837cf2b&libraries=services"></script>
+	<script th:inline="javascript" th:src="@{/js/activityModify.js}"></script>
 
-        <div class="row">
-            <div layout:fragment="content" class="col-lg-4">
-                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="card-header">
-                        <h1>활동 :  : 수정</h1>
-                    </div>
-                    
-                    <div class="card-body">
-                        <form id="formModify">
-                            <div class="my-4">
-                                <label for="activityId" class="form-label">글 번호</label>
-                                <input id="activityId" name="id" class="form-control" th:value="${ activity.activityId }" readonly />
-                            </div>
-                            <div class="my-4">
-                                <label for="play" class="form-label">제목</label>
-                                <input id="play" name="play" class="form-control" th:value="${ activity.play }" autofocus />
-                            </div>
-                            <div class="my-4">
-                                <label for="place" class="form-label">장소</label>
-                                <input id="place" name="place" class="form-control" th:value="${ activity.place }" autofocus />
-                            </div>
-                            <div class="my-4">
-                                <label for="startTime" class="form-label" style="color: white;"><b>날짜/시간</b></label>
-                                <input type="datetime-local" id="startTime" class="form-control"
-                                    name="startTime" required />
-                            </div>
-                            <div class="my-4">
-                                <label for="nickname" class="form-label">생성자</label>
-                                <input id="nickname" name="nickname" class="form-control" th:value="${ #authentication.name }" readonly />
-                            </div>
-                        </form>
-                        <div class="my-4">
-                            <button class="btn btn-danger" id="btnDelete">삭제</button>
-                            <button class="btn btn-success" id="btnUpdate">수정 완료</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Call to Action-->
-<section class="call-to-action text-white text-center" id="signup">
-    <div class="container position-relative">
-        <div class="row justify-content-center">
-        </div>
-    </div>
-</section>
-<!-- Footer-->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div
-                class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">HOME</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">마이페이지</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지 사항</a></li>
-                </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy;
-                    SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
-            </div>
-            <div
-                class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item me-4"><a
-                        href="#!"><i class="bi-facebook fs-3"></i></a>
-                    </li>
-                    <li class="list-inline-item me-4"><a
-                        href="#!"><i class="bi-twitter fs-3"></i></a>
-                    </li>
-                    <li class="list-inline-item"><a href="#!"><i
-                            class="bi-instagram fs-3"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
-    
-<!-- Bootstrap core JS-->
-<!-- Bootstrap core JS-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script th:src="@{/js/scripts.js}"></script>
- 
-<script layout:fragment="script">
-
-const formModify = document.querySelector('#formModify')
-
-// 삭제 이벤트 리스너.
-const btnDelete = document.querySelector('#btnDelete');
-btnDelete.addEventListener('click', function () {
-    const result = confirm('정말 삭제하시겠습니까?');
-    if (result) {
-        formModify.action = '/activity/delete';
-        formModify.method = 'post';
-        formModify.submit();
-    }
-});
-
-// 수정 이벤트 리스너.
-const btnUpdate = document.querySelector('#btnUpdate');
-btnUpdate.addEventListener('click', function () {
-    const play = document.querySelector('#play').value;
-    const place = document.querySelector('#place').value;
-    if (play == '' || place == '') {
-        alert('주제와 장소를 작성해주세요.');
-        return;
-    }
-    
-    const result = confirm('정말 수정하시겠습니까?');
-    if (result) {
-        formModify.action = '/activity/update';
-        formModify.method = 'post';
-        formModify.submit();
-    }
-});
-</script>    
 </body>
 </html>
 

@@ -1269,7 +1269,7 @@ function changeTypeDate() {
 		
 		const userName = document.querySelector('.loginUserName').value;
 		
-		if(userName == ""){
+		if(userName == "anonymousUser"){
 			
 			alert("로그인 후 이용해 주세요.")
 			
