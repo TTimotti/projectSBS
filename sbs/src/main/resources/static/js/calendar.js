@@ -1212,6 +1212,24 @@ $(document).on("click",".infoAc", function(event){
         .then(response => { openPop(response.data)})
         .catch(err => { console.log(err) }); 
 });
+// 팀 가입 정원수 카운팅
+countMembers();
 
+function countMembers() {
+			const teamId = document.querySelector('#id').value;
+            axios
+            .get('/team/countMembers/' + teamId)
+            .then(response => {$('.joinMembers').val(response.data)})
+            .catch(err => { console.log(err) });
+        }
+changeTypeDate();
+        
+function changeTypeDate() {
+	
+	const teamCreateTime = document.querySelector('#teamCreatedTime').value;
+	const teamCreateTimes = moment(teamCreateTime).format('YYYY년 MM월 DD일');
 
-
+	($('.createTimeTeam').val(teamCreateTimes));
+	
+}
+	

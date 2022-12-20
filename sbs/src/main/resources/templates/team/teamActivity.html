@@ -29,12 +29,39 @@
 <nav class="navbar navbar-light static-top">
     <div class="container">
         <input type="text" class="navbar-brand" th:value="${team.teamName}"
-        style="background-color:transparent; border:0; font-size: 30px;" readonly disabled/> 
+        style="background-color:transparent; border:0; font-family:'Noto-Sans-Korean', sans-serif; font-size: 30px;" readonly disabled/> 
     </div>
 </nav>
 </div>
 		<div id="jb-sidebar-left">
+			<div class="teamPhoto">
+				<img class="teamImage" id="teamImage"
+					th:src="@{/image/display?fid={teamFid} (teamFid = ${team.fid}) }"
+					width="220" height="200" />
+			</div>
+			<br />
+			<div class="sidebarTeamInfo">
+				<h2>[[ ${ team.teamName } ]]</h2>
+				<hr style="width: 200px"/>
+				<h7>리더 : [[ ${ team.leader } ]]</h7>
+				<hr style="width: 200px"/>
+				<h4>
+					정원 : <input class="joinMembers" readOnly disabled/> / [[${ team.maxMember }]]명
+				</h4>
+				<hr style="width: 200px"/>
+					<h6>
+						<input class="createTimeTeam" readOnly disabled/>
+					</h6>
+				<hr style="width: 200px"/>
+				<textarea class="teamInfoDetail" readOnly disabled>[[${ team.purpose }]]</textarea>
+			</div>
+			<br />
+			<div class="sidebarUserInfo">
+				<h5>[[ ${ #authentication.name } ]] 님 어서오세요!</h5>
+				<h3></h3>
+			</div>
 		</div>
+
 		<div id="jb-sidebar-right">
 				<i class="bi-window m-auto text-primary"></i> 
 				<br/>
@@ -42,11 +69,13 @@
 					th:href="@{ /activity/create?id={id} (id = ${ team.teamId }) }"
 					style="margin: 0px;">활동 등록</a>
 				<br/>
-				<i class="bi bi-newspaper m-auto text-success"></i>
+				<i class="bi bi-newspaper m-auto text-success"
+				   th:if="${#authentication.name == team.leader}"></i>
 				<br/>
 					<a class="btn btn-success"
 					th:href="@{ /post/create?id={id} (id = ${ team.teamId }) }"
-					style="margin: 0px;">게시글 작성</a>
+					th:if="${#authentication.name == team.leader}"
+					style="margin: 0px;">공지 등록</a>
 				<br/>
 				<i class="bi bi-gear" th:if="${#authentication.name == team.leader}"></i>
 				<br/>	 
@@ -88,6 +117,7 @@
     <!-- week calendar -->
     <input type="text" class="teamJoinDay" id="teamJoinDay" style="display: none;"/>
     <input type="text" class="activityId" id="activityId" style="display: none;">
+    <input type="text" class="teamCreatedTime" id="teamCreatedTime" th:value="${ team.createdTime }" style="display: none;">
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
@@ -113,6 +143,7 @@
                         <div id="calendar"></div>
                     </div>
                 </div>
+                <br/><br/><br/><br/>
                 <div>
                     <h1 class="activityTitle">진행중인 활동</h1>
                 </div>
@@ -203,7 +234,7 @@
                     <li class="list-inline-item">⋅</li>
                     <li class="list-inline-item"><a href="#!">공지 사항 Policy</a></li>
                 </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy; Footer</p>
+                <p class="text-muted small mb-4 mb-lg-0">&copy;SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
             </div>
             <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                 <ul class="list-inline mb-0">
