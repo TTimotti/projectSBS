@@ -3,6 +3,7 @@ package pro.sbs.web;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Users;
+import pro.sbs.dto.MyTeamListDto;
 import pro.sbs.dto.PasswordChangeDto;
 import pro.sbs.dto.UsersCashDto;
 import pro.sbs.dto.UsersCreateDto;
@@ -243,6 +245,23 @@ public class UsersController {
         Integer result = usersService.delete(userId);
 
         return "redirect:/logout";
+    }
+    
+    /**
+     * 유저가 가입한 팀 목록을 불러오는 기능
+     * @param userName 로그인한 유저
+     * @param model
+     * @author 서범수
+     */
+    @GetMapping("/myTeamList")
+    public void myTeamList(String userName, Model model) {
+        log.info("myTeamList(userName = {}) 호출", userName);
+        
+        List<MyTeamListDto> myTeamList= usersService.readMyTeamList(userName);
+        log.info("myTeamList= {}", myTeamList);
+        
+        model.addAttribute("myTeamList", myTeamList);
+        
     }
     
 }
