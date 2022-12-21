@@ -132,6 +132,16 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     })
 
+    // 로그인 유저 체크
+    const passwordChangeDiv = document.querySelector('#passwordChangeDiv');
+    const errorDiv = document.querySelector('#errorDiv');
+        if(userName.value == loginUser) {
+            passwordChangeDiv.className = 'my-2';
+            
+        } else{
+            errorDiv.className = 'my-2 p-4 text-danger text-center rounded';
+        }
+
 
 
 });
