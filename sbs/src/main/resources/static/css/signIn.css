@@ -247,10 +247,7 @@ input{
     margin: 3px;
     font-size: 14px;
 }
-/*저작권 표시X*/
-footer{
-    display: none;
-}
+
 
 
 /*가로 800px 이상일때*/
@@ -304,12 +301,6 @@ footer{
     display:block;
 }
 
-/*저작권 표시*/
-footer{
-    display:block;
-}
-
-}
 
 
 /*회원가입 부분*/
