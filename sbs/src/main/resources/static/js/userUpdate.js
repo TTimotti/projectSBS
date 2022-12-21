@@ -186,7 +186,6 @@ window.addEventListener('DOMContentLoaded', function() {
         if(userName.value == loginUser) {
             updateDiv.className = 'my-2';
             
-            
         } else{
             errorDiv.className = 'my-2 p-4 text-danger text-center rounded';
         }
