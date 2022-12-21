@@ -699,7 +699,7 @@ function pastDisplayData(currentPage, dataPerPage, data) {
       chartHtml += '<tr>'
                 + '<td id="acId">' + data[i].activityId + '</td>'
                 + '<td>' + stTime + '</td>'
-                + '<td><a href="/activity/detail?id=' + data[i].activityId + '">' + data[i].play + '</a></td>'
+                + '<td>' + data[i].play + '</td>'
                 + '<td>' + data[i].userName + '</td>'
                 + '<td>' + data[i].budget.toLocaleString(); +'</td>'
       chartHtml +='<td>' +
@@ -1287,7 +1287,7 @@ function teamManagement() {
 		
 		const userName = document.querySelector('.loginUserName').value;
 		
-		if(userName == "anonymousUser"){
+		if(userName === "anonymousUser"){
 			
 			alert("로그인 후 이용해 주세요.")
 			
@@ -1322,7 +1322,6 @@ function checkLoginUserTeam(data) {
 		joinedTeamsId.push(t.teamId);
 	}
 	console.log(checkAvailability(joinedTeamsId, teamId));
-	const even = (element) => element % teamId === 0;
 
 	console.log("JOIN", joinedTeamsId);
 
