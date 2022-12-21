@@ -36,6 +36,10 @@
 
         <!--로그인 부분-->
         <section class="login-wrap">
+            <div class="d-none" id="signInErr">
+                <p>존재하지 않거나 잘못된 회원정보입니다.</p>
+            </div>
+        
             <form method="post">
                 <div class="login-id-wrap">
                     <input id="input-id" placeholder="아이디" type="text" name="username"/>
@@ -95,8 +99,9 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer>    
     
+    <script src="/js/signIn.js"> </script>
 </body>
 
 </html>

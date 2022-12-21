@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,12 @@ public class HomeController {
         return "/home";
         
 
+    }
+    
+    @PostMapping("/signInErr") 
+    public String signInErr() {
+        log.info("signInErr() post 호출");
+        
+        return "redirect:/user/signIn?error";
     }
 }

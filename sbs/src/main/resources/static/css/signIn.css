@@ -452,3 +452,17 @@ h3{
     outline:none;
     cursor: pointer;
 }
+
+.d-none {
+    display: none !important;
+}
+
+.d-on {
+    display: block !important;
+}
+
+#signInErr {
+    color: red;
+    font-family: 15px;
+    font-family: sans-serif;
+}
