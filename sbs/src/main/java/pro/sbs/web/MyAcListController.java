@@ -77,4 +77,14 @@ public class MyAcListController {
 
         return "redirect:/team/teamActivity?teamId=" + dto.getTeamId();
     }
+    
+    @PostMapping("/myAcList/delete")
+    public String delete(Integer id, RedirectAttributes attrs) {
+        log.info("delete(id={})", id);
+        Integer myActListId = myActivityListService.delete(id);
+        attrs.addFlashAttribute("myActListId", myActListId);
+        log.info("delete mylistId = {})", myActListId);
+        
+        return "redirect:/";
+    }
 }

@@ -47,4 +47,12 @@ public class MyActivityListService {
         
         return mylist;
     }
+
+    public Integer delete(Integer id) {
+        log.info("delete(id = {} )", id);
+        
+        myActivityListRepository.deleteById(id);
+        
+        return id;
+    }
 }
