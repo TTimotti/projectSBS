@@ -197,6 +197,18 @@
 
         </div>
 </div>
+</th:block>
+    <th:block sec:authorize="isAnonymous()">
+        <div
+            class="my-2 p-4 text-danger text-center rounded">
+            <h1>비정상적인 접근입니다.</h1>
+        <ul>
+            <li><a th:href="@{ /user/signIn }">Sign In</a></li>
+            <li><a th:href="@{ /user/signUp }">Sign Up</a></li>
+        </ul>
+    </div>
+
+    </th:block>
         <!-- Footer-->
         <footer class="footer" style="clear: left;">
             <div class="container">
@@ -239,18 +251,7 @@
                 </div>
             </div>
         </footer>
-</th:block>
-    <th:block sec:authorize="isAnonymous()">
-        <div
-            class="my-2 p-4 text-danger text-center rounded">
-            <h1>비정상적인 접근입니다.</h1>
-        <ul>
-            <li><a th:href="@{ /user/signIn }">Sign In</a></li>
-            <li><a th:href="@{ /user/signUp }">Sign Up</a></li>
-        </ul>
-    </div>
 
-    </th:block>
 <!-- Bootstrap core JS-->
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
