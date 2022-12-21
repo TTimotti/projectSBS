@@ -180,21 +180,21 @@ public class TeamsController {
         return ResponseEntity.ok(list);
     }
     
-    /**
-     * 
-     * @param loginUser
-     * @return axios 방식, loginUser(=userName)가 가입한 모임들을 가져옴.
-     * @author 추지훈
-     */
-    @PostMapping("/readByActivityByLoginUser/")
-    @ResponseBody
-    public ResponseEntity<List<Activity>> readByActivityByLoginUser(@RequestBody String loginUser) {
-        log.info("readByActivityByLoginUser(loginUser={}) 호출", loginUser);
-        
-        List<Activity> list = activityService.readByLoginUser(loginUser);
-        
-        return ResponseEntity.ok(list);
-    }
+//    /**
+//     * 
+//     * @param loginUser
+//     * @return axios 방식, loginUser(=userName)가 가입한 모임들을 가져옴.
+//     * @author 추지훈
+//     */
+//    @PostMapping("/readByActivityByLoginUser/")
+//    @ResponseBody
+//    public ResponseEntity<List<Activity>> readByActivityByLoginUser(@RequestBody String loginUser) {
+//        log.info("readByActivityByLoginUser(loginUser={}) 호출", loginUser);
+//        
+//        List<Activity> list = activityService.readByLoginUser(loginUser);
+//        
+//        return ResponseEntity.ok(list);
+//    }
     
     
     /**

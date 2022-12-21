@@ -149,7 +149,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // 수정 완료 버튼 찾아서 이벤트 리스너 등록 TODO
     btnUpdate.addEventListener('click', function() {
-        const result = confirm('정말 수정?');
+        const result = confirm('정보를 수정하시겠습니까?');
         if (result) {
             formUpdate.action = '/user/userUpdate';
             formUpdate.method = 'post';
@@ -160,7 +160,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // 회원 탈퇴 버튼
     btnDelete.addEventListener('click', function() {
-        const result = confirm('정말 삭제?');
+        const result = confirm('정말 계정을 삭제하시겠습니까?');
         if (result) {
             formUpdate.action = '/user/delete';
             formUpdate.method = 'post';
@@ -172,7 +172,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // 비밀번호 변경 버튼
     btnPasswordChange.addEventListener('click', function() {
-        const result = confirm('비밀번호 변경?');
+        const result = confirm('비밀번호를 변경하시겠습니까?');
         if (result) {
             formUpdate.action = '/user/passwordChange';
             formUpdate.method = 'get';

@@ -4,6 +4,7 @@ moment.locale('ko');
 /*************************/
 /*페이지 기능 추가 메서드*/
 /*************************/
+	returnNoJoinUser();
 // 진행중인 활동 리스트.
 progressActivityList();
 // 기간이 지난 활동 리스트
@@ -698,7 +699,7 @@ function pastDisplayData(currentPage, dataPerPage, data) {
       chartHtml += '<tr>'
                 + '<td id="acId">' + data[i].activityId + '</td>'
                 + '<td>' + stTime + '</td>'
-                + '<td><a href="/activity/detail?id=' + data[i].activityId + '">' + data[i].play + '</a></td>'
+                + '<td>' + data[i].play + '</td>'
                 + '<td>' + data[i].userName + '</td>'
                 + '<td>' + data[i].budget.toLocaleString(); +'</td>'
       chartHtml +='<td>' +
@@ -852,15 +853,7 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
         return false;
     }));
 }
-joinedActivitys();
 
-function joinedActivitys() {
-    
-    axios
-    .post('/team/readByActivityByLoginUser/', loginUser)
-    .then(response => { progressDisplayData(response.data) })
-    .catch(err => { console.log(err) });
-}
 
 /**
  * 진행중인 활동 목록 테이블 처리 
@@ -868,6 +861,21 @@ function joinedActivitys() {
 function progressDisplayData(currentPage, dataPerPage, data) {
     
     console.log(data);
+    console.log(data.myActivityList)
+    console.log(loginUser);
+    console.log(myAcLists);
+    console.log(loginUser);
+    console.log(myAcLists[1].userName);
+    console.log(loginUser);
+    
+    readMyListData(data.myActivityList)
+    
+    function readMyListData(data) {
+        
+        
+    }
+    
+    
     let chartHtml = "";
     var i;
     //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
@@ -902,15 +910,15 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '<td>' + data[i].budget.toLocaleString(); +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-            if (data[i].teamId == data[i].teamId) {
+            if (myAcLists[5].userName == loginUser && myAcLists[5].activityId == data[i].activity) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
-            + data[i].activityId 
+            + data[i].activityId
             + '">참여</a>'
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (data[i].userName == loginUser) {
+            } else if (myAcLists[5].userName == loginUser && myAcLists[5].activityId != data[i].activity) {
         chartHtml += '<td>' +
             '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
             + '</td>'   
@@ -1084,6 +1092,7 @@ function openPop(data) {
     //-------------------------------------//
     totalData = data.myActivityList.length - 1;
     userListGlobalData = data.myActivityList;
+    console.log(data.myActivityList);
     dataPerPage = 5;
     
     joinUserListData(1, dataPerPage, data.myActivityList)
@@ -1295,20 +1304,45 @@ function teamManagement() {
 		
 	}
 	
-	/*
-	 * 팀 메인 페이지 가입안한 유저 리턴기능
-	 */
-	returnNoJoinUser();
-	
-	function returnNoJoinUser() {
-		
+/*
+ * 팀 메인 페이지 가입안한 유저 리턴기능
+ */
+
+function returnNoJoinUser() {
+
 	const loginUser = document.querySelector('.loginUserName').value;
-	
+
 	axios
-	.post("/team/readByLoginUser/", loginUser)
-    .then(response => { checkLoginUserTeam(response.data)
-	})
-    .catch(err => { console.log(err) });	
+		.post("/team/readByLoginUser/", loginUser)
+		.then(response => {
+			checkLoginUserTeam(response.data)
+		})
+		.catch(err => { console.log(err) });
+}
+
+function checkLoginUserTeam(data) {
+
+	let teamId = parseInt(document.querySelector('.joinTeamId').value);
+
+	let joinedTeamsId = [];
+
+	for (let t of data) {
+		joinedTeamsId.push(t.teamId);
 	}
-	
-	
+
+	console.log(checkAvailability(joinedTeamsId, teamId));
+	const even = (element) => element % teamId === 0;
+
+	console.log("JOIN", joinedTeamsId);
+
+	if (!checkAvailability(joinedTeamsId, teamId)) {
+		alert('가입되지 않은 모임 입니다. 가입 후 이용해주세요.');
+		window.location.replace("http://localhost:8888/");
+	}
+}
+
+function checkAvailability(arr, val) {
+	return arr.some(function(arrVal) {
+		return val === arrVal;
+	});
+}

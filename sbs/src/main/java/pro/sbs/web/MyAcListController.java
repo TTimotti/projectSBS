@@ -36,14 +36,6 @@ public class MyAcListController {
 
     
     
-//    @GetMapping("/myAcList/partyin")
-//    public ResponseEntity<List<MyAcListReadDto>> partyin(@PathVariable Integer id) {
-//        log.info("partyIn()");
-//        
-//        List<MyAcListReadDto> list = 
-//        
-//        return ResponseEntity.ok(id);
-//    }
 
     
     @GetMapping("/myAcList/partyin")

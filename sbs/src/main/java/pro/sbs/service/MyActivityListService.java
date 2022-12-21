@@ -18,6 +18,9 @@ public class MyActivityListService {
     private final MyActivityListRepository myActivityListRepository;
     
     public List<MyActivityList> read() {
+        List<MyActivityList> list = myActivityListRepository.findAll();
+        
+        log.info("MyActivityList All ={} ", list);
         return myActivityListRepository.findAll();
     }
     
