@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import pro.sbs.domain.Activity;
+import pro.sbs.domain.Teams;
 
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
@@ -19,6 +20,24 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
     List<Activity> findByOrderByStartTimeDesc();
     
     List<Activity> findByTeamIdOrderByActivityIdDesc(Integer teamId);
+    
+    
+    /**
+     * 
+     * @param loginUser2
+     * @return loginUser가 가입한 활동들에 대한 정보들을 리스트로 가져옴.
+     * @author 추
+     */
+    @Query("select t.activityId from ACTIVITIES t where t.activityId in (select l.activityId from MYACTIVITYLIST l where l.userName = :userName)")
+    List<Activity> selectYourActivity(@Param(value = "userName") String loginUser2);
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * 캘린더에서 받은 날짜에 해당되는 활동 리스트를 보여주는 기능 

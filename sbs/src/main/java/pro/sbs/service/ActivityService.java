@@ -28,6 +28,23 @@ public class ActivityService {
     private final TeamRepository teamRepository;
 
     private final MyActivityListRepository myActivityListRepository;
+    
+    /**
+     * 
+     * @param loginUser
+     * // loginUser를 자바스크립트에서 가져올 때, 마지막에 ('=')라는 글자가 추가되기 때문에
+     * // 마지막 글자를 제거하기 위해 loginUser2라는 변수를 새로 생성함.
+     * @return 해당 loginUser가 가입한 활동에 대한 정보들을 리스트로 가져옴.
+     * @author 추지훈
+     */
+    public List<Activity> readByLoginUser(String loginUser) {
+        String loginUser2 = loginUser.substring(0, loginUser.length() - 1);
+        log.info("아이디 가져옴 {}", loginUser2);
+        List<Activity> list = activityRepository.selectYourActivity(loginUser2);
+        return list;
+    }
+    
+    
     /**
      *  활동 아이디 내림차순으로 
      *  활동 목록 불러오는 기능.

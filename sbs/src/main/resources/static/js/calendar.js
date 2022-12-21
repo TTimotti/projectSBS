@@ -851,12 +851,20 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
         return false;
     }));
 }
+joinedActivitys();
 
+function joinedActivitys() {
+    axios
+    .post('/team/readByActivityByLoginUser/', loginUser)
+    .then(response => { progressDisplayData(response.data) })
+    .catch(err => { console.log(err) });
+}
 
 /**
  * 진행중인 활동 목록 테이블 처리 
  * */ 
 function progressDisplayData(currentPage, dataPerPage, data) {
+    
     console.log(data);
     let chartHtml = "";
     var i;
@@ -892,7 +900,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '<td>' + data[i].budget.toLocaleString(); +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-            if (data[i].teamId == 27) {
+            if (data[i].userName == loginUser) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
             + data[i].teamId 
@@ -900,7 +908,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (data[i].teamId != 1) {
+            } else if (data[i].userName == loginUser) {
         chartHtml += '<td>' +
             '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/">탈퇴</a>'
             + '</td>'   
