@@ -16,12 +16,14 @@ public class MyActivityListCreateDto {
     private Integer teamId;
     private Integer activityId;
     private String userName;
+    private String nickname;
     
     public MyActivityList toEntity() {
         return MyActivityList.builder()
                 .TeamId(teamId)
                 .activityId(activityId)
                 .userName(userName)
+                .nickName(nickname)
                 .build();
     }
     

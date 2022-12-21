@@ -3,6 +3,7 @@ package pro.sbs.web;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class PostController {
     
     private final PostService postService;
     
-    
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping({"/post/detail", "/post/modify"})
     // 컨트롤러 메서드가 2개 이상의 요청 주소를 처리할 때는 mapping에서 요청 주소를 배열로 설정.
     public void detail(Integer id, Model model) {
@@ -39,7 +40,7 @@ public class PostController {
         
     }
     
-    
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/post/create")
     public void create(Integer id, Model model) {
         log.info("PostController Get create()");
@@ -47,7 +48,7 @@ public class PostController {
         
     }
     
-    
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/post/create")
     public String create(PostCreateDto dto, RedirectAttributes attrs, Integer id) {
         log.info("PostController Post create() dto = {}", dto);
@@ -65,7 +66,7 @@ public class PostController {
         return "redirect:/team/teamActivity?teamId=" + teamId;
     }
     
-    
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/post/update")
     public String update(PostUpdateDto dto) {
         log.info("PostController update(dto = {})",dto);
@@ -77,7 +78,7 @@ public class PostController {
         return "redirect:/post/detail?id=" + dto.getId();
     }
     
-    
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/post/delete")
     public String delete(Integer id, RedirectAttributes attrs) {
         log.info("PostController delete(id={})", id);

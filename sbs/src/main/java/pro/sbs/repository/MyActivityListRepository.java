@@ -6,13 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import pro.sbs.domain.Activity;
 import pro.sbs.domain.MyActivityList;
 
 public interface MyActivityListRepository extends JpaRepository<MyActivityList, Integer> {
 
     List<MyActivityList> findByOrderByUserNameDesc();
     
-    List<MyActivityList> findByUserName(Integer userId);
+    
+    @Query("select t.nickname from USERS t where t.userName in (select l.userName from MYACTIVITYLIST l where l.userName = :userName)")
+    MyActivityList findByNickNameByUserName(@Param(value = "userName") String userName);
+    
+    
     
     /**
      * 활동에 참여한 유저 목록 출력 기능

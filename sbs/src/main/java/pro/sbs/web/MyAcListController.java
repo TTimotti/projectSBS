@@ -66,18 +66,18 @@ public class MyAcListController {
     
     
     @PostMapping("/myAcList/partyin")
-    public String partyin(MyActivityListCreateDto dto, Integer id, RedirectAttributes attrs) {
+    public String partyin(MyActivityListCreateDto dto, RedirectAttributes attrs) {
         log.info("partyIn() dto = {}", dto);
-        log.info("partyIn() id = {}", id);
-        dto.setTeamId(id);
-        //        dto.setUserId(userId);
+        String uName = dto.getUserName();
+        MyActivityList mylist = myActivityListService.readByUserName(uName);
+        log.info("partyin mylist = {}", mylist);
+        dto.setNickname(mylist.getNickName());
         log.info("partyIn() dto2 = {}", dto);
         MyActivityList entity = myActivityListService.create(dto);
         log.info("partyIn() entity = {}", entity);
         // userId로 바꿔서 넣어야함.
-        List<MyActivityList> mylist = myActivityListService.readByUserName(id);
-        log.info("partyin mylist = {}", mylist);
+        
 
-        return "redirect:/team/teamActivity?teamId=" + id;
+        return "redirect:/team/teamActivity?teamId=" + dto.getTeamId();
     }
 }
