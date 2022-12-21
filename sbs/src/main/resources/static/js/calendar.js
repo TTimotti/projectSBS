@@ -905,14 +905,14 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             if (data[i].teamId == 27) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
-            + data[i].teamId 
+            + data[i].activityId 
             + '">참여</a>'
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
             } else if (data[i].userName == loginUser) {
         chartHtml += '<td>' +
-            '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/">탈퇴</a>'
+            '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
             + '</td>'   
             }
             + '</tr>';
@@ -1311,25 +1311,24 @@ function teamManagement() {
     .catch(err => { console.log(err) });	
 	}
 	
-	
-function checkLoginUserTeam(data) {
+	function checkLoginUserTeam(data) {
 
-	const teamId = document.querySelector('.joinTeamId').value;
-	let joinedTeamsId = [];
-	console.log(teamId);
-	for (let t of data) {
-		joinedTeamsId.push(t.teamId);
-	}
+    const teamId = document.querySelector('.joinTeamId').value;
+    let joinedTeamsId = [];
+    console.log(teamId);
+    for (let t of data) {
+        joinedTeamsId.push(t.teamId);
+    }
 
-	console.log(joinedTeamsId);
+    console.log(joinedTeamsId);
 
-	if (joinedTeamsId.includes(teamId)) {
-		
-		
-	} else {
+    if (joinedTeamsId.includes(teamId)) {
+        
+        
+    } else {
 
-		alert('가입되지 않은 모임 입니다. 가입 후 이용해 주세요.');
+        alert('가입되지 않은 모임 입니다. 가입 후 이용해 주세요.');
 
-		window.location.replace("http://localhost:8888/");
-	}
+        window.location.replace("http://localhost:8888/");
+    }
 }

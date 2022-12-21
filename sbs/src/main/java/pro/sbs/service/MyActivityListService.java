@@ -55,4 +55,10 @@ public class MyActivityListService {
         
         return id;
     }
+
+    public List<MyActivityList> readIndex(Integer teamId) {
+        log.info("readIndex teamId= {}", teamId);
+        
+        return null;
+    }
 }

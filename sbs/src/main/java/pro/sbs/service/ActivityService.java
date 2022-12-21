@@ -183,7 +183,7 @@ public class ActivityService {
        
        log.info("entity = {}",entity);
        
-       entity.update(dto.getPlay(), dto.getPlace(),dto.getBudget(),dto.toEntity().getStartTime());
+       entity.update(dto.getPlay(), dto.getPlace(), dto.getBudget(), dto.toEntity().getStartTime());
 
         return entity.getActivityId();
     }
