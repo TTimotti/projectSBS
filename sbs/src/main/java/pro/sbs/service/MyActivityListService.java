@@ -22,10 +22,12 @@ public class MyActivityListService {
     }
     
     public MyActivityList create(MyActivityListCreateDto dto) {
+        
 
         MyActivityList myList = MyActivityList.builder().TeamId(dto.getTeamId())
                 .activityId(dto.getActivityId())
                 .userName(dto.getUserName())
+                .nickName(dto.getNickname())
                 .build();
         log.info("create(myList) = {}", myList);
         
@@ -35,11 +37,11 @@ public class MyActivityListService {
         return entity;
     }
 
-    public MyActivityList readByUserName(String userName) {
-        log.info("readByUserName userName = {}", userName);
+    public String readByUserName(String userName) {
+        log.info("readByUserName dto = {}", userName);
         
         
-        MyActivityList mylist = myActivityListRepository.findByNickNameByUserName(userName);
+        String mylist = myActivityListRepository.findByNickNameByUserName(userName);
         log.info("readByUserId mylist = {}", mylist);
         
         

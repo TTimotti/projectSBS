@@ -58,10 +58,6 @@ public class MyAcListController {
         
         model.addAttribute("active", active);
         
-//        ActivityReadDto activeDto = activityService.readIndex(id);
-//        log.info("activeDto = {}", activeDto);
-//        model.addAttribute("activeDto", activeDto);
-        
   }
     
     
@@ -69,13 +65,14 @@ public class MyAcListController {
     public String partyin(MyActivityListCreateDto dto, RedirectAttributes attrs) {
         log.info("partyIn() dto = {}", dto);
         String uName = dto.getUserName();
-        MyActivityList mylist = myActivityListService.readByUserName(uName);
+        String mylist = myActivityListService.readByUserName(uName);
         log.info("partyin mylist = {}", mylist);
-        dto.setNickname(mylist.getNickName());
+        dto.setNickname(mylist);
         log.info("partyIn() dto2 = {}", dto);
         MyActivityList entity = myActivityListService.create(dto);
         log.info("partyIn() entity = {}", entity);
-        // userId로 바꿔서 넣어야함.
+        
+        log.info("partyIn() entity = {}", dto.getTeamId());
         
 
         return "redirect:/team/teamActivity?teamId=" + dto.getTeamId();

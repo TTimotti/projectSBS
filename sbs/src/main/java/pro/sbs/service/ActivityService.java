@@ -128,7 +128,6 @@ public class ActivityService {
         Teams team = teamRepository.findById(dto.getTeamId()).get();
         log.info("create(team = {}", team);
         
-        
         Activity activity = Activity.builder().teamId(dto.getTeamId())
                 .play(dto.getPlay())
                 .place(dto.getPlace())
