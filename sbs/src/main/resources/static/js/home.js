@@ -89,7 +89,7 @@ function prepareSearchedTeams(teamIds) {
                         + '<a href="/team/teamActivity?teamId='
                         +  st.teamId
                         + '">'
-                        + `<div class="btnGoToTeam btn btn-primary" data-teamId="${ st.teamId }">활동하기</div>` 
+                        + `<div class="btnGoToTeam btn btn-primary" data-teamId="${ st.teamId }&data-userName="${ st.userName }>활동하기</div>` 
                         + '</a>'
                         + '</td>'
                 // 팀의 인원수가 다 찼을 경우.
