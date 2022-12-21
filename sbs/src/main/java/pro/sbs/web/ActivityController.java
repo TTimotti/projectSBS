@@ -87,7 +87,6 @@ public class ActivityController {
 
     /**
      * 활동 생성 기능
-     * 
      * @param id
      * @param dto
      * @return

@@ -100,7 +100,7 @@ public class PostController {
         Integer teamId = post.get(0).getTeam().getTeamId();
         log.info("teamId ={}", teamId);
         
-        return "redirect:/team/teamActivity?teamId=" + 27;
+        return "redirect:/team/teamActivity?teamId=" + teamId;
     }
     
     
