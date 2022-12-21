@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pro.sbs.domain.Activity;
 import pro.sbs.domain.MyActivityList;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +23,6 @@ public class ActivityInfoDto {
 	private String place;
 	private Integer teamId;
 	private List<MyActivityList> myActivityList;
-	
+	private List<Activity> activityList;
 	
 }

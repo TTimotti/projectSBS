@@ -532,8 +532,9 @@ function progressActivityList() {
           axios
         .get("/team/progressList", {params: {teamId}})
         .then(response => {
-            console.log(response.data);
-            totalData = response.data.length - 1;
+            console.log(response.data.activityList.length);
+            console.log(response.data.myActivityList);
+            totalData = response.data.activityList.length - 1;
             proGlobalData = response.data;
             
             progressDisplayData(1, dataPerPage, response.data)
@@ -860,22 +861,15 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
  * */ 
 function progressDisplayData(currentPage, dataPerPage, data) {
     
-    console.log(data);
-    console.log(data.myActivityList)
-    console.log(loginUser);
-    console.log(myAcLists);
-    console.log(loginUser);
-    console.log(myAcLists[1].userName);
-    console.log(loginUser);
     
-    readMyListData(data.myActivityList)
-    
-    function readMyListData(data) {
+    let activityList = [];
         
-        
-    }
-    
-    
+    activityList.push(data.activityList);
+	
+	console.log(activityList);
+	console.log(data.activityList);
+	console.log(data.myActivityList[1].userName);
+	
     let chartHtml = "";
     var i;
     //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
@@ -897,30 +891,28 @@ function progressDisplayData(currentPage, dataPerPage, data) {
     
 for (i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
     
-    if (data[i] == undefined) {
+    if (data.activityList[i] == undefined || data.myActivityList[i] == undefined)   {
         break;
     }       
 
-const stTime = moment(data[i].startTime).format('YY-MM-DD');
+const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
   chartHtml += '<tr>'
-            + '<td>' + data[i].activityId+ '</td>'
+            + '<td>' + data.activityList[i].activityId+ '</td>'
             + '<td>' + stTime + '</td>'
-            + '<td><a href="/activity/detail?id=' + data[i].activityId + '">' + data[i].play + '</a></td>'
-            + '<td>' + data[i].userName + '</td>'
-            + '<td>' + data[i].budget.toLocaleString(); +'</td>'
+            + '<td><a href="/activity/detail?id=' + data.activityList[i].activityId + '">' + data.activityList[i].play + '</a></td>'
+            + '<td>' + data.activityList[i].userName + '</td>'
+            + '<td>' + data.activityList[i].budget +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-            if (data[i].activityId == data[i].activityId) {
-                            // if (myAcLists[5].userName == loginUser && myAcLists[5].activityId == data[i].activity) {
+         if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId == data.myActivityList[i].activity) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
-            + data[i].activityId
+            + data.myActivityList[i].activityId
             + '">참여</a>'
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (data[i].teamId != 1) {
-                 // } else if (myAcLists[5].userName == loginUser && myAcLists[5].activityId != data[i].activity) {
+            } else if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId != data.myActivityList[i].activity) {
         chartHtml += '<td>' +
             '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
             + '</td>'   

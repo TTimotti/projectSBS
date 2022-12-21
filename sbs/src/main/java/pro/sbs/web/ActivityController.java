@@ -134,9 +134,9 @@ public class ActivityController {
     */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/team/progressList") // 요청 URL/방식 매핑.
-    public ResponseEntity<List<Activity>> home4(Integer teamId, Model model) {
+    public ResponseEntity<ActivityInfoDto> home4(Integer teamId, Model model) {
         // 기간이 지나지 않은 활동 내역 조회
-        List<Activity> list2 = activityService.readAcTimeProgress(teamId);
+        ActivityInfoDto list2 = activityService.readAcTimeProgress(teamId);
         model.addAttribute("progressList", list2);
         return ResponseEntity.ok(list2);
     }

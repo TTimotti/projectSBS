@@ -28,7 +28,7 @@ public class MyActivityList extends BaseTimeEntity {
     private Integer myListId;
     
     @Column(name = "team_id", columnDefinition = "number (6)")
-    private Integer TeamId;
+    private Integer teamId;
     
     @Column(name = "activity_id", columnDefinition = "number (6)")
     private Integer activityId;

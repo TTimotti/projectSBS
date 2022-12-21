@@ -27,7 +27,7 @@ public class MyActivityListService {
     public MyActivityList create(MyActivityListCreateDto dto) {
         
 
-        MyActivityList myList = MyActivityList.builder().TeamId(dto.getTeamId())
+        MyActivityList myList = MyActivityList.builder().teamId(dto.getTeamId())
                 .activityId(dto.getActivityId())
                 .userName(dto.getUserName())
                 .nickName(dto.getNickname())

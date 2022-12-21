@@ -26,6 +26,13 @@ public interface MyActivityListRepository extends JpaRepository<MyActivityList, 
      */
     @Query("select a from MYACTIVITYLIST a where activityId like :activityId")
     List<MyActivityList> ActivityJoinMemberInfo(@Param(value = "activityId") Integer activityId);
-    
+   
+    /**
+     * 활동에 참여한 유저 목록 출력 기능
+     * @param teamId
+     * @return
+     */
+    @Query("select a from MYACTIVITYLIST a where teamId like :teamId")
+    List<MyActivityList> ActivityJoinMemberInfo2(@Param(value = "teamId") Integer teamId);
     
 }
