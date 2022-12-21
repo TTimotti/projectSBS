@@ -1,5 +1,6 @@
+@charset "UTF-8";
 body{
-    background-color: #282c37;
+    background-color: ghostwhite;
 }
 select{
     width:85px;
@@ -49,6 +50,13 @@ input{
     background: #dae9f4;
     color: #282c37;
 }
+
+.signUpLink {
+    color: #2b90d9;
+    margin-top: 20px;
+    text-align: right;
+}
+
 /*input 패스워드박스*/
 .login-pw-wrap{
 
@@ -251,7 +259,7 @@ footer{
     .main{
         width: 460px;
         margin: auto;
-        background-color: #282c37;
+        background-color: ghostwhite;
     }
     
     /*로그인버튼*/
