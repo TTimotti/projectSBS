@@ -902,7 +902,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '<td>' + data[i].budget.toLocaleString(); +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-            if (data[i].teamId == 27) {
+            if (data[i].teamId == data[i].teamId) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
             + data[i].activityId 
@@ -1311,24 +1311,4 @@ function teamManagement() {
     .catch(err => { console.log(err) });	
 	}
 	
-	function checkLoginUserTeam(data) {
-
-    const teamId = document.querySelector('.joinTeamId').value;
-    let joinedTeamsId = [];
-    console.log(teamId);
-    for (let t of data) {
-        joinedTeamsId.push(t.teamId);
-    }
-
-    console.log(joinedTeamsId);
-
-    if (joinedTeamsId.includes(teamId)) {
-        
-        
-    } else {
-
-        alert('가입되지 않은 모임 입니다. 가입 후 이용해 주세요.');
-
-        window.location.replace("http://localhost:8888/");
-    }
-}
+	
