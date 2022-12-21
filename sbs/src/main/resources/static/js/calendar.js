@@ -4,6 +4,7 @@ moment.locale('ko');
 /*************************/
 /*페이지 기능 추가 메서드*/
 /*************************/
+	returnNoJoinUser();
 // 진행중인 활동 리스트.
 progressActivityList();
 // 기간이 지난 활동 리스트
@@ -1295,41 +1296,45 @@ function teamManagement() {
 		
 	}
 	
-	/*
-	 * 팀 메인 페이지 가입안한 유저 리턴기능
-	 */
-	returnNoJoinUser();
-	
-	function returnNoJoinUser() {
-		
+/*
+ * 팀 메인 페이지 가입안한 유저 리턴기능
+ */
+
+function returnNoJoinUser() {
+
 	const loginUser = document.querySelector('.loginUserName').value;
-	
+
 	axios
-	.post("/team/readByLoginUser/", loginUser)
-    .then(response => { checkLoginUserTeam(response.data)
-	})
-    .catch(err => { console.log(err) });	
-	}
-	
-	
+		.post("/team/readByLoginUser/", loginUser)
+		.then(response => {
+			checkLoginUserTeam(response.data)
+		})
+		.catch(err => { console.log(err) });
+}
+
 function checkLoginUserTeam(data) {
 
-	const teamId = document.querySelector('.joinTeamId').value;
+	let teamId = parseInt(document.querySelector('.joinTeamId').value);
+
 	let joinedTeamsId = [];
-	console.log(teamId);
+
 	for (let t of data) {
 		joinedTeamsId.push(t.teamId);
 	}
+	console.log(checkAvailability(joinedTeamsId, teamId));
+	const even = (element) => element % teamId === 0;
 
-	console.log(joinedTeamsId);
+	console.log("JOIN", joinedTeamsId);
 
-	if (joinedTeamsId.includes(teamId)) {
-		
-		
-	} else {
-
-		alert('가입되지 않은 모임 입니다. 가입 후 이용해 주세요.');
-
+	if (!checkAvailability(joinedTeamsId, teamId)) {
+		alert('가입되지 않은 모임 입니다. 가입 후 이용해주세요.');
 		window.location.replace("http://localhost:8888/");
 	}
 }
+
+function checkAvailability(arr, val) {
+	return arr.some(function(arrVal) {
+		return val === arrVal;
+	});
+}
+
