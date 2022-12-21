@@ -6,6 +6,8 @@
 window.addEventListener('DOMContentLoaded', function() {
     const btnPasswordChange = document.querySelector('#btnPasswordChange');
     const btnDelete = document.querySelector('#btnDeleteUser');
+    const userName = document.querySelector('#userName');
+    console.log(userName);
     const userId = document.querySelector('#userId');
     const password = document.querySelector('#password');
     const pcheck = document.querySelector('#pcheck');
@@ -177,5 +179,16 @@ window.addEventListener('DOMContentLoaded', function() {
             formUpdate.submit();
         }
     })
+
+    // 로그인 유저 체크
+    const updateDiv = document.querySelector('#updateDiv');
+    const errorDiv = document.querySelector('#errorDiv');
+        if(userName.value == loginUser) {
+            updateDiv.className = 'my-2';
+            
+            
+        } else{
+            errorDiv.className = 'my-2 p-4 text-danger text-center rounded';
+        }
 
 });
