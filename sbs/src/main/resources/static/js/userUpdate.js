@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const pinfo = document.querySelector('#pinfo');
 
     // 패스워드 체크
-    password.addEventListener('change', function() {
+    password.addEventListener('change', function() { 
 
         const passwordValue = password.value;
 
