@@ -28,6 +28,12 @@
         <div class="my-2 p-4 text-danger text-center rounded d-none"
             id="errorDiv">
             <h1>비정상적인 접근입니다.</h1>
+            <ul>
+                <li><a th:href="@{ / }">Main</a></li>
+                <li><a
+                    th:href="@{ /user/myPage?userName={userName} (userName = ${ #authentication.name }) }">My
+                        Page</a></li>
+            </ul>
         </div>
         <div class="container-fluid d-none" id = "updateDiv">
             
@@ -168,6 +174,10 @@
         <div
             class="my-2 p-4 text-danger text-center rounded">
             <h1>비정상적인 접근입니다.</h1>
+            <ul>
+                <li><a th:href="@{ /user/signIn }">Sign In</a></li>
+                <li><a th:href="@{ /user/signUp }">Sign Up</a></li>
+            </ul>
         </div>
 
     </th:block>
