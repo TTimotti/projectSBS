@@ -104,6 +104,7 @@ public class ActivityController {
 
         return "redirect:/team/teamActivity?teamId=" + teamId;
     }
+    
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/team/list") // 요청 URL/방식 매핑.
     public ResponseEntity<List<Activity>> home2(Model model) {

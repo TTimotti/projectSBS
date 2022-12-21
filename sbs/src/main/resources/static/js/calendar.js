@@ -19,6 +19,7 @@ noticeActivityList();
 
 // 달력 요일
 var calendarDays = ["일", "월", "화", "수", "목", "금", "토"];
+console.log(loginUser);
 
 // 달력 요일 HTML
 function calendarWeekHTML(options) {
@@ -851,12 +852,21 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
         return false;
     }));
 }
+joinedActivitys();
 
+function joinedActivitys() {
+    
+    axios
+    .post('/team/readByActivityByLoginUser/', loginUser)
+    .then(response => { progressDisplayData(response.data) })
+    .catch(err => { console.log(err) });
+}
 
 /**
  * 진행중인 활동 목록 테이블 처리 
  * */ 
 function progressDisplayData(currentPage, dataPerPage, data) {
+    
     console.log(data);
     let chartHtml = "";
     var i;
@@ -900,7 +910,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (data[i].teamId != 1) {
+            } else if (data[i].userName == loginUser) {
         chartHtml += '<td>' +
             '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/">탈퇴</a>'
             + '</td>'   

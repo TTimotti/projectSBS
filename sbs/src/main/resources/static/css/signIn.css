@@ -1,5 +1,6 @@
+@charset "UTF-8";
 body{
-    background-color: #282c37;
+    background-color: ghostwhite;
 }
 select{
     width:85px;
@@ -49,6 +50,13 @@ input{
     background: #dae9f4;
     color: #282c37;
 }
+
+.signUpLink {
+    color: #2b90d9;
+    margin-top: 20px;
+    text-align: right;
+}
+
 /*input 패스워드박스*/
 .login-pw-wrap{
 
@@ -239,10 +247,7 @@ input{
     margin: 3px;
     font-size: 14px;
 }
-/*저작권 표시X*/
-footer{
-    display: none;
-}
+
 
 
 /*가로 800px 이상일때*/
@@ -251,7 +256,7 @@ footer{
     .main{
         width: 460px;
         margin: auto;
-        background-color: #282c37;
+        background-color: ghostwhite;
     }
     
     /*로그인버튼*/
@@ -296,12 +301,6 @@ footer{
     display:block;
 }
 
-/*저작권 표시*/
-footer{
-    display:block;
-}
-
-}
 
 
 /*회원가입 부분*/

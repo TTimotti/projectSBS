@@ -76,6 +76,10 @@
   }
 }
 
+h1{
+    color: #2b90d9;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

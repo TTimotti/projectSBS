@@ -289,11 +289,11 @@
             </div>
             <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                 <ul class="list-inline mb-0">
-                    <li class="list-inline-item me-4"><a href="#!"><i
+                    <li class="list-inline-item me-4"><a href="https://ko-kr.facebook.com/"><i
                             class="bi-facebook fs-3"></i></a></li>
-                    <li class="list-inline-item me-4"><a href="#!"><i
+                    <li class="list-inline-item me-4"><a href="https://twitter.com/"><i
                             class="bi-twitter fs-3"></i></a></li>
-                    <li class="list-inline-item"><a href="#!"><i
+                    <li class="list-inline-item"><a href="https://www.instagram.com/"><i
                             class="bi-instagram fs-3"></i></a></li>
                 </ul>
             </div>
@@ -314,6 +314,13 @@
         </div>
     </div>
 </div> 
+<script th:inline="javascript">
+            // 타임리프 inline 기능을 이용하면 자바스크립트 안에서 타임리프 속성을 이용할 수 있음.
+            // 로그인 사용자 아이디를 자바스크립트 변수에 저장.            
+            const loginUser = [[ ${ #authentication.name } ]];
+            console.log(loginUser);
+            const searchedTeams = [[${ active }]];
+        </script>
 <!-- Ajax axios JS-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- Jquery JS-->
@@ -327,5 +334,20 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script th:inline="javascript" th:src="@{/js/calendar.js}"></script>
+    <script>
+    const btnDeleteJoinedTeam = document.querySelector('#btnDeleteJoinedTeam');
+    const deleteJoinedTeamForm  = document.querySelector('#deleteJoinedTeamForm');
+    btnDeleteJoinedTeam.addEventListener('click', function(){
+    	const result = confirm('탈퇴 하겠습니까?');
+    	if (result) {
+    		deleteJoinedTeamForm.action = '/user/deleteJoinedTeam';
+    		deleteJoinedTeamForm.method = 'post';
+    		deleteJoinedTeamForm.submit();
+    		
+    		alert("탈퇴가 완료되었습니다.");
+    	}
+    });
+    </script>
+    
 </body>
 </html>
