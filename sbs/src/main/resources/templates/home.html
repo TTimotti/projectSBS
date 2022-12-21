@@ -57,7 +57,8 @@
 <!--                            로그인 상태 -->
                     <ul>
                     <th:block sec:authorize="isAuthenticated()">                   
-                        <span sec:authentication="name"></span><li>님, 반갑습니다! </li>
+                        <strong><span sec:authentication="name" style="color: ghostwhite;"></span></strong>
+                        <li style="color: ghostwhite; font-family: Inter;">님, 반갑습니다! </li>
                         <li><a th:href="@{ /user/myPage?userName={userName} (userName = ${ #authentication.name }) }">My Page</a></li>
                         <li><a th:href="@{ /user/myTeamList?userName={userName} (userName = ${ #authentication.name }) }">My Team List</a></li>
                         <li><a th:href="@{ /team/teamCreate }">Team Create</a></li>
