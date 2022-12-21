@@ -159,13 +159,15 @@ public class ActivityService {
         return list;
     }
     
-    
+    @Transactional
     public Integer update(ActivityUpdateDto dto) {
         log.info("update(dto={}", dto);
-// FIXME
-       Activity entity = activityRepository.findById(dto.getId()).get();
-       entity.update(dto.getPlay(), dto.getPlace(), dto.toEntity().getStartTime());
+        
+       Activity entity = activityRepository.findById(dto.getActivityId()).get();
+       
        log.info("entity = {}",entity);
+       
+       entity.update(dto.getPlay(), dto.getPlace(),dto.getBudget(),dto.toEntity().getStartTime());
 
         return entity.getActivityId();
     }

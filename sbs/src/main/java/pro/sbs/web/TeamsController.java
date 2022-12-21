@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,7 @@ public class TeamsController {
      * @author 김지훈
      * @author 서범수
      */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")    
     @GetMapping("/teamCreate") 
     public void teamCreate() {
         log.info("teamCreate() 호출");
@@ -63,7 +65,8 @@ public class TeamsController {
      * @throws IOException
      * @author 김지훈, 서범수
      * 수정사항: team 생성 시, leader도 teamsLog에 저장되도록 수정.
-     */    
+     */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/teamCreate")
     public String createTeam(TeamsCreateDto dto, @RequestParam("teamImage") MultipartFile file) throws IOException {
         log.info("creatTeam(dto={}, file={}) 호출", dto, file);
@@ -88,7 +91,8 @@ public class TeamsController {
      * @throws IOException
      * @author 김지훈, 서범수.
      */
-    @GetMapping("/teamConfig") 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PostMapping("/teamConfig") 
     public void teamConfig(Model model, Integer teamId) throws IOException{
         log.info("teamConfig(model={}, teamId={}) 호출", model, teamId);
         
@@ -114,6 +118,7 @@ public class TeamsController {
      * @return 팀 관리자 페이지로 리다이렉트.
      * @author 서범수
      */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/updateTeam")
     public String updateTeam(TeamsUpdateDto dto, @RequestParam("teamImage") MultipartFile file, Model model) throws IOException{
         log.info("updateTeam(dto={}, file={}) 호출", dto, file);
@@ -122,7 +127,7 @@ public class TeamsController {
         
         imagesService.updateTeamImage(file, dto.getTeamId());
         
-        return "redirect:/team/teamConfig?teamId=" + dto.getTeamId();
+        return "redirect:/team/teamActivity?teamId=" + teamId;
     }
     
     /**
@@ -213,6 +218,7 @@ public class TeamsController {
      * @author 추지훈.
      * 팀 메인 페이지로 들어가는 기능. (ActivityController -> TeamsController로 옮김)
      */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/teamActivity")
     public void team(Integer teamId, Model model) {
         log.info("team()");
@@ -238,7 +244,7 @@ public class TeamsController {
      * 팀 이름 중복 방지를 위해, DB에서 팀 이름을 비교하는 메서드
      * 
      * @param teamName 사용자가 입력한 
-     * @return 사용자가 입력한 값이 가능한 것인지 여부 확인
+     * @return ajax방식, 사용자가 입력한 값이 가능한 것인지 여부 확인
      * @author 서범수
      */
     @GetMapping("/checkTeamId")
@@ -258,6 +264,7 @@ public class TeamsController {
      * @return 팀 관리자 페이지로 리다이렉트.
      * @author 서범수.
      */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/changeTeamPassword")
     public String changeTeamPassword(@RequestParam(value = "changePassword") String password, Integer teamId) {
         log.info("changeTeamPassword(password= {}, teamId = {}) 호출", password, teamId);
@@ -275,6 +282,7 @@ public class TeamsController {
      * @return 탈퇴시키고 난 후, 팀 관리자 페이지로 리다이렉트.
      * @author 서범수
      */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/kickOutMembers")
     public String kickOutMembers(@RequestParam(value ="checkedMember[]") List<String> checkedMember, Integer teamId) {
         log.info("kickOutMembers(checkedMember={}, teamId={}) 호출", checkedMember, teamId);
@@ -291,6 +299,7 @@ public class TeamsController {
      * @return 팀 메인 페이지로 이동.
      * @author 서범수
      */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/handOverLeader")
     public String handOverLeader(@RequestParam(value ="checkedMember[]") List<String> checkedMember, Integer teamId) {
         log.info("handOverLeader(checkedMember={}, teamId={}) 호출", checkedMember, teamId);
@@ -306,6 +315,7 @@ public class TeamsController {
      * @return 사이트 메인 페이지로 이동.
      * @author 서범수
      */
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/deleteTeam")
     public String deleteTeam(Integer teamId) {
         log.info("deleteTeam(teamId= {}) 호출", teamId);

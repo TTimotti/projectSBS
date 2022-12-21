@@ -3,9 +3,9 @@ package pro.sbs.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,6 +18,8 @@ import org.springframework.security.web.SecurityFilterChain;
 // 컨트롤러 메서드들에서 @PreAuthorize, @PostAuthorize 애니테이션을 이용할 수 있도록
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration // 스프링부트 앱 환경 설정을 자바 코드로 설정.
+@EnableWebSecurity
+
 public class SecurityConfig {
 
     @Bean // 스프링 컨텍스트에서 생성, 관리하는 객체 - 필요한 곳에 의존성 주입

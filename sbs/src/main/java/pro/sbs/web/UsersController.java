@@ -266,6 +266,12 @@ public class UsersController {
         
     }
     
+    /**
+     * 사용자가 가입한 모임 탈퇴하는 기능
+     * @param userName
+     * @param teamId
+     * @author 서범수
+     */
     @PostMapping("/deleteJoinedTeam")
     public String deleteJoinedTeam(String userName, Integer teamId) {
         log.info("deleteJoinedTeam(userName = {}, teamId = {}) 호출", userName, teamId);

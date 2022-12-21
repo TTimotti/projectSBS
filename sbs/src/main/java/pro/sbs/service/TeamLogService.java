@@ -60,7 +60,13 @@ public class TeamLogService {
         teamsLogRepository.deleteByTeamId(teamId);
         
     }
-
+    
+    /**
+     * 사용자가 가입한 모임 탈퇴하는 기능
+     * @param userName
+     * @param teamId
+     * @author 서범수
+     */
     public void deleteJoinedTeam(String userName, Integer teamId) {
         log.info("deleteJoinedTeam(userName={}, teamId={}) 호출", userName, teamId);
         
