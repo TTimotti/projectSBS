@@ -1263,14 +1263,21 @@ function changeTypeDate() {
     /*
     * 팀 관리 페이지로 들어가는 기능.
     */
-    const btnTeamConfig = document.querySelector('#btnTeamConfig');
-    const teamConfigForm = document.querySelector('#teamConfigForm');
-    btnTeamConfig.addEventListener('click', function() {
-       teamConfigForm.action = "/team/teamConfig"
-       teamConfigForm.method = "post";
-       teamConfigForm.submit();
-    });
-    
+   teamManagement();
+function teamManagement() {
+	const teamLeaderText = document.querySelector('.teamLeaderText').value;
+	const userName = document.querySelector('.loginUserName').value;
+	if (teamLeaderText == userName) {
+		const btnTeamConfig = document.querySelector('#btnTeamConfig');
+		const teamConfigForm = document.querySelector('#teamConfigForm');
+
+		btnTeamConfig.addEventListener('click', function() {
+			teamConfigForm.action = "/team/teamConfig"
+			teamConfigForm.method = "post";
+			teamConfigForm.submit();
+		});
+	}
+}
 	/*
 	* 로그인 안하면 메인페이지로 이동시키는 기능
 	*/ 
@@ -1287,3 +1294,42 @@ function changeTypeDate() {
 		}
 		
 	}
+	
+	/*
+	 * 팀 메인 페이지 가입안한 유저 리턴기능
+	 */
+	returnNoJoinUser();
+	
+	function returnNoJoinUser() {
+		
+	const loginUser = document.querySelector('.loginUserName').value;
+	
+	axios
+	.post("/team/readByLoginUser/", loginUser)
+    .then(response => { checkLoginUserTeam(response.data)
+	})
+    .catch(err => { console.log(err) });	
+	}
+	
+	
+function checkLoginUserTeam(data) {
+
+	const teamId = document.querySelector('.joinTeamId').value;
+	let joinedTeamsId = [];
+	console.log(teamId);
+	for (let t of data) {
+		joinedTeamsId.push(t.teamId);
+	}
+
+	console.log(joinedTeamsId);
+
+	if (joinedTeamsId.includes(teamId)) {
+		
+		
+	} else {
+
+		alert('가입되지 않은 모임 입니다. 가입 후 이용해 주세요.');
+
+		window.location.replace("http://localhost:8888/");
+	}
+}

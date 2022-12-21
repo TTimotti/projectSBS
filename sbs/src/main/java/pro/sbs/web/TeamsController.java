@@ -80,7 +80,7 @@ public class TeamsController {
         TeamsJoinDto teamJoinDto = new TeamsJoinDto(entity.getTeamId(), entity.getLeader());
         teamLogService.add(teamJoinDto);
         
-        return "redirect:/team/teamConfig?teamId=" + entity.getTeamId();
+        return "redirect:/team/teamActivity?teamId=" + entity.getTeamId();
         
     }
     

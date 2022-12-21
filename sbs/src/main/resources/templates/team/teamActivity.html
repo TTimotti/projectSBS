@@ -64,8 +64,8 @@
                 <hr style="width: 200px"/>
                 <form id="deleteJoinedTeamForm">
                     <div>
-                        <input class ="loginUserName" type="hidden" th:value="${ #authentication.name }" name="userName"/>
-                        <input type="hidden" th:value="${ team.teamId }" name="teamId" />
+                        <input type="hidden" th:value="${ #authentication.name }" name="userName"/>
+                        <input class = "joinTeamId" type="hidden" th:value="${ team.teamId }" name="teamId" />
                         <a th:if="${#authentication.name != team.leader}" id="btnDeleteJoinedTeam" class="btn btn-danger" style="width: 70%; height: 5%; font-size: 15px;">모임 탈퇴</a>
                     </div>
                 </form>
@@ -163,6 +163,8 @@
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3" style="margin-left:auto; margin-right:auto;">
     <!-- week calendar -->
+    <input type="text" class ="teamLeaderText" th:value="${ team.leader }" style="display: none;"/>
+    <input type="text" class ="loginUserNames" th:value="${ #authentication.name }" style="display: none;"/>
     <input type="text" class="teamJoinDay" id="teamJoinDay" style="display: none;"/>
     <input type="text" class="activityId" id="activityId" style="display: none;">
     <input type="text" class="teamCreatedTime" id="teamCreatedTime" th:value="${ team.createdTime }" style="display: none;">
