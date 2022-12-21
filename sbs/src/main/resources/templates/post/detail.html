@@ -23,7 +23,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
-<link href="/css/calendar.css" rel="stylesheet" />
 <link href="/css/postDetail.css" rel="stylesheet"/>
 </head>
 <body>
@@ -47,11 +46,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         <div class="row">
             <div layout:fragment="content" class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="col-lg-6 card-header">
-                        <h1>게시글 : </h1>
-                    </div>
-                    
-                    <div class="col-lg-6 card-body">
+						<div class="my-2 p-3" style="color: white;">
+							<h1>공지사항 상세 내용</h1>
+							<hr style="width: 400px;" />
+						</div>
+						<div class="card-body">
                         <form>
                             <div class="my-4">
                                 <label for="postId" class="form-label">글 번호</label>

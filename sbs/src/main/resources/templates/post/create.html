@@ -23,7 +23,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="/css/styles.css" rel="stylesheet" />
-<link href="/css/calendar.css" rel="stylesheet" />
 <link href="/css/postCreate.css" rel="stylesheet"/>
 </head>
 <body>
@@ -36,56 +35,40 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         <a class="btn btn-primary" href="#signup">POST : CREATE</a>
     </div>
 </nav>
-
-
-
-<section class="features-icons">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-6 card my-2">
-            
-            <div class="col-lg-6 card-header">
-                <h1 id="pcheader">게시물작성</h1>
-            </div>
-            <div class="col card-body">
-                <form method="post">
-                    <div class="my-4">
-                        <label for="title" class="form-label">제목</label>
-                        <input id="title" class="form-control" 
-                            type="text" name="title" required autofocus />
-                    </div>
-                    <div class="my-4">
-                        <label for="content" class="form-label">내용</label>
-                        <textarea id="content" class="form-control"
-                            name="content" required></textarea>
-                    </div>
-                    <div class="my-4">
-                        <label for="author" class="form-label">작성자</label>
-                        <!-- 작성자는 로그인 사용자 아이디를 자동으로 삽입. readonly. -->
-                        <input id="author" class="form-control" type="text"
-                            name="author" th:value="${ #authentication.name }" readonly />
-                    </div>
-                    <div class="my-4">
-                        <input type="submit" class="form-control btn btn-primary" 
-                            value="작성 완료" />
-                    </div>
-                </form>
-            </div>
-        </div>
-        </div>
-    </div>
-</section>
-
-<!-- Call to Action-->
-<section class="call-to-action text-white text-center" id="signup">
-    <div class="container position-relative">
-        <div class="row justify-content-center">
-        </div>
-    </div>
-</section>
-
+	<section class="features-icons">
+		<div class="container" style="margin-left: auto; margin-right: auto;">
+			<div class="card my-2">
+				<div class="my-2 p-3" style="color: white;">
+					<h1>공지사항 작성</h1>
+					<hr style="width: 400px;" />
+				</div>
+				<div class="card-body">
+					<form method="post">
+						<div class="my-4">
+							<label for="title" class="form-label">제목</label> <input
+								id="title" class="form-control" type="text" name="title"
+								required autofocus />
+						</div>
+						<div class="my-4">
+							<label for="content" class="form-label">내용</label>
+							<textarea id="content" class="form-control" name="content"
+								required></textarea>
+						</div>
+						<div class="my-4">
+							<label for="author" class="form-label">작성자</label>
+							<!-- 작성자는 로그인 사용자 아이디를 자동으로 삽입. readonly. -->
+							<input id="author" class="form-control" type="text" name="author"
+								th:value="${ #authentication.name }" readonly />
+						</div>
+						<div class="my-4">
+							<input type="submit" class="form-control btn btn-primary"
+								value="작성 완료" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
 <!-- Footer-->
 <footer class="footer">
     <div class="container">
