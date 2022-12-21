@@ -49,35 +49,45 @@ public class MyAcListController {
     @GetMapping("/myAcList/partyin")
     public void partyin(Integer id, Model model) {
         
-        Teams team = teamService.readTeam(id);
-        log.info("team = {}", team);
-        model.addAttribute("team", team);
-        
         Activity active = activityService.readIndex(id);
         log.info("active = {}", active);
         
         model.addAttribute("active", active);
-        
-//        ActivityReadDto activeDto = activityService.readIndex(id);
-//        log.info("activeDto = {}", activeDto);
-//        model.addAttribute("activeDto", activeDto);
         
   }
     
     
     @PostMapping("/myAcList/partyin")
     public String partyin(MyActivityListCreateDto dto, RedirectAttributes attrs) {
+//        Teams team = teamService.readTeam(id);
+//        log.info("team = {}", team);
+//        Activity active = activityService.readIndex(id);
+//        log.info("active = {}", active);
+//        dto.setTeamId(team.getTeamId());
+//        dto.setActivityId(active.getActivityId());
+        
         log.info("partyIn() dto = {}", dto);
         String uName = dto.getUserName();
-        MyActivityList mylist = myActivityListService.readByUserName(uName);
+        String mylist = myActivityListService.readByUserName(uName);
         log.info("partyin mylist = {}", mylist);
-        dto.setNickname(mylist.getNickName());
+        dto.setNickname(mylist);
         log.info("partyIn() dto2 = {}", dto);
         MyActivityList entity = myActivityListService.create(dto);
         log.info("partyIn() entity = {}", entity);
-        // userId로 바꿔서 넣어야함.
+        
+        log.info("partyIn() entity = {}", dto.getTeamId());
         
 
         return "redirect:/team/teamActivity?teamId=" + dto.getTeamId();
+    }
+    
+    @PostMapping("/myAcList/delete")
+    public String delete(Integer id, RedirectAttributes attrs) {
+        log.info("delete(id={})", id);
+        Integer myActListId = myActivityListService.delete(id);
+        attrs.addFlashAttribute("myActListId", myActListId);
+        log.info("delete mylistId = {})", myActListId);
+        
+        return "redirect:/";
     }
 }

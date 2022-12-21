@@ -59,19 +59,33 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 window.addEventListener('DOMContentLoaded', function() {
 
-    // 캐쉬충전 홈페이지로 이동
-    const btnCash = document.querySelector('#btnCash');
-    const form = document.querySelector('#form');
-    
-    btnCash.addEventListener('click', function() {
-        const result = confirm('캐쉬 충전하시겠습니까?');
-        if (result) {
-            form.action = '/user/cash';
-            form.method = 'get';
-            form.submit();
 
+    // 로그인 유저 체크
+    const myPageDiv = document.querySelector('#myPageDiv');
+    const errorDiv = document.querySelector('#errorDiv');
+    console.log(loginUser);
+    console.log(userName);
+        if(userName == loginUser) {
+            myPageDiv.className = '';
+            
+        } else{
+            errorDiv.className = 'my-2 p-4 text-danger text-center rounded';
         }
-    })
+
+    // 캐쉬충전 홈페이지로 이동
+    
+//    const btnCash = document.querySelector('#btnCash');
+//    const form = document.querySelector('#form');
+//    
+//    btnCash.addEventListener('click', function() {
+//        const result = confirm('캐쉬 충전하시겠습니까?');
+//        if (result) {
+//            form.action = '/user/cash';
+//            form.method = 'get';
+//            form.submit();
+//
+//        }
+//    })
 
 
 

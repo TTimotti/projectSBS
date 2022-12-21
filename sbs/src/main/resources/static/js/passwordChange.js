@@ -123,7 +123,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // 수정 완료 버튼 찾아서 이벤트 리스너 등록 TODO
     btnChange.addEventListener('click', function() {
-        const result = confirm('비밀번호 변경?');
+        const result = confirm('비밀번호를 변경하시겠습니까?');
         if (result) {
             formPasswordChange.action = '/user/passwordChange';
             formPasswordChange.method = 'post';
@@ -131,6 +131,16 @@ window.addEventListener('DOMContentLoaded', function() {
 
         }
     })
+
+    // 로그인 유저 체크
+    const passwordChangeDiv = document.querySelector('#passwordChangeDiv');
+    const errorDiv = document.querySelector('#errorDiv');
+        if(userName.value == loginUser) {
+            passwordChangeDiv.className = 'my-2';
+            
+        } else{
+            errorDiv.className = 'my-2 p-4 text-danger text-center rounded';
+        }
 
 
 

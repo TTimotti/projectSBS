@@ -72,8 +72,8 @@ public class ActivityController {
         log.info("delete(id={})", id);
 
         Integer activityId = activityService.delete(id);
-        attrs.addFlashAttribute("deletedPostId", activityId);
-        log.info("postController delete postId = {}", activityId);
+        attrs.addFlashAttribute("deleted activityId", activityId);
+        log.info("postController delete activityId = {}", activityId);
 
         return "redirect:/";
     }

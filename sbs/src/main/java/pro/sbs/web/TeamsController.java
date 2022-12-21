@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Activity;
 import pro.sbs.domain.Images;
+import pro.sbs.domain.MyActivityList;
 import pro.sbs.domain.Teams;
 import pro.sbs.domain.Users;
 import pro.sbs.dto.PostReadDto;
@@ -29,6 +30,7 @@ import pro.sbs.dto.TeamsJoinDto;
 import pro.sbs.dto.TeamsUpdateDto;
 import pro.sbs.service.ActivityService;
 import pro.sbs.service.ImagesService;
+import pro.sbs.service.MyActivityListService;
 import pro.sbs.service.PostService;
 import pro.sbs.service.TeamLogService;
 import pro.sbs.service.TeamService;
@@ -44,6 +46,7 @@ public class TeamsController {
     private final TeamLogService teamLogService;
     private final PostService postService;
     private final ActivityService activityService;
+    private final MyActivityListService myActivityListService;
 
     /**
      * 팀 생성 페이지로 이동 GET
@@ -80,7 +83,7 @@ public class TeamsController {
         TeamsJoinDto teamJoinDto = new TeamsJoinDto(entity.getTeamId(), entity.getLeader());
         teamLogService.add(teamJoinDto);
         
-        return "redirect:/team/teamConfig?teamId=" + entity.getTeamId();
+        return "redirect:/team/teamActivity?teamId=" + entity.getTeamId();
         
     }
     
@@ -254,6 +257,10 @@ public class TeamsController {
         log.info("active = {}", active);
         
         model.addAttribute("active", active);
+        
+        List<MyActivityList> myAcList = myActivityListService.read();
+        
+        model.addAttribute("myAcList", myAcList);
         
     }
     
