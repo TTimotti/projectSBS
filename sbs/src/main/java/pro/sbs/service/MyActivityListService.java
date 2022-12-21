@@ -35,14 +35,14 @@ public class MyActivityListService {
         return entity;
     }
 
-    public List<MyActivityList> readByUserName(Integer userId) {
-        log.info("readByUserName userName = {}", userId);
-        userId = 1;
+    public MyActivityList readByUserName(String userName) {
+        log.info("readByUserName userName = {}", userName);
         
-        List<MyActivityList> mylist = myActivityListRepository.findByUserName(userId);
+        
+        MyActivityList mylist = myActivityListRepository.findByNickNameByUserName(userName);
         log.info("readByUserId mylist = {}", mylist);
         
         
-        return null;
+        return mylist;
     }
 }
