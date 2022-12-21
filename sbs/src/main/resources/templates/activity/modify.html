@@ -104,8 +104,10 @@
 						</div>
 						<div class="my-10" style="text-align: center;">
 								<button class="btn btn-danger" id="btnDelete"
+								th:if="${ #authentication.name == activity.userName }"
 								style="width: 300px; height: 65px; margin-top: 40px; margin-bottom: 40px; font-size: xx-large;  margin-right: 50px;">삭제</button>
 								<button class="btn btn-success" id="btnUpdate"
+								th:if="${ #authentication.name == activity.userName }"
 								style="width: 300px; height: 65px; margin-top: 40px; margin-bottom: 40px; font-size: xx-large;  margin-left: 50px;">수정 완료</button>
 						</div>
 					</div>

@@ -1295,7 +1295,7 @@ function teamManagement() {
 		
 		const userName = document.querySelector('.loginUserName').value;
 		
-		if(userName == "anonymousUser"){
+		if(userName === "anonymousUser"){
 			
 			alert("로그인 후 이용해 주세요.")
 			
@@ -1331,7 +1331,6 @@ function checkLoginUserTeam(data) {
 	}
 
 	console.log(checkAvailability(joinedTeamsId, teamId));
-	const even = (element) => element % teamId === 0;
 
 	console.log("JOIN", joinedTeamsId);
 
