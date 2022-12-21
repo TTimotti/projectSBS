@@ -853,15 +853,7 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
         return false;
     }));
 }
-joinedActivitys();
 
-function joinedActivitys() {
-    
-    axios
-    .post('/team/readByActivityByLoginUser/', loginUser)
-    .then(response => { progressDisplayData(response.data) })
-    .catch(err => { console.log(err) });
-}
 
 /**
  * 진행중인 활동 목록 테이블 처리 
@@ -869,6 +861,21 @@ function joinedActivitys() {
 function progressDisplayData(currentPage, dataPerPage, data) {
     
     console.log(data);
+    console.log(data.myActivityList)
+    console.log(loginUser);
+    console.log(myAcLists);
+    console.log(loginUser);
+    console.log(myAcLists[1].userName);
+    console.log(loginUser);
+    
+    readMyListData(data.myActivityList)
+    
+    function readMyListData(data) {
+        
+        
+    }
+    
+    
     let chartHtml = "";
     var i;
     //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
@@ -903,17 +910,17 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '<td>' + data[i].budget.toLocaleString(); +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-            if (data[i].teamId == 27) {
+            if (myAcLists[5].userName == loginUser && myAcLists[5].activityId == data[i].activity) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
-            + data[i].teamId 
+            + data[i].activityId
             + '">참여</a>'
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (data[i].userName == loginUser) {
+            } else if (myAcLists[5].userName == loginUser && myAcLists[5].activityId != data[i].activity) {
         chartHtml += '<td>' +
-            '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/">탈퇴</a>'
+            '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
             + '</td>'   
             }
             + '</tr>';
@@ -1085,6 +1092,7 @@ function openPop(data) {
     //-------------------------------------//
     totalData = data.myActivityList.length - 1;
     userListGlobalData = data.myActivityList;
+    console.log(data.myActivityList);
     dataPerPage = 5;
     
     joinUserListData(1, dataPerPage, data.myActivityList)
@@ -1321,6 +1329,7 @@ function checkLoginUserTeam(data) {
 	for (let t of data) {
 		joinedTeamsId.push(t.teamId);
 	}
+
 	console.log(checkAvailability(joinedTeamsId, teamId));
 
 	console.log("JOIN", joinedTeamsId);
@@ -1336,4 +1345,3 @@ function checkAvailability(arr, val) {
 		return val === arrVal;
 	});
 }
-
