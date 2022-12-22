@@ -13,3 +13,8 @@ header span {
 .d-span {
     padding: 9px 8px;
 }
+a h1 {
+    color: ghostwhite;
+    font-size: 30px;
+    font-family: sans-serif;
+}

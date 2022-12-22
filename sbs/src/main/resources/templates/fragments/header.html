@@ -9,7 +9,7 @@
 <header th:fragment="header" >
     <nav class="navbar navbar-light static-top" style="background-color: #282c37;">
         <div class="container" >
-            <a class="navbar-brand" th:href="@{/}" style="color: white;">SBS</a>
+            <a class="navbar-brand" th:href="@{/}"><h1>SBS</h1></a>
             <th:block sec:authorize="isAnonymous()">
                 <a class="btn btn-outline-primary" th:href="@{ /user/signIn }">Sign In</a>
                 <a class="btn btn-outline-primary" th:href="@{ /user/signUp }">Sign Up</a>
