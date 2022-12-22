@@ -863,12 +863,12 @@ function progressDisplayData(currentPage, dataPerPage, data) {
     
     
     let activityList = [];
-        
+    let myActivityList = [];    
     activityList.push(data.activityList);
-	
+	myActivityList.push(data.myActivityList);
 	console.log(activityList);
 	console.log(data.activityList);
-	console.log(data.myActivityList[1].userName);
+	console.log(data.myActivityList);
 	
     let chartHtml = "";
     var i;
@@ -891,7 +891,7 @@ function progressDisplayData(currentPage, dataPerPage, data) {
     
 for (i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
     
-    if (data.activityList[i] == undefined || data.myActivityList[i] == undefined)   {
+    if (data.activityList[i] === undefined)   {
         break;
     }       
 
@@ -904,7 +904,7 @@ const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
             + '<td>' + data.activityList[i].budget +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-         if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId == data.myActivityList[i].activity) {
+         if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
             + data.myActivityList[i].activityId
@@ -912,7 +912,7 @@ const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId != data.myActivityList[i].activity) {
+            } else if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
         chartHtml += '<td>' +
             '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
             + '</td>'   
