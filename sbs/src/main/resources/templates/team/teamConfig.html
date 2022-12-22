@@ -55,11 +55,11 @@
                         </div>
                     </div>  
                     <div class="col-6">
-                        <div class="mb-3">    
+                        <div class="mb-3 px-4">    
                             <strong><label>메인 이미지</label></strong><br/>
                             <img id="teamImage" th:src="@{/image/display?fid={teamFid} (teamFid = ${team.fid}) }" width = 300px height = 200px />
                         </div>
-                        <div>
+                        <div class="px-4">
                             <strong><label id="teamImageModify">이미지 변경</label></strong>
                             <input type="file" id="teamImage" class="form-form form-image" name="teamImage" />
                         </div>
