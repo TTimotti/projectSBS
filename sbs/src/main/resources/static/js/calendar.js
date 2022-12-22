@@ -866,7 +866,6 @@ function progressDisplayData(currentPage, dataPerPage, data) {
     console.log(loginUser);
     console.log(myAcLists);
     console.log(loginUser);
-    console.log(myAcLists[1].userName);
     console.log(loginUser);
     console.log(data);
 
@@ -876,7 +875,7 @@ function progressDisplayData(currentPage, dataPerPage, data) {
 	
 	console.log(activityList);
 	console.log(data.activityList);
-	console.log(data.myActivityList[1].userName);
+
 	
     let chartHtml = "";
     var i;
@@ -917,7 +916,7 @@ const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
             // if (data[i].activityId == data[i].activityId) {
             // if (myAcLists[i].userName == loginUser && myAcLists[i].activityId == data[i].activity) {
 
-         if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId == data.myActivityList[i].activity) {
+         // if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId == data[i].activityId) {
 
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
@@ -930,7 +929,7 @@ const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
             // } else if (data[i].teamId != 1) {
             // } else if (myAcLists[i].userName == loginUser && myAcLists[i].activityId != data[i].activity) {
 
-            } else if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId != data.myActivityList[i].activity) {
+//             } else if (data.myActivityList[i].userName == loginUser && data.myActivityList[i].activityId != data.myActivityList[i].activity) {
 
         chartHtml += '<td>' +
             '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
