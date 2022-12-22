@@ -15,13 +15,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Activity;
+import pro.sbs.domain.MyActivityList;
 import pro.sbs.dto.ActivityCreateDto;
 import pro.sbs.dto.ActivityInfoDto;
 import pro.sbs.dto.ActivityUpdateDto;
 import pro.sbs.dto.PostReadDto;
 import pro.sbs.service.ActivityService;
+import pro.sbs.service.MyActivityListService;
 import pro.sbs.service.PostService;
-import pro.sbs.service.TeamService;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -32,6 +33,8 @@ public class ActivityController {
     private final PostService postService;
 
     private final ActivityService activityService;
+    
+    private final MyActivityListService myActivityListService;
     
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/team/teamNoticePost")
@@ -99,7 +102,11 @@ public class ActivityController {
         Activity entity = activityService.create(dto);
         log.info("ActivityController create() entity = {}", entity);
         Integer teamId = dto.getTeamId();
-
+        log.info("list.get(0) ={}",entity.getActivityId());
+        String nickName = myActivityListService.readByUserName(entity.getUserName());
+        MyActivityList entity2 = myActivityListService.createActivityCreate(teamId, entity.getActivityId(), entity.getUserName(), nickName);
+        log.info("activity create()  entity = {}", entity2);
+        
         log.info("id={}", teamId);
 
         return "redirect:/team/teamActivity?teamId=" + teamId;

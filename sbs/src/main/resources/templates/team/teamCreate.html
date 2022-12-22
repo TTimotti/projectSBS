@@ -31,23 +31,14 @@
                 }
         </style>
         
+        <link href="/css/header.css" rel="stylesheet" />
+        
         <title>Team Create Page</title>
     </head>
     
     <body>
-        <!-- Navigation -->
-        <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a class="navbar-brand" th:href="@{/}">SBS</a>
-                <th:block sec:authorize="isAuthenticated()">
-                    <span>
-                        <span sec:authentication="name"></span><span>님, 반갑습니다! </span>
-                        <a class="btn btn-primary" th:href="@{/}">돌아가기</a>
-                        <a class="btn btn-primary" th:href="@{ /logout }">Log Out</a>
-                    </span>
-                </th:block>
-            </div>
-        </nav>
+    
+        <header th:replace="fragments/header :: header"></header>
     
         <div class="container container-body mt-3 mb-3" style="text-align: center;">          
             <div>

@@ -32,11 +32,12 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
     List<Activity> selectYourActivity(@Param(value = "userName") String loginUser2);
     
     
+//    @Query("select a from ACTIVITIES a where teamId like :teamId and to_char(a.createdTime, 'yyyy-MM-dd') like :createdTime order by createdTime desc")
+//    Activity findByLastModifiedTime(@Param(value = "createdTime") String createdTime,
+//                                    @Param(value = "teamId")Integer teamId);
     
-    
-    
-    
-    
+    @Query("select a from ACTIVITIES a order by createdTime desc")
+    List<Activity> selectByCreateTimeOrderByDesc();
     
     
     /**

@@ -322,7 +322,7 @@
 }
 
 #jb-header {
-	background-color:#d9e1e8;
+	background-color:#282c37;
 	width: 1600px;
 	margin-bottom: 20px;
 	border-radius : 5px 5px 5px 5px;
@@ -355,7 +355,7 @@
 }
 
 #jb-footer {
-	background-color:#d9e1e8;
+	background-color:#282c37;
 	border-radius : 5px 5px 5px 5px;
 	width: 1600px;
 	clear: both;

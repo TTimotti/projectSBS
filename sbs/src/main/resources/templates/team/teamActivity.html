@@ -105,9 +105,9 @@
         <div>
             <div>
              <input id="id" class="form-control" th:value="${ team.teamId }" readonly style="display:none;"/>
-                <div class="card-body bg-light col-auto" id="mypageListMain" 
+                <div class="card-body col-auto" id="mypageListMain" 
                      style="text-align: center; border-radius : 5px 5px 5px 5px;
-                     margin-bottom: 5px;" >
+                     margin-bottom: 5px; border-style: groove; border-color: 9baec8;" >
                 <div style="width: 800px; margin-left: auto; margin-right: auto;">
                                         <h3 class="card-title">공지사항</h3>
 <!-- 
@@ -157,10 +157,12 @@
 <!-- Icons Grid-->
 <div class="container position-relative"></div>
 <section class="features-icons bg-light text-center"
-    style="border-radius : 5px 5px 5px 5px; margin-bottom: 5px;" >
+    style="border-radius : 10px 10px 10px 10px; margin-bottom: 10px;" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4"
+            style="text-align: center; border-radius : 5px 5px 5px 5px;
+                     margin-bottom: 5px; border-style: groove; border-color: 9baec8;">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3" style="margin-left:auto; margin-right:auto;">
     <!-- week calendar -->
     <input type="text" class ="teamLeaderText" th:value="${ team.leader }" style="display: none;"/>

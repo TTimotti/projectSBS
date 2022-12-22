@@ -44,6 +44,16 @@ public class ActivityService {
         return list;
     }
     
+    /**
+     * 
+     * @return
+     */
+    public List<Activity> findByCreatedTimeOrderByDesc() {
+        log.info("createList", activityRepository.selectByCreateTimeOrderByDesc());
+        return activityRepository.selectByCreateTimeOrderByDesc();
+    }
+    
+    
     
     /**
      *  활동 아이디 내림차순으로 
