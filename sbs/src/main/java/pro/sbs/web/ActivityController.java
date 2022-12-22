@@ -75,7 +75,7 @@ public class ActivityController {
         attrs.addFlashAttribute("deleted activityId", activityId);
         log.info("postController delete activityId = {}", activityId);
 
-        return "redirect:/";
+        return "redirect:/team/teamActivity?teamId=21";
     }
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -134,9 +134,9 @@ public class ActivityController {
     */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/team/progressList") // 요청 URL/방식 매핑.
-    public ResponseEntity<ActivityInfoDto> home4(Integer teamId, Model model) {
+    public ResponseEntity<List<Activity>> home4(Integer teamId, Model model) {
         // 기간이 지나지 않은 활동 내역 조회
-        ActivityInfoDto list2 = activityService.readAcTimeProgress(teamId);
+        List<Activity> list2 = activityService.readAcTimeProgress(teamId);
         model.addAttribute("progressList", list2);
         return ResponseEntity.ok(list2);
     }

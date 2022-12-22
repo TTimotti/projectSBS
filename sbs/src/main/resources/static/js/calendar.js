@@ -532,9 +532,7 @@ function progressActivityList() {
           axios
         .get("/team/progressList", {params: {teamId}})
         .then(response => {
-            console.log(response.data.activityList.length);
-            console.log(response.data.myActivityList);
-            totalData = response.data.activityList.length - 1;
+            totalData = response.data.length - 1;
             proGlobalData = response.data;
             
             progressDisplayData(1, dataPerPage, response.data)
@@ -861,18 +859,11 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
  * */ 
 function progressDisplayData(currentPage, dataPerPage, data) {
     
-    
-    let activityList = [];
-    let myActivityList = [];    
-    activityList.push(data.activityList);
-	myActivityList.push(data.myActivityList);
-	console.log(activityList);
-	console.log(data.activityList);
-	console.log(data.myActivityList);
-	
+    	
     let chartHtml = "";
     var i;
     //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
+    
     currentPage = Number(currentPage);
     dataPerPage = Number(dataPerPage);
     
@@ -891,33 +882,21 @@ function progressDisplayData(currentPage, dataPerPage, data) {
     
 for (i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + dataPerPage; i++) {
     
-    if (data.activityList[i] === undefined)   {
+    if (data[i] === undefined)   {
         break;
     }       
 
-const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
-  chartHtml += '<tr>'
-            + '<td>' + data.activityList[i].activityId+ '</td>'
-            + '<td>' + stTime + '</td>'
-            + '<td><a href="/activity/detail?id=' + data.activityList[i].activityId + '">' + data.activityList[i].play + '</a></td>'
-            + '<td>' + data.activityList[i].userName + '</td>'
-            + '<td>' + data.activityList[i].budget +'</td>'
-            
-            // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-         if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
-        chartHtml += '<td>' +
-            '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
-            + data.myActivityList[i].activityId
-            + '">참여</a>'
-            + '</td>'
-            
-            // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
-        chartHtml += '<td>' +
-            '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
-            + '</td>'   
-            }
-            + '</tr>';
+const stTime = moment(data[i].startTime).format('YY-MM-DD');
+	chartHtml += '<tr>'
+		+ '<td>' + data[i].activityId + '</td>'
+		+ '<td>' + stTime + '</td>'
+		+ '<td><a href="/activity/detail?id=' + data[i].activityId + '">' + data[i].play + '</a></td>'
+		+ '<td>' + data[i].userName + '</td>'
+		+ '<td>' + data[i].budget + '</td>'
+	chartHtml += '<td>' +
+		`<a class="infoAc2 btn btn-primary" data-activityId="${data[i].activityId}" style="width:100px; height:30px; padding:0%;">정보</a>`
+		+ '</td>'
+		+ '</tr>';
             
 }
     
@@ -999,7 +978,7 @@ function joinUserListData(currentPage, dataPerPage, data){
             break;
         }
            html += '<tr>'
-                + '<td><h5>'+ data[i].nickName + '</h5></td>'
+                + '<td><h5>'+ data[i].userName + '</h5></td>'
                 + '</tr>';
     }
            html += '</tbody>';
@@ -1078,8 +1057,9 @@ function joinUserListPaging(totalData, dataPerPage, pageCount, currentPage) {
 // 활동 정보 팝업창
 function openPop(data) {
     console.log(data);
-    document.getElementById("popup_layer").style.display = "block";
-        
+    
+    document.getElementById("popup_layer").style.display = "block"; 
+ 
     popUptable(data);
 
     // 참여한 유저 목록 출력 및 페이징 기능
@@ -1097,6 +1077,27 @@ function openPop(data) {
     kakaoMap(data);
 }
 
+function openPop2(data) {
+    console.log(data);
+    
+    document.getElementById("popup_layer").style.display = "block"; 
+ 
+    popUptable2(data);
+
+    // 참여한 유저 목록 출력 및 페이징 기능
+    //-------------------------------------//
+    totalData = data.myActivityList.length - 1;
+    userListGlobalData = data.myActivityList;
+    console.log(data.myActivityList);
+    dataPerPage = 5;
+    
+    joinUserListData(1, dataPerPage, data.myActivityList)
+    joinUserListPaging(totalData, dataPerPage, pageCount, 1)
+    //-------------------------------------//
+    
+    // 카카오 지도 검색 구현
+    kakaoMap(data);
+}
 function popUptable(data) {
 
     let html = "";
@@ -1145,6 +1146,75 @@ function popUptable(data) {
 
     }
 
+function popUptable2(data) {
+
+	let userNames = [];
+	for (let n of data.myActivityList) {
+		userNames.push(n.userName);
+	}
+	let id=[];
+	
+	for(let i of data.myActivityList) {
+		if(i.userName == loginUser){
+			id.push(i.myListId);
+		}
+	}
+	$(".myActivityListId").val(id);
+
+    let html = "";
+    const stTime = moment(data.startTime).format('YYYY-MM-DD');
+
+    html += '<div style="margin-left:30px; text-decoration: underline">' 
+        + '<h4>활동 상세 정보2</h4>'
+        + '</div>'
+        + '<br/>'
+        + '<div id = "activityPopupInfo" style="float: left; margin-left:30px;">'
+        + '<label id="playTitle">활동 번호</label>'
+        + '<br/>'
+        + '<h6 class="my-2" id ="activityId" style="border: none; background: transparent;" readOnly>'
+        + data.activityId +'</h6>'
+        + '<label id="playTitle">활동 일자</label>'
+        + '<br/>'
+        + '<h6 class="my-2" id ="activityStartTime" style="border: none; background: transparent;" readOnly>'
+        + stTime +'</h6>'
+        + '<br/>'
+        + '<label id="playTitle">주제</label>'
+        + '<br/>'
+        + '<h6 class="my-2" id ="activityPlay" style="border: none; background: transparent;" readOnly>'
+        + data.play +'</h6>'
+        + '<br/>'
+        + '<label id="playBudget">회비</label>'
+        + '<br/>'
+        + '<h6 class="my-2" id ="activityBudget" style="border: none; background: transparent;" readOnly>'
+        + data.budget + '원' +'</h6>'
+        + '<br/>'
+        + '<label id="playPlace">장소</label>'
+        + '<br/>'
+        + '<h6 class="my-2" id ="activityPlace" style="border: none; background: transparent;" readOnly>'
+        + data.place +'</h6>'
+        + '</br>'
+        + '</div>'
+        + '<div id="kakaoJoinMemberList" style="float: left; margin-left:100px; width:450px;">'
+        + '<div id="map" style="width:300px;height:350px; border-radius : 5px 5px 5px 5px; float: left;"></div>'
+        + '<div style="margin-left: 340px; margin-top: 20px; text-algin: center;">'
+        + '<table id="activityJoinList" style="text-align: center;"></table>'
+        + '<br/>'
+        + '</div>'
+        + '<ul id="joinUserListul"></ul>'
+        + '</div>'
+        + '<div style="clear: left;">'
+        if(!checkAvailability(userNames, loginUser)) {
+   html +='<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
+            + data.activityId
+            + '">참여</a>'
+		}else if(checkAvailability(userNames, loginUser)) {			
+   html += '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;">취소</a>'		
+		}
+		+ '</div>';
+    $(".popup_cont").empty();
+    $(".popup_cont").append(html);
+
+    }
 
 // 카카오맵 구현 메서드
 function kakaoMap(data) {
@@ -1223,6 +1293,30 @@ $(document).on("click",".infoAc", function(event){
         .then(response => { openPop(response.data)})
         .catch(err => { console.log(err) }); 
 });
+
+$(document).on("click",".infoAc2", function(event){
+
+        // 클릭된 버튼의 속성값을 읽어오기.
+        const acId = event.target.getAttribute('data-activityId');
+        $(".activityId").val(acId)
+        const activityId= document.querySelector('#activityId').value;
+         axios
+        .get("/activityInfo", {params: {activityId}})
+        .then(response => { openPop2(response.data)})
+        .catch(err => { console.log(err) }); 
+});
+
+$(document).on("click","#joinAcFail", function(){
+	
+	const myActivityIdForm = document.querySelector('.myActivityIdForm');
+    const result = confirm('정말 취소하시겠습니까?');
+    if (result) {
+        myActivityIdForm.action = '/myAcList/delete';
+        myActivityIdForm.method = 'post';
+        myActivityIdForm.submit();
+    }
+});
+
 // 팀 가입 정원수 카운팅
 countMembers();
 
