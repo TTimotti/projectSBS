@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html 
-    xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>SBS - 정보 수정</title>
-        
-                <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />        
-        
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        
-        <link th:href="@{ /css/userUpdate.css }" rel="stylesheet" />
-        
-    </head>
-    
-    <body id="page-top" style="margin : 0 15vw 0 15vw; background-color: ghostwhite">
-     
-    
-    
-     <th:block sec:authorize="isAuthenticated()">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>SBS - 정보 수정</title>
+<!-- Icon -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    rel="stylesheet" type="text/css" />
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<!-- Google fonts-->
+<link
+    href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+    rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/css/footer.css">
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+    rel="stylesheet" type="text/css" />
+<link
+    href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+    rel="stylesheet" type="text/css" />
+
+<link th:href="@{ /css/userUpdate.css }" rel="stylesheet" />
+
+</head> 
+
+<body id="page-top"
+    style="margin: 0 15vw 0 15vw; background-color: ghostwhite">
+
+    <th:block sec:authorize="isAuthenticated()">
         <div class="my-2 p-4 text-danger text-center rounded d-none"
             id="errorDiv">
             <h1>비정상적인 접근입니다.</h1>
@@ -35,146 +44,219 @@
                         Page</a></li>
             </ul>
         </div>
-        <div class="container-fluid d-none" id = "updateDiv">
-            
-            <div class="my-2 p-4 bg-secondary text-white text-center rounded">
-                <h1>정보 수정 페이지</h1>
-            </div>
-            
-            <div class="my-2" >
-                <form method="post" id="formUpdate" enctype="multipart/form-data">
-                
-                    <div class="my-2">
-                        <label for="userId" class="form-label" style="color: #2b90d9">유저 아이디</label> 
-                        <input type="number" id="userId" class="form-control" name="userId" th:value="${ user.userId }" readonly style="background-color: #d9e1e8; color: #2b90d9; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid"  />
+        <div class="container-fluid d-none" id="updateDiv">
+            <!-- Navigation-->
+            <nav
+                class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
+                id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand" href="#page-top">정보 수정
+                        페이지</a>
+                    <button
+                        class="navbar-toggler text-uppercase font-weight-bold rounded myBtn"
+                        type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarResponsive"
+                        aria-controls="navbarResponsive"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        Menu <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse"
+                        id="navbarResponsive">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item mx-0 mx-lg-1"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded"
+                                th:href="@{ / }">Main</a></li>
+                        </ul>
                     </div>
-                    
+                </div>
+            </nav>
+
+            <div class="my-2">
+                <form method="post" id="formUpdate"
+                    enctype="multipart/form-data">
+
+                <div class="masthead bg-primary text-white text-center"
+                    style="border-radius: 10px; padding: 100px 0 0 0"></div>
                     <div class="my-2">
-                        <label for="userName" class="form-label" style="color: #2b90d9">유저 이름</label> 
-                        <input type="text" id="userName" class="form-control" name="userName"  th:value="${ user.userName }" readonly style="background-color: #d9e1e8; color: #2b90d9; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid"  />
+                        <label for="userId" class="form-label"
+                            style="color: #2b90d9">유저 아이디</label> <input
+                            type="number" id="userId"
+                            class="form-control" name="userId"
+                            th:value="${ user.userId }" readonly
+                            style="background-color: #d9e1e8; color: #2b90d9; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="password" class="form-label" style="color: #2b90d9">비밀번호</label>
-                        <input type="password" id="password" class="form-control" name="password" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                        <label for="userName" class="form-label"
+                            style="color: #2b90d9">유저 이름</label> <input
+                            type="text" id="userName"
+                            class="form-control" name="userName"
+                            th:value="${ user.userName }" readonly
+                            style="background-color: #d9e1e8; color: #2b90d9; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                            
+
+                    <div class="my-2">
+                        <label for="password" class="form-label"
+                            style="color: #2b90d9">비밀번호</label> <input
+                            type="password" id="password"
+                            class="form-control" name="password"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                    </div>
+
                     <div class="my-2" id="pinput">
                         <p class="text-info">비밀번호를 입력해주세요.</p>
                     </div>
-                            
+
                     <div class="my-2 d-none" id="pcheck">
                         <p class="text-danger">비밀번호가 올바르지 않습니다.</p>
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="passwordcheck" class="form-label" style="color: #2b90d9">비밀번호 확인</label> 
-                        <input type="password" id="passwordcheck" class="form-control" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                        <label for="passwordcheck" class="form-label"
+                            style="color: #2b90d9">비밀번호 확인</label> <input
+                            type="password" id="passwordcheck"
+                            class="form-control"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                    
+
                     <div class="my-2 d-none" id="pok">
                         <p class="text-success">비밀번호가 확인 되었습니다.</p>
                     </div>
-                    
+
                     <div class="my-2 d-none" id="pnok">
                         <p class="text-danger">비밀번호가 서로 다릅니다.</p>
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="nickname" class="form-label" style="color: #2b90d9">닉네임</label>
-                        <input type="text" id="nickname" class="form-control" name="nickname" th:value="${ user.nickname }" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                        <label for="nickname" class="form-label"
+                            style="color: #2b90d9">닉네임</label> <input
+                            type="text" id="nickname"
+                            class="form-control" name="nickname"
+                            th:value="${ user.nickname }"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="email" class="form-label" style="color: #2b90d9">이메일</label> 
-                        <input type="email" id="email" class="form-control" name="email" th:value="${ user.email }" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                        <label for="email" class="form-label"
+                            style="color: #2b90d9">이메일</label> <input
+                            type="email" id="email" class="form-control"
+                            name="email" th:value="${ user.email }"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="phone" class="form-label" style="color: #2b90d9">휴대폰</label> 
-                        <input type="text" id="phone" class="form-control" name="phone" th:value="${ user.phone }" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                        <label for="phone" class="form-label"
+                            style="color: #2b90d9">휴대폰</label> <input
+                            type="text" id="phone" class="form-control"
+                            name="phone" th:value="${ user.phone }"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="selectGender" class="form-label" style="color: #2b90d9">성별</label>
-                        <select class="form-select" name="gender" id="selectGender" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" >
+                        <label for="selectGender" class="form-label"
+                            style="color: #2b90d9">성별</label> <select
+                            class="form-select" name="gender"
+                            id="selectGender"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid">
                             <option value="male" selected>남자</option>
                             <option value="female">여자</option>
                         </select>
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="birthdate" class="form-label" style="color: #2b90d9">생일</label>
-                        <input type="date" id="birthdate" class="form-control" name="birthdate" th:value="${ user.birthdate }" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                        <label for="birthdate" class="form-label"
+                            style="color: #2b90d9">생일</label> <input
+                            type="date" id="birthdate"
+                            class="form-control" name="birthdate"
+                            th:value="${ user.birthdate }"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                    
+
                     <div class="my-2">
-                        <label for="location" class="form-label" style="color: #2b90d9">지역</label>
-                        
-                        <select id="location" name="location" class="form-select" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" >
+                        <label for="location" class="form-label"
+                            style="color: #2b90d9">지역</label> <select
+                            id="location" name="location"
+                            class="form-select"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid">
                             <option value="강원" selected>강원도</option>
-                            <option value="경기" >경기도</option>
-                            <option value="경남" >경상남도</option>
-                            <option value="경북" >경상북도</option>
-                            <option value="서울" >서울</option>
-                            <option value="전남" >전라남도</option>
-                            <option value="전북" >전라북도</option>
-                            <option value="제주" >제주도</option>
-                            <option value="충남" >충청남도</option>
-                            <option value="충북" >충청북도</option>
-                        </select> 
+                            <option value="경기">경기도</option>
+                            <option value="경남">경상남도</option>
+                            <option value="경북">경상북도</option>
+                            <option value="서울">서울</option>
+                            <option value="전남">전라남도</option>
+                            <option value="전북">전라북도</option>
+                            <option value="제주">제주도</option>
+                            <option value="충남">충청남도</option>
+                            <option value="충북">충청북도</option>
+                        </select>
                     </div>
-                    
-                    
-                    
-<!--                 이미지 로드 -->
-                    <div>    
-                        <label style="color: #2b90d9">유저 이미지</label>
-                        <img id="userImage" th:src="@{/image/display?fid={userFid} (userFid = ${user.fid}) }" width="300" height="200" />
-                    </div>
-<!--                 이미지 업로드 -->
+
+
+
+                    <!--                 이미지 로드 -->
                     <div>
-                        <label id="teamImageModify" style="color: #2b90d9">이미지 변경</label>
-                        <input type="file" id="userImage" name="userImage" style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                        <label style="color: #2b90d9">유저 이미지</label> <img
+                            id="userImage"
+                            th:src="@{/image/display?fid={userFid} (userFid = ${user.fid}) }"
+                            width="300" height="200" />
                     </div>
-                    
+                    <!--                 이미지 업로드 -->
+                    <div>
+                        <label id="teamImageModify"
+                            style="color: #2b90d9">이미지 변경</label> <input
+                            type="file" id="userImage" name="userImage"
+                            style="background-color: ghostwhite; color: #282c37; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
+                    </div>
+
                     <div class="my-2">
-                        <label for="cash" class="form-label" style="color: #2b90d9">캐쉬</label>
-                        <input id="cash" class="form-control" th:value="${ user.cash }" name ="cash" readonly style="background-color: #d9e1e8; color: #2b90d9; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid"/>
+                        <label for="cash" class="form-label"
+                            style="color: #2b90d9">캐쉬</label> <input
+                            id="cash" class="form-control"
+                            th:value="${ user.cash }" name="cash"
+                            readonly
+                            style="background-color: #d9e1e8; color: #2b90d9; border-color: #2b90d9; border-radius: 0.5rem; border: 2px solid" />
                     </div>
-                    
+
                 </form>
-                
+
                 <div class="row">
-                
+
                     <div class="my-2 col-3">
-                        <button class="form-control btn btn-outline-success disabled"  id="btnUpdate">수정하기</button>
+                        <button
+                            class="form-control btn btn-outline-success disabled"
+                            id="btnUpdate">수정하기</button>
                     </div>
-                    
+
                     <div class="my-2 col-3">
-                        <button class="form-control btn btn-outline-warning " id="btnCancel">뒤로가기</button>
+                        <button
+                            class="form-control btn btn-outline-secondary "
+                            id="btnCancel">뒤로가기</button>
                     </div>
-                    
+
                     <div class="my-2 col-3">
-                        <button class="form-control btn btn-outline-primary disabled" id="btnPasswordChange">비밀번호 변경</button>
+                        <button
+                            class="form-control btn btn-outline-secondary disabled"
+                            id="btnPasswordChange">비밀번호 변경</button>
                     </div>
-                    
+
                     <div class="my-2 col-3">
-                        <button class="form-control btn btn-outline-danger disabled" id="btnDeleteUser">회원 탈퇴</button>
+                        <button
+                            class="form-control btn btn-outline-danger disabled"
+                            id="btnDeleteUser">회원 탈퇴</button>
                     </div>
-                    
+
                 </div>
-                                                                
-                    <div class="my-2" id="pinfo">
-                        <p class="text-danger">비밀번호가 확인되면 버튼이 활성화됩니다.</p>
-                    </div>
+
+                <div class="my-2" id="pinfo">
+                    <p class="text-danger">비밀번호가 확인되면 버튼이 활성화됩니다.</p>
+                </div>
             </div>
-            
+
         </div>
     </th:block>
     <th:block sec:authorize="isAnonymous()">
-        <div
-            class="my-2 p-4 text-danger text-center rounded">
+        <div class="my-2 p-4 text-danger text-center rounded">
             <h1>비정상적인 접근입니다.</h1>
             <ul>
                 <li><a th:href="@{ /user/signIn }">Sign In</a></li>
@@ -183,59 +265,59 @@
         </div>
 
     </th:block>
-            <!-- Footer-->
-        <footer class="footer" style="clear: left;">
-            <div class="container">
-                <div class="row">
-                    <div
-                        class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                        <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a
-                                href="/">HOME</a></li>
-                            <!--                         <li class="list-inline-item">⋅</li> -->
-                            <!--                         <li class="list-inline-item"> -->
-                            <!--                             <a href="/">마이페이지</a> -->
-                            <!--                         </li> -->
-                            <!--                         <li class="list-inline-item">⋅</li> -->
-                            <!--                         <li class="list-inline-item"> -->
-                            <!--                             <a href="/">공지 사항</a> -->
-                            <!--                         </li> -->
-                        </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">
-                            &copy; SBSProject :: su :: choo :: lee ::
-                            jang :: kim :: kim</p>
-                    </div>
-                    <div
-                        class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item me-4"><a
-                                href="https://ko-kr.facebook.com/">
-                                    <i class="bi-facebook fs-3"></i>
-                            </a></li>
-                            <li class="list-inline-item me-4"><a
-                                href="https://twitter.com/"> <i
-                                    class="bi-twitter fs-3"></i>
-                            </a></li>
-                            <li class="list-inline-item"><a
-                                href="https://www.instagram.com/"> <i
-                                    class="bi-instagram fs-3"></i>
-                            </a></li>
-                        </ul>
-                    </div>
+    <!-- Footer-->
+    <footer class="footer" style="clear: left;">
+        <div class="container">
+            <div class="row">
+                <div
+                    class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item"><a href="/">HOME</a></li>
+                        <!--                         <li class="list-inline-item">⋅</li> -->
+                        <!--                         <li class="list-inline-item"> -->
+                        <!--                             <a href="/">마이페이지</a> -->
+                        <!--                         </li> -->
+                        <!--                         <li class="list-inline-item">⋅</li> -->
+                        <!--                         <li class="list-inline-item"> -->
+                        <!--                             <a href="/">공지 사항</a> -->
+                        <!--                         </li> -->
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy;
+                        SBSProject :: su :: choo :: lee :: jang :: kim
+                        :: kim</p>
+                </div>
+                <div
+                    class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item me-4"><a
+                            href="https://ko-kr.facebook.com/"> <i
+                                class="bi-facebook fs-3"></i>
+                        </a></li>
+                        <li class="list-inline-item me-4"><a
+                            href="https://twitter.com/"> <i
+                                class="bi-twitter fs-3"></i>
+                        </a></li>
+                        <li class="list-inline-item"><a
+                            href="https://www.instagram.com/"> <i
+                                class="bi-instagram fs-3"></i>
+                        </a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-                <script th:inline = "javascript">
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JS-->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:inline="javascript">
         // 타입리프 inline 기능을 이용하면 자바스크립트 안에서 타임리프 속성을 이용할 수 있음
         
         // 로그인 사용자 아이디를 자바스크립트 변수에 저장
          const loginUser=[[ ${#authentication.name} ]];
-        </script> 
-        <script th:src=" @{ /js/userUpdate.js }"></script> 
-    </body>  
+        </script>
+    <script th:src=" @{ /js/userUpdate.js }"></script>
+</body>
 </html>
