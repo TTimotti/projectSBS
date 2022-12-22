@@ -20,38 +20,53 @@
                 text-align: center;
             }
             
+            th  {
+                color: #2b90d9;
+            }
+            
             body {
                 background-color: ghostwhite;
             }
             
             .container-body {
                 width: 800px;
-                background-color: white;
-                border: 1px solid grey;
-                border-radius: 10px;
+                background-color: ghostwhite;
+                border: 3px solid #2b90d9;
+                border-radius: 15px;
             }
             
             .form-form {
                 width:300px;
+                border: 2px solid #2b90d9;
+                border-radius: 8px;
+                color: #282c37;
             }
-            
+             .e {
+                background-color: ghostwhite;
+                color: #9baec8;
+            }
             .short-form {
                 width: 25px;
                 }
+                
+            img {
+                border: 2px solid #2b90d9;
+                border-radius: 15px;
+                
+            }
         </style>
+        <link href="/css/header.css" rel="stylesheet" />
         
         <title>Team Config Page</title>
     </head>
 
     <body>
-    <div th:replace="fragments/header :: header"></div>
+    <header th:replace="fragments/header :: header"></header>
     
 
         <div class="container container-body mt-3 mb-3">
-            <div class ="row mt-3">
-                <h3>팀 정보</h3>
-
-                <hr/>
+            <div class ="row mt-4 mb-4">
+                <h2>팀 정보</h2>   
             </div>
             <form id="updateTeamForm" th:action="@{ /team/teamUpdate }" method="post" enctype="multipart/form-data">
                 <div class = "row">
@@ -69,7 +84,7 @@
                         </div>
                         <div class="mb-3">
                             <h6>팀 리더</h6>
-                            <input id="leader" class="form-form" th:value="${ team.leader }" readonly />          
+                            <input id="leader" class="form-form e" th:value="${ team.leader }" readonly />          
                         </div>
                         <div class="mb-3">
                             <h6><label for="purpose">팀 소개</label></h6>
@@ -77,7 +92,7 @@
                         </div> 
                         <div class="mb-3">
                             <h6>개설일</h6>
-                            <input id="createdTime" class="form-form" th:value="${ team.createdTime }" readonly />          
+                            <input id="createdTime" class="form-form e" th:value="${ team.createdTime }" readonly />          
                         </div>                
                         <div class="mb-3">
                             <h6><label for="maxMember">최대 회원 수 </label></h6>
@@ -91,7 +106,7 @@
                         </div>
                         <div>
                             <label id="teamImageModify">이미지 변경</label>
-                            <input type="file" id="teamImage" name="teamImage" />
+                            <input type="file" id="teamImage" class="form-form" name="teamImage" />
                         </div>
                     </div>
                 </div>
@@ -102,10 +117,10 @@
                  </div>           
             </form>
             
-                         
-            <div class ="row mt-3">
+               <hr/>          
+            <div class ="row mt-4 mb-4">
                 <h3>비밀번호 변경</h3>
-                <hr/>
+                
             </div>
             <form id="changeTeamPasswordForm">
                 <div class="row">
@@ -131,10 +146,10 @@
                     </div>
                  </div>
             </form>
-            
-            <div class ="row mt-3">
+            <hr/>
+            <div class ="row mt-4 mb-4">
                 <h3>멤버 관리</h3>
-                <hr/>
+                
             </div>
                 <form id="memberForm">
                     <table class="table table-hover">

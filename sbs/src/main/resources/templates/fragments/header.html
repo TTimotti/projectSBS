@@ -4,10 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       
 <head>
-
     <link href="/css/styles.css" rel="stylesheet" />
 </head>
-<div th:fragment="header" >
+<header th:fragment="header" >
     <nav class="navbar navbar-light static-top" style="background-color: #282c37;">
         <div class="container" >
             <a class="navbar-brand" th:href="@{/}" style="color: white;">SBS</a>
@@ -17,7 +16,7 @@
             </th:block>
             <th:block sec:authorize="isAuthenticated()">
                 <span>
-                    <span sec:authentication="name"></span><span>님, 반갑습니다! </span>
+                    <span class="d-span"><span sec:authentication="name" ></span><span>님, 반갑습니다! </span></span>
                     <a class="btn btn-outline-primary" th:href="@{ /user/myPage?userName={userName} (userName = ${ #authentication.name }) }">My Page</a>
                     <a class="btn btn-outline-primary" th:href="@{ /user/myTeamList?userName={userName} (userName = ${ #authentication.name }) }">My Team List</a>
                     <a class="btn btn-outline-primary" th:href="@{ /team/teamCreate }">Team Create</a>
@@ -26,6 +25,6 @@
             </th:block>
         </div>
     </nav>
-</div>
+</header>
       
 </html>

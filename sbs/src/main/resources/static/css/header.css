@@ -1,0 +1,15 @@
+@charset "UTF-8";
+ header .btn {
+    color: #2b90d9;
+    margin: 8px 0.25vw;
+    padding: 8px 8px;
+    border: 2px #2b90d9 solid; 
+}
+
+header span {
+    color: #9baec8;
+}
+
+.d-span {
+    padding: 9px 8px;
+}
