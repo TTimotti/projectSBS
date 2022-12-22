@@ -867,6 +867,7 @@ function progressDisplayData(currentPage, dataPerPage, data) {
     console.log(loginUser);
     console.log(myAcLists[1].userName);
     console.log(loginUser);
+    console.log(data);
     
     readMyListData(data.myActivityList)
     
@@ -899,7 +900,8 @@ for (i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + 
     
     if (data[i] == undefined) {
         break;
-    }       
+    }   
+    
 
 const stTime = moment(data[i].startTime).format('YY-MM-DD');
   chartHtml += '<tr>'
@@ -910,8 +912,8 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '<td>' + data[i].budget.toLocaleString(); +'</td>'
             
             // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-            if (data[i].activityId == data[i].activityId) {
-                            // if (myAcLists[5].userName == loginUser && myAcLists[5].activityId == data[i].activity) {
+            // if (data[i].activityId == data[i].activityId) {
+            if (myAcLists[i].userName == loginUser && myAcLists[i].activityId == data[i].activity) {
         chartHtml += '<td>' +
             '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
             + data[i].activityId
@@ -919,8 +921,8 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
             + '</td>'
             
             // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (data[i].teamId != 1) {
-                 // } else if (myAcLists[5].userName == loginUser && myAcLists[5].activityId != data[i].activity) {
+            // } else if (data[i].teamId != 1) {
+            } else if (myAcLists[i].userName == loginUser && myAcLists[i].activityId != data[i].activity) {
         chartHtml += '<td>' +
             '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
             + '</td>'   
