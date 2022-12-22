@@ -20,7 +20,7 @@ public class MyActivityListCreateDto {
     
     public MyActivityList toEntity() {
         return MyActivityList.builder()
-                .TeamId(teamId)
+                .teamId(teamId)
                 .activityId(activityId)
                 .userName(userName)
                 .nickName(nickname)

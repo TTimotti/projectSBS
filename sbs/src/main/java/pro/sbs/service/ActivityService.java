@@ -103,9 +103,12 @@ public class ActivityService {
 
    /*  진행중인 활동 목록 불러오는 기능.
     */
-   public List<Activity> readAcTimeProgress(Integer teamId){
-
-       return activityRepository.startTimeByProgress(teamId);
+   public ActivityInfoDto readAcTimeProgress(Integer teamId){
+	 List<Activity> activity = activityRepository.startTimeByProgress(teamId);
+	 List<MyActivityList> myActivityList = myActivityListRepository.ActivityJoinMemberInfo2(teamId);
+     ActivityInfoDto dto = ActivityInfoDto.builder().activityList(activity)
+             .myActivityList(myActivityList).build();
+     return dto;
    }
     
     /**
