@@ -243,7 +243,7 @@ public class UsersController {
     @PostMapping("/delete")
     public String delete(Integer userId) {
         log.info("delete(userId) = {}", userId);
-
+        
         Integer result = usersService.delete(userId);
 
         return "redirect:/logout";
