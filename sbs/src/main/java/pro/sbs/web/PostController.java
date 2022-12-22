@@ -88,15 +88,15 @@ public class PostController {
     public String delete(Integer id, RedirectAttributes attrs) {
         List<ReplyReadDto> list = new ArrayList<>();
         Post post = postService.readIndex(id);
-        list = replyService.readReplies(id);
-        log.info("replyList = {}", list);
-        
-        
-        
-        for(int i = 0; list.get(i) == null; i++) {
-            replyService.delete(list.get(i).getReplyId());
-            
-        }
+//        list = replyService.readReplies(id);
+//        log.info("replyList = {}", list);
+//        
+//        
+//        
+//        for(int i = 0; list.get(i) == null; i++) {
+//            replyService.delete(list.get(i).getReplyId());
+//            
+//        }
         
         log.info("PostController delete(id={})", id);
         
