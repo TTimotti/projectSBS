@@ -4,59 +4,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     
     <head>
-    <link href="/css/styles.css" rel="stylesheet" />
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-    rel="stylesheet" type="text/css" />
-<!-- Google fonts-->
-<link
-    href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
-    rel="stylesheet" type="text/css" />        
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        
-        <style>
-            th, td {
-                text-align: center;
-            }
-            
-            th  {
-                color: #2b90d9;
-            }
-            
-            body {
-                background-color: ghostwhite;
-            }
-            
-            .container-body {
-                width: 800px;
-                background-color: ghostwhite;
-                border: 3px solid #2b90d9;
-                border-radius: 15px;
-            }
-            
-            .form-form {
-                width:300px;
-                border: 2px solid #2b90d9;
-                border-radius: 8px;
-                color: #282c37;
-            }
-             .e {
-                background-color: ghostwhite;
-                color: #9baec8;
-            }
-            .short-form {
-                width: 25px;
-                }
-                
-            img {
-                border: 2px solid #2b90d9;
-                border-radius: 15px;
-                
-            }
-        </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />        
+        <link href="/css/styles.css" rel="stylesheet" />
+        <link href="/css/teamConfig.css" rel="stylesheet" />
         <link href="/css/header.css" rel="stylesheet" />
-        
+    
         <title>Team Config Page</title>
     </head>
 
@@ -64,7 +19,7 @@
     <header th:replace="fragments/header :: header"></header>
     
 
-        <div class="container container-body mt-3 mb-3">
+        <div class="container container-body mt-5 mb-3">
             <div class ="row mt-4 mb-4">
                 <h2>팀 정보</h2>   
             </div>
@@ -73,7 +28,7 @@
                     <div class = "col-6">
                     <input type="hidden" id="teamId" th:value="${ team.teamId } " name = "teamId" readonly/>
                         <div class="mb-3">
-                            <h6><label for="teamName">팀 이름</label></h6>
+                            <strong><label for="teamName">팀 이름</label></strong><br/>
                             <input id="teamName" class="form-form" th:value="${ team.teamName }" name="teamName" required/>
                                 <div class="my-2 d-none" id="ok">
                                     <p class="text-success">사용 가능한 아이디입니다.</p>
@@ -83,30 +38,30 @@
                                 </div>          
                         </div>
                         <div class="mb-3">
-                            <h6>팀 리더</h6>
-                            <input id="leader" class="form-form e" th:value="${ team.leader }" readonly />          
+                            <strong><label>팀 리더</label></strong><br/>
+                            <input id="leader" class="form-form form-fixed" th:value="${ team.leader }" readonly />          
                         </div>
                         <div class="mb-3">
-                            <h6><label for="purpose">팀 소개</label></h6>
-                            <textarea id="purpose" class="form-form" th:text="${ team.purpose }" name="purpose" style="width : 300px; resize: none; " required></textarea>        
+                            <strong><label for="purpose">팀 소개</label></strong><br/>
+                            <textarea id="purpose" class="form-form form-textarea" th:text="${ team.purpose }" name="purpose"  required></textarea>        
                         </div> 
                         <div class="mb-3">
-                            <h6>개설일</h6>
-                            <input id="createdTime" class="form-form e" th:value="${ team.createdTime }" readonly />          
+                            <strong><label>개설일</label></strong><br/>
+                            <input id="createdTime" class="form-form form-fixed" th:value="${#temporals.format(team.createdTime, 'yyyy년 MM월 dd일 hh시 mm분')}" readonly />          
                         </div>                
                         <div class="mb-3">
-                            <h6><label for="maxMember">최대 회원 수 </label></h6>
-                            <input id="maxMember" class="short-form" th:value="${ team.maxMember }" name="maxMember" required/><span>명</span>      
+                            <strong><label for="maxMember">최대 회원 수 </label></strong><br/>
+                            <input id="maxMember" class="short-form" th:value="${ team.maxMember }" name="maxMember" required/><strong><span>명</span></strong>      
                         </div>
                     </div>  
                     <div class="col-6">
                         <div class="mb-3">    
-                            <h6>메인 이미지</h6>
+                            <strong><label>메인 이미지</label></strong><br/>
                             <img id="teamImage" th:src="@{/image/display?fid={teamFid} (teamFid = ${team.fid}) }" width = 300px height = 200px />
                         </div>
                         <div>
-                            <label id="teamImageModify">이미지 변경</label>
-                            <input type="file" id="teamImage" class="form-form" name="teamImage" />
+                            <strong><label id="teamImageModify">이미지 변경</label></strong>
+                            <input type="file" id="teamImage" class="form-form form-image" name="teamImage" />
                         </div>
                     </div>
                 </div>
@@ -126,12 +81,12 @@
                 <div class="row">
                     <div class="mb-3">
                         <input type="hidden" th:value="${ team.teamId }" name="teamId" readonly />
-                        <h6><label for="changePassword">변경할 비밀번호</label></h6>
-                        <input type="password" id="changePassword" name="changePassword"/>
+                        <strong><label for="changePassword">변경할 비밀번호</label></strong><br/>
+                        <input type="password" id="changePassword" class="form-form" name="changePassword"/>
                     </div>
                     <div class="mb-3">
-                        <h6><label for="changePassword2">다시 입력</label><br/></h6>
-                        <input type="password" id="changePassword2" name="changePassword2"/>
+                        <strong><label for="changePassword2">비밀번호 재입력</label></strong><br/>
+                        <input type="password" id="changePassword2" class="form-form" name="changePassword2"/>
                     </div>
                         <div class="my-2 d-none" id="pok">
                             <p class="text-success">비밀번호가 확인 되었습니다.</p>
