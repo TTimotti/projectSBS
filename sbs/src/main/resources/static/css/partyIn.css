@@ -4,27 +4,6 @@ body {
        background-color: #282c37;
     color: rgb(192, 192, 192);
 }
-.features-icons {
-    background-color: ghostwhite;
-       color: rgb(233, 233, 233);
-}
-
-.my-2 {
-    background-color:  #9baec8; 
-    color: #fff;
-    border-radius: 20px 20px 20px 20px;
-    
-}
-
-.my-4 {
-   background-color:  #9baec8; 
-    color: #fff;
-    border-radius: 20px 20px 20px 20px;
-     
-}
-.card- {
-    
-}
 
 .col-lg-4 {
     background-color:  #9baec8; 
@@ -45,4 +24,9 @@ body {
  
 #pcheader {
     border-radius: 10px 10px 10px 10px;
+}
+.container {
+	
+	border: 1px;
+	
 }
