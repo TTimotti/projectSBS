@@ -254,7 +254,7 @@ public class TeamsController {
         
         List<Activity> active = activityService.read();
         
-        log.info("active = {}", active);
+        log.info("active = {}", active);        
         
         model.addAttribute("active", active);
         

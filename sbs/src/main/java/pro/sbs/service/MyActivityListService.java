@@ -39,6 +39,22 @@ public class MyActivityListService {
         
         return entity;
     }
+    
+    public MyActivityList createActivityCreate(Integer teamId, Integer activityId, String userName, String nickName) {
+        
+
+        MyActivityList myList = MyActivityList.builder().teamId(teamId)
+                .activityId(activityId)
+                .userName(userName)
+                .nickName(nickName)
+                .build();
+        log.info("create(myList) = {}", myList);
+        
+        MyActivityList entity = myActivityListRepository.save(myList);
+        
+        
+        return entity;
+    }
 
     public String readByUserName(String userName) {
         log.info("readByUserName dto = {}", userName);

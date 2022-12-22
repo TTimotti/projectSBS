@@ -4,13 +4,13 @@ body {
     color: rgb(0, 0, 0);
 }
 .features-icons {
-    background-color: #d9e1e8;;
+    background-color: ghostwhite;
        color: rgb(0, 0, 0);
 }
 
 .my-2 {
     border-radius: 20px 20px 20px 20px;
-    background-color:  #77919d;
+    background-color:  #9baec8;
 }
 
 
@@ -19,3 +19,6 @@ body {
     border-radius: 10px 10px 10px 10px;
 }
 
+h1 {
+    color: #fff;
+}

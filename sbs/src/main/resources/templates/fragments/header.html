@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      
+<head>
+
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<div th:fragment="header" >
+    <nav class="navbar navbar-light static-top" style="background-color: #282c37;">
+        <div class="container" >
+            <a class="navbar-brand" th:href="@{/}" style="color: white;">SBS</a>
+            <th:block sec:authorize="isAnonymous()">
+                <a class="btn btn-outline-primary" th:href="@{ /user/signIn }">Sign In</a>
+                <a class="btn btn-outline-primary" th:href="@{ /user/signUp }">Sign Up</a>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <span>
+                    <span sec:authentication="name"></span><span>님, 반갑습니다! </span>
+                    <a class="btn btn-outline-primary" th:href="@{ /user/myPage?userName={userName} (userName = ${ #authentication.name }) }">My Page</a>
+                    <a class="btn btn-outline-primary" th:href="@{ /user/myTeamList?userName={userName} (userName = ${ #authentication.name }) }">My Team List</a>
+                    <a class="btn btn-outline-primary" th:href="@{ /team/teamCreate }">Team Create</a>
+                    <a class="btn btn-outline-primary" th:href="@{ /logout }">Log Out</a>
+                </span>
+            </th:block>
+        </div>
+    </nav>
+</div>
+      
+</html>
