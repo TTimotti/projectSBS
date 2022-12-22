@@ -455,7 +455,7 @@ function scSearchList(data) {
                 + '<td>' + t.userName + '</td>'
                 + '<td>' + t.budget.toLocaleString(); +'</td>'
             str += '<td>' +
-                `<a class="infoAc btn btn-primary" data-activityId="${ t.activityId }" style="width:100px; height:30px; padding:0%;">정보</a>`
+                `<a class="infoAc btn btn-primary" data-activityId="${ t.activityId }" style="width:100px; height:30px; padding:0%; color:ghostwhite;">정보</a>`
                 + '</td>'
                 + '</tr>';
         }
@@ -702,7 +702,7 @@ function pastDisplayData(currentPage, dataPerPage, data) {
                 + '<td>' + data[i].userName + '</td>'
                 + '<td>' + data[i].budget.toLocaleString(); +'</td>'
       chartHtml +='<td>' +
-                `<a class="infoAc btn btn-primary" data-activityId="${ data[i].activityId }" style="width:100px; height:30px; padding:0%;">정보</a>`
+                `<a class="infoAc btn btn-primary" data-activityId="${ data[i].activityId }" style="width:100px; height:30px; padding:0%; color:ghostwhite;">정보</a>`
                 + '</td>'
                 + '</tr>';
     }
@@ -900,7 +900,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
 		+ '<td>' + data[i].userName + '</td>'
 		+ '<td>' + data[i].budget + '</td>'
 	chartHtml += '<td>' +
-		`<a class="infoAc2 btn btn-primary" data-activityId="${data[i].activityId}" style="width:100px; height:30px; padding:0%;">정보</a>`
+		`<a class="infoAc2 btn btn-primary" data-activityId="${data[i].activityId}" style="width:100px; height:30px; padding:0%; color:ghostwhite;">정보</a>`
 		+ '</td>'
 		+ '</tr>';
 
