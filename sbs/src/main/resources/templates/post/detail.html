@@ -42,31 +42,31 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         <div class="row">
             <div layout:fragment="content" class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-						<div class="my-2 p-3" style="color: white;">
-							<h1>공지사항 상세 내용</h1>
-							<hr style="width: 400px;" />
-						</div>
-						<div class="card-body">
+                        <div class="my-2 p-3" style="color: ghostwhite;">
+                            <h1 style="color: #2b90d9;">공지사항 상세 내용</h1>
+                            <hr style="width: 400px; color: #282c37;"/>
+                        </div>
+                        <div class="card-body">
                         <form>
                             <div class="my-4">
-                                <label for="postId" class="form-label">글 번호</label>
+                                <label for="postId" class="form-label" style="color: #2b90d9;">글 번호</label>
                                 <input id="postId" class="form-control" th:value="${ post.postId }" readonly />
                             </div>
                             <div class="my-4">
-                                <label for="title" class="form-label">제목</label>
+                                <label for="title" class="form-label" style="color: #2b90d9;">제목</label>
                                 <input id="title" class="form-control" th:value="${ post.title }" readonly />
                             </div>
                             <div class="my-4">
-                                <label for="content" class="form-label">내용</label>
+                                <label for="content" class="form-label" style="color: #2b90d9;">내용</label>
                                 <textarea id="content" class="form-control" th:text="${ post.content }" readonly></textarea>
                             </div>
                             <div class="my-4">
-                                <label for="author" class="form-label">작성자</label>
+                                <label for="author" class="form-label" style="color: #2b90d9;">작성자</label>
                                 <input id="author" class="form-control" th:value="${ post.author }" readonly />
                             </div>
                             <div class="my-4">
                                 <label for="createdTime"
-                                    class="form-label">작성 시간</label>
+                                    class="form-label" style="color: #2b90d9;">작성 시간</label>
                                 <input id="createdTime"
                                     class="form-control"
                                     th:value="${ #temporals.format(post.createdTime, 'yyyy-MM-dd HH:mm:ss') }"
@@ -74,7 +74,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                             </div>
                             <div class="my-4">
                                 <label for="modifiedTime"
-                                    class="form-label">수정 시간</label>
+                                    class="form-label" style="color: #2b90d9;">수정 시간</label>
                                 <input id="modifiedTime"
                                     class="form-control"
                                     th:value="${ #temporals.format(post.modifiedTime, 'yyyy-MM-dd HH:mm:ss') }"

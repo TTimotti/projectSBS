@@ -10,25 +10,26 @@ body {
 }
 
 .my-2 {
-    background-color:  #9baec8; 
-    color: #fff;
+    background-color:  ghostwhite; 
+    color: #2b90d9;
     border-radius: 20px 20px 20px 20px;
-    
+
 }
 
 .my-4 {
-   background-color:  #9baec8; 
-    color: #fff;
+   background-color:  ghostwhite;
+    color: #2b90d9;
     border-radius: 20px 20px 20px 20px;
+    border-color: ghostwhite;
      
 }
 .card-header {
-    
+    background-color: ghostwhite; 
 }
 
 .col-lg-4 {
-    background-color:  #9baec8; 
-    border-radius: 20px 20px 20px 20px;
+    background-color:  ghostwhite; 
+    border-radius: 20px 20px 20px 20px;   
 }
 
 
@@ -41,8 +42,52 @@ body {
 
 .form-control {
     border-radius: 10px 10px 10px 10px;
+    border-color:#2b90d9;
 }
  
 #pcheader {
     border-radius: 10px 10px 10px 10px;
+}
+.form-control:disabled, .form-control[readonly] {
+  background-color: ghostwhite;
+  opacity: 1;
+  border : solid #2b90d9;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2b90d9;
+}
+h5, .h5 {
+  font-size: 1.25rem;
+  color: #2b90d9;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  
+}
+.card-header {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0;
+  background-color: ghostwhite;
+  border-bottom: 0px solid rgba(0, 0, 0, 0.125);
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+    background-color: ghostwhite;
+}
+.card-footer {
+    padding: 0.5rem 1rem;
+    background-color: ghostwhite;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    
 }

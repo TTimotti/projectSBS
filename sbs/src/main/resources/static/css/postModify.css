@@ -17,7 +17,7 @@ body {
 }
 
 .my-4 {
-   background-color:  #9baec8; 
+   background-color:  ghostwhite; 
     color: #fff;
     border-radius: 20px 20px 20px 20px;
      
@@ -27,7 +27,7 @@ body {
 }
 
 .col-lg-4 {
-    background-color: #9baec8; 
+    background-color: ghostwhite; 
     border-radius: 20px 20px 20px 20px;
 }
 
@@ -45,4 +45,35 @@ body {
  
 #pcheader {
     border-radius: 10px 10px 10px 10px;
+}
+.card-header {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0;
+  background-color: ghostwhite;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.form-label {
+  margin-bottom: 0.5rem;
+  color :  #2b90d9;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: ghostwhite;
+  background-clip: padding-box;
+  border: 1px solid  #2b90d9;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-control:disabled, .form-control[readonly] {
+    background-color: ghostwhite;
+    opacity: 1;
 }
