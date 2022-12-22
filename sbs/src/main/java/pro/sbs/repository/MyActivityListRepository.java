@@ -14,7 +14,7 @@ public interface MyActivityListRepository extends JpaRepository<MyActivityList, 
     List<MyActivityList> findByOrderByUserNameDesc();
     
     
-    @Query("select t.nickname from USERS t where t.userName in (select l.userName from MYACTIVITYLIST l where l.userName = :userName)")
+    @Query("select t.nickname from USERS t where t.userName = :userName")
     String findByNickNameByUserName(@Param(value = "userName") String userName);
     
     

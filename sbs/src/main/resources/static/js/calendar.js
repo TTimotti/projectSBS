@@ -858,11 +858,6 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
  * 진행중인 활동 목록 테이블 처리 
  * */ 
 function progressDisplayData(currentPage, dataPerPage, data) {
-<<<<<<< HEAD
-    
-    	
-=======
-
 
     console.log(data);
     console.log(data.myActivityList)
@@ -880,8 +875,7 @@ function progressDisplayData(currentPage, dataPerPage, data) {
 	console.log(data.activityList);
 
 	console.log(data.myActivityList);
-	
->>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
+
     let chartHtml = "";
     var i;
     //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
@@ -908,7 +902,7 @@ for (i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + 
         break;
     }       
 
-<<<<<<< HEAD
+
 const stTime = moment(data[i].startTime).format('YY-MM-DD');
 	chartHtml += '<tr>'
 		+ '<td>' + data[i].activityId + '</td>'
@@ -920,33 +914,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
 		`<a class="infoAc2 btn btn-primary" data-activityId="${data[i].activityId}" style="width:100px; height:30px; padding:0%;">정보</a>`
 		+ '</td>'
 		+ '</tr>';
-=======
-const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
-  chartHtml += '<tr>'
-            + '<td>' + data.activityList[i].activityId+ '</td>'
-            + '<td>' + stTime + '</td>'
-            + '<td><a href="/activity/detail?id=' + data.activityList[i].activityId + '">' + data.activityList[i].play + '</a></td>'
-            + '<td>' + data.activityList[i].userName + '</td>'
-            + '<td>' + data.activityList[i].budget +'</td>'
-            
-            // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-         if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
 
-        chartHtml += '<td>' +
-            '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
-            + data.myActivityList[i].activityId
-            + '">참여</a>'
-            + '</td>'
-            
-            // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
-
-        chartHtml += '<td>' +
-            '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
-            + '</td>'   
-            }
-            + '</tr>';
->>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
             
 }
     
