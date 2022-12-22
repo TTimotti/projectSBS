@@ -4,10 +4,20 @@
  */
 
 window.addEventListener('DOMContentLoaded', function() {
+    
+        // 최대 멤버 수 표시 관련 js
+    const mom = document.querySelector('#maxMember');
+    mom.addEventListener('mousemove', function() {
+
+        let momCount = mom.value;        
+        const m = document.querySelector('#mMember');        
+        m.innerText = `( ${momCount} 명)`;
+        
+    });
+    
     // 팀 이름 중복 체크(teamCreate.js와 동일한 내용)
     const teamNameInput = document.querySelector('#teamName');
-    //const purpose = document.querySelector('#purpose');
-    //const maxMember = document.querySelector('#maxMember');
+    const purposeInput = document.querySelector('#purpose');
     const okDiv = document.querySelector('#ok');
     const nokDiv = document.querySelector('#nok');
     const btnUpdateTeam = document.querySelector('#btnUpdateTeam');
@@ -37,6 +47,13 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     
     btnUpdateTeam.addEventListener('click', function() {
+        const teamName = teamNameInput.value;
+        const purpose = purposeInput.value;
+        
+        if (teamName.length == 0 || purpose.length == 0 || maxMember == 0) {
+            alert("빈칸을 채워주세요!")
+        } else {
+        
         const result = confirm('팀 정보를 수정하겠습니까?');
         if (result) {
             updateTeamForm.action = '/team/updateTeam';
@@ -45,7 +62,8 @@ window.addEventListener('DOMContentLoaded', function() {
             
             alert("수정이 완료되었습니다.");
         }
-    })
+        }
+    });
     
     // 패스워드 변경.
     const pokDiv = document.querySelector('#pok');
