@@ -898,7 +898,7 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
 		+ '<td>' + stTime + '</td>'
 		+ '<td><a href="/activity/detail?id=' + data[i].activityId + '">' + data[i].play + '</a></td>'
 		+ '<td>' + data[i].userName + '</td>'
-		+ '<td>' + data[i].budget + '</td>'
+		+ '<td>' + data[i].budget.toLocaleString(); + '</td>'
 	chartHtml += '<td>' +
 		`<a class="infoAc2 btn btn-primary" data-activityId="${data[i].activityId}" style="width:100px; height:30px; padding:0%; color:ghostwhite;">정보</a>`
 		+ '</td>'
