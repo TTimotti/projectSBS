@@ -40,7 +40,7 @@ th, td {
             }
             .short-form {
                 border: 2px solid #2b90d9;
-                width: 30px;
+                width: 45px;
                 color: #282c37;
                 border-radius: 5px;
                 }
@@ -65,6 +65,6 @@ th, td {
                 
             img {
                 border: 2px solid #2b90d9;
-                border-radius: 15px;
+                border-radius: 10px;
                 
             }

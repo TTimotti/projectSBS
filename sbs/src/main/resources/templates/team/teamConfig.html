@@ -23,7 +23,7 @@
             <div class ="row mt-4 mb-4">
                 <h2>팀 정보</h2>   
             </div>
-            <form id="updateTeamForm" th:action="@{ /team/teamUpdate }" method="post" enctype="multipart/form-data">
+            <form id="updateTeamForm"  method="post" enctype="multipart/form-data">
                 <div class = "row">
                     <div class = "col-6">
                     <input type="hidden" id="teamId" th:value="${ team.teamId } " name = "teamId" readonly/>
@@ -50,8 +50,8 @@
                             <input id="createdTime" class="form-form form-fixed" th:value="${#temporals.format(team.createdTime, 'yyyy년 MM월 dd일 hh시 mm분')}" readonly />          
                         </div>                
                         <div class="mb-3">
-                            <strong><label for="maxMember">최대 회원 수 </label></strong><br/>
-                            <input id="maxMember" class="short-form" th:value="${ team.maxMember }" name="maxMember" required/><strong><span>명</span></strong>      
+                            <strong><label for="maxMember">최대 회원 수 </label></strong><span id="mMember"></span><br/>
+                            <input type="range" min="1" max="50" id="maxMember" class="from-range form-form" th:value="${ team.maxMember }" name="maxMember" required/>  
                         </div>
                     </div>  
                     <div class="col-6">
@@ -82,11 +82,11 @@
                     <div class="mb-3">
                         <input type="hidden" th:value="${ team.teamId }" name="teamId" readonly />
                         <strong><label for="changePassword">변경할 비밀번호</label></strong><br/>
-                        <input type="password" id="changePassword" class="form-form" name="changePassword"/>
+                        <input type="password" id="changePassword" class="form-form" name="changePassword" required/>
                     </div>
                     <div class="mb-3">
                         <strong><label for="changePassword2">비밀번호 재입력</label></strong><br/>
-                        <input type="password" id="changePassword2" class="form-form" name="changePassword2"/>
+                        <input type="password" id="changePassword2" class="form-form" name="changePassword2" required/>
                     </div>
                         <div class="my-2 d-none" id="pok">
                             <p class="text-success">비밀번호가 확인 되었습니다.</p>
@@ -161,6 +161,33 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script th:src="@{ /js/teamConfig.js }"></script>    
+        <script th:inline = "javascript">
+
+         let img = document.querySelector('input#teamImage'); 
+         console.log(img);
+         
+         function readImage(input) {
+                // 인풋 태그에 파일이 있는 경우
+                if(input.files && input.files[0]) {
+                    // 이미지 파일인지 검사 (생략)
+                    // FileReader 인스턴스 생성
+                    const reader = new FileReader();
+                    // 이미지가 로드가 된 경우
+                    reader.onload = e => {
+                        const previewImage = document.querySelector('img#teamImage');
+                        previewImage.setAttribute('src', e.target.result);
+                    }
+                    // reader가 이미지 읽도록 하기
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            // input file에 change 이벤트 부여
+
+            img.addEventListener("change", e => {
+                console.log('change');
+                readImage(e.target);
+            })
+        </script> 
     </body>    
         
 </html>

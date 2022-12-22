@@ -47,26 +47,5 @@ window.addEventListener('DOMContentLoaded', function() {
             btnCreateTeam.classList.add('disabled');
         }
     }
-    
-        btnCreateTeam.addEventListener('click', function() {
-            const teamName = teamNameInput.value;
-            const password = passwordInput.value;
-            const purpose = purposeInput.value;
-            const teamImage = teamImageInput.value;
-        
-        if (password.length == 0 || purpose.length == 0 || teamName.length == 0 || teamImage.length == 0) {
-            alert("빈칸을 채워주세요!");
-        } else {
-            
-        const result = confirm('팀을 정말 생성할까요?');
-        if (result) {
-            createTeamForm.action = '/team/teamCreate';
-            createTeamForm.method = 'post';
-            createTeamForm.submit();
-            
-            alert("생성완료! 활동하러 갈까요?");
-            }
-        }
-    })
 
 });
