@@ -5,65 +5,46 @@ body {
     color: rgb(192, 192, 192);
 }
 .features-icons {
-    background-color: #d9e1e8;
+    background-color: ghostwhite;
        color: rgb(233, 233, 233);
 }
 
 .my-2 {
-    background-color: ghostwhite; 
+    background-color:  #9baec8; 
     color: #fff;
     border-radius: 20px 20px 20px 20px;
-    border: solid #2b90d9;
+
 }
 .col card-body {
     border-radius: 20px 20px 20px 20px;
-    background-color:  #77919d;
-}
-
-.container {
-    
+    background-color:  #9baec8;
 }
 
 .my-4 {
-   background-color:   #282c37;
+   background-color:  #9baec8;
     color: #fff;
     border-radius: 20px 20px 20px 20px;
-     
+
 }
-.form-label {
-  margin-bottom: 0.5rem;
-  color : #2b90d9;
-}
+
 
 .features-icons{
     background-color: ghostwhite;
     color: #fff;
-    
+
 }
 
 
 .form-control {
     border-radius: 10px 10px 10px 10px;
-    border-color:#2b90d9;
 }
  
 #pcheader {
-/*     border-radius: 10px 10px 10px 10px; */
-    
+    border-radius: 10px 10px 10px 10px;
 }
+.container {
 
-.btn-primary{
-    color : ghostwhite;
-    background-color: #2b90d9;
-}
-.p-3 {
-  padding: 1rem !important;
-  background-color : #282c37;
-}
-.form-control:disabled, .form-control[readonly] {
-  background-color: ghostwhite;
-  opacity: 1;
-}
-.my-4{
-    background-color : ghostwhite;
+    margin-left: auto;
+    margin-right: auto;
+
 }

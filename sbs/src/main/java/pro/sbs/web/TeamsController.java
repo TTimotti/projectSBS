@@ -2,6 +2,7 @@ package pro.sbs.web;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -295,7 +296,7 @@ public class TeamsController {
         
         teamService.changeTeamPassword(password, teamId);
         
-        return "redirect:/team/teamConfig?teamId=" + teamId;
+        return "redirect:/team/teamActivity?teamId=" + teamId;
         
     }
 
@@ -313,7 +314,7 @@ public class TeamsController {
         
         Integer kickOutMembers = teamLogService.kickOutMembers(checkedMember, teamId);
         
-    return "redirect:/team/teamConfig?teamId=" + teamId;
+    return "redirect:/team/teamActivity?teamId=" + teamId;
     }
     
     /**
@@ -343,6 +344,15 @@ public class TeamsController {
     @PostMapping("/deleteTeam")
     public String deleteTeam(Integer teamId) {
         log.info("deleteTeam(teamId= {}) 호출", teamId);
+        
+        List<PostReadDto> list = new ArrayList<>();
+        list = postService.read(teamId);
+
+        for(int i = 0; i < list.size(); i++) {
+            postService.delete(list.get(i).getPostId());
+            log.info("list.get(i).getReplyId() = {}", list.get(i).getPostId());
+        }
+        
         
         teamService.deleteTeam(teamId);
         teamLogService.deleteByTeamId(teamId);

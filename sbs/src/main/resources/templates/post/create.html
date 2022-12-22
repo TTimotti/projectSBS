@@ -26,16 +26,15 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <link href="/css/postCreate.css" rel="stylesheet"/>
 </head>
 <body>
-<!-- Navigation-->
-<header th:replace="fragments/header :: header"></header>
+<!-- header -->
+<div th:replace="fragments/header :: header"></div>
 
 <!-- body -->
->
     <section class="features-icons">
-        <div class="container" style="margin-left: auto; margin-right: auto;">
-            <div class="card my-2">
-                <div class="my-2 p-3" style="color: white;">
-                    <h1>공지사항 작성</h1>
+        <div class="container">
+            <div class="card my-2" style="width: 50%; height: 50%; margin-left: auto; margin-right: auto;">
+                <div class="my-2 p-3" style="color: white; padding:0;">
+                    <h1 style="padding-top: 30px;">공지사항 작성</h1>
                     <hr style="width: 400px;" />
                 </div>
                 <div class="card-body">
@@ -47,7 +46,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                         </div>
                         <div class="my-4">
                             <label for="content" class="form-label">내용</label>
-                            <textarea id="content" class="form-control" name="content"
+                            <textarea id="content" class="form-control" name="content" style="height: 300px;"
                                 required></textarea>
                         </div>
                         <div class="my-4">
@@ -66,9 +65,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         </div>
     </section>
 <!-- Footer-->
-
-<footer th:replace="fragments/footer :: footer"></footer>
-
+<div th:replace="fragments/footer :: footer"></div>
 <!-- Bootstrap core JS-->
 <!-- Bootstrap core JS-->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
