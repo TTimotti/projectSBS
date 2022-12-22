@@ -34,7 +34,6 @@ public class PostController {
     
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping({"/post/detail", "/post/modify"})
-    // 컨트롤러 메서드가 2개 이상의 요청 주소를 처리할 때는 mapping에서 요청 주소를 배열로 설정.
     public void detail(Integer id, Model model) {
         log.info("postController datail(id={})", id);
         log.info("postController modify(id={})", id);
