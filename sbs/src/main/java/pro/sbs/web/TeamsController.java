@@ -26,6 +26,7 @@ import pro.sbs.domain.MyActivityList;
 import pro.sbs.domain.Teams;
 import pro.sbs.domain.Users;
 import pro.sbs.dto.PostReadDto;
+import pro.sbs.dto.ReplyReadDto;
 import pro.sbs.dto.TeamsCreateDto;
 import pro.sbs.dto.TeamsJoinDto;
 import pro.sbs.dto.TeamsUpdateDto;
@@ -33,6 +34,7 @@ import pro.sbs.service.ActivityService;
 import pro.sbs.service.ImagesService;
 import pro.sbs.service.MyActivityListService;
 import pro.sbs.service.PostService;
+import pro.sbs.service.ReplyService;
 import pro.sbs.service.TeamLogService;
 import pro.sbs.service.TeamService;
 
@@ -48,6 +50,7 @@ public class TeamsController {
     private final PostService postService;
     private final ActivityService activityService;
     private final MyActivityListService myActivityListService;
+    private final ReplyService replyService;
 
     /**
      * 팀 생성 페이지로 이동 GET
@@ -344,7 +347,19 @@ public class TeamsController {
     @PostMapping("/deleteTeam")
     public String deleteTeam(Integer teamId) {
         log.info("deleteTeam(teamId= {}) 호출", teamId);
-        
+
+        List<PostReadDto> postList = postService.read(teamId);
+
+
+        List<ReplyReadDto> list2 = new ArrayList<>();
+        for (int j = 0; j < postList.size(); j++) {
+        list2 = replyService.readReplies(postList.get(j).getPostId());
+            for(int i = 0; i < list2.size(); i++) {
+                replyService.delete(list2.get(i).getReplyId());
+                log.info("list.get(i).getReplyId() = {}", list2.get(i).getReplyId());
+            }
+        }
+
         List<PostReadDto> list = new ArrayList<>();
         list = postService.read(teamId);
 
@@ -352,11 +367,11 @@ public class TeamsController {
             postService.delete(list.get(i).getPostId());
             log.info("list.get(i).getReplyId() = {}", list.get(i).getPostId());
         }
-        
-        
+
+
         teamService.deleteTeam(teamId);
         teamLogService.deleteByTeamId(teamId);
-        
+
         return "redirect:/";
     }
     

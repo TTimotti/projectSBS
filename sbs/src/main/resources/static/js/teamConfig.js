@@ -52,6 +52,7 @@ window.addEventListener('DOMContentLoaded', function() {
         
         if (teamName.length == 0 || purpose.length == 0 || maxMember == 0) {
             alert("빈칸을 채워주세요!")
+            
         } else {
         
         const result = confirm('팀 정보를 수정하겠습니까?');
@@ -92,6 +93,15 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     
     btnChangeTeamPassword.addEventListener('click', function() {
+        const password = changePassword.value;
+        const password2 = changePassword2.value;
+        
+        if (password.length == 0 || password2.length == 0) {
+            alert("빈칸을 채워주세요!");
+            
+            
+        } else {
+        
         const result = confirm('비밀번호를 수정할까요?');
         if (result) {
             changeTeamPasswordForm.action = '/team/changeTeamPassword';
@@ -99,6 +109,7 @@ window.addEventListener('DOMContentLoaded', function() {
             changeTeamPasswordForm.submit();
             
             alert("비밀번호 수정이 완료되었습니다.");
+        }
         }
         });
 
