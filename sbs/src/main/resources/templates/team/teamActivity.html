@@ -22,16 +22,12 @@
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/calendar.css" rel="stylesheet" />
 <link href="/css/paging.css" rel="stylesheet" />
+<link href="/css/footer.css" rel="stylesheet" />
 </head>
 <body>
 <div id="jb-container">
 <div id="jb-header">
-<nav class="navbar navbar-light static-top">
-    <div class="container">
-        <input type="text" class="navbar-brand" th:value="${team.teamName}"
-        style="background-color:transparent; border:0; font-family:'Noto-Sans-Korean', sans-serif; font-size: 30px;" readonly disabled/> 
-    </div>
-</nav>
+<div th:replace="fragments/header :: header"></div>
 </div>
         <div id="jb-sidebar-left">
             <div class="teamPhoto">
@@ -274,34 +270,7 @@
 </div> <!-- jb - content -->
 <!-- Footer-->
 <div id="jb-footer">
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">검색</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">마이페이지</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">모임 참석</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지 사항 Policy</a></li>
-                </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy;SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
-            </div>
-            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item me-4"><a href="https://ko-kr.facebook.com/"><i
-                            class="bi-facebook fs-3"></i></a></li>
-                    <li class="list-inline-item me-4"><a href="https://twitter.com/"><i
-                            class="bi-twitter fs-3"></i></a></li>
-                    <li class="list-inline-item"><a href="https://www.instagram.com/"><i
-                            class="bi-instagram fs-3"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
 </div>
 </div>
 <div class="popup_layer" id="popup_layer" style="display: none;">
