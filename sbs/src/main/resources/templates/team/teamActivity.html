@@ -90,7 +90,7 @@
                     <div>
                         <input class ="loginUserName" type="hidden" th:value="${ #authentication.name }" name="userName"/>
                         <input type="hidden" th:value="${ team.teamId }" name="teamId" />
-                        <a class="btn btn-warning" th:if="${#authentication.name == team.leader}" id="btnTeamConfig" style="margin: 0px;">관리하기</a>
+                        <a class="btn btn-secondary" th:if="${#authentication.name == team.leader}" id="btnTeamConfig" style="margin: 0px;">관리하기</a>
                     </div>
                 </form>
                 
