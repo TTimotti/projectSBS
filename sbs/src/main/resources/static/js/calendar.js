@@ -858,30 +858,14 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
  * 진행중인 활동 목록 테이블 처리 
  * */ 
 function progressDisplayData(currentPage, dataPerPage, data) {
-<<<<<<< HEAD
-    
-    	
-=======
 
 
-    console.log(data);
-    console.log(data.myActivityList)
-    console.log(loginUser);
-    console.log(myAcLists);
-    console.log(loginUser);
-    console.log(loginUser);
-    console.log(data);
 
     let activityList = [];
     let myActivityList = [];    
     activityList.push(data.activityList);
 	myActivityList.push(data.myActivityList);
-	console.log(activityList);
-	console.log(data.activityList);
 
-	console.log(data.myActivityList);
-	
->>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
     let chartHtml = "";
     var i;
     //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
@@ -908,7 +892,6 @@ for (i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + 
         break;
     }       
 
-<<<<<<< HEAD
 const stTime = moment(data[i].startTime).format('YY-MM-DD');
 	chartHtml += '<tr>'
 		+ '<td>' + data[i].activityId + '</td>'
@@ -920,33 +903,6 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
 		`<a class="infoAc2 btn btn-primary" data-activityId="${data[i].activityId}" style="width:100px; height:30px; padding:0%;">정보</a>`
 		+ '</td>'
 		+ '</tr>';
-=======
-const stTime = moment(data.activityList[i].startTime).format('YY-MM-DD');
-  chartHtml += '<tr>'
-            + '<td>' + data.activityList[i].activityId+ '</td>'
-            + '<td>' + stTime + '</td>'
-            + '<td><a href="/activity/detail?id=' + data.activityList[i].activityId + '">' + data.activityList[i].play + '</a></td>'
-            + '<td>' + data.activityList[i].userName + '</td>'
-            + '<td>' + data.activityList[i].budget +'</td>'
-            
-            // if 안에 조건문은 임시, teamId가 일치하면서 해당 activityId가 비어있을경우 참여버튼 생성
-         if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
-
-        chartHtml += '<td>' +
-            '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
-            + data.myActivityList[i].activityId
-            + '">참여</a>'
-            + '</td>'
-            
-            // 이미 가입된 회원일 경우 탈퇴버튼 생성.
-            } else if (checkAvailability(myActivityList,data.activityList[i].activityId) && checkAvailability(myActivityList,loginUser)) {
-
-        chartHtml += '<td>' +
-            '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;" href="/myAcList/delete">탈퇴</a>'
-            + '</td>'   
-            }
-            + '</tr>';
->>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
             
 }
     
@@ -1214,52 +1170,50 @@ function popUptable2(data) {
     let html = "";
     const stTime = moment(data.startTime).format('YYYY-MM-DD');
 
-    html += '<div style="margin-left:30px; text-decoration: underline">' 
-        + '<h4>활동 상세 정보2</h4>'
+    html += '<div id="popup-container">'
+    	+ '<div id="popup-header">'
+        + '<h4>활동 상세 정보</h4>'
+        + '<hr/ style="300px;">'
         + '</div>'
-        + '<br/>'
-        + '<div id = "activityPopupInfo" style="float: left; margin-left:30px;">'
+        + '<div id = "popup-left">'
         + '<label id="playTitle">활동 번호</label>'
-        + '<br/>'
         + '<h6 class="my-2" id ="activityId" style="border: none; background: transparent;" readOnly>'
         + data.activityId +'</h6>'
+        + '<hr/ style="20px;">'
         + '<label id="playTitle">활동 일자</label>'
         + '<br/>'
         + '<h6 class="my-2" id ="activityStartTime" style="border: none; background: transparent;" readOnly>'
         + stTime +'</h6>'
-        + '<br/>'
+        + '<hr/ style="20px;">'
         + '<label id="playTitle">주제</label>'
-        + '<br/>'
         + '<h6 class="my-2" id ="activityPlay" style="border: none; background: transparent;" readOnly>'
         + data.play +'</h6>'
-        + '<br/>'
+        + '<hr/ style="20px;">'
         + '<label id="playBudget">회비</label>'
-        + '<br/>'
         + '<h6 class="my-2" id ="activityBudget" style="border: none; background: transparent;" readOnly>'
         + data.budget + '원' +'</h6>'
-        + '<br/>'
+        + '<hr/ style="20px;">'
         + '<label id="playPlace">장소</label>'
-        + '<br/>'
         + '<h6 class="my-2" id ="activityPlace" style="border: none; background: transparent;" readOnly>'
         + data.place +'</h6>'
-        + '</br>'
+        + '<hr/ style="20px;">'
         + '</div>'
-        + '<div id="kakaoJoinMemberList" style="float: left; margin-left:100px; width:450px;">'
-        + '<div id="map" style="width:300px;height:350px; border-radius : 5px 5px 5px 5px; float: left;"></div>'
-        + '<div style="margin-left: 340px; margin-top: 20px; text-algin: center;">'
-        + '<table id="activityJoinList" style="text-align: center;"></table>'
+        + '<div id="popup-center">'
+        + '<div id="map" style="width:430px;height:455px; border-radius : 5px 5px 5px 5px; float: left;"></div>'
+        + '</div>'
+        + '<div id="popup-right">'
+        + '<table id="activityJoinList" style="margin-left:auto; margin-right:auto;"></table>'
+        + '<hr/ style="20px;">'
+        + '<ul id="joinUserListul" style="padding: 20px; margin-left:6px;"></ul>'
         + '<br/>'
-        + '</div>'
-        + '<ul id="joinUserListul"></ul>'
-        + '</div>'
-        + '<div style="clear: left;">'
         if(!checkAvailability(userNames, loginUser)) {
-   html +='<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
+   html += '<a id="joinAcSuccess" class="btn btn-success" style="width:100px; height:30px; padding:0%;" href="/myAcList/partyin?id=' 
             + data.activityId
             + '">참여</a>'
 		}else if(checkAvailability(userNames, loginUser)) {			
    html += '<a id="joinAcFail" class="btn btn-danger" style="width:100px; height:30px; padding:0%;">취소</a>'		
 		}
+		+ '<div>'
 		+ '</div>';
     $(".popup_cont").empty();
     $(".popup_cont").append(html);

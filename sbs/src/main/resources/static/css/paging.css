@@ -1,5 +1,4 @@
 ul {
-    text-align: center;
     display: inline-block;
     
     border-right: 0;
@@ -20,6 +19,7 @@ ul li a {
 
 ul li.on {
     background: #2b90d9;
+    border-radius : 5px 5px 5px 5px;
 }
 
 ul li.on a {

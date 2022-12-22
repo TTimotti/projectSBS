@@ -176,10 +176,6 @@
 }
 
 
-/* 활동 명단 css */
-.imgSelect {
-    cursor: pointer;
-}
 
 .popupLayer {
     position: absolute;
@@ -212,7 +208,7 @@
 	top: 50%;
 	left: 50%;
 	overflow: auto;
-	height: 550px;
+	height: 600px;
 	width: 880px;
 	transform: translate(-50%, -50%);
 	z-index: 1002;
@@ -224,7 +220,7 @@
 }
 /*컨텐츠 영역*/
 .popup_box .popup_cont {
-	padding: 50px;
+	padding: 10px;
 	line-height: 1.4rem;
 	font-size: 14px;
 }
@@ -322,7 +318,6 @@
 }
 
 #jb-header {
-	background-color:#282c37;
 	width: 1600px;
 	margin-bottom: 20px;
 	border-radius : 5px 5px 5px 5px;
@@ -359,6 +354,47 @@
 	border-radius : 5px 5px 5px 5px;
 	width: 1600px;
 	clear: both;
+}
+
+#popup-container {
+	width: 835px;
+	height: 560px;
+    margin-left : auto; margin-right : auto;
+	padding: 20px;
+}
+
+#popup-header {
+	width: 800px;
+	margin-bottom: 20px;
+	border-radius : 5px 5px 5px 5px;
+}
+
+#popup-center {
+	background-color:ghostwhite;
+	width: 400px;
+	margin-left: 10px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+#popup-left {
+	width: 150px;
+	padding: 20px;
+	margin-bottom: 20px;
+	float: left;
+	border: 1px solid #bcbcbc;
+	border-radius : 5px 5px 5px 5px;
+}
+
+#popup-right {
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+	padding: 10px;
+	float: right;
+	border: 1px solid #bcbcbc;
+	text-align: center;
+	border-radius : 5px 5px 5px 5px;
 }
 .bi-window {
 	font-size: 100px;
