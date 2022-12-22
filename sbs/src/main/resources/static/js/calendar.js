@@ -859,13 +859,28 @@ function noticePostPaging(totalData, dataPerPage, pageCount, currentPage) {
  * */ 
 function progressDisplayData(currentPage, dataPerPage, data) {
 
+<<<<<<< HEAD
 
+=======
+    console.log(data);
+    console.log(data.myActivityList)
+    console.log(loginUser);
+    console.log(myAcLists);
+    console.log(loginUser);
+    console.log(loginUser);
+    console.log(data);
+>>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
 
     let activityList = [];
     let myActivityList = [];    
     activityList.push(data.activityList);
 	myActivityList.push(data.myActivityList);
 
+<<<<<<< HEAD
+=======
+	console.log(data.myActivityList);
+
+>>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
     let chartHtml = "";
     var i;
     //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
@@ -891,6 +906,10 @@ for (i = (currentPage - 1) * dataPerPage; i < (currentPage - 1) * dataPerPage + 
     if (data[i] === undefined)   {
         break;
     }       
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
 
 const stTime = moment(data[i].startTime).format('YY-MM-DD');
 	chartHtml += '<tr>'
@@ -902,7 +921,12 @@ const stTime = moment(data[i].startTime).format('YY-MM-DD');
 	chartHtml += '<td>' +
 		`<a class="infoAc2 btn btn-primary" data-activityId="${data[i].activityId}" style="width:100px; height:30px; padding:0%;">정보</a>`
 		+ '</td>'
+<<<<<<< HEAD
 		+ '</tr>';
+=======
+		+ '</tr>';
+
+>>>>>>> branch 'main' of https://github.com/TTimotti/projectSBS.git
             
 }
     

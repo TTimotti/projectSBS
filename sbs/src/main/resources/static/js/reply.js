@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 + '<p> 수정 시간: ' + r.modifiedTime + '</p>'
                 + '</div>';
           
-            if (r.writer == r.writer) {
+            if (r.writer == loginUser) {
                 str += '<div class="card-footer">'
                     + `<button type="button" class="btnModifies btn btn-primary" data-rid="${r.replyId}">수정</button>`
                     + '</div>';

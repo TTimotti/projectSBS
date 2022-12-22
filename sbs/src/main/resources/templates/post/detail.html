@@ -81,7 +81,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                                     readonly />
                             </div>
                         </form>
-                        <div class="my-4">
+                        
+                        <div class="my-4" th:if="${ post.author } == ${ #authentication.name }">
                             <a class="btn btn-primary" th:href="@{ /post/modify?id={id} (id = ${ post.postId }) }">수정</a>
                         </div>
                     </div>
@@ -166,7 +167,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 
 <!-- Axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+<script th:inline="javascript">
+        const loginUser = [[ ${ #authentication.name } ]];
+</script>
 <!-- Core theme JS-->
 <script th:src="@{/js/reply.js}"></script>
 </body>

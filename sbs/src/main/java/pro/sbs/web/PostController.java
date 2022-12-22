@@ -1,7 +1,7 @@
 package pro.sbs.web;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import pro.sbs.domain.Post;
 import pro.sbs.dto.PostCreateDto;
 import pro.sbs.dto.PostUpdateDto;
+import pro.sbs.dto.ReplyReadDto;
 import pro.sbs.service.PostService;
+import pro.sbs.service.ReplyService;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,9 +29,11 @@ public class PostController {
     
     private final PostService postService;
     
+    private final ReplyService replyService;
+    
+    
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping({"/post/detail", "/post/modify"})
-    // 컨트롤러 메서드가 2개 이상의 요청 주소를 처리할 때는 mapping에서 요청 주소를 배열로 설정.
     public void detail(Integer id, Model model) {
         log.info("postController datail(id={})", id);
         log.info("postController modify(id={})", id);
@@ -81,13 +85,25 @@ public class PostController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/post/delete")
     public String delete(Integer id, RedirectAttributes attrs) {
+        List<ReplyReadDto> list = new ArrayList<>();
+        Post post = postService.readIndex(id);
+        list = replyService.readReplies(id);
+        log.info("replyList = {}", list);
+        log.info("replylist.get(i).getReplyId() = {}", list.get(0).getReplyId());
+        
+        
+        for(int i = 0; i < list.size(); i++) {
+            replyService.delete(list.get(i).getReplyId());
+            log.info("list.get(i).getReplyId() = {}", list.get(i).getReplyId());
+        }
+        
         log.info("PostController delete(id={})", id);
         
         Integer postId = postService.delete(id);
         attrs.addFlashAttribute("deletedPostId", postId);
         log.info("postController delete postId = {}", postId);
         
-        return "redirect:/";
+        return "redirect:/team/teamActivity?teamId=" + post.getTeam().getTeamId();
     }
     
     @GetMapping("/post/search")

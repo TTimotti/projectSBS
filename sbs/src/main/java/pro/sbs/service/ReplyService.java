@@ -1,5 +1,6 @@
 package pro.sbs.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -81,5 +82,13 @@ public class ReplyService {
         // @Transactional이 적용된 경우에 메서드 실행이 끝날 때 DB에 자동으로 save됨.
         
         return entity.getReplyId(); // 수정한 엔터티의 아이디를 리턴.
+    }
+
+    public Integer deleteAll(Integer postId) {
+        
+        
+        
+        
+        return null;
     }
 }
