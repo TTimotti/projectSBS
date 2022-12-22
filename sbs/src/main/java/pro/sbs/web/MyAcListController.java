@@ -68,12 +68,12 @@ public class MyAcListController {
     }
     
     @PostMapping("/myAcList/delete")
-    public String delete(Integer id, RedirectAttributes attrs) {
+    public String delete(Integer id,Integer teamId, RedirectAttributes attrs) {
         log.info("delete(id={})", id);
         Integer myActListId = myActivityListService.delete(id);
         attrs.addFlashAttribute("myActListId", myActListId);
         log.info("delete mylistId = {})", myActListId);
         
-        return "redirect:/";
+        return "redirect:/team/teamActivity?teamId=" + teamId;
     }
 }

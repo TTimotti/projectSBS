@@ -165,6 +165,10 @@
     <input type="text" class ="loginUserNames" th:value="${ #authentication.name }" style="display: none;"/>
     <input type="text" class="teamJoinDay" id="teamJoinDay" style="display: none;"/>
     <input type="text" class="activityId" id="activityId" style="display: none;">
+    <form class="myActivityIdForm">
+    <input type="text" class="myActivityListId" name="id" style="display: none;">
+    <input type="text" name = "teamId" th:value="${ team.teamId }" style="display:none;"/>
+    </form>
     <input type="text" class="teamCreatedTime" id="teamCreatedTime" th:value="${ team.createdTime }" style="display: none;">
     <div class="container">
         <div class="row">

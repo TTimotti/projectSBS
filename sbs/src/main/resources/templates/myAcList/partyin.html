@@ -57,7 +57,7 @@
         <div class="my-2">
             <label for="userName" class="form-label">사용자
                 아이디</label> <input id="userName" class="form-control"
-                th:value="${ active.userName }" type="text"
+                th:value="${ #authentication.name }" type="text"
                 name="userName" readonly/>
         </div>
         <div class="my-2">
@@ -177,7 +177,6 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script th:inline="javascript" th:src="@{/js/calendar.js}"></script>
 <script th:inline="javascript">
-
 
 
 </script>
