@@ -28,13 +28,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 <link href="/css/kakaomap.css" rel="stylesheet" />
 </head>
 <body>
-<!-- Navigation-->
-<nav class="navbar navbar-light static-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">SBS</a> <a
-            class="btn btn-primary" href="#signup">ACTIVITY : DETAIL</a>
-    </div>
-</nav>
+<!-- header -->
+<div th:replace="fragments/header :: header"></div>
 
 <!-- Icons Grid-->
 <div class="container position-relative">
@@ -122,109 +117,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
                         </div>
                     </div>
                 </div>
-                
-                <!-- 
-                <div class="card my-4">
-                    <div class="card-header">
-                        <div class="col-4">
-                            <!-- 로그인 아이디로 댓글 작성자 아이디를 자동 삽입. readonly -->
-                          <!--   
-                        <input type="text" class="form-control" id="writer" />
-                    </div>
-                </div>
-                <div class="card-body row">
-                    <div class="col-10">
-                        <textarea class="form-control"
-                            id="replyText" placeholder="댓글 작성"></textarea>
-                    </div>
-                    <div class="col-2">
-                        <button
-                            class="btn btn-outline-secondary"
-                            id="btnReplyRegister">등록</button>
-                    </div>
-                </div>
-            </div>
-
-            <hr />
-            <div id="replies"></div>
-
-            <!-- 댓글 수정/삭제 Modal -->
-            <!-- 
-            <div class="modal fade" id="replyModal"
-                tabindex="-1" aria-labelledby="replyModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5"
-                                id="replyModalLabel">댓글 수정</h1>
-                            <button type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- 댓글 아이디 삽입 위치 -->
-                            <!-- 
-                            <input type="hidden"
-                                id="modalReplyId" readonly />
-                            <!-- 댓글 내용 삽입 위치 -->
-                            <!-- 
-                            <textarea id="modalReplyText"
-                                class="form-control"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button"
-                                class="btn btn-outline-secondary"
-                                data-bs-dismiss="modal">취소</button>
-                            <button type="button"
-                                id="modalBtnDelete"
-                                class="btn btn-outline-danger">삭제</button>
-                            <button type="button"
-                                id="modalBtnUpdate"
-                                class="btn btn-outline-success">수정
-                                완료</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end modal -->
-
+              
             </div>
         </div>
 </section>
 <!-- Footer-->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div
-                class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">HOME</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">마이페이지</a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="#!">공지 사항</a></li>
-                </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy;
-                    SBSProject :: su :: choo :: lee :: jang :: kim :: kim .com ..;</p>
-            </div>
-            <div
-                class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item me-4"><a
-                        href="#!"><i class="bi-facebook fs-3"></i></a>
-                    </li>
-                    <li class="list-inline-item me-4"><a
-                        href="#!"><i class="bi-twitter fs-3"></i></a>
-                    </li>
-                    <li class="list-inline-item"><a href="#!"><i
-                            class="bi-instagram fs-3"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
 <!-- Bootstrap core JS-->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<!-- Bootstrap core JS-->
@@ -237,8 +135,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abaecbd1f25256beda80cb6e2837cf2b&libraries=services"></script>
 
-	<!-- Core theme JS-->
-	<script th:src="@{/js/reply.js}"></script>
 	<script th:inline="javascript" th:src="@{/js/activityDetail.js}"></script>
 	
 	<script th:inline="javascript">
