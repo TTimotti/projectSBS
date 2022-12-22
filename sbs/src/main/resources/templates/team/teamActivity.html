@@ -39,13 +39,14 @@
             <div class="sidebarTeamInfo">
                 <h2>[[ ${ team.teamName } ]]</h2>
                 <hr style="width: 200px"/>
-                <h7>리더 : [[ ${ team.leader } ]]</h7>
+                <h6>Leader : [[ ${ team.leader } ]]</h6>
                 <hr style="width: 200px"/>
                 <h4>
                     정원 : <input class="joinMembers" readOnly disabled/> / [[${ team.maxMember }]]명
                 </h4>
                 <hr style="width: 200px"/>
                     <h6>
+                    	since:
                         <input class="createTimeTeam" readOnly disabled/>
                     </h6>
                 <hr style="width: 200px"/>
@@ -62,7 +63,8 @@
                     <div>
                         <input type="hidden" th:value="${ #authentication.name }" name="userName"/>
                         <input class = "joinTeamId" type="hidden" th:value="${ team.teamId }" name="teamId" />
-                        <a th:if="${#authentication.name != team.leader}" id="btnDeleteJoinedTeam" class="btn btn-danger" style="width: 70%; height: 5%; font-size: 15px;">모임 탈퇴</a>
+                        <a th:if="${#authentication.name != team.leader}" id="btnDeleteJoinedTeam" class="btn btn-outline-danger" 
+                        style="width: 70%; height: 5%; font-size: 15px; color:white; border-color: white; font-size: 20px;">모임 탈퇴</a>
                     </div>
                 </form>
             </div>
