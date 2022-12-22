@@ -104,7 +104,7 @@ public class ActivityController {
         Integer teamId = dto.getTeamId();
         log.info("list.get(0) ={}",entity.getActivityId());
         String nickName = myActivityListService.readByUserName(entity.getUserName());
-        MyActivityList entity2 = myActivityListService.createActivityCreate(teamId, id, entity.getUserName(), nickName);
+        MyActivityList entity2 = myActivityListService.createActivityCreate(teamId, entity.getActivityId(), entity.getUserName(), nickName);
         log.info("activity create()  entity = {}", entity2);
         
         log.info("id={}", teamId);
