@@ -82,6 +82,13 @@ public class PostController {
         return "redirect:/post/detail?id=" + dto.getId();
     }
     
+    /**
+     * 종속관계인 댓글이달린 포스트 삭제
+     * 
+     * @param id
+     * @param attrs
+     * @return 추
+     */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/post/delete")
     public String delete(Integer id, RedirectAttributes attrs) {
@@ -91,7 +98,7 @@ public class PostController {
         log.info("replyList = {}", list);
         log.info("replylist.get(i).getReplyId() = {}", list.get(0).getReplyId());
         
-        
+        // 해당 포스트의 댓글 전체 삭제.
         for(int i = 0; i < list.size(); i++) {
             replyService.delete(list.get(i).getReplyId());
             log.info("list.get(i).getReplyId() = {}", list.get(i).getReplyId());
