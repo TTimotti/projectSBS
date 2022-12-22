@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="utf-8" />
@@ -208,8 +207,7 @@
             <li><a th:href="@{ /user/signUp }">Sign Up</a></li>
         </ul>
     </div>
-                                <div class="container-fluid" layout:fragment="content">
-                </div>
+
     </th:block>
         <!-- Footer-->
         <footer class="footer" style="clear: left;">
