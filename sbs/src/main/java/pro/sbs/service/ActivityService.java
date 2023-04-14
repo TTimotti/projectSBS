@@ -1,6 +1,8 @@
 package pro.sbs.service;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,7 +78,7 @@ public class ActivityService {
         
         List<Activity> list = activityRepository.findByTeamIdOrderByActivityIdDesc(teamId);
         
-        return list.stream().map(ActivityReadDto::fromEntity).toList();
+        return list.stream().map(ActivityReadDto::fromEntity).collect(Collectors.toList());
     }
     
     /**

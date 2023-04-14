@@ -939,7 +939,7 @@
         if (typeof config !== 'string') {
           return;
         }
-
+    
         if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
           throw new TypeError(`No method named "${config}"`);
         }

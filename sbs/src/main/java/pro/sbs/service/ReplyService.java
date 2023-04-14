@@ -2,6 +2,7 @@ package pro.sbs.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +53,7 @@ public class ReplyService {
         log.info("ReplyService List<Reply> list = {}", list);
         
         // List<Reply>를 List<ReplyReadDto> 변환해서 리턴.
-        return list.stream().map(ReplyReadDto::fromEntity).toList();
+        return list.stream().map(ReplyReadDto::fromEntity).collect(Collectors.toList());
     }
 
     public ReplyReadDto readReply(Integer replyId) {

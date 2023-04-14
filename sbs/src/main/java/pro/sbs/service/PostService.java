@@ -2,6 +2,7 @@ package pro.sbs.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class PostService {
         
         List<Post> list = postRepository.findByTeamTeamIdOrderByPostIdDesc(teamId);
         
-        return list.stream().map(PostReadDto::fromEntity).toList();
+        return list.stream().map(PostReadDto::fromEntity).collect(Collectors.toList());
     }
     
     @Transactional(readOnly = true)
